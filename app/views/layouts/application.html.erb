@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PeerSoundProject Version Hugo et Etienne</title>
+    <%= csrf_meta_tags %>
+    <link rel="stylesheet" href="./mdl/material.min.css">
+    <script src="./mdl/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css" />
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body style="background-color:#f2f2f2;">
+      <ul style="z-index:1;">
+          <li class="lili"><div style="float:left"><%= image_tag("PSP-LOGO-REVERSE.png", size:"54x48") %></div></li>
+          <li class="lili"><a class="active" href="/home/homepage">Home</a></li>
+          <li class="lili"><a href="/contact/new">Contact</a></li>
+          <li class="lili"><a href="#about">About</a></li>
+          <% if user_signed_in? %>
+              <li class="lili"><%= link_to 'Recherche', search_path, :class => 'navbar-link'%></li>
+              <li class="lili"><%= link_to 'Mes Groupes', group_path, :class => 'navbar-link'%></li>
+              <li class="lili"><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></li>
+              <li class="lili"><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
+              <div class="userName">
+                  <li class="lili">Logged in as <strong><%= current_user.email %></strong></li>
+              </div>
+              <%= form_tag(music_search_path, :method => "get", id: "search-form") do %>
+                  <div id="input">             
+                      <font style="margin-top:5px;margin-left:15px;margin-right:10px;" color="white" >Recherche rapide : </font> <%= text_field_tag :search, params[:search], placeholder: "Votre recherche", style:"margin-right:8px;" %>
+                  <%= submit_tag "Search", class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" %>
+                  </div>
+              <% end %>
+          <% else %>
+                  <li class="lili"><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></li>
+              <li class="lili" style="border-right: 1px solid #bbb"><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></li>
+          <% end %></strong>
+            </ul>
+
+      </ul>
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+
+      <%= yield %>
+      <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+  </body>
+</html>
+
+
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+
+#seek-label {
+   color:white;
+}
+
+
+#input {
+    margin-top: 6px;
+    display:flex;
+    align-items: center;
+}
+
+.userName {
+    float:right;
+    margin-right:15px;
+    color:white;
+    margin-top:11px;
+}
+
+
+.lili {
+    float: left;
+    border-right: 1px solid #bbb;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+
+}
+
+
+li:last-child {
+        border-right: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    color:white;
+}
+</style>

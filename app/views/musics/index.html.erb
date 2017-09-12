@@ -1,0 +1,21 @@
+<% if !@musics.nil? && @musics.count >= 1%>
+    <br>  Les musiques trouvées avec terme <%= params[:search] %> :
+    <% @musics.each do |f| %>
+        <% @shared_music = f%>
+        <%= render 'musics/show' %>
+<% end %>
+<% end %>
+
+<% if false%>
+<% if !@artists.nil? && @artists.count >= 1%>
+    <br>  Les musiques trouvées avec l'artist  <%= params[:search] %> :
+    <% @artists.each do |f| %>
+        <br>Le titre : <%= f.title %>
+<% end %>
+<% end %>
+<% end %>
+
+<% if @musics.nil? || @musics.count <= 1%>
+
+    Aucune musique trouvé avec le terme : <%= params[:search] %>
+<% end %>

@@ -1,0 +1,25 @@
+{:uriI"ófile://app/assets/images/bootstrap-social-gh-pages/bower.json?type=application/json&id=0c7d3aecdb6acc7510db06bab8f85f3cd745ec1e27f98d473f79310274bdcb1f:ET:load_pathI"app/assets/images;T:filenameI";app/assets/images/bootstrap-social-gh-pages/bower.json;T:	nameI"$bootstrap-social-gh-pages/bower;T:logical_pathI")bootstrap-social-gh-pages/bower.json;T:content_typeI"application/json;T:sourceI"'{
+  "name": "bootstrap-social",
+  "main": [
+    "bootstrap-social.css",
+    "bootstrap-social.less",
+    "bootstrap-social.scss"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "assets",
+    "index.html",
+    "LICENCE"
+  ],
+  "dependencies": {
+    "bootstrap": "~3",
+    "font-awesome": "~4.7"
+  }
+}
+;T:metadata{	:dependencieso:Set:
+@hash}
+I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"@processors:type=application/json&file_type=application/json;TTI"Ifile-digest://app/assets/images/bootstrap-social-gh-pages/bower.json;TTF:charsetI"
+utf-8;F:digest"%20¢‚ÊœÈ
+
+Ù0÷ˆæ¨¡©üˆ¥iı∏OãyŒ:lengthi':dependencies_digest"%≠∂t£»„Y‚â˙®o@∫ô∆£ª4πêÚOÏhﬁ©«Z:idI"E0c7d3aecdb6acc7510db06bab8f85f3cd745ec1e27f98d473f79310274bdcb1f;F:
+mtimel+oæ”X

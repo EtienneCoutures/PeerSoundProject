@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style type= "text/css">
+
+.baliseYoutube {
+    display: flex; /* contexte sur le parent */
+    flex-direction: column; /* direction d'affichage verticale */
+    justify-content: center; /* alignement vertical */
+    width: 450px;
+    height: 190px;
+    background-position: top;
+    background-color: white;
+    align-items: center;
+    border-width:4px;
+    border-style:hidden;
+    border-color:#CDCDCD;
+    border-radius: 10px;
+    font-family: serif;
+    font-weight:lighter;
+    border: 1px solid black;
+    margin-top: 40px;
+    box-shadow: 1px 1px 1px #ff0000;
+}
+
+.baliseDeezer {
+    display: flex; /* contexte sur le parent */
+    flex-direction: column; /* direction d'affichage verticale */
+    justify-content: center; /* alignement vertical */
+    width: 450px;
+    height: 190px;
+    background-position: top;
+    background-color: white;
+    align-items: center;
+    border-width:4px;
+    border-style:hidden;
+    border-color:blue;
+    border-radius: 10px;
+    font-family: serif;
+    font-weight:lighter;
+    border: 1px solid black;
+    margin-top: 40px;
+    box-shadow: 1px 1px 1px blue;
+}
+
+.baliseSoundcloud {
+    display: flex; /* contexte sur le parent */
+    flex-direction: column; /* direction d'affichage verticale */
+    justify-content: center; /* alignement vertical */
+    width: 450px;
+    height: 190px;
+    background-position: top;
+    background-color: white;
+    align-items: center;
+    border-width:4px;
+    border-style:hidden;
+    border-color:green;
+    border-radius: 10px;
+    font-family: serif;
+    font-weight:lighter;
+    border: 1px solid black;
+    margin-top: 40px;
+    box-shadow: 1px 1px 1px orange;
+}
+
+.baliseDailymotion {
+    display: flex; /* contexte sur le parent */
+    flex-direction: column; /* direction d'affichage verticale */
+    justify-content: center; /* alignement vertical */
+    width: 450px;
+    height: 190px;
+    background-position: top;
+    background-color: white;
+    align-items: center;
+    border-width:4px;
+    border-style:hidden;
+    border-color:#CDCDCD;
+    border-radius: 10px;
+    font-family: serif;
+    font-weight:lighter;
+    border: 1px solid black;
+    margin-top: 40px;
+    box-shadow: 1px 1px 1px orange;
+}
+
+.balise {
+    display: flex; /* contexte sur le parent */
+    flex-direction: column; /* direction d'affichage verticale */
+    justify-content: center; /* alignement vertical */
+    width: 450px;
+    height: 190px;
+    background-position: top;
+    background-color: white;
+    align-items: center;
+    border-width:4px;
+    border-style:hidden;
+    border-color:#CDCDCD;
+    border-radius: 10px;
+    font-family: serif;
+    font-weight:lighter;
+    border: 1px solid black;
+    margin-top: 40px;
+    box-shadow: 4px 4px 4px grey;
+}
+
+#image {
+    position: inherit;
+    margin-top: -5%;
+    vertical-align:text-bottom;
+    display:flex;
+    justify-content:flex-end;
+    background-color: transparent;
+    line-height: normal;
+}
+
+
+
+#imagesoundcloud {
+  margin-top: 10%;
+
+   display: flex;
+   -webkit-flex-direction: column;
+   flex-direction: column;
+   -webkit-align-items: flex-end;
+   align-items: flex-end;
+}
+
+#txt {
+    display:block;
+    margin-top: 2px;
+    width: 200px;
+}
+
+        </style>
+    </head>
+    <body>
+        <%if @shared_music.source == SourceConstants::YOUTUBE%>
+            <div id=string class="baliseYoutube container">
+                <div>
+                    <div class="col-md-4">
+                        <div id="logo" >
+                            <%= image_tag("PSP-LOGO.jpg",  style: "height:35%;width:35%") %>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-6">
+                        <div id="image" >
+                            <%= image_tag("youtube-logo-full_color.png",  style: "height:40%;width:40%") %>
+                        </div>
+                    </div>
+                </div>
+                <div id="txt">
+                    <p><li>   Title : <%= @shared_music.title %> </li></p>
+                    <p><li>   Artiste : <%= @shared_music.artist %> </li></p>
+                    <p><li> Theme du Groupe : <%=Group.last.theme%></li></p>
+                    <%= link_to "Listen ", @shared_music.url, target: 'blank', action: "show"%>
+                </div>
+            </div>
+            <% else if @shared_music.source == SourceConstants::DEEZER%>
+                <div id=string class="baliseDeezer container">
+                    <div>
+                        <div class="col-md-4">
+                            <div id="logo" >
+                                <%= image_tag("PSP-LOGO.jpg",  style: "height:35%;width:35%") %>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-6">
+                            <div id="image">
+                                <%= image_tag("youtube-logo-full_color.png",  style: "height:40%;width:40%") %>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="txt">
+                        <p><li>   Title : <%= @shared_music.title %> </li></p>
+                        <p><li>   Artiste : <%= @shared_music.artist %> </li></p>
+                        <p><li> Theme du Groupe : <%=Group.last.theme%></li></p>
+                        <%= link_to "Listen ", @shared_music.url, target: 'blank', action: "show"%>
+                    </div>
+                </div>
+                <% else if @shared_music.source == SourceConstants::SOUNDCLOUD%>
+                    <div id=string class="baliseSoundcloud container">
+                        <div>
+                            <div class="col-md-4">
+                                <div id="logo" >
+                                    <%= image_tag("PSP-LOGO.jpg",  style: "height:35%;width:35%") %>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                            </div>
+                            <div class="col-md-6">
+                                <div id="image">
+                                  <%=image_tag("logo-soundcloud.png",  style: "height:30%;width:30%")%>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="txt">
+                            <p><li>   Title : <%= @shared_music.title %> </li></p>
+                            <p><li>   Artiste : <%= @shared_music.artist %> </li></p>
+                            <p><li> Theme du Groupe : <%=Group.last.theme%></li></p>
+                            <%= link_to "Listen ", @shared_music.url, target: 'blank', action: "show"%>
+                        </div>
+                    </div>
+                    <% else if @shared_music.source == SourceConstants::DAYLIMOTION%>
+                        <div id=string class="baliseDaylimotion container">
+                            <div>
+                                <div class="col-md-4">
+                                    <div id="image" >
+                                        <%= image_tag("PSP-LOGO.jpg",  style: "height:35%;width:35%") %>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-6">
+                                    <div id="image" >
+                                        <%= image_tag("youtube-logo-full_color.png",  style: "height:40%;width:40%") %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="txt">
+                                <p><li>   Title : <%= @shared_music.title %> </li></p>
+                                <p><li>   Artiste : <%= @shared_music.artist %> </li></p>
+                                <p><li> Theme du Groupe : <%=Group.last.theme%></li></p>
+                                <%= link_to "Listen ", @shared_music.url, target: 'blank', action: "show"%>
+                            </div>
+                        </div>
+                    <% else %>
+                        <div id=string class="balise container">
+                            <div>
+                                <div class="col-md-4">
+                                    <div id="logo" >
+                                        <%= image_tag("PSP-LOGO.jpg",  style: "height:35%;width:35%") %>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                </div>
+                                <!-- <div class="col-md-6">
+                                    <div id="image" >
+                                        <%= image_tag("youtube-logo-full_color.png",  style: "height:40%;width:40%") %>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div id="txt">
+                                <p><li>   Title : <%= @shared_music.title %> </li></p>
+                                <p><li>   Artiste : <%= @shared_music.artist %> </li></p>
+                                <p><li> Theme du Groupe : <%=Group.last.theme%></li></p>
+                                <%= link_to "Listen ", @shared_music.url, target: 'blank', action: "show"%>
+                            </div>
+                        </div>
+                    <%end%>
+                <% end %>
+            <% end %>
+        <%end%>
+    </body>
+</html>
+
+<script>
+$( document  ).ready(function() {
+    console.log( "ready! madafaka"  );
+  })
+</script>

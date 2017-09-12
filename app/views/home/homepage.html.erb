@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <header>
+    </header>
+    <body>
+        <h1>Welcome In PeerSoundProject</h1>
+          <div class="container">
+            <%Music.all.each do |i|%>
+            <% @shared_music = i %>
+            <%=render "/musics/show" %>
+            <br>
+             <%end%>
+           </div>
+        <br>
+        La traduction doit print Bonjour : <%= I18n.t('hello') %>
+    <br>
+    <% if !user_signed_in? %>
+        <h4>Pas encore inscrit? Rejoignez PSP!</h4>
+
+    <% end %>
+    </body>
+</html>
