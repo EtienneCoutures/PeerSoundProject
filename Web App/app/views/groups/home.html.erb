@@ -1,0 +1,17 @@
+<div align="center">
+Voici la liste de vos groupes:
+
+<% current_user.groups.each do |i|%>
+    <% @current_user_group = i %>
+    <%= render 'groups/show'%>
+    <br>
+<%end%>
+</div>
+Voici la liste des groupes:
+
+<% Group.all.each do |i|%>
+    <br>
+    Groupe : <%= i.theme %> (<%= i.users.count %> utilisateurs)    
+    
+<%end%>
+
