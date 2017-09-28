@@ -1,18 +1,0 @@
-{:uriI"™file://app/assets/images/bootstrap-social-gh-pages/package.json?type=application/json&id=f5f35ab71e336dd690a0f3d0c200fac4079b9c88b89bade5194807f710675277:ET:load_pathI"app/assets/images;T:filenameI"=app/assets/images/bootstrap-social-gh-pages/package.json;T:	nameI"&bootstrap-social-gh-pages/package;T:logical_pathI"+bootstrap-social-gh-pages/package.json;T:content_typeI"application/json;T:sourceI"û{
-  "name": "bootstrap-social",
-  "version": "5.1.1",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/lipis/bootstrap-social.git"
-  },
-  "license": "MIT",
-  "dependencies": {
-    "bootstrap": "~3",
-    "font-awesome": "~4.7"
-  }
-}
-;T:metadata{	:dependencieso:Set:
-@hash}
-I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"@processors:type=application/json&file_type=application/json;TTI"Kfile-digest://app/assets/images/bootstrap-social-gh-pages/package.json;TTF:charsetI"
-utf-8;F:digest"%„yÉ»éy'˜õEòŠ%†øÎ/¹b½|jÖÓtß4?Æ:lengthiû:dependencies_digest"%`\ÔâhYĞdèV¦‹ü.úØ¼÷'şïN¸*\ÅÉ:idI"Ef5f35ab71e336dd690a0f3d0c200fac4079b9c88b89bade5194807f710675277;F:
-mtimel+o¾ÓX
