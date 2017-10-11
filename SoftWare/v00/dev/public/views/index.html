@@ -6,19 +6,31 @@
     <script>if (window.module) module = window.module;</script>
     <script src="https://rawgit.com/riot/riot/master/riot%2Bcompiler.min.js"></script>
     <meta charset="UTF-8">-->
-    <title>Phoenix</title>
+
+    <script src="../js/jquery/jquery-3.2.1.min.js"></script>
+    <script src="../js/riotJS/riot.js"></script>
+    <script src="../js/riotJS/riot+compiler.js"></script>
+    <script type="riot/tag" src="../riotTag/riotPanel.tag"></script>
+
+    <title>PSP Software</title>
   </head>
   <body>
 
     <div class="container">
 
-      <div id="riot_panel"></div>
+      <riotPanel></riotPanel>
 
     </div>
 
   <script>
 
+  //var riotPanel = require('../riotTag/riotPanel.tag');
 
+  //console.log('riotPanel: ', riotPanel);
+
+  //console.log('$: ', $);
+
+  riot.mount('riotPanel', {width : "100px", height : "100px"});
 
   </script>
 </body>

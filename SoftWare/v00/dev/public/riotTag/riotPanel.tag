@@ -1,7 +1,8 @@
 <riotPanel>
 
-  <div id="panel"></div>
+  <div id="panel">Hello</div>
 
+<script src="../js/jquery/jquery-3.2.1.min.js"></script>
 <script>
 
   this.width = opts.width;
@@ -13,4 +14,4 @@
 
 </script>
 
-</riotPane>
+</riotPanel>
