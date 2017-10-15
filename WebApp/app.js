@@ -6,8 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var nav = require('./app/routes/navbar');
-var users = require('./app/routes/users');
-
+var home = require('./app/routes/home')
 var app = express();
 
 // view engine setup
@@ -36,8 +35,7 @@ app.use(function(err, req, res, next) {
 
 // routes ======================================================================
 app.use('/', nav);
-app.use('/users', users);
-
+app.use('/home', home);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

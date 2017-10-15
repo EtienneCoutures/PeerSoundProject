@@ -60,3 +60,35 @@
     background-color: #4CAF50;
     color: white;
 }
+
+footer{
+background-color:#e5e5e5;
+bottom:0;
+width:100%;
+padding:5px;
+height:60px;
+margin-top: 7px;
+position: absolute;
+}
+.left {
+  float:left;
+  width:20%;/*The width is 20%, by default*/
+}
+.main {
+  float:left;
+  width:60%;/*The width is 60%, by default*/
+}
+
+#footerLogo {
+    position:absolute;
+    width:70%;
+    float:left;
+    margin-right: 100%;
+}
+
+/*Use a media query to add a break point at 800px:*/
+@media (max-width:1000px) {
+  .left, .main, .right {
+    width:100%;/*The width is 100%, when the viewport is 800px or smaller*/
+  }
+}
