@@ -2,12 +2,14 @@
   background-color: black;
   width:100%;
   height: 9%;
+  position: absolute;
 }
 
 #navbar-right{
   background-color: black;
   width:100%;
   height: 9%;
+  position: absolute;
 }
 
 #logo{
@@ -151,22 +153,8 @@ left: 1700px;
     top:10;
 }
 
-#boutonTelechargement{
-  margin-left: 170px;
-  font-size: 30px;
-}
-
-#boutonCGU a{
-  font-size: 50px;
-  margin-left: -900px;
-}
-
-footer {
-position:absolute;
-bottom: 0;
-height: 8px;
-width: 100px;
-color: #8b3436;
-background-color: #000000;
-text-align: center;
+#footer{
+  height: 100px;
+  position: absolute;
+  bottom: 0;
 }
