@@ -4,11 +4,10 @@ pspApp.config(function($routeProvider) {
 		$routeProvider
 
 			// route for the home page
-			.when('/', {
+			.when('/home', {
 				templateUrl : 'views/home.html',
-				controller  : 'navController', 'homeController',
-			})
-			
+				controller  : 'homeController',
+
 function navController($scope) {
     $scope.header = {name: "navbar.html", url: "/../views/navbar.html"};
 		$scope.message = 'Ca marche';

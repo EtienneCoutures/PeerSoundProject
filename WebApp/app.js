@@ -5,8 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var nav = require('./app/routes/navbar');
-var home = require('./app/routes/home')
+var home = require('./app/routes/home.js');
+
 var app = express();
 
 // view engine setup
@@ -21,6 +21,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/', home);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
@@ -32,18 +41,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-
-// routes ======================================================================
-app.use('/', nav);
-app.use('/home', home);
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-
 app.listen(8080);
-
 module.exports = app;
