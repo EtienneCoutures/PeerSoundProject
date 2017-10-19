@@ -1,16 +1,21 @@
 <!DOCTYPE html>
+
 <html ng-app="PspHeader">
   <head>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/stylesheets/home.css" rel="stylesheet" media="all" type="text/css">
-    <script src='/public/controller/headerController.js'></script>
-    <div ng-controller="headerController">
-      <div ng-include src="/views/navbar.html"></div>
-      <script type="text/ng-template" id="header.html"></script>
-    </div>
+    <script src='/controller/headerController.js'></script>
   </head>
 <body>
+
+  <!--div ng-controller="headerController">
+    <div ng-include="'navbar.html'"></div>
+    <script type="text/ng-template" id="navbar.html"></script>
+  </div-->
+
+  <header id="navbar" ng-model="template" ng-include="'../views/navbar.html'" ng-controller="headerController as hctrl"></header> <!-- POUR APPELER LA NAVBAR -->
+
   <div class="vertical-menu">
     <a href="#" class="active">MyFavMusic</a>
     <a href="#">Link 1</a>

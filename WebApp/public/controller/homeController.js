@@ -1,4 +1,4 @@
-var pspApp = angular.module('PspNavBar', []);
+var pspApp = angular.module('PspHome', []);
 
 pspApp.config(function($routeProvider) {
 		$routeProvider
