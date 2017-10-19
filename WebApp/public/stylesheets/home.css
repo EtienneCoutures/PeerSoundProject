@@ -15,7 +15,7 @@
 }
 
 .vertical-menu a.active {
-    background-color: #4CAF50;
+    background-color: #D3D3D3;
     color: white;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .vertical-menu2 a.active {
-    background-color: #4CAF50;
+    background-color: #D3D3D3;
     color: white;
 }
 
@@ -57,6 +57,56 @@
 }
 
 .vertical-menu3 a.active {
-    background-color: #4CAF50;
+    background-color: #D3D3D3;
     color: white;
+}
+
+.actu{
+  display: flex; /* contexte sur le parent */
+  flex-direction: column; /* direction d'affichage verticale */
+  justify-content: center; /* alignement vertical */
+  width: 450px;
+  height: 190px;
+  background-position: top;
+  background-color: white;
+  align-items: center;
+  border-width:4px;
+  border-style:hidden;
+  border-color:#CDCDCD;
+  border-radius: 10px;
+  font-family: serif;
+  font-weight:lighter;
+  border: 1px solid black;
+  margin-top: 40px;
+  box-shadow: 4px 4px 4px grey;
+}
+
+#txt {
+    display:block;
+    margin-top: 2px;
+    width: 200px;
+}
+
+#image {
+    position: inherit;
+    margin-top: 5%;
+    vertical-align:text-bottom;
+    display:flex;
+    justify-content:flex-end;
+    background-color: transparent;
+    line-height: normal;
+}
+
+#imageAccount {
+  margin-top: 10%;
+
+   display: flex;
+   -webkit-flex-direction: column;
+   flex-direction: column;
+   -webkit-align-items: flex-end;
+   align-items: flex-end
+}
+
+body{
+  background-color: #D3D3D3;
 }
