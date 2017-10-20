@@ -1,6 +1,6 @@
 var pspApp = angular.module('PspHeader', [])
 	.controller('headerController', ['$scope', function($scope) {
-	$scope.template = {name: "navbar.html", url: "/../views/navbar.html"};
+	$scope.template = {name: "header.html", url: "/../views/header.html"};
 }]);
 
 /*pspApp.config(function($routeProvider) {
@@ -16,6 +16,6 @@ var pspApp = angular.module('PspHeader', [])
 });*/
 
 function headerController($scope) {
-    $scope.header = {name: "navbar.html", url: "/../views/navbar.html"};
+    $scope.header = {name: "header.html", url: "/../views/header.html"};
 		$scope.message = 'MrBiscotte';
 }

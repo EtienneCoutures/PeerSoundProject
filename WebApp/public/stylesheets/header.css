@@ -1,11 +1,11 @@
-#navbar{
+#header{
   background-color: black;
   width:100%;
   height: 9%;
   position: absolute;
 }
 
-#navbar-right{
+#header-right{
   background-color: black;
   width:100%;
   height: 9%;
@@ -21,10 +21,6 @@
 
 
 #dropdown {
-  float: left;
-  position: absolute;
-  left: -1500px;
-  top: -25px;
 }
 
 /* Dropdown button */
@@ -39,7 +35,7 @@
 }
 
 /* Add a red background color to navbar links on hover */
-.navbar a:hover, .dropdown:hover .dropbtn {
+.header a:hover, .dropdown:hover .dropbtn {
   background-color: black;
   opacity: 0.5;
 }

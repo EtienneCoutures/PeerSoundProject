@@ -1,3 +1,4 @@
+
 var mysql = require('mysql');
 
 var db = "peersoundproject";
@@ -10,6 +11,19 @@ var con = mysql.createConnection({
   password: pass,
   database: db
 });
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+  var table = "users";
+  var sql = "CREATE TABLE " + db;
+  con.query(sql, function (err, result) {
+    if (err) {
+      throw err;
+    } else {
+      console.log("Table created");}
+    });
+  });
+
 
 con.connect(function(err) {
   if (err) throw err;

@@ -1,15 +1,9 @@
-var pspApp = angular.module('PspFooter', []);
-
-pspApp.config(function($routeProvider) {
-		$routeProvider
-			// route for the home page
-			.when('/', {
-				templateUrl : 'views/footer.html',
-				controller  : 'footerController',
-      });
-    });
+var pspApp = angular.module('PspHeader', [])
+	.controller('footerController', ['$scope', function($scope) {
+	$scope.template = {name: "footer.html", url: "/../views/footer.html"};
+}]);
 
 function footerController($scope) {
-    $scope.header = {name: "home.html", url: "/../views/home.html"};
+    $scope.header = {name: "footer.html", url: "/../views/footer.html"};
 		$scope.message = 'MrBiscotte';
 }
