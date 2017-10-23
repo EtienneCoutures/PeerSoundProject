@@ -1,16 +1,10 @@
-var pspApp = angular.module('PspHome', []);
+var pspApp = angular.module('PspHeader', [])
+	.controller('homeController', ['$scope', function($scope) {
+	$scope.template = {name: "home.html", url: "/../views/home.html"};
+}]);
 
-pspApp.config(function($routeProvider) {
-		$routeProvider
-
-			// route for the home page
-			.when('/', {
-				templateUrl : 'views/home.html',
-				controller  : 'homeController',
-			});
-		});
-
-function homeController($scope) {
-    $scope.header = {name: "home.html", url: "/../views/home.html"};
+function headerController($scope) {
+    $scope.header = {name: "header.html", url: "/../views/header.html"};
+		$scope.footer = {name: "footer.html", url: "/../views/footer.html"};
 		$scope.message = 'MrBiscotte';
 }

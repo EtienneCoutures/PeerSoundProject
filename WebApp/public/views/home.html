@@ -8,47 +8,52 @@
     <script src='/controller/headerController.js'></script>
   </head>
 <body>
-  <header id="header" ng-model="template" ng-include="'../views/header.html'" ng-controller="headerController as hctrl"></header> <!-- POUR APPELER LA NAVBAR -->
-  <div class="col-md-12">
-  <div class="col-md-4">
-    <div class="vertical-menu">
-      <a href="#" class="active">MyFavMusic</a>
-      <a href="#">Link 1</a>
-      <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
-      <a href="#">Link 4</a>
+  <!-- <footer id="footer" ng-model="template" ng-include="'../views/footer.html'" ng-controller="headerController as hctrl"></header> < POUR APPELER le Footer -->
+  <div class="row">
+  <header div class="col-md-12" id="header" ng-model="template" ng-include="'../views/header.html'" ng-controller="headerController as hctrl"></header> <!-- POUR APPELER LA NAVBAR -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-4">
+        <div class="vertical-menu">
+        <a href="#" class="active">MyFavMusic</a>
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+        <a href="#">Link 4</a>
+        </div>
+      <div class="vertical-menu2">
+        <a href="#" class="active">MyFriend(s)</a>
+        <a href="#">MrBiscotte</a>
+        <a href="#">Bobkulte</a>
+        <a href="#">KEDIRA</a>
+        <a href="#">ITIZ</a>
+      </div>
+      <div class="vertical-menu3">
+        <a href="#" class="active">MyPlaylist</a>
+        <a href="#">Rock</a>
+        <a href="#">Regea</a>
+        <a href="#">Zoumba</a>
+        <a href="#">Hardcore</a>
+      </div>
     </div>
-    <div class="vertical-menu2">
-      <a href="#" class="active">MyFriend(s)</a>
-      <a href="#">MrBiscotte</a>
-      <a href="#">Bobkulte</a>
-      <a href="#">KEDIRA</a>
-      <a href="#">ITIZ</a>
-    </div>
-    <div class="vertical-menu3">
-      <a href="#" class="active">MyPlaylist</a>
-      <a href="#">Rock</a>
-      <a href="#">Regea</a>
-      <a href="#">Zoumba</a>
-      <a href="#">Hardcore</a>
-    </div>
-</div>
 <div class="col-md-8">
   <div id="content" class="actu">
     <div>
-      <div class="col-md-4">
+      <div class="col-md-6">
           <div id="logo" >
               <a target="_blank"><img  src="/images/logo2.png" style="width:15%;height:15%;">
           </div>
       </div>
-    <div class="col-md-8">
+    <div class="col-md-4">
         <div id="imageAcount"><img  src="/images/myAccount.png" style="width:15%;height:15%;"></div>
     </div>
   </div>
-  <div class="col-md-12" style="text-align=center"id="txt">
+  <div class="col-md-6" style="text-align=center"id="txt">
       <p><li>   Title : MR </li></p>
       <p><li>   Artiste : test </li></p>
       <p><li> Theme du Groupe : toto </li></p>
+  </div>
+  </div>
   </div>
   </div>
 </div>

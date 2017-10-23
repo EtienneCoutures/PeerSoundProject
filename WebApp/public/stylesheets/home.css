@@ -61,7 +61,7 @@
     color: white;
 }
 
-.actu{
+#content{
   display: flex; /* contexte sur le parent */
   flex-direction: column; /* direction d'affichage verticale */
   justify-content: center; /* alignement vertical */
