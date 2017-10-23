@@ -14,12 +14,12 @@
   </head>
   <body ng-controller="headerController">
       <ul id="header-right" class="col-sm-12">
-        <div id="logo" class="col-sm-6"><img  src="/images/logo2.png" style="width:80px;height:70px;"></div>
+        <div id="logo" class="col-sm-6"><img  src="/images/logo2.png" style="width:50px;height:50px;"></div>
         <div id="dropdown" class="col-sm-4">
           <div class="col-sm-6">
-          <button class="dropbtn">Gestion des ressources
+        <!--  <button class="dropbtn">Gestion des ressources
             <i class="fa fa-caret-down"></i>
-          </button>
+          </button> -->
          <div class="dropdown-content">
            <a href="#">Amis</a>
            <a href="#">playlist</a>
@@ -27,10 +27,10 @@
          </div>
        </div>
        </div>
-       <div id="searchthis" class="col-sm-2">
+       <div id="searchthis" class="row">
          <form action="/search"  method="get">
            <input id="search" name="q" type="text" placeholder="Rechercher" />
-           <input id="search-btn" type="submit" value="Rechercher" />
+           <input id="search-btn" type="submit" value="R" />
          </form>
        </div>
        <div id="notif" class="col-sm-6"><img  src="/images/music.jpg" style="width:80px;height:70px;"></div>
