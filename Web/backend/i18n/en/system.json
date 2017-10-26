@@ -1,0 +1,13 @@
+{
+  "User Not found.": "User Not found.",
+  "Record not found": "Record not found",
+  "Invalid Password": "Invalid Password",
+  "Account with same username already exist.": "Account with same username already exist.",
+  "No account found with this email address.": "No account found with this email address.",
+  "[ peersoundproject ] - lost password request": "[ peersoundproject ] - lost password request",
+  "An email containing the procedure for obtaining a new password has been sent to you.": "An email containing the procedure for obtaining a new password has been sent to you.",
+  "Token invalid or expired.": "Token invalid or expired.",
+  "__MODEL__ successfully deleted": "__MODEL__ successfully deleted",
+  "Create": "Create",
+  "Update": "Update"
+}

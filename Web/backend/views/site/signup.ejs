@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Sign Up</title>
+
+    <meta name="description" content="overview &amp; stats"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!--basic styles-->
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
+
+    <!-- ================== BEGIN BASE CSS STYLE ================== -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    
+    <link href="/theme/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet">
+    <link href="/theme/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/theme/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/theme/plugins/DataTables/css/data-table.css" rel="stylesheet">
+    <link href="/theme/plugins/ionRangeSlider/css/ion.rangeSlider.css" rel="stylesheet">
+    <link href="/theme/plugins/ionRangeSlider/css/ion.rangeSlider.skinNice.css" rel="stylesheet">
+    <link href="/theme/plugins/select2/dist/css/select2.min.css" rel="stylesheet">
+    <link href="/theme/plugins/password-indicator/css/password-indicator.css" rel="stylesheet">
+    <link href="/theme/plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet">
+    <link href="/theme/plugins/parsley/src/parsley.css" rel="stylesheet">
+    <link href="/theme/plugins/switchery/switchery.min.css" rel="stylesheet">
+    <link href="/theme/css/animate.min.css" rel="stylesheet">
+    <link href="/theme/css/style.min.css" rel="stylesheet">
+    <link href="/theme/css/style-responsive.min.css" rel="stylesheet">
+    <link href="/theme/css/theme/default.css" rel="stylesheet">
+    <link href="/theme/css/style.css" rel="stylesheet">
+    <link href="/theme/plugins/jquery-file-upload/blueimp-gallery/blueimp-gallery.min.css" rel="stylesheet">
+    <link href="/theme/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet">
+    <link href="/theme/plugins/jquery-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet">
+    <!-- ================== END BASE CSS STYLE ================== -->
+</head>
+
+<body>
+
+<div id="page-loader" class="fade in"><span class="spinner"></span></div>
+<!--<div class="content">-->
+<div id="page-container" class="fade">
+    <!-- begin login -->
+    <div class="login bg-black animated fadeInDown">
+        <!-- begin brand -->
+        <div class="login-header">
+            <div class="brand">
+                <span class="logo"></span> SignUp
+                <small>Please type login and password</small>
+            </div>
+            <div class="icon">
+                <i class="fa fa-sign-in"></i>
+            </div>
+        </div>
+        <!-- end brand -->
+        <div class="login-content">
+            <form id="signup-form" method="POST" action="/signup">
+                <div class="errorMessage">
+                    <div class="alert alert-block alert-danger" id="signup-form_es_"
+                         style="<% if (!(locals.errors && errors.length > 0)) { %>display:none<% } %>">
+                        <ul><%
+if (locals.messages) {
+        for (var i = 0; i < messages.length; i++) { %>
+                            <li><b><%= messages[i].message %></b></li><%
+        }
+} %>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group m-b-20">
+                        <label for="login">Login <span class="required">*</span></label>
+                        <input class="form-control input-lg" name="login" id="login" type="text"
+                               value=""/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group m-b-20">
+                        <label for="password">Password</label>
+                        <input class="form-control input-lg" name="password" id="password" type="password"
+                               value="" required="required"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group m-b-20">
+                        <label for="confirm">Confirm Password</label>
+                        <input class="form-control input-lg" name="confirm" id="confirm" type="password"
+                               value="" required="required"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="login-buttons">
+                        <input type="button" onclick="signUp()" name="yt1" class="btn btn-success btn-block btn-lg"
+                               value="Sign Up"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- end login -->
+</div>
+<!--</div>-->
+
+<!-- ================== BEGIN BASE JS ================== -->
+<script src="/theme/plugins/jquery/jquery-1.9.1.min"></script>
+<script src="/theme/plugins/jquery/jquery-migrate-1.1.0.min"></script>
+<script src="/theme/plugins/jquery-ui/ui/minified/jquery-ui.min"></script>
+<script src="/theme/plugins/slimscroll/jquery.slimscroll.min"></script>
+<script src="/theme/plugins/gritter/js/jquery.gritter"></script>
+<script src="/theme/plugins/bootstrap/js/bootstrap.min"></script>
+<script src="/theme/plugins/password-indicator/js/password-indicator"></script>
+<script src="/theme/js/apps"></script>
+
+<script src="/js/script.js"></script>
+<!-- ================== END BASE JS ================== -->
+
+<script>
+    $(document).ready(function () {
+        App.init();
+    });
+
+    function signUp() {
+        if (document.getElementById('password').value != document.getElementById('confirm').value) {
+            return alert('Passwords do not match');
+        }
+        document.forms["signup-form"].submit();
+    }
+
+    (function () {
+        $('form').each(function () {
+            $(this).find('input').keypress(function (e) {
+                if (e.which == 10 || e.which == 13) {
+                    signUp();
+                }
+            });
+        });
+    })();
+</script>
+</body>
+</html>
