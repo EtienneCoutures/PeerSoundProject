@@ -1,0 +1,154 @@
+24-10-2017 23:54 UTC - info: options set: port=8000, env=development
+24-10-2017 23:54 UTC - info: Magic happens on port 8000
+24-10-2017 23:54 UTC - error:  SequelizeAccessDeniedError: ER_ACCESS_DENIED_ERROR: Access denied for user 'root'@'localhost' (using password: NO)
+    at Handshake._callback (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\sequelize\lib\dialects\mysql\connection-manager.js:83:20)
+    at Handshake.Sequence.end (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\mysql\lib\protocol\sequences\Sequence.js:88:24)
+    at Handshake.ErrorPacket (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\mysql\lib\protocol\sequences\Handshake.js:132:8)
+    at Protocol._parsePacket (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\mysql\lib\protocol\Protocol.js:279:23)
+    at Parser.write (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\mysql\lib\protocol\Parser.js:76:12)
+    at Protocol.write (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\mysql\lib\protocol\Protocol.js:39:16)
+    at Socket.<anonymous> (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\mysql\lib\Connection.js:103:28)
+    at emitOne (events.js:96:13)
+    at Socket.emit (events.js:188:7)
+    at readableAddChunk (_stream_readable.js:176:18)
+    at Socket.Readable.push (_stream_readable.js:134:10)
+    at TCP.onread (net.js:547:20)
+24-10-2017 23:56 UTC - info: options set: port=8000, env=development
+24-10-2017 23:56 UTC - info: Magic happens on port 8000
+24-10-2017 23:56 UTC - error:  SequelizeDatabaseError: ER_CANNOT_ADD_FOREIGN: Cannot add foreign key constraint
+    at Query.formatError (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\sequelize\lib\dialects\mysql\query.js:175:14)
+    at Query._callback (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\sequelize\lib\dialects\mysql\query.js:49:21)
+    at Query.Sequence.end (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\mysql\lib\protocol\sequences\Sequence.js:88:24)
+    at Query.ErrorPacket (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\mysql\lib\protocol\sequences\Query.js:90:8)
+    at Protocol._parsePacket (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\mysql\lib\protocol\Protocol.js:279:23)
+    at Parser.write (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\mysql\lib\protocol\Parser.js:76:12)
+    at Protocol.write (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\mysql\lib\protocol\Protocol.js:39:16)
+    at Socket.<anonymous> (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\mysql\lib\Connection.js:103:28)
+    at emitOne (events.js:96:13)
+    at Socket.emit (events.js:188:7)
+    at readableAddChunk (_stream_readable.js:176:18)
+    at Socket.Readable.push (_stream_readable.js:134:10)
+    at TCP.onread (net.js:547:20)
+25-10-2017 00:13 UTC - info: options set: port=8000, env=development
+25-10-2017 00:13 UTC - info: Magic happens on port 8000
+25-10-2017 00:13 UTC - error:  SequelizeDatabaseError: ER_CANNOT_ADD_FOREIGN: Cannot add foreign key constraint
+    at Query.formatError (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\sequelize\lib\dialects\mysql\query.js:175:14)
+    at Query._callback (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\sequelize\lib\dialects\mysql\query.js:49:21)
+    at Query.Sequence.end (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\mysql\lib\protocol\sequences\Sequence.js:88:24)
+    at Query.ErrorPacket (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\mysql\lib\protocol\sequences\Query.js:90:8)
+    at Protocol._parsePacket (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\mysql\lib\protocol\Protocol.js:279:23)
+    at Parser.write (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\mysql\lib\protocol\Parser.js:76:12)
+    at Protocol.write (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\mysql\lib\protocol\Protocol.js:39:16)
+    at Socket.<anonymous> (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\mysql\lib\Connection.js:103:28)
+    at emitOne (events.js:96:13)
+    at Socket.emit (events.js:188:7)
+    at readableAddChunk (_stream_readable.js:176:18)
+    at Socket.Readable.push (_stream_readable.js:134:10)
+    at TCP.onread (net.js:547:20)
+25-10-2017 01:02 UTC - info: options set: port=8000, env=development
+25-10-2017 01:02 UTC - info: Magic happens on port 8000
+25-10-2017 01:02 UTC - error:  SequelizeDatabaseError: ER_CANNOT_ADD_FOREIGN: Cannot add foreign key constraint
+    at Query.formatError (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\sequelize\lib\dialects\mysql\query.js:175:14)
+    at Query._callback (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\sequelize\lib\dialects\mysql\query.js:49:21)
+    at Query.Sequence.end (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\mysql\lib\protocol\sequences\Sequence.js:88:24)
+    at Query.ErrorPacket (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\mysql\lib\protocol\sequences\Query.js:90:8)
+    at Protocol._parsePacket (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\mysql\lib\protocol\Protocol.js:279:23)
+    at Parser.write (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\mysql\lib\protocol\Parser.js:76:12)
+    at Protocol.write (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\mysql\lib\protocol\Protocol.js:39:16)
+    at Socket.<anonymous> (D:\59eef6dd40c61756a4b0a1a7\backend\node_modules\mysql\lib\Connection.js:103:28)
+    at emitOne (events.js:96:13)
+    at Socket.emit (events.js:188:7)
+    at readableAddChunk (_stream_readable.js:176:18)
+    at Socket.Readable.push (_stream_readable.js:134:10)
+    at TCP.onread (net.js:547:20)
+30-10-2017 04:45 UTC - info: options set: port=8000, env=development
+30-10-2017 04:45 UTC - info: Magic happens on port 8000
+30-10-2017 04:47 UTC - verbose: (GET) /signup
+30-10-2017 04:47 UTC - verbose: (GET) /signup
+30-10-2017 04:47 UTC - verbose: (GET) /signup
+30-10-2017 04:47 UTC - verbose: (GET) /signup
+30-10-2017 04:49 UTC - verbose: (GET) /signup
+30-10-2017 04:49 UTC - verbose: (GET) /signup
+30-10-2017 04:49 UTC - verbose: (GET) /signup
+30-10-2017 04:49 UTC - verbose: (GET) /signup
+30-10-2017 04:50 UTC - verbose: (POST) /signup
+30-10-2017 04:50 UTC - verbose: (GET) /signup
+30-10-2017 04:50 UTC - verbose: (GET) /signup
+30-10-2017 04:50 UTC - verbose: (GET) /signup
+30-10-2017 04:50 UTC - verbose: (GET) /signup
+30-10-2017 04:51 UTC - verbose: (POST) /signup
+30-10-2017 04:51 UTC - verbose: (GET) /
+30-10-2017 04:51 UTC - verbose: (GET) /theme/plugins/DataTables/css/data-table.css
+30-10-2017 04:53 UTC - info: options set: port=8000, env=development
+30-10-2017 04:53 UTC - info: Magic happens on port 8000
+30-10-2017 04:53 UTC - verbose: (GET) /
+30-10-2017 04:53 UTC - verbose: (GET) /theme/plugins/DataTables/css/data-table.css
+30-10-2017 04:54 UTC - verbose: (GET) /
+30-10-2017 04:54 UTC - verbose: (GET) /theme/plugins/DataTables/css/data-table.css
+30-10-2017 04:54 UTC - verbose: (GET) /
+30-10-2017 04:54 UTC - verbose: (GET) /theme/plugins/DataTables/css/data-table.css
+30-10-2017 04:55 UTC - info: options set: port=8000, env=development
+30-10-2017 04:55 UTC - info: Magic happens on port 8000
+30-10-2017 04:55 UTC - verbose: (GET) /
+30-10-2017 04:55 UTC - verbose: (GET) /theme/plugins/DataTables/css/data-table.css
+30-10-2017 04:55 UTC - verbose: (GET) /
+30-10-2017 04:55 UTC - verbose: (GET) /theme/plugins/DataTables/css/data-table.css
+30-10-2017 04:56 UTC - info: options set: port=8000, env=development
+30-10-2017 04:56 UTC - info: Magic happens on port 8000
+30-10-2017 04:56 UTC - verbose: (GET) /
+30-10-2017 04:56 UTC - verbose: (GET) /theme/plugins/DataTables/css/data-table.css
+30-10-2017 04:57 UTC - verbose: (GET) /
+30-10-2017 04:57 UTC - verbose: (GET) /theme/plugins/DataTables/css/data-table.css
+30-10-2017 04:57 UTC - verbose: (GET) /
+30-10-2017 04:57 UTC - verbose: (GET) /theme/plugins/DataTables/css/data-table.css
+30-10-2017 04:58 UTC - verbose: (GET) /
+30-10-2017 04:58 UTC - verbose: (GET) /theme/plugins/DataTables/css/data-table.css
+30-10-2017 04:59 UTC - verbose: (GET) /signup
+30-10-2017 04:59 UTC - verbose: (GET) /theme/plugins/DataTables/css/data-table.css
+30-10-2017 04:59 UTC - verbose: (GET) /js/script.js
+30-10-2017 04:59 UTC - verbose: (GET) /theme/plugins/jquery/jquery.min.map
+30-10-2017 04:59 UTC - verbose: (GET) /js/script.js
+30-10-2017 05:01 UTC - verbose: (GET) /signup
+30-10-2017 05:01 UTC - verbose: (GET) /theme/plugins/DataTables/css/data-table.css
+30-10-2017 05:01 UTC - verbose: (GET) /js/script.js
+30-10-2017 05:01 UTC - verbose: (GET) /js/script.js
+30-10-2017 05:01 UTC - verbose: (GET) /theme/plugins/jquery/jquery.min.map
+30-10-2017 05:02 UTC - verbose: (POST) /signup
+30-10-2017 05:02 UTC - verbose: (GET) /signup
+30-10-2017 05:02 UTC - verbose: (GET) /theme/plugins/DataTables/css/data-table.css
+30-10-2017 05:02 UTC - verbose: (GET) /js/script.js
+30-10-2017 05:02 UTC - verbose: (GET) /theme/plugins/jquery/jquery.min.map
+30-10-2017 05:02 UTC - verbose: (GET) /js/script.js
+30-10-2017 05:02 UTC - verbose: (POST) /signup
+30-10-2017 05:02 UTC - verbose: (GET) /
+30-10-2017 05:02 UTC - verbose: (GET) /theme/plugins/DataTables/css/data-table.css
+30-10-2017 05:02 UTC - verbose: (GET) /api/auth/me
+30-10-2017 05:02 UTC - verbose: (GET) /api/auth/me
+30-10-2017 05:04 UTC - verbose: (GET) /
+30-10-2017 05:04 UTC - verbose: (GET) /api/auth/me
+30-10-2017 05:05 UTC - verbose: (GET) /
+30-10-2017 05:05 UTC - verbose: (GET) /
+30-10-2017 05:06 UTC - verbose: (GET) /api/auth/me
+30-10-2017 05:06 UTC - verbose: (GET) /
+30-10-2017 05:06 UTC - verbose: (GET) /api/auth/me
+30-10-2017 05:09 UTC - verbose: (GET) /
+30-10-2017 05:09 UTC - verbose: (GET) /api/auth/me
+30-10-2017 05:10 UTC - verbose: (GET) /
+30-10-2017 05:10 UTC - verbose: (GET) /api/auth/me
+30-10-2017 05:17 UTC - verbose: (GET) /
+30-10-2017 05:17 UTC - verbose: (GET) /api/auth/me
+30-10-2017 05:17 UTC - verbose: (GET) /
+30-10-2017 05:17 UTC - verbose: (GET) /api/auth/me
+30-10-2017 05:17 UTC - verbose: (GET) /api/auth/me
+30-10-2017 05:17 UTC - verbose: (GET) /signup
+30-10-2017 05:17 UTC - verbose: (GET) /theme/plugins/DataTables/css/data-table.css
+30-10-2017 05:17 UTC - verbose: (GET) /js/script.js
+30-10-2017 05:17 UTC - verbose: (GET) /js/script.js
+30-10-2017 05:17 UTC - verbose: (GET) /theme/plugins/jquery/jquery.min.map
+30-10-2017 05:18 UTC - info: options set: port=8000, env=development
+30-10-2017 05:18 UTC - info: Magic happens on port 8000
+30-10-2017 05:18 UTC - verbose: (GET) /signup
+30-10-2017 05:18 UTC - verbose: (GET) /theme/plugins/DataTables/css/data-table.css
+30-10-2017 05:18 UTC - verbose: (GET) /js/script.js
+30-10-2017 05:18 UTC - verbose: (GET) /theme/plugins/jquery/jquery.min.map
+30-10-2017 05:18 UTC - verbose: (GET) /js/script.js
