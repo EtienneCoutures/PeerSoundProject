@@ -57,32 +57,61 @@
          id="header">
         <!-- begin container-fluid -->
         <div class="container-fluid row">
-            <div class="navbar-header col-xs-12">
+            <div class="navbar-header col-md-12">
                 <!-- begin mobile sidebar expand / collapse button -->
+                <div class="col-md-2">
                 <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
                 <!-- end mobile sidebar expand / collapse button -->
-                <a href="#/" class="navbar-brand"><span class="navbar-logo hidden-xs"></span> peersoundproject</a>
+                <a href="#/" class="navbar-brand"><img src="/img/logo2.png" style="width:63px;height:52px;"></img></a>
+              </div>
                 <div style="float: right">
                     <!-- begin header navigation right -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown navbar-user">
-                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                    <div class="container">
+                      <div class="col-md-5">
+                        <form role="search" name="searchform" method="get">
+                            <div class="form-group" id="searchthis">
+                              <div class="input-group">
+                                <input id="search" type="text" placeholder="recherche" name="s" class="form-control left-rounded">
+                              <div class="input-group-btn">
+                                <button id="search-btn" type="submit" class="btn btn-inverse">Chercher</button>
+                              </div>
+                            </div>
+                          </div>
+                      </form>
+                      </div>
+                      <div class="col-md-5">
+                        <div class="col-md-6">
+                          <div id="notif" class="col-md-4"><img  src="/img/music.jpg" style="width:70px;height:60px;"></div>
+                          <div id="interogation" class="col-md-4"><img  src="/img/point.jpg" style="width:55px;height:59px;"></div>
+                          <div id="france" class="col-md-4"><img  src="/img/france.png" style="width:49px;height:59px;"></div>
+                        </div>
+                        <div class="col-md-6">
+                          <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown navbar-user">
+                              <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                                 <span>{{myself.usr_email | ucfirst}}</span> <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu animated fadeInLeft">
-                                <li class="arrow"></li>
-                                <li><a ng-href="#/user/{{myself.usr_id}}" translate>Edit Profile</a></li>
-                                <li class="divider"></li>
-                                <li><a href="/logout" translate>Log Out</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                              </a>
+                          <ul class="dropdown-menu animated fadeInLeft">
+                              <li class="arrow"></li>
+                              <li><a ng-href="#/user/{{myself.usr_id}}" translate>Edit Profile</a></li>
+                              <li class="divider"></li>
+                              <li><a href="/logout" translate>Log Out</a></li>
+                              <li><a href="#">Amis</a></li>
+                              <li><a href="#">playlist</a></li>
+                              <li><a href="#">favoris</a></li>
+                          </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div> <!-- container navbar -->
                     <!-- end header navigation right -->
                 </div>
+
             </div>
         </div>
         <!-- end container-fluid -->

@@ -152,3 +152,603 @@
 30-10-2017 05:18 UTC - verbose: (GET) /js/script.js
 30-10-2017 05:18 UTC - verbose: (GET) /theme/plugins/jquery/jquery.min.map
 30-10-2017 05:18 UTC - verbose: (GET) /js/script.js
+31-10-2017 10:56 UTC - info: options set: port=8000, env=development
+31-10-2017 10:56 UTC - info: Magic happens on port 8000
+31-10-2017 10:56 UTC - error:  SequelizeConnectionRefusedError: connect ECONNREFUSED 127.0.0.1:3306
+    at Handshake._callback (C:\Users\GILSON\Desktop\EIP\ProjectDev\PeerSoundProject\Web\backend\node_modules\sequelize\lib\dialects\mysql\connection-manager.js:80:20)
+    at Handshake.Sequence.end (C:\Users\GILSON\Desktop\EIP\ProjectDev\PeerSoundProject\Web\backend\node_modules\mysql\lib\protocol\sequences\Sequence.js:88:24)
+    at Protocol.handleNetworkError (C:\Users\GILSON\Desktop\EIP\ProjectDev\PeerSoundProject\Web\backend\node_modules\mysql\lib\protocol\Protocol.js:363:14)
+    at Connection._handleNetworkError (C:\Users\GILSON\Desktop\EIP\ProjectDev\PeerSoundProject\Web\backend\node_modules\mysql\lib\Connection.js:428:18)
+    at emitOne (events.js:96:13)
+    at Socket.emit (events.js:188:7)
+    at emitErrorNT (net.js:1277:8)
+    at _combinedTickCallback (internal/process/next_tick.js:80:11)
+    at process._tickCallback (internal/process/next_tick.js:104:9)
+31-10-2017 11:50 UTC - info: options set: port=8000, env=development
+31-10-2017 11:50 UTC - info: Magic happens on port 8000
+31-10-2017 11:50 UTC - error:  SequelizeConnectionRefusedError: connect ECONNREFUSED 127.0.0.1:3306
+    at Handshake._callback (C:\Users\GILSON\Desktop\EIP\ProjectDev\PeerSoundProject\Web\backend\node_modules\sequelize\lib\dialects\mysql\connection-manager.js:80:20)
+    at Handshake.Sequence.end (C:\Users\GILSON\Desktop\EIP\ProjectDev\PeerSoundProject\Web\backend\node_modules\mysql\lib\protocol\sequences\Sequence.js:88:24)
+    at Protocol.handleNetworkError (C:\Users\GILSON\Desktop\EIP\ProjectDev\PeerSoundProject\Web\backend\node_modules\mysql\lib\protocol\Protocol.js:363:14)
+    at Connection._handleNetworkError (C:\Users\GILSON\Desktop\EIP\ProjectDev\PeerSoundProject\Web\backend\node_modules\mysql\lib\Connection.js:428:18)
+    at emitOne (events.js:96:13)
+    at Socket.emit (events.js:188:7)
+    at emitErrorNT (net.js:1277:8)
+    at _combinedTickCallback (internal/process/next_tick.js:80:11)
+    at process._tickCallback (internal/process/next_tick.js:104:9)
+31-10-2017 12:59 UTC - info: options set: port=8000, env=development
+31-10-2017 12:59 UTC - info: Magic happens on port 8000
+31-10-2017 12:59 UTC - error:  SequelizeDatabaseError: ER_CANNOT_ADD_FOREIGN: Cannot add foreign key constraint
+    at Query.formatError (C:\Users\GILSON\Desktop\EIP\ProjectDev\PeerSoundProject\Web\backend\node_modules\sequelize\lib\dialects\mysql\query.js:175:14)
+    at Query._callback (C:\Users\GILSON\Desktop\EIP\ProjectDev\PeerSoundProject\Web\backend\node_modules\sequelize\lib\dialects\mysql\query.js:49:21)
+    at Query.Sequence.end (C:\Users\GILSON\Desktop\EIP\ProjectDev\PeerSoundProject\Web\backend\node_modules\mysql\lib\protocol\sequences\Sequence.js:88:24)
+    at Query.ErrorPacket (C:\Users\GILSON\Desktop\EIP\ProjectDev\PeerSoundProject\Web\backend\node_modules\mysql\lib\protocol\sequences\Query.js:90:8)
+    at Protocol._parsePacket (C:\Users\GILSON\Desktop\EIP\ProjectDev\PeerSoundProject\Web\backend\node_modules\mysql\lib\protocol\Protocol.js:279:23)
+    at Parser.write (C:\Users\GILSON\Desktop\EIP\ProjectDev\PeerSoundProject\Web\backend\node_modules\mysql\lib\protocol\Parser.js:76:12)
+    at Protocol.write (C:\Users\GILSON\Desktop\EIP\ProjectDev\PeerSoundProject\Web\backend\node_modules\mysql\lib\protocol\Protocol.js:39:16)
+    at Socket.<anonymous> (C:\Users\GILSON\Desktop\EIP\ProjectDev\PeerSoundProject\Web\backend\node_modules\mysql\lib\Connection.js:103:28)
+    at emitOne (events.js:96:13)
+    at Socket.emit (events.js:188:7)
+    at readableAddChunk (_stream_readable.js:176:18)
+    at Socket.Readable.push (_stream_readable.js:134:10)
+    at TCP.onread (net.js:547:20)
+31-10-2017 13:01 UTC - info: options set: port=8000, env=development
+31-10-2017 13:01 UTC - info: Magic happens on port 8000
+31-10-2017 13:02 UTC - verbose: (GET) /signup
+31-10-2017 13:02 UTC - verbose: (GET) /signup
+31-10-2017 13:02 UTC - verbose: (GET) /signup
+31-10-2017 13:02 UTC - verbose: (GET) /signup
+31-10-2017 13:02 UTC - verbose: (POST) /signup
+31-10-2017 13:02 UTC - verbose: (GET) /
+31-10-2017 13:02 UTC - verbose: (GET) /api/auth/me
+31-10-2017 13:02 UTC - verbose: (GET) /api/auth/me
+31-10-2017 13:03 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+31-10-2017 13:55 UTC - info: options set: port=8000, env=development
+31-10-2017 13:55 UTC - info: Magic happens on port 8000
+31-10-2017 14:02 UTC - info: options set: port=8000, env=development
+31-10-2017 14:02 UTC - info: Magic happens on port 8000
+31-10-2017 14:02 UTC - info: options set: port=8000, env=development
+31-10-2017 14:02 UTC - info: Magic happens on port 8000
+31-10-2017 14:12 UTC - verbose: (GET) /
+31-10-2017 14:12 UTC - verbose: (GET) /api/auth/me
+31-10-2017 14:12 UTC - verbose: (GET) /api/auth/me
+31-10-2017 14:12 UTC - verbose: (POST) /api/auth/login
+31-10-2017 14:39 UTC - verbose: (GET) /
+31-10-2017 14:39 UTC - verbose: (GET) /api/auth/me
+31-10-2017 14:41 UTC - verbose: (GET) /
+31-10-2017 14:41 UTC - verbose: (GET) /api/auth/me
+31-10-2017 14:44 UTC - verbose: (GET) /
+31-10-2017 14:44 UTC - verbose: (GET) /api/auth/me
+31-10-2017 14:44 UTC - verbose: (GET) /
+31-10-2017 14:44 UTC - verbose: (GET) /api/auth/me
+31-10-2017 14:45 UTC - verbose: (GET) /
+31-10-2017 14:45 UTC - verbose: (GET) /api/auth/me
+31-10-2017 14:45 UTC - verbose: (GET) /
+31-10-2017 14:45 UTC - verbose: (GET) /api/auth/me
+31-10-2017 14:45 UTC - verbose: (GET) /
+31-10-2017 14:45 UTC - verbose: (GET) /api/auth/me
+31-10-2017 14:46 UTC - verbose: (GET) /
+31-10-2017 14:46 UTC - verbose: (GET) /api/auth/me
+31-10-2017 14:46 UTC - verbose: (GET) /
+31-10-2017 14:46 UTC - verbose: (GET) /api/auth/me
+31-10-2017 14:46 UTC - verbose: (GET) /
+31-10-2017 14:46 UTC - verbose: (GET) /api/auth/me
+31-10-2017 14:46 UTC - verbose: (GET) /
+31-10-2017 14:46 UTC - verbose: (GET) /api/auth/me
+31-10-2017 14:49 UTC - verbose: (GET) /
+31-10-2017 14:49 UTC - verbose: (GET) /api/auth/me
+31-10-2017 14:49 UTC - verbose: (GET) /api/user?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+31-10-2017 14:49 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+31-10-2017 14:49 UTC - verbose: (GET) /
+31-10-2017 14:49 UTC - verbose: (GET) /api/auth/me
+31-10-2017 14:50 UTC - verbose: (GET) /
+31-10-2017 14:50 UTC - verbose: (GET) /api/auth/me
+31-10-2017 14:50 UTC - verbose: (GET) /
+31-10-2017 14:50 UTC - verbose: (GET) /api/auth/me
+31-10-2017 14:51 UTC - verbose: (GET) /
+31-10-2017 14:51 UTC - verbose: (GET) /api/auth/me
+31-10-2017 14:51 UTC - verbose: (GET) /
+31-10-2017 14:51 UTC - verbose: (GET) /api/auth/me
+31-10-2017 14:51 UTC - verbose: (GET) /
+31-10-2017 14:51 UTC - verbose: (GET) /api/auth/me
+31-10-2017 14:53 UTC - verbose: (GET) /
+31-10-2017 14:53 UTC - verbose: (GET) /api/auth/me
+31-10-2017 15:24 UTC - verbose: (GET) /
+31-10-2017 15:24 UTC - verbose: (GET) /api/auth/me
+31-10-2017 15:25 UTC - verbose: (GET) /
+31-10-2017 15:25 UTC - verbose: (GET) /api/auth/me
+31-10-2017 15:28 UTC - verbose: (GET) /
+31-10-2017 15:28 UTC - verbose: (GET) /api/auth/me
+31-10-2017 15:29 UTC - verbose: (GET) /
+31-10-2017 15:29 UTC - verbose: (GET) /api/auth/me
+31-10-2017 16:35 UTC - verbose: (GET) /
+31-10-2017 16:35 UTC - verbose: (GET) /api/auth/me
+31-10-2017 16:35 UTC - verbose: (POST) /api/auth/login
+31-10-2017 16:35 UTC - verbose: (POST) /api/auth/login
+31-10-2017 16:35 UTC - verbose: (POST) /api/auth/login
+31-10-2017 16:39 UTC - verbose: (GET) /
+31-10-2017 16:40 UTC - verbose: (GET) /api/auth/me
+31-10-2017 17:58 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+02-11-2017 14:31 UTC - info: options set: port=8000, env=development
+02-11-2017 14:31 UTC - info: Magic happens on port 8000
+02-11-2017 14:34 UTC - verbose: (GET) /name
+02-11-2017 14:34 UTC - verbose: (GET) /
+02-11-2017 14:34 UTC - verbose: (GET) /api/auth/me
+02-11-2017 14:34 UTC - verbose: (GET) /api/auth/me
+02-11-2017 14:35 UTC - verbose: (POST) /api/auth/login
+02-11-2017 14:40 UTC - verbose: (GET) /
+02-11-2017 14:40 UTC - verbose: (GET) /images/music.jpg
+02-11-2017 14:40 UTC - verbose: (GET) /images/point.jpg
+02-11-2017 14:40 UTC - verbose: (GET) /images/france.png
+02-11-2017 14:40 UTC - verbose: (GET) /images/myAccount.png
+02-11-2017 14:40 UTC - verbose: (GET) /
+02-11-2017 14:40 UTC - verbose: (GET) /
+02-11-2017 14:40 UTC - verbose: (GET) /
+02-11-2017 14:40 UTC - verbose: (GET) /
+02-11-2017 14:40 UTC - verbose: (GET) /api/auth/me
+02-11-2017 14:40 UTC - verbose: (GET) /images/music.jpg
+02-11-2017 14:40 UTC - verbose: (GET) /images/point.jpg
+02-11-2017 14:40 UTC - verbose: (GET) /images/france.png
+02-11-2017 14:40 UTC - verbose: (GET) /images/myAccount.png
+02-11-2017 14:40 UTC - verbose: (GET) /
+02-11-2017 14:40 UTC - verbose: (GET) /
+02-11-2017 14:40 UTC - verbose: (GET) /
+02-11-2017 14:40 UTC - verbose: (GET) /
+02-11-2017 14:41 UTC - verbose: (GET) /
+02-11-2017 14:41 UTC - verbose: (GET) /images/music.jpg
+02-11-2017 14:41 UTC - verbose: (GET) /images/point.jpg
+02-11-2017 14:41 UTC - verbose: (GET) /images/france.png
+02-11-2017 14:41 UTC - verbose: (GET) /images/myAccount.png
+02-11-2017 14:41 UTC - verbose: (GET) /
+02-11-2017 14:41 UTC - verbose: (GET) /
+02-11-2017 14:41 UTC - verbose: (GET) /
+02-11-2017 14:41 UTC - verbose: (GET) /
+02-11-2017 14:41 UTC - verbose: (GET) /api/auth/me
+02-11-2017 14:41 UTC - verbose: (GET) /images/music.jpg
+02-11-2017 14:41 UTC - verbose: (GET) /images/point.jpg
+02-11-2017 14:41 UTC - verbose: (GET) /images/france.png
+02-11-2017 14:41 UTC - verbose: (GET) /images/myAccount.png
+02-11-2017 14:41 UTC - verbose: (GET) /
+02-11-2017 14:41 UTC - verbose: (GET) /
+02-11-2017 14:41 UTC - verbose: (GET) /
+02-11-2017 14:41 UTC - verbose: (GET) /
+02-11-2017 14:41 UTC - verbose: (GET) /
+02-11-2017 14:41 UTC - verbose: (GET) /images/music.jpg
+02-11-2017 14:41 UTC - verbose: (GET) /images/point.jpg
+02-11-2017 14:41 UTC - verbose: (GET) /images/france.png
+02-11-2017 14:41 UTC - verbose: (GET) /images/myAccount.png
+02-11-2017 14:41 UTC - verbose: (GET) /
+02-11-2017 14:41 UTC - verbose: (GET) /
+02-11-2017 14:41 UTC - verbose: (GET) /
+02-11-2017 14:41 UTC - verbose: (GET) /
+02-11-2017 14:41 UTC - verbose: (GET) /api/auth/me
+02-11-2017 14:41 UTC - verbose: (GET) /images/music.jpg
+02-11-2017 14:41 UTC - verbose: (GET) /images/point.jpg
+02-11-2017 14:41 UTC - verbose: (GET) /images/france.png
+02-11-2017 14:41 UTC - verbose: (GET) /images/myAccount.png
+02-11-2017 14:41 UTC - verbose: (GET) /
+02-11-2017 14:41 UTC - verbose: (GET) /
+02-11-2017 14:41 UTC - verbose: (GET) /
+02-11-2017 14:41 UTC - verbose: (GET) /
+02-11-2017 14:41 UTC - verbose: (GET) /
+02-11-2017 14:41 UTC - verbose: (GET) /api/auth/me
+02-11-2017 14:48 UTC - verbose: (GET) /
+02-11-2017 14:48 UTC - verbose: (GET) /api/auth/me
+02-11-2017 14:49 UTC - verbose: (GET) /
+02-11-2017 14:49 UTC - verbose: (GET) /api/auth/me
+02-11-2017 15:05 UTC - verbose: (GET) /
+02-11-2017 15:05 UTC - verbose: (GET) /api/auth/me
+02-11-2017 15:06 UTC - verbose: (GET) /
+02-11-2017 15:06 UTC - verbose: (GET) /
+02-11-2017 15:06 UTC - verbose: (GET) /api/auth/me
+02-11-2017 15:06 UTC - verbose: (GET) /
+02-11-2017 15:06 UTC - verbose: (GET) /api/auth/me
+06-11-2017 13:57 UTC - info: options set: port=8000, env=development
+06-11-2017 13:57 UTC - info: Magic happens on port 8000
+08-11-2017 09:50 UTC - info: options set: port=8000, env=development
+08-11-2017 09:50 UTC - info: Magic happens on port 8000
+08-11-2017 09:51 UTC - verbose: (GET) /
+08-11-2017 09:51 UTC - verbose: (GET) /api/auth/me
+08-11-2017 09:51 UTC - verbose: (POST) /api/auth/login
+08-11-2017 09:51 UTC - verbose: (GET) /
+08-11-2017 09:51 UTC - verbose: (GET) /api/auth/me
+08-11-2017 10:07 UTC - verbose: (GET) /
+08-11-2017 10:07 UTC - verbose: (GET) /api/auth/me
+08-11-2017 10:08 UTC - verbose: (GET) /
+08-11-2017 10:08 UTC - verbose: (GET) /api/auth/me
+08-11-2017 10:08 UTC - verbose: (GET) /
+08-11-2017 10:08 UTC - verbose: (GET) /api/auth/me
+08-11-2017 16:55 UTC - verbose: (GET) /
+08-11-2017 16:55 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:01 UTC - verbose: (POST) /api/auth/login
+08-11-2017 17:02 UTC - verbose: (GET) /
+08-11-2017 17:02 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:03 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+08-11-2017 17:03 UTC - verbose: (GET) /api/user?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+08-11-2017 17:03 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+08-11-2017 17:03 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%22music_name%22:%22t%22%7D
+08-11-2017 17:03 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%22music_name%22:%22ts%22%7D
+08-11-2017 17:03 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%22music_name%22:%22tst%22%7D
+08-11-2017 17:03 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%22music_name%22:%22ts%22%7D
+08-11-2017 17:03 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%22music_name%22:%22t%22%7D
+08-11-2017 17:03 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%22music_name%22:%22%22%7D
+08-11-2017 17:03 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%22music_name%22:%22%22,%22music_source%22:%22youtube%22%7D
+08-11-2017 17:10 UTC - verbose: (GET) /
+08-11-2017 17:10 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:10 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+08-11-2017 17:11 UTC - verbose: (GET) /
+08-11-2017 17:11 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:11 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+08-11-2017 17:12 UTC - verbose: (GET) /
+08-11-2017 17:12 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:12 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+08-11-2017 17:20 UTC - verbose: (GET) /
+08-11-2017 17:20 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:20 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+08-11-2017 17:24 UTC - verbose: (GET) /
+08-11-2017 17:24 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:24 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+08-11-2017 17:26 UTC - verbose: (GET) /
+08-11-2017 17:27 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:27 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+08-11-2017 17:28 UTC - verbose: (GET) /
+08-11-2017 17:28 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:28 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+08-11-2017 17:29 UTC - verbose: (GET) /
+08-11-2017 17:29 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:29 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+08-11-2017 17:35 UTC - verbose: (GET) /
+08-11-2017 17:35 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:35 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+08-11-2017 17:35 UTC - verbose: (GET) /
+08-11-2017 17:35 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:35 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+08-11-2017 17:36 UTC - verbose: (GET) /api/user?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+08-11-2017 17:36 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+08-11-2017 17:36 UTC - verbose: (GET) /api/user?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+08-11-2017 17:37 UTC - verbose: (GET) /
+08-11-2017 17:37 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:37 UTC - verbose: (GET) /api/user?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+08-11-2017 17:39 UTC - verbose: (GET) /
+08-11-2017 17:40 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:40 UTC - verbose: (GET) /
+08-11-2017 17:40 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:41 UTC - verbose: (GET) /
+08-11-2017 17:41 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:44 UTC - verbose: (GET) /
+08-11-2017 17:44 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:45 UTC - verbose: (GET) /
+08-11-2017 17:45 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:45 UTC - verbose: (GET) /
+08-11-2017 17:45 UTC - verbose: (GET) /img/logo.jpg
+08-11-2017 17:45 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:45 UTC - verbose: (GET) /img/logo.jpg
+08-11-2017 17:46 UTC - verbose: (GET) /
+08-11-2017 17:46 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:47 UTC - verbose: (GET) /
+08-11-2017 17:48 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:48 UTC - verbose: (GET) /
+08-11-2017 17:48 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:49 UTC - verbose: (GET) /
+08-11-2017 17:49 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:49 UTC - verbose: (GET) /
+08-11-2017 17:49 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:50 UTC - verbose: (GET) /
+08-11-2017 17:50 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:50 UTC - verbose: (GET) /
+08-11-2017 17:50 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:51 UTC - verbose: (GET) /
+08-11-2017 17:51 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:51 UTC - verbose: (GET) /
+08-11-2017 17:51 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:52 UTC - verbose: (GET) /
+08-11-2017 17:52 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:52 UTC - verbose: (GET) /
+08-11-2017 17:52 UTC - verbose: (GET) /
+08-11-2017 17:52 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:53 UTC - verbose: (GET) /
+08-11-2017 17:53 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:54 UTC - verbose: (GET) /
+08-11-2017 17:54 UTC - verbose: (GET) /img/logo.jpg
+08-11-2017 17:54 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:54 UTC - verbose: (GET) /img/logo.jpg
+08-11-2017 17:54 UTC - verbose: (GET) /
+08-11-2017 17:54 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:55 UTC - verbose: (GET) /
+08-11-2017 17:55 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:55 UTC - verbose: (GET) /
+08-11-2017 17:55 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:57 UTC - verbose: (GET) /
+08-11-2017 17:57 UTC - verbose: (GET) /api/auth/me
+08-11-2017 17:59 UTC - verbose: (GET) /
+08-11-2017 17:59 UTC - verbose: (GET) /api/auth/me
+08-11-2017 18:00 UTC - verbose: (GET) /
+08-11-2017 18:00 UTC - verbose: (GET) /api/auth/me
+08-11-2017 18:02 UTC - verbose: (GET) /
+08-11-2017 18:02 UTC - verbose: (GET) /api/auth/me
+08-11-2017 18:04 UTC - verbose: (GET) /
+08-11-2017 18:04 UTC - verbose: (GET) /api/auth/me
+08-11-2017 18:05 UTC - verbose: (GET) /
+08-11-2017 18:05 UTC - verbose: (GET) /api/auth/me
+08-11-2017 18:09 UTC - verbose: (GET) /
+08-11-2017 18:09 UTC - verbose: (GET) /api/auth/me
+08-11-2017 18:13 UTC - verbose: (GET) /
+08-11-2017 18:13 UTC - verbose: (GET) /api/auth/me
+08-11-2017 18:13 UTC - verbose: (GET) /
+08-11-2017 18:13 UTC - verbose: (GET) /api/auth/me
+08-11-2017 18:18 UTC - verbose: (GET) /
+08-11-2017 18:18 UTC - verbose: (GET) /api/auth/me
+08-11-2017 18:19 UTC - verbose: (GET) /
+08-11-2017 18:19 UTC - verbose: (GET) /api/auth/me
+08-11-2017 18:19 UTC - verbose: (GET) /
+08-11-2017 18:19 UTC - verbose: (GET) /api/auth/me
+08-11-2017 18:19 UTC - verbose: (GET) /
+08-11-2017 18:19 UTC - verbose: (GET) /api/auth/me
+08-11-2017 18:20 UTC - verbose: (GET) /
+08-11-2017 18:20 UTC - verbose: (GET) /api/auth/me
+08-11-2017 18:20 UTC - verbose: (GET) /
+08-11-2017 18:20 UTC - verbose: (GET) /api/auth/me
+08-11-2017 18:21 UTC - verbose: (GET) /
+08-11-2017 18:21 UTC - verbose: (GET) /api/auth/me
+08-11-2017 18:21 UTC - verbose: (GET) /
+08-11-2017 18:21 UTC - verbose: (GET) /api/auth/me
+08-11-2017 18:21 UTC - verbose: (GET) /
+08-11-2017 18:21 UTC - verbose: (GET) /api/auth/me
+08-11-2017 18:22 UTC - verbose: (GET) /
+08-11-2017 18:22 UTC - verbose: (GET) /api/auth/me
+08-11-2017 18:22 UTC - verbose: (GET) /
+08-11-2017 18:22 UTC - verbose: (GET) /api/auth/me
+08-11-2017 18:22 UTC - verbose: (GET) /
+08-11-2017 18:22 UTC - verbose: (GET) /api/auth/me
+08-11-2017 18:22 UTC - verbose: (GET) /
+08-11-2017 18:22 UTC - verbose: (GET) /api/auth/me
+10-11-2017 11:07 UTC - info: options set: port=8000, env=development
+10-11-2017 11:07 UTC - info: Magic happens on port 8000
+10-11-2017 11:18 UTC - verbose: (GET) /
+10-11-2017 11:18 UTC - verbose: (GET) /api/auth/me
+10-11-2017 11:18 UTC - verbose: (POST) /api/auth/login
+10-11-2017 11:18 UTC - verbose: (POST) /api/auth/login
+10-11-2017 11:18 UTC - verbose: (GET) /
+10-11-2017 11:18 UTC - verbose: (GET) /api/auth/me
+10-11-2017 11:19 UTC - info: options set: port=8000, env=development
+10-11-2017 11:19 UTC - info: Magic happens on port 8000
+10-11-2017 12:25 UTC - verbose: (GET) /
+10-11-2017 12:25 UTC - verbose: (GET) /api/auth/me
+10-11-2017 12:25 UTC - verbose: (POST) /api/auth/login
+10-11-2017 12:27 UTC - verbose: (GET) /
+10-11-2017 12:27 UTC - verbose: (GET) /api/auth/me
+10-11-2017 12:39 UTC - verbose: (GET) /
+10-11-2017 12:39 UTC - verbose: (GET) /api/auth/me
+10-11-2017 12:39 UTC - verbose: (GET) /
+10-11-2017 12:39 UTC - verbose: (GET) /api/auth/me
+10-11-2017 12:40 UTC - verbose: (GET) /
+10-11-2017 12:40 UTC - verbose: (GET) /api/auth/me
+10-11-2017 12:40 UTC - verbose: (GET) /
+10-11-2017 12:40 UTC - verbose: (GET) /api/auth/me
+13-11-2017 17:26 UTC - info: options set: port=8000, env=development
+13-11-2017 17:26 UTC - info: Magic happens on port 8000
+13-11-2017 17:26 UTC - verbose: (GET) /
+13-11-2017 17:26 UTC - verbose: (GET) /api/auth/me
+13-11-2017 17:26 UTC - verbose: (POST) /api/auth/login
+13-11-2017 17:26 UTC - verbose: (POST) /api/auth/login
+13-11-2017 17:37 UTC - verbose: (GET) /
+13-11-2017 17:37 UTC - verbose: (GET) /api/auth/me
+13-11-2017 17:38 UTC - verbose: (GET) /
+13-11-2017 17:38 UTC - verbose: (GET) /api/auth/me
+13-11-2017 17:39 UTC - verbose: (GET) /
+13-11-2017 17:39 UTC - verbose: (GET) /api/auth/me
+13-11-2017 17:39 UTC - verbose: (GET) /
+13-11-2017 17:39 UTC - verbose: (GET) /api/auth/me
+13-11-2017 17:39 UTC - verbose: (GET) /
+13-11-2017 17:39 UTC - verbose: (GET) /api/auth/me
+13-11-2017 17:40 UTC - verbose: (GET) /
+13-11-2017 17:40 UTC - verbose: (GET) /api/auth/me
+13-11-2017 17:40 UTC - verbose: (GET) /
+13-11-2017 17:40 UTC - verbose: (GET) /api/auth/me
+13-11-2017 17:40 UTC - verbose: (GET) /
+13-11-2017 17:40 UTC - verbose: (GET) /api/auth/me
+13-11-2017 17:42 UTC - verbose: (GET) /
+13-11-2017 17:42 UTC - verbose: (GET) /api/auth/me
+13-11-2017 17:51 UTC - info: options set: port=8000, env=development
+13-11-2017 17:51 UTC - info: Magic happens on port 8000
+13-11-2017 17:51 UTC - verbose: (GET) /
+13-11-2017 17:52 UTC - verbose: (GET) /
+13-11-2017 17:52 UTC - verbose: (GET) /
+13-11-2017 17:52 UTC - verbose: (GET) /
+13-11-2017 17:52 UTC - verbose: (GET) /
+13-11-2017 17:52 UTC - verbose: (GET) /
+13-11-2017 17:53 UTC - verbose: (GET) /
+13-11-2017 17:53 UTC - verbose: (GET) /api/auth/me
+13-11-2017 17:53 UTC - verbose: (GET) /api/auth/me
+13-11-2017 18:00 UTC - verbose: (GET) /
+13-11-2017 18:00 UTC - verbose: (GET) /api/auth/me
+13-11-2017 18:02 UTC - verbose: (GET) /
+13-11-2017 18:02 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:07 UTC - verbose: (GET) /
+13-11-2017 20:07 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:08 UTC - verbose: (POST) /api/auth/login
+13-11-2017 20:08 UTC - verbose: (GET) /
+13-11-2017 20:08 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:09 UTC - verbose: (GET) /
+13-11-2017 20:09 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:09 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+13-11-2017 20:12 UTC - verbose: (GET) /
+13-11-2017 20:12 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:13 UTC - verbose: (GET) /
+13-11-2017 20:13 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:13 UTC - verbose: (GET) /
+13-11-2017 20:13 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:13 UTC - verbose: (GET) /
+13-11-2017 20:13 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:14 UTC - verbose: (GET) /
+13-11-2017 20:14 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:15 UTC - verbose: (GET) /
+13-11-2017 20:15 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:15 UTC - verbose: (GET) /
+13-11-2017 20:15 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:16 UTC - verbose: (GET) /
+13-11-2017 20:16 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:16 UTC - verbose: (GET) /
+13-11-2017 20:16 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:22 UTC - verbose: (GET) /
+13-11-2017 20:22 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:22 UTC - verbose: (GET) /
+13-11-2017 20:22 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:22 UTC - verbose: (GET) /
+13-11-2017 20:22 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:31 UTC - verbose: (GET) /
+13-11-2017 20:31 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:31 UTC - verbose: (GET) /
+13-11-2017 20:31 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:33 UTC - verbose: (GET) /
+13-11-2017 20:33 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:33 UTC - verbose: (GET) /
+13-11-2017 20:33 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:35 UTC - verbose: (GET) /
+13-11-2017 20:35 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:36 UTC - verbose: (GET) /
+13-11-2017 20:36 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:38 UTC - verbose: (GET) /
+13-11-2017 20:38 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:39 UTC - verbose: (GET) /
+13-11-2017 20:39 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:40 UTC - verbose: (GET) /
+13-11-2017 20:40 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:40 UTC - verbose: (GET) /
+13-11-2017 20:40 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:40 UTC - verbose: (GET) /
+13-11-2017 20:40 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:40 UTC - verbose: (GET) /
+13-11-2017 20:40 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:40 UTC - verbose: (GET) /
+13-11-2017 20:41 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:41 UTC - verbose: (GET) /
+13-11-2017 20:41 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:41 UTC - verbose: (GET) /
+13-11-2017 20:41 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:41 UTC - verbose: (GET) /
+13-11-2017 20:41 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:41 UTC - verbose: (GET) /
+13-11-2017 20:41 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:41 UTC - verbose: (GET) /
+13-11-2017 20:41 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:42 UTC - verbose: (GET) /
+13-11-2017 20:42 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:44 UTC - verbose: (GET) /
+13-11-2017 20:44 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:45 UTC - verbose: (GET) /
+13-11-2017 20:45 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:45 UTC - verbose: (GET) /
+13-11-2017 20:45 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:45 UTC - verbose: (GET) /
+13-11-2017 20:45 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:46 UTC - verbose: (GET) /
+13-11-2017 20:46 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:46 UTC - verbose: (GET) /
+13-11-2017 20:46 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:47 UTC - verbose: (GET) /
+13-11-2017 20:47 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:51 UTC - verbose: (GET) /
+13-11-2017 20:51 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:51 UTC - verbose: (GET) /
+13-11-2017 20:51 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:51 UTC - verbose: (GET) /
+13-11-2017 20:51 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:53 UTC - verbose: (GET) /
+13-11-2017 20:53 UTC - verbose: (GET) /api/auth/me
+13-11-2017 20:59 UTC - verbose: (GET) /
+13-11-2017 20:59 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:00 UTC - verbose: (GET) /
+13-11-2017 21:00 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:05 UTC - verbose: (GET) /
+13-11-2017 21:05 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:05 UTC - verbose: (GET) /
+13-11-2017 21:05 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:06 UTC - verbose: (GET) /
+13-11-2017 21:06 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:06 UTC - verbose: (GET) /
+13-11-2017 21:06 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:06 UTC - verbose: (GET) /
+13-11-2017 21:06 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:07 UTC - verbose: (GET) /
+13-11-2017 21:07 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:07 UTC - verbose: (GET) /
+13-11-2017 21:07 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:07 UTC - verbose: (GET) /
+13-11-2017 21:07 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:08 UTC - verbose: (GET) /
+13-11-2017 21:08 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:08 UTC - verbose: (GET) /
+13-11-2017 21:08 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:08 UTC - verbose: (GET) /
+13-11-2017 21:08 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:08 UTC - verbose: (GET) /
+13-11-2017 21:08 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:08 UTC - verbose: (GET) /
+13-11-2017 21:08 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:09 UTC - verbose: (GET) /
+13-11-2017 21:09 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:09 UTC - verbose: (GET) /
+13-11-2017 21:09 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:09 UTC - verbose: (GET) /
+13-11-2017 21:09 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:09 UTC - verbose: (GET) /
+13-11-2017 21:09 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:10 UTC - verbose: (GET) /
+13-11-2017 21:10 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:10 UTC - verbose: (GET) /
+13-11-2017 21:10 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:11 UTC - verbose: (GET) /
+13-11-2017 21:11 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:11 UTC - verbose: (GET) /
+13-11-2017 21:11 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:11 UTC - verbose: (GET) /
+13-11-2017 21:11 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:11 UTC - verbose: (GET) /
+13-11-2017 21:11 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:18 UTC - verbose: (GET) /api/user?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+13-11-2017 21:18 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+13-11-2017 21:18 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+13-11-2017 21:18 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+13-11-2017 21:18 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+13-11-2017 21:21 UTC - verbose: (GET) /
+13-11-2017 21:21 UTC - verbose: (GET) /images/logo.png
+13-11-2017 21:21 UTC - verbose: (GET) /
+13-11-2017 21:21 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:21 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+13-11-2017 21:21 UTC - verbose: (GET) /
+13-11-2017 21:21 UTC - verbose: (GET) /images/logo.png
+13-11-2017 21:21 UTC - verbose: (GET) /
+13-11-2017 21:21 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:21 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+13-11-2017 21:22 UTC - verbose: (GET) /
+13-11-2017 21:22 UTC - verbose: (GET) /images/logo.png
+13-11-2017 21:22 UTC - verbose: (GET) /
+13-11-2017 21:22 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:24 UTC - verbose: (GET) /
+13-11-2017 21:24 UTC - verbose: (GET) /images/logo.png
+13-11-2017 21:24 UTC - verbose: (GET) /
+13-11-2017 21:24 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:26 UTC - verbose: (GET) /
+13-11-2017 21:26 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:41 UTC - verbose: (GET) /
+13-11-2017 21:41 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:41 UTC - verbose: (GET) /
+13-11-2017 21:41 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:43 UTC - verbose: (GET) /
+13-11-2017 21:43 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:51 UTC - verbose: (GET) /
+13-11-2017 21:51 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:52 UTC - verbose: (GET) /
+13-11-2017 21:52 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:52 UTC - verbose: (GET) /
+13-11-2017 21:52 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:52 UTC - verbose: (GET) /
+13-11-2017 21:52 UTC - verbose: (GET) /api/auth/me
+13-11-2017 21:58 UTC - verbose: (GET) /api/music?limit=20&page=1&sort=%7B%22field%22:null,%22asc%22:true%7D&where=%7B%7D
+13-11-2017 22:03 UTC - verbose: (GET) /
+13-11-2017 22:03 UTC - verbose: (GET) /api/auth/me
+13-11-2017 22:04 UTC - verbose: (GET) /
+13-11-2017 22:04 UTC - verbose: (GET) /api/auth/me
+13-11-2017 22:04 UTC - verbose: (GET) /
+13-11-2017 22:05 UTC - verbose: (GET) /api/auth/me
