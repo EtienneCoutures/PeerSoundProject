@@ -16,6 +16,8 @@ module.exports = function (app) {
             res.render('layouts/main', {
                 __layout: false
             });
+            user = new User();
+            console.log(user)
         });
 
     /**
@@ -35,6 +37,7 @@ module.exports = function (app) {
                 __layout: "layouts/login",
                 messages: req.flash('message')
             });
+
         });
 
     /**

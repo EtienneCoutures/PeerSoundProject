@@ -152,3 +152,51 @@
 30-10-2017 05:18 UTC - verbose: (GET) /js/script.js
 30-10-2017 05:18 UTC - verbose: (GET) /theme/plugins/jquery/jquery.min.map
 30-10-2017 05:18 UTC - verbose: (GET) /js/script.js
+14-11-2017 05:33 UTC - info: options set: port=8000, env=development
+14-11-2017 05:33 UTC - info: Magic happens on port 8000
+14-11-2017 05:34 UTC - verbose: (GET) /api/auth/me
+14-11-2017 05:34 UTC - verbose: (GET) /api/auth/me
+14-11-2017 05:34 UTC - verbose: (GET) /api/auth/me
+14-11-2017 05:34 UTC - verbose: (POST) /api/auth/login
+14-11-2017 05:36 UTC - verbose: (GET) /signup
+14-11-2017 05:36 UTC - verbose: (GET) /js/script.js
+14-11-2017 05:36 UTC - verbose: (GET) /js/script.js
+14-11-2017 05:36 UTC - verbose: (GET) /theme/plugins/jquery/jquery.min.map
+14-11-2017 05:36 UTC - verbose: (POST) /signup
+14-11-2017 05:36 UTC - verbose: (GET) /signup
+14-11-2017 05:36 UTC - verbose: (GET) /js/script.js
+14-11-2017 05:36 UTC - verbose: (GET) /js/script.js
+14-11-2017 05:36 UTC - verbose: (GET) /theme/plugins/jquery/jquery.min.map
+14-11-2017 05:36 UTC - verbose: (POST) /signup
+14-11-2017 05:36 UTC - verbose: (GET) /signup
+14-11-2017 05:36 UTC - verbose: (GET) /js/script.js
+14-11-2017 05:36 UTC - verbose: (GET) /js/script.js
+14-11-2017 05:36 UTC - verbose: (GET) /theme/plugins/jquery/jquery.min.map
+14-11-2017 05:37 UTC - info: options set: port=8000, env=development
+14-11-2017 05:37 UTC - info: options set: port=8000, env=development
+14-11-2017 05:37 UTC - info: Magic happens on port 8000
+14-11-2017 05:37 UTC - verbose: (GET) /signup
+14-11-2017 05:37 UTC - verbose: (GET) /js/script.js
+14-11-2017 05:37 UTC - verbose: (GET) /js/script.js
+14-11-2017 05:37 UTC - verbose: (GET) /theme/plugins/jquery/jquery.min.map
+14-11-2017 05:37 UTC - verbose: (POST) /signup
+14-11-2017 05:37 UTC - verbose: (GET) /signup
+14-11-2017 05:37 UTC - verbose: (GET) /js/script.js
+14-11-2017 05:37 UTC - verbose: (GET) /js/script.js
+14-11-2017 05:37 UTC - verbose: (GET) /theme/plugins/jquery/jquery.min.map
+14-11-2017 05:38 UTC - info: options set: port=8000, env=development
+14-11-2017 05:38 UTC - info: Magic happens on port 8000
+14-11-2017 05:38 UTC - verbose: (GET) /signup
+14-11-2017 05:38 UTC - verbose: (GET) /js/script.js
+14-11-2017 05:38 UTC - verbose: (GET) /js/script.js
+14-11-2017 05:38 UTC - verbose: (GET) /theme/plugins/jquery/jquery.min.map
+14-11-2017 05:38 UTC - verbose: (POST) /signup
+14-11-2017 05:38 UTC - verbose: (GET) /signup
+14-11-2017 05:38 UTC - verbose: (GET) /js/script.js
+14-11-2017 05:38 UTC - verbose: (GET) /js/script.js
+14-11-2017 05:38 UTC - verbose: (GET) /theme/plugins/jquery/jquery.min.map
+14-11-2017 05:46 UTC - info: options set: port=8000, env=development
+14-11-2017 05:46 UTC - info: Magic happens on port 8000
+14-11-2017 05:46 UTC - verbose: (GET) /
+14-11-2017 05:46 UTC - verbose: (GET) /api/auth/me
+14-11-2017 05:46 UTC - verbose: (GET) /api/auth/me
