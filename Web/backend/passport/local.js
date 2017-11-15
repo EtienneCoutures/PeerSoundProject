@@ -58,13 +58,15 @@ module.exports = function (app, passport) {
             passReqToCallback: true
         },
         function (req, username, password, done) {
+            console.log(req.body);
             var form = req.body;
-
+            console.log(username);
             app.models['User'].find({
                 where: {
                     'usr_email': username
                 }
             }).then(function (account) {
+                console.log(account)
                 if (account) {
                     return done(null, false, req.flash('message', req.translate('system', 'Account with same username already exist.')));
                 }
@@ -173,6 +175,7 @@ module.exports = function (app, passport) {
                     'usr_id': account['usr_id'],
                     'atok_type': 'recovery'
                 }).then(function (recoveryToken) {
+                    console.log(recoveryToken);
                     app.mailer.sendMail({
                         to: email,
                         subject: req.translate('system', '[ peersoundproject ] - lost password request'),
