@@ -55,7 +55,7 @@ module.exports = function (app) {
     /**
      * Logout
      */
-    router.get('/api/logout',
+    router.get('/logout',
         app.requirePermission([
             ['allow', {
                 users: '@' // Connected only
@@ -71,9 +71,7 @@ module.exports = function (app) {
                 }
             }).done(function() {
                 req.logout();
-                res.json({
-                    code: 0
-                });
+                return res.redirect('/login');
             });
         });
 
