@@ -16,8 +16,7 @@ module.exports = function (app) {
             res.render('layouts/main', {
                 __layout: false
             });
-            user = new User();
-            console.log(user)
+
         });
 
     /**
@@ -40,6 +39,19 @@ module.exports = function (app) {
 
         });
 
+        router.post('/signup',
+            app.requirePermission([
+                ['allow', {
+                    users: '?' // Guest only
+                }]
+            ]),
+            function (req, res) {
+                res.render('site/login', {
+                    __layout: "layouts/login",
+                    messages: req.flash('message')
+                });
+                console.log("ketamine")
+            });
     /**
      * Logout
      */

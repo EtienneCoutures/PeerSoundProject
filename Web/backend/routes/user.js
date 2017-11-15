@@ -95,7 +95,7 @@ module.exports = function (app) {
         ]),
         function (req, res) {
             var Record = req.body;
-
+        
             if (!Record["usr_id"])
                 return createRecord();
             return updateRecord();
@@ -106,7 +106,7 @@ module.exports = function (app) {
                 }
                 var record = app.models["User"].build({});
 
-                // Add fields 
+                // Add fields
                 if (!S(Record.usr_login).isEmpty()) record.usr_login = Record.usr_login;
                 if (!S(Record.usr_password).isEmpty()) record.usr_password = Record.usr_password;
                 if (!S(Record.usr_email).isEmpty()) record.usr_email = Record.usr_email;
@@ -141,7 +141,7 @@ module.exports = function (app) {
                         return reply(req.translate('system', 'You do not have permissions update this user.'))
                     }
 
-                    // Update fields 
+                    // Update fields
                 if (!S(Record.usr_login).isEmpty()) record.usr_login = Record.usr_login;
                 if (!S(Record.usr_password).isEmpty()) record.usr_password = Record.usr_password;
                 if (!S(Record.usr_email).isEmpty()) record.usr_email = Record.usr_email;
