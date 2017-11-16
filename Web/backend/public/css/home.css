@@ -1,0 +1,17 @@
+
+
+#txt {
+    display:block;
+    margin-top: 2px;
+    width: 200px;
+    vertical-align: middle;
+}
+
+#imageAccount {
+  margin-top: 20%;
+   display: flex;
+   -webkit-flex-direction: column;
+   flex-direction: column;
+   -webkit-align-items: flex-end;
+   align-items: flex-end
+}

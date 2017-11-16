@@ -18,6 +18,7 @@ define([
         .controller('SiteController', [
             '$scope',
             function ($scope) {
+              
             }
         ])
         .controller('LoginController', [
