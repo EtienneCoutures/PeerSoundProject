@@ -98,7 +98,7 @@ module.exports = function (app) {
                 }
             },
             image: {
-              type: Sequelize.Blob,
+              type: Sequelize.BLOB,
               validate:{
               }
             }
