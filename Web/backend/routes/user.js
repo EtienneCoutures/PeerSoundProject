@@ -5,11 +5,35 @@ var express = require('express'),
     async = require('async'),
     Cookies = require('cookies'),
     S = require('string'),
+    crypto = require('password-hash'),
     logger = global.logger;
 
 module.exports = function (app) {
     var router = express.Router();
     app.use('/api/user', router);
+
+    /*router.get('/plugin/:login/:password',
+      function (req, res) {
+        var query = {
+            where: {
+                "usr_email": req.params.login
+            },
+            include: []
+        };
+        app.models["User"].findOne(query).then(function (result) {
+            if (!result) {
+                return res.json({
+                    code: 1
+                });
+            }
+            console.log("test");
+            res.json({
+                "code": 0,
+                "User": result
+            });
+        });
+      }
+    )*/
 
     // List All models of User
     router.get('/',
@@ -68,14 +92,12 @@ module.exports = function (app) {
                 },
                 include: []
             };
-
             app.models["User"].findOne(query).then(function (result) {
                 if (!result) {
                     return res.json({
                         code: 1
                     });
                 }
-
                 res.json({
                     "code": 0,
                     "User": result

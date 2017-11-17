@@ -1,3 +1,5 @@
+<link href="/css/home.css" rel="stylesheet"/>
+
 <%
 var menu_items = [{
     label: 'music',
@@ -12,8 +14,43 @@ var menu_items = [{
     return a.label > b.label ? 1 : -1;
 });
 %>
+
+<%
+var new_item = [{
+    user_name: "MrBiscotte",
+    album: "ecole du micro d'argent",
+    artist: "IAM",
+    playlist: "RapFr",
+    titre: "petit frere"
+}, {
+    user_name: "ITIZ",
+    album: "l'autre",
+    artist: "TSR",
+    playlist: "RapFr",
+    titre: "fenetre sur rue"
+  }, {
+    user_name: "KETAMAX",
+    album: "accuse de reflexion",
+    artist: "davoka",
+    playlist: "RapFr",
+    titre: "amour"
+  }, {
+    user_name: "KEDIRA",
+    album: "punk",
+    artist: "pink",
+    playlist: "RapFr",
+    titre: "petit frere"
+  }, {
+    user_name: "GABO",
+    album: "ecole du micro d'argent",
+    artist: "toto",
+    playlist: "RapFr",
+    titre: "petit frere"
+}];
+%>
+
 <!-- begin row -->
-<div class="row"><%
+<!--div class="row"><%
 menu_items.forEach(function(item) { %>
     <div class="col-md-3 col-sm-6">
         <div class="widget widget-stats widget-thumbnail bg-green" onclick="window.location.href = '<%= item.url %>'">
@@ -29,5 +66,38 @@ menu_items.forEach(function(item) { %>
         </div>
     </div><%
 }); %>
-</div>
+</div-->
 <!-- end row -->
+<div class="row"><%
+new_item.forEach(function(item) { %>
+<div class="notif">
+    <div>
+        <div class="col-md-3">
+            <div id="logo" >
+              <div class="usrimage"><img  src="/img/point.jpg" style="width:79px;height:67px;"></div>
+            </div>
+          </div>
+        <div class="col-md-6">
+          <div id="txt">
+            <p><li> Title : <%= item.titre %> </li></p>
+            <p><li> Artiste : <%= item.artist %> </li></p>
+            <p><li> Playlist : <%= item.playlist %></li></p>
+            <p><li> UserName : <%= item.user_name %></li></p>
+          </div>
+        </div>
+        <div class="col-md-3">
+            <div class="logoImg" >
+                <img src="/img/logo2.png" style="width:79px;height:67px;"><img>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+      <div>
+        <button id="acces" align="left"><a href="#/download">Acceder à la page</a></button>
+      </div>
+    </div>
+</div>
+<%
+}); %>
+</div>

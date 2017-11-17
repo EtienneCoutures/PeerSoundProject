@@ -3,7 +3,14 @@
  */
 var express        = require('express'),
     app            = express(),
-    server         = require('http').createServer(app),
+    fs             = require('fs-extra'),
+    hskey          = fs.readFileSync('./hacksparrow-key.pem'),
+    hscert         = fs.readFileSync('./hacksparrow-cert.pem'),
+    https_options  = {
+      key: hskey,
+      cert: hscert
+    },
+    server         = require('https').createServer(https_options, app),
 
     session        = require('express-session'),
     flash          = require('express-flash'),
@@ -17,10 +24,10 @@ var express        = require('express'),
     _              = require('underscore'),
     Promise        = require('bluebird'),
     glob           = require('glob'),
-    fs             = require('fs-extra'),
     S              = require('string'),
     nodemailer     = require('nodemailer'),
     path           = require('path'),
+
 
     translate      = require('./translate')(path.resolve('./i18n'), 'en'),
     logger;

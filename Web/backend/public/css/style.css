@@ -7,8 +7,8 @@
 }
 .container-fluid .navbar-header {
     margin: 0;
-    background-color: black;
-    opacity: 0.8;
+    background-color: #2d353c;
+    opacity: 0,98;
 }
 .navbar-header .navbar-brand {
     width: 33.3333333%;
@@ -36,7 +36,7 @@ span.select2 {
 ul.toolbar {
     display: table;
     list-style: outside none none;
-    padding: 0;
+    padding: 10;
 }
 ul.toolbar > li {
     float: left;
@@ -54,8 +54,8 @@ ul.toolbar .dropdown > .dropdown-toggle > .label {
     top: 0;
     right: 0;
     display: block;
-    background: #FF5B57 none repeat scroll 0% 0%;
-    background-color: white;
+    background: #F0F8FF none repeat scroll 0% 0%;
+    background-color: #FFFFF0;
     line-height: 12px;
     font-weight: 300;
     padding: 0.3em 0.6em;
@@ -73,51 +73,6 @@ ul.toolbar .dropdown > .dropdown-toggle > .label {
     animation: 0.2s ease 0s normal none 1 running fadeIn;
     z-index: 1020;
     border-radius: 0px 0px 4px 4px;
-}
-
-/* Champ de saisie */
-#searchthis{
-  float: left;
-  position: absolute;
-  top: 13px;
-}
-
- #search {
-  background-color: #ffffff;   /* Couleur de fond */
-  border-style: solid;   /* Style de la bordure  */
-  border-width: 1px;   /* Epaisseur de la bordure  */
-  border-color: grey;   /* Couleur de la bordure  */
-  padding: 6px 10px 6px 10px;   /* Espace entre les bords et le contenu : haut droite bas gauche  */
-  box-sizing: border-box;   /* Important */
-  font-family: Lato;   /* Police du texte */
-  font-size: 12px;   /* Taille de la police du texte */
-  font-weight: normal;   /* Graisse du texte : normal = normal ; bold = gras */
-  letter-spacing: 1px;   /* Espacement des caractères */
-  height: 100%;
-}
-
-/* Bouton valider */
-#searchthis #search-btn {
-  background-color: #CDCDCD;   /* Couleur de fond */
-  border-style: solid;   /* Style de la bordure  */
-  border-width: 1px;   /* Epaisseur de la bordure  */
-  border-color: white;   /* Couleur de la bordure  */
-  padding: 5px 10px 5px 10px;   /* Espace entre les bords et le contenu : haut droite bas gauche  */
-  box-sizing: border-box;   /* Important */
-  font-family: PT sans;   /* Police du texte */
-  font-size: 12px;   /* Taille de la police du texte */
-  font-weight: normal;   /* Graisse du texte : normal = normal ; bold = gras */
-  letter-spacing: 2px;   /* Espacement des caractères */
-  margin: 0px 0 0 0;   /* Espace autour du bouton : haut droite bas gauche  */
-  text-transform: uppercase;   /* Transforme le texte en majuscules */
-  color: #ffffff;   /* Couleur du texte */
-}
-
-/* Bouton valider quand survolé par la souris */
-#searchthis #search-btn:hover {
-  background-color: #ffffff;   /* Couleur de fond */
-  color: #E8B960;   /* Couleur du texte */
-  cursor: pointer;   /* Apparence du curseur comme pour un lien */
 }
 
 .widget.widget-thumbnail {

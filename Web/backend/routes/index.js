@@ -16,8 +16,22 @@ module.exports = function (app) {
             res.render('layouts/main', {
                 __layout: false
             });
+          });
+        /**
+         * Account
+         */
+        router.get('/account',
+            function (req, res, next) {
+                res.render('site/account')
+            });
 
-        });
+        /**
+          * Dowload
+        */
+        router.get('/download',
+        function (req, res, next) {
+          res.render('site/download')
+          });
 
     /**
      * SignUp
@@ -39,7 +53,7 @@ module.exports = function (app) {
 
         });
 
-        
+
     /**
      * Logout
      */

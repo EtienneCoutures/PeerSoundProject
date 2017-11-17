@@ -13,9 +13,18 @@ define([
                 .when('/login', {
                     templateUrl: '/partials/site/login',
                     controller: 'LoginController'
+                })
+                .when('/download', {
+                    templateUrl: '/partials/site/download',
+                    controller: 'DownloadController'
                 });
         }])
         .controller('SiteController', [
+            '$scope',
+            function ($scope) {
+            }
+        ])
+        .controller('DownloadController', [
             '$scope',
             function ($scope) {
             }

@@ -46,7 +46,7 @@ define([
                     label: 'music_source',
                     sortable: true,
                     filter: 'enum',
-                    values: ["youtube","spotify","deezer","else"]
+                    values: ["youtube","spotify","deezer","soundcloud", "else"]
                 }];
 
                 $scope.loadMusicList = function (dtRequest, dtRefresh) {
