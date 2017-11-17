@@ -20,6 +20,22 @@ module.exports = function (app) {
             //console.log(user)
         });
 
+        /**
+         * Account
+         */
+        router.get('/account',
+            function (req, res, next) {
+                res.render('site/account')
+            });
+
+        /**
+          * Dowload
+        */
+        router.get('/download',
+        function (req, res, next) {
+          res.render('site/download')
+          });
+
     /**
      * SignUp
      */

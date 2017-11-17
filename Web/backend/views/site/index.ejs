@@ -1,3 +1,5 @@
+<link href="/css/home.css" rel="stylesheet"/>
+
 <%
 var menu_items = [{
     label: 'music',
@@ -13,7 +15,7 @@ var menu_items = [{
 });
 %>
 <!-- begin row -->
-<div class="row"><%
+<!--div class="row"><%
 menu_items.forEach(function(item) { %>
     <div class="col-md-3 col-sm-6">
         <div class="widget widget-stats widget-thumbnail bg-green" onclick="window.location.href = '<%= item.url %>'">
@@ -29,5 +31,26 @@ menu_items.forEach(function(item) { %>
         </div>
     </div><%
 }); %>
-</div>
+</div-->
 <!-- end row -->
+
+
+<div class="col-md-12">
+        <div id="content" class="actu">
+            <div class="container">
+            <div class="col-md-8" style="text-align=center"id="txt">
+              <p><li>   Title : MR </li></p>
+              <p><li>   Artiste : test </li></p>
+              <p><li> Theme du Groupe : toto </li></p>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div id="logo" >
+                <a target="_blank"><img  src="/img/logo2.png" style="width:15%;height:15%;">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div id="imageAcount"><img  src="/img/myAccount.png" style="width:15%;height:15%;"></div>
+          </div>
+      </div>
+</div>
