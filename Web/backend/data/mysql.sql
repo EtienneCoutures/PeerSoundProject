@@ -80,6 +80,9 @@ ALTER TABLE `user`
 --
 -- Data for tables
 --
+alter table music add music_group text;
+alter table user add image blob;
+
 
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;

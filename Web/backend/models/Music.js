@@ -9,7 +9,7 @@ var Sequelize = require('sequelize'),
 module.exports = function (app) {
     if (!sequelize.isDefined('Music')) {
         var schema = {
-            // List of 'Music' fields 
+            // List of 'Music' fields
             music_id: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
@@ -59,11 +59,17 @@ module.exports = function (app) {
                 defaultValue: "",
                 validate: {
                 }
+            },
+            music_groupe: {
+              type: Sequelize.TEXT,
+              allowNull: false,
+              validate: {
+              }
             }
         };
 
         app.models.Music = sequelize.define('Music', schema, {
-            // Define model options 
+            // Define model options
             timestamps: true,
             createdAt: 'music_insert',
             updatedAt: 'music_update',
@@ -73,8 +79,8 @@ module.exports = function (app) {
             }
         });
 
-        // List of required models 
+        // List of required models
 
-        // Define relations of this model 
+        // Define relations of this model
     }
 };

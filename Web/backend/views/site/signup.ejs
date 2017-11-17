@@ -55,15 +55,22 @@
         <!-- end brand -->
         <div class="login-content">
             <form id="signup-form" method="POST" action="/signup">
+              <%= JSON.stringify(locals) %>
+              <%= errors %>
+              <div ng-if="locals.messages" class="alert alert-block alert-danger">
+                  <ul>
+                      <li ng-repeat="error in locals.errors">{{error.message | translate}}</li>
+                  </ul>
+              </div>
                 <div class="errorMessage">
                     <div class="alert alert-block alert-danger" id="signup-form_es_"
                          style="<% if (!(locals.errors && errors.length > 0)) { %>display:none<% } %>">
                         <ul><%
-if (locals.messages) {
-        for (var i = 0; i < messages.length; i++) { %>
-                            <li><b><%= messages[i].message %></b></li><%
-        }
-} %>
+                          if (locals.messages) {
+                            for (var i = 0; i < messages.length; i++) { %>
+                              <li><b><%= messages[i].message %></b></li><%
+                            }
+                          } %>
                         </ul>
                     </div>
                 </div>

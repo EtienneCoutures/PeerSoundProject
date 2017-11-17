@@ -22,7 +22,7 @@ module.exports = function (app, passport) {
                 }
             }).then(function (account) {
                 if (!account) {
-                    return done(null, false, req.flash('message', req.translate('system', 'User Not found.')));
+                    return done(null, false, req.flash('message', req.translate('system', 'User not found')));
                 }
                 if (!account.validatePassword(password)) {
                     return done(null, false, req.flash('message', req.translate('system', 'Invalid Password')));
@@ -58,18 +58,15 @@ module.exports = function (app, passport) {
             passReqToCallback: true
         },
         function (req, username, password, done) {
-            console.log(req.body);
             var form = req.body;
-            console.log(username);
             app.models['User'].find({
                 where: {
                     'usr_email': username
                 }
             }).then(function (account) {
-                console.log(account)
-                if (account) {
-                    return done(null, false, req.flash('message', req.translate('system', 'Account with same username already exist.')));
-                }
+              if (account) {
+                return done(null, false, req.flash('message', req.translate('system', 'Account with same username already exist.')));
+              }
                 account = app.models['User'].build({
                     'usr_email' : username,
                     'usr_password' : password

@@ -9,7 +9,7 @@ var Sequelize = require('sequelize'),
 module.exports = function (app) {
     if (!sequelize.isDefined('User')) {
         var schema = {
-            // List of 'User' fields 
+            // List of 'User' fields
             usr_id: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
@@ -96,11 +96,16 @@ module.exports = function (app) {
                 defaultValue: "active",
                 validate: {
                 }
+            },
+            image: {
+              type: Sequelize.Blob,
+              validate:{
+              }
             }
         };
 
         app.models.User = sequelize.define('User', schema, {
-            // Define model options 
+            // Define model options
             timestamps: true,
             createdAt: 'usr_insert',
             updatedAt: 'usr_update',
@@ -113,8 +118,8 @@ module.exports = function (app) {
             }
         });
 
-        // List of required models 
+        // List of required models
 
-        // Define relations of this model 
+        // Define relations of this model
     }
 };
