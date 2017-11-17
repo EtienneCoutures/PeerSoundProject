@@ -5,11 +5,35 @@ var express = require('express'),
     async = require('async'),
     Cookies = require('cookies'),
     S = require('string'),
+    crypto = require('password-hash'),
     logger = global.logger;
 
 module.exports = function (app) {
     var router = express.Router();
     app.use('/api/user', router);
+
+    /*router.get('/plugin/:login/:password',
+      function (req, res) {
+        var query = {
+            where: {
+                "usr_email": req.params.login
+            },
+            include: []
+        };
+        app.models["User"].findOne(query).then(function (result) {
+            if (!result) {
+                return res.json({
+                    code: 1
+                });
+            }
+            console.log("test");
+            res.json({
+                "code": 0,
+                "User": result
+            });
+        });
+      }
+    )*/
 
     // List All models of User
     router.get('/',
@@ -68,14 +92,12 @@ module.exports = function (app) {
                 },
                 include: []
             };
-
             app.models["User"].findOne(query).then(function (result) {
                 if (!result) {
                     return res.json({
                         code: 1
                     });
                 }
-
                 res.json({
                     "code": 0,
                     "User": result
@@ -106,7 +128,7 @@ module.exports = function (app) {
                 }
                 var record = app.models["User"].build({});
 
-                // Add fields 
+                // Add fields
                 if (!S(Record.usr_login).isEmpty()) record.usr_login = Record.usr_login;
                 if (!S(Record.usr_password).isEmpty()) record.usr_password = Record.usr_password;
                 if (!S(Record.usr_email).isEmpty()) record.usr_email = Record.usr_email;
@@ -141,7 +163,7 @@ module.exports = function (app) {
                         return reply(req.translate('system', 'You do not have permissions update this user.'))
                     }
 
-                    // Update fields 
+                    // Update fields
                 if (!S(Record.usr_login).isEmpty()) record.usr_login = Record.usr_login;
                 if (!S(Record.usr_password).isEmpty()) record.usr_password = Record.usr_password;
                 if (!S(Record.usr_email).isEmpty()) record.usr_email = Record.usr_email;

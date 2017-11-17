@@ -4,7 +4,8 @@
 var express       = require('express'),
     crypto        = require('crypto'),
     Cookies       = require('cookies'),
-    LocalStrategy = require('passport-local').Strategy;
+    LocalStrategy = require('passport-local').Strategy,
+    validator     = require('validator');
 
 module.exports = function (app, passport) {
     var router = express.Router();
@@ -21,6 +22,7 @@ module.exports = function (app, passport) {
                     'usr_email': username
                 }
             }).then(function (account) {
+              console.log(account);
                 if (!account) {
                     return done(null, false, req.flash('message', req.translate('system', 'User Not found.')));
                 }
@@ -58,17 +60,18 @@ module.exports = function (app, passport) {
             passReqToCallback: true
         },
         function (req, username, password, done) {
-            console.log(req.body);
             var form = req.body;
-            console.log(username);
             app.models['User'].find({
                 where: {
                     'usr_email': username
                 }
             }).then(function (account) {
-                console.log(account)
+              console.log(account);
                 if (account) {
                     return done(null, false, req.flash('message', req.translate('system', 'Account with same username already exist.')));
+                }
+                if (!validator.isEmail(username)) {
+                    return done(null, false, req.flash('message', 'Email input is not valid email adress.'));
                 }
                 account = app.models['User'].build({
                     'usr_email' : username,
@@ -135,7 +138,7 @@ module.exports = function (app, passport) {
         function (req, res, next) {
             passport.authenticate('signup', function (err, user, info, status) {
                 if (!user) {
-                    return res.redirect('/signup');
+                  return res.redirect('/signup');
                 }
                 req.login(user, function () {
                     res.redirect('/');
@@ -176,6 +179,7 @@ module.exports = function (app, passport) {
                     'atok_type': 'recovery'
                 }).then(function (recoveryToken) {
                     console.log(recoveryToken);
+                    console.log(email);
                     app.mailer.sendMail({
                         to: email,
                         subject: req.translate('system', '[ peersoundproject ] - lost password request'),

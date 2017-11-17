@@ -24,7 +24,7 @@ var config  = {
         },
         servers: {
             self: {
-                protocol: "http",
+                protocol: "https",
                 host: "peersoundproject.com"
             }
         },
@@ -48,7 +48,7 @@ var config  = {
         development: {
             servers: {
                 self: {
-                    protocol: "http",
+                    protocol: "https",
                     host: false
                 }
             },
