@@ -127,18 +127,38 @@
 
             <!-- begin sidebar nav -->
             <ul class="nav">
-                <li class="nav-header" translate>Navigation</li>
+                <li class="nav-header" translate></li>
                 <li class="{{__controller == 'music' ? 'active' : ''}}">
-                    <a href="#/music">
-                        <i class="fa fa-cube"></i>
-                        <span>music</span>
-                    </a>
+                <a href="#/music">
+                  <i><img src="/img/logo2.png" style="width:25px;height:25px;"></img></i>
+                  <span>My Fav Music</span>
+                </a>
+                  <a href="#">Link 1</a>
+                  <a href="#">Link 2</a>
+                  <a href="#">Link 3</a>
+                  <a href="#">Link 4</a>
                 </li>
                 <li class="{{__controller == 'user' ? 'active' : ''}}">
-                    <a href="#/user">
-                        <i class="fa fa-cube"></i>
-                        <span>user</span>
+                  <a href="#/user" class="Myriend">
+                    <i><img src="/img/logo2.png" style="width:25px;height:25px;"></img></i>
+                      <span>MyFriend(s)</span>
+                  </a>
+                  <a href="#">MrBiscotte</a>
+                  <a href="#">Bobkulte</a>
+                  <a href="#">KEDIRA</a>
+                  <a href="#">ITIZ</a>
+
+                  </li>
+                  <li class="myPlaylist">
+                    <a href="#/dowload" class="MyPlaylist">
+                      <i><img src="/img/logo2.png" style="width:25px;height:25px;"></img></i>
+                        <span>MyPlaylist</span>
                     </a>
+                  <a href="#" class="active">MyPlaylist</a>
+                  <a href="#">Rock</a>
+                  <a href="#">Regea</a>
+                  <a href="#">Zoumba</a>
+                  <a href="#">Hardcore</a>
                 </li>
                 <!-- begin sidebar minify button -->
                 <li>

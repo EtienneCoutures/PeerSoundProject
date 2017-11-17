@@ -54,8 +54,8 @@ ul.toolbar .dropdown > .dropdown-toggle > .label {
     top: 0;
     right: 0;
     display: block;
-    background: #FF5B57 none repeat scroll 0% 0%;
-    background-color: white;
+    background: #F0F8FF none repeat scroll 0% 0%;
+    background-color: #FFFFF0;
     line-height: 12px;
     font-weight: 300;
     padding: 0.3em 0.6em;
@@ -324,7 +324,7 @@ ul.toolbar .dropdown > .dropdown-toggle > .label {
         position: relative;
         margin: 0 auto;
     }
-    
+
     footer {
         background:#333;
         background-color:#e5e5e5;
