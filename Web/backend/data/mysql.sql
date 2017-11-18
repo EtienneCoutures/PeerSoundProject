@@ -83,6 +83,9 @@ ALTER TABLE `user`
 alter table music add music_group text;
 alter table user add image blob;
 
+alter table music add usr_id INT;
+
+alter table music add foreign key (`usr_id`) references user(`usr_id`);
 
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;

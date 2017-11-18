@@ -117,7 +117,7 @@ module.exports = function (app) {
         ]),
         function (req, res) {
             var Record = req.body;
-        
+
             if (!Record["usr_id"])
                 return createRecord();
             return updateRecord();
@@ -138,6 +138,7 @@ module.exports = function (app) {
                 if (!S(Record.usr_phone).isEmpty()) record.usr_phone = Record.usr_phone;
                 if (!S(Record.usr_birthday).isEmpty()) record.usr_birthday = Record.usr_birthday;
                 if (!S(Record.usr_role).isEmpty()) record.usr_role = Record.usr_role;
+                if (!S(Record.image).isEmpty()) record.image = Record.image;
                 if (!S(Record.usr_status).isEmpty()) record.usr_status = Record.usr_status;
 
                 record.save().then(function (record) {
