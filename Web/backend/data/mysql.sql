@@ -87,5 +87,9 @@ alter table music add usr_id INT;
 
 alter table music add foreign key (`usr_id`) references user(`usr_id`);
 
+alter table music add music_date text;
+
+alter table music add url text;
+
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
