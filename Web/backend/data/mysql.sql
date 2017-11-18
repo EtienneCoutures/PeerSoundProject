@@ -21,20 +21,6 @@ DROP TABLE IF EXISTS `user`;
 -- --------------------------------------------------------
 
 --
--- Structure of the table `music`
---
-CREATE TABLE IF NOT EXISTS `music` (
-  `music_id` int NOT NULL,
-  `music_name` varchar(255) NOT NULL,
-  `music_description` text NOT NULL,
-  `music_comment` text,
-  `music_picture_default` varchar(255) NOT NULL,
-  `music_insert` datetime NOT NULL,
-  `music_update` datetime NOT NULL,
-  `music_source` enum('youtube','spotify','deezer','else') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
-
---
 -- Structure of the table `user`
 --
 CREATE TABLE IF NOT EXISTS `user` (
@@ -50,7 +36,28 @@ CREATE TABLE IF NOT EXISTS `user` (
   `usr_role` enum('super-admin','admin','member') NOT NULL DEFAULT "member",
   `usr_insert` datetime NOT NULL,
   `usr_update` datetime NOT NULL,
-  `usr_status` enum('waiting','active','lock') NOT NULL DEFAULT "active"
+  `usr_status` enum('waiting','active','lock') NOT NULL DEFAULT "active",
+  `usr_image` blob default NULL,
+  primary key (`usr_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+
+--
+-- Structure of the table `music`
+--
+CREATE TABLE IF NOT EXISTS `music` (
+  `music_id` int NOT NULL,
+  `music_name` varchar(255) NOT NULL,
+  `music_description` text NOT NULL,
+  `music_comment` text,
+  `music_picture_default` varchar(255) NOT NULL,
+  `music_insert` datetime NOT NULL,
+  `music_update` datetime NOT NULL,
+  `music_source` enum('youtube','spotify','deezer','else') NOT NULL,
+  `music_group` text NOT NULL,
+  `music_url` text NOT NULL,
+  `usr_id` int NOT NULL,
+  foreign key (`usr_id`) references user(`usr_id`),
+  primary key (`music_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 --
@@ -61,14 +68,12 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Index of the table `music`
 --
 ALTER TABLE `music`
-  ADD PRIMARY KEY (`music_id`),
   MODIFY `music_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Index of the table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`usr_id`),
   MODIFY `usr_id` int NOT NULL AUTO_INCREMENT,
   ADD KEY (`usr_login`),
   ADD UNIQUE KEY `usr_email` (`usr_email`);
@@ -80,16 +85,5 @@ ALTER TABLE `user`
 --
 -- Data for tables
 --
-alter table music add music_group text;
-alter table user add image blob;
-
-alter table music add usr_id INT;
-
-alter table music add foreign key (`usr_id`) references user(`usr_id`);
-
-alter table music add music_date text;
-
-alter table music add url text;
-
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;

@@ -140,6 +140,7 @@ module.exports = function (app) {
                 if (!S(Record.usr_role).isEmpty()) record.usr_role = Record.usr_role;
                 if (!S(Record.image).isEmpty()) record.image = Record.image;
                 if (!S(Record.usr_status).isEmpty()) record.usr_status = Record.usr_status;
+                if (!S(Record.usr_image).isEmpty()) record.usr_image = Record.usr_image;
 
                 record.save().then(function (record) {
                     reply(null, record);
@@ -175,6 +176,7 @@ module.exports = function (app) {
                 if (!S(Record.usr_birthday).isEmpty()) record.usr_birthday = Record.usr_birthday;
                 if (!S(Record.usr_role).isEmpty()) record.usr_role = Record.usr_role;
                 if (!S(Record.usr_status).isEmpty()) record.usr_status = Record.usr_status;
+                if (!S(Record.usr_image).isEmpty()) record.usr_image = Record.usr_image;
 
                     record.save().then(function (record) {
                         reply(null, record);

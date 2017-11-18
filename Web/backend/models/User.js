@@ -97,8 +97,9 @@ module.exports = function (app) {
                 validate: {
                 }
             },
-            image: {
+            usr_image: {
               type: Sequelize.BLOB,
+              defaultValue: null,
               validate:{
               }
             }

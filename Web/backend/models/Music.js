@@ -60,9 +60,15 @@ module.exports = function (app) {
                 validate: {
                 }
             },
-            music_groupe: {
+            music_group: {
               type: Sequelize.TEXT,
-              allowNull: false,
+              defaultValue: "",
+              validate: {
+              }
+            },
+            music_url: {
+              type: Sequelize.TEXT,
+              defaultValue: "",
               validate: {
               }
             },
