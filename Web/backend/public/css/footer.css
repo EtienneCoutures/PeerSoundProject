@@ -7,3 +7,36 @@
     bottom:0;
     height:60px;
 }
+
+.button1 {
+background: #76B3FA;
+ border-radius: 100px;
+ padding: 10px 60px;
+ color: black;
+ text-decoration: none;
+ margin: 0 8px;
+ font-size: 15px;
+ border: 2px solid #2F4F4F ;
+ margin-top: -5px;
+
+}
+
+/* Hover state animation applied here */
+.button1:hover {
+  -webkit-animation: hover 1200ms linear 2 alternate;
+  animation: hover 1200ms linear 2 alternate;
+}
+
+/* Active state animation applied here */
+.button1:active {
+  -webkit-animation: active 1200ms ease 1 alternate;
+  animation: active 1200ms ease 1 alternate;
+  background: #5F9BE0;
+}
+
+.boutonCGU {
+  background-color: #e7e7e7;
+  color: black;
+  border: 2px solid #2F4F4F ;
+  font-size: 12px;
+}

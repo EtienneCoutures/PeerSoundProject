@@ -61,17 +61,16 @@
          id="header">
         <!-- begin container-fluid -->
         <div class="container-fluid row">
-            <div class="navbar-header col-md-12">
+            <div class="navbar-header col-md-12" style="border-">
                 <!-- begin mobile sidebar expand / collapse button -->
                 <div class="col-md-2">
-
                 <!-- end mobile sidebar expand / collapse button -->
                 <a href="#/" class="navbar-brand"><img src="/img/logo2.png" style="width:59px;height:47px;" id="logoPSP"></img></a>
               </div>
                 <div style="float: right">
                     <!-- begin header navigation right -->
                     <div class="container">
-                      <div class="col-md-5">
+                      <div class="col-md-6">
                         <form role="search" name="searchform" method="get">
                             <div class="form-group" id="searchthis">
                               <div class="input-group">
@@ -83,31 +82,34 @@
                           </div>
                       </form>
                       </div>
-                      <div class="col-md-5">
-                        <div class="col-md-6">
-                          <div id="notif" class="col-md-4"><img  src="/img/music.jpg" style="width:70px;height:60px;"></div>
-                          <div id="interogation" class="col-md-4"><img  src="/img/point.jpg" style="width:55px;height:59px;"></div>
-                          <div id="france" class="col-md-4"><img  src="/img/france.png" style="width:49px;height:59px;"></div>
+                      <div class="col-md-6">
+                        <div class="col-md-5">
+                          <div id="notif" class="col-md-6"><img  src="/img/music.jpg" style="width:60px;height:50px;"></div>
+                          <div id="interogation" class="col-md-6"><img  src="/img/point.png" style="width:45px;height:49px;"></div>
                         </div>
-                        <div class="col-md-6">
-                          <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown navbar-user">
-                              <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                                <span>{{myself.usr_email | ucfirst}}</span> <b class="caret"></b>
-                              </a>
-                          <ul class="dropdown-menu animated fadeInLeft">
-                              <li class="arrow"></li>
-                              <li><a ng-href="#/user/{{myself.usr_id}}" translate>Edit Profile</a></li>
-                              <li class="divider"></li>
-                              <li><a href="/logout" translate>Log Out</a></li>
-                              <li><a href="#">Amis</a></li>
-                              <li><a href="#">playlist</a></li>
-                              <li><a href="#">favoris</a></li>
-                          </ul>
-                          </li>
+                        <div class="col-md-5">
+                        <ul class="nav navbar-nav navbar-right">
+                          <li class="dropdown navbar-user">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                              <span>{{myself.usr_email | ucfirst}}</span> <b class="caret"></b>
+                            </a>
+                        <ul class="dropdown-menu animated fadeInLeft">
+                            <li class="arrow"></li>
+                            <li><a ng-href="#/user/{{myself.usr_id}}" translate>Edit Profile</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/logout" translate>Log Out</a></li>
+                            <li><a href="#">Amis</a></li>
+                            <li><a href="#">playlist</a></li>
+                            <li><a href="#">favoris</a></li>
                         </ul>
-                      </div>
+                        </li>
+                      </ul>
                     </div>
+                    <div class="col-md-2">
+                      <div id="france" class="col-md-4"><img  src="/img/france.png" style="width:39px;height:49px; text-align=center;"></div>
+                  </div>
+                    </div>
+
                   </div> <!-- container navbar -->
                     <!-- end header navigation right -->
                 </div>
@@ -126,6 +128,7 @@
         <div data-scrollbar="true" data-height="100%">
 
             <!-- begin sidebar nav -->
+
             <ul class="nav">
                 <li class="nav-header" translate></li>
                 <li class="{{__controller == 'music' ? 'active' : ''}}">
@@ -137,6 +140,7 @@
                   <a href="#">Link 2</a>
                   <a href="#">Link 3</a>
                   <a href="#">Link 4</a>
+                  <hr>
                 </li>
                 <li class="{{__controller == 'user' ? 'active' : ''}}">
                   <a href="#/user" class="Myriend">
@@ -147,7 +151,7 @@
                   <a href="#">Bobkulte</a>
                   <a href="#">KEDIRA</a>
                   <a href="#">ITIZ</a>
-
+                  <hr>
                   </li>
                   <li class="myPlaylist">
                     <a href="#/dowload" class="MyPlaylist">
@@ -159,6 +163,7 @@
                   <a href="#">Regea</a>
                   <a href="#">Zoumba</a>
                   <a href="#">Hardcore</a>
+                  <hr>
                 </li>
                 <!-- begin sidebar minify button -->
                 <li>
