@@ -100,11 +100,14 @@ module.exports = function (app) {
             function createRecord() {
                 var record = app.models["Music"].build({});
 
-                // Add fields 
+                // Add fields
                 if (!S(Record.music_name).isEmpty()) record.music_name = Record.music_name;
                 if (!S(Record.music_description).isEmpty()) record.music_description = Record.music_description;
                 if (!S(Record.music_picture_default).isEmpty()) record.music_picture_default = Record.music_picture_default;
                 if (!S(Record.music_source).isEmpty()) record.music_source = Record.music_source;
+                if (!S(Record.usr_id).isEmpty()) record.usr_id = Record.usr_id;
+                if (!S(Record.music_group).isEmpty()) record.music_group = Record.music_group;
+
 
                 record.save().then(function (record) {
                     reply(null, record);
@@ -120,12 +123,14 @@ module.exports = function (app) {
                 }).then(function (record) {
                     if (!record) return reply(req.translate('system', 'Record not found'));
 
-                    // Update fields 
+                    // Update fields
                 if (!S(Record.music_name).isEmpty()) record.music_name = Record.music_name;
                 if (!S(Record.music_description).isEmpty()) record.music_description = Record.music_description;
                 if (!S(Record.music_comment).isEmpty()) record.music_comment = Record.music_comment;
                 if (!S(Record.music_picture_default).isEmpty()) record.music_picture_default = Record.music_picture_default;
                 if (!S(Record.music_source).isEmpty()) record.music_source = Record.music_source;
+                if (!S(Record.usr_id).isEmpty()) record.usr_id = Record.usr_id;
+                if (!S(Record.music_group).isEmpty()) record.music_group = Record.music_group;
 
                     record.save().then(function (record) {
                         reply(null, record);
