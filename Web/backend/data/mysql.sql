@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS `music` (
   `music_source` enum('youtube','spotify','deezer','else') NOT NULL,
   `music_group` text NOT NULL,
   `music_url` text NOT NULL,
+  `music_date` text NOT NULL,
   `usr_id` int NOT NULL,
   foreign key (`usr_id`) references user(`usr_id`),
   primary key (`music_id`)
