@@ -72,6 +72,12 @@ module.exports = function (app) {
               validate: {
               }
             },
+            music_date: {
+              type: Sequelize.TEXT,
+              defaultValue: "",
+              validate: {
+              }
+            },
             usr_id:{
               type: Sequelize.INTEGER,
               references: 'user', // <<< Note, its table's name, not object name
