@@ -106,10 +106,10 @@ module.exports = function (app) {
                 if (!S(Record.music_comment).isEmpty()) record.music_comment = Record.music_comment;
                 if (!S(Record.music_picture_default).isEmpty()) record.music_picture_default = Record.music_picture_default;
                 if (!S(Record.music_source).isEmpty()) record.music_source = Record.music_source;
-                if (!S(Record.usr_id).isEmpty()) record.usr_id = Record.usr_id;
                 if (!S(Record.music_group).isEmpty()) record.music_group = Record.music_group;
                 if (!S(Record.music_url).isEmpty()) record.music_url = Record.music_url;
                 if (!S(Record.music_date).isEmpty()) record.music_date = Record.music_date;
+                if (!S(Record.usr_id).isEmpty()) record.usr_id = Record.usr_id;
 
 
                 record.save().then(function (record) {
@@ -132,10 +132,10 @@ module.exports = function (app) {
                 if (!S(Record.music_comment).isEmpty()) record.music_comment = Record.music_comment;
                 if (!S(Record.music_picture_default).isEmpty()) record.music_picture_default = Record.music_picture_default;
                 if (!S(Record.music_source).isEmpty()) record.music_source = Record.music_source;
-                if (!S(Record.usr_id).isEmpty()) record.usr_id = Record.usr_id;
                 if (!S(Record.music_group).isEmpty()) record.music_group = Record.music_group;
                 if (!S(Record.music_url).isEmpty()) record.music_url = Record.music_url;
                 if (!S(Record.music_date).isEmpty()) record.music_date = Record.music_date;
+                if (!S(Record.usr_id).isEmpty()) record.usr_id = Record.usr_id;
 
                     record.save().then(function (record) {
                         reply(null, record);

@@ -17,6 +17,7 @@ START TRANSACTION;
 
 DROP TABLE IF EXISTS `music`;
 DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `playlist`;
 
 -- --------------------------------------------------------
 
@@ -62,6 +63,19 @@ CREATE TABLE IF NOT EXISTS `music` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
 --
+-- Structure of the table `playlist`
+--
+CREATE TABLE IF NOT EXISTS `playlist` (
+  `playlist_id` int NOT NULL,
+  `playlist_name` varchar(255) NOT NULL,
+  `playlist_description` text NOT NULL,
+  `playlist_comment` text,
+  `playlist_creator` int NOT NULL,
+  foreign key (`playlist_creator`) references user(`usr_id`),
+  primary key (`playlist_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+
+--
 -- Index for dumped tables
 --
 
@@ -78,6 +92,12 @@ ALTER TABLE `user`
   MODIFY `usr_id` int NOT NULL AUTO_INCREMENT,
   ADD KEY (`usr_login`),
   ADD UNIQUE KEY `usr_email` (`usr_email`);
+
+--
+-- Index of the table `playlist`
+--
+ALTER TABLE `playlist`
+  MODIFY `playlist_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

@@ -110,17 +110,26 @@ define([
                         if (result.code != 0) return $location.url('/user');
 
                         $scope.User = result.User;
+                        $scope.old_password = $scope.User.usr_password;
                     });
                 }
 
                 $scope.save = function() {
                     $scope.querying = true;
-
-                    Restangular.all('user').post($scope.User).then(function(result) {
-                        if (result.code == 0) return $location.url('/user');
-                        $scope.errors = result.errors;
-                        $scope.querying = false;
-                    });
+                    if ($scope.old_password == $scope.User.usr_password) {
+                      Restangular.all('user/mod').post($scope.User).then(function(result) {
+                          if (result.code == 0) return $location.url('/user');
+                          $scope.errors = result.errors;
+                          $scope.querying = false;
+                      });
+                    }
+                    else {
+                      Restangular.all('user').post($scope.User).then(function(result) {
+                          if (result.code == 0) return $location.url('/user');
+                          $scope.errors = result.errors;
+                          $scope.querying = false;
+                      });
+                    }
                 };
             }
         ]);

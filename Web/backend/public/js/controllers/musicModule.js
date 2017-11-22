@@ -98,6 +98,7 @@ define([
                 }
 
                 $scope.save = function() {
+                    $scope.Music.usr_id = $scope.myself.usr_id;
                     $scope.querying = true;
 
                     Restangular.all('music').post($scope.Music).then(function(result) {
