@@ -1,4 +1,4 @@
 node_modules/
 logs/
 server.log
-npm-debug.log
+Web/backend/npm-debug.log
