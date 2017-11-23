@@ -14,7 +14,6 @@ START TRANSACTION;
 --
 -- Drop all table
 --
-
 DROP TABLE IF EXISTS `music`;
 DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS `playlist`;
@@ -68,8 +67,11 @@ CREATE TABLE IF NOT EXISTS `music` (
 CREATE TABLE IF NOT EXISTS `playlist` (
   `playlist_id` int NOT NULL,
   `playlist_name` varchar(255) NOT NULL,
+  `playlist_style` varchar(255) NOT NULL,
   `playlist_description` text NOT NULL,
   `playlist_comment` text,
+  `playlist_insert` datetime NOT NULL,
+  `playlist_update` datetime NOT NULL,
   `playlist_creator` int NOT NULL,
   foreign key (`playlist_creator`) references user(`usr_id`),
   primary key (`playlist_id`)

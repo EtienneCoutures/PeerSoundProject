@@ -143,17 +143,17 @@ module.exports = function (app) {
                     }
 
                     // Update fields
-                if (!S(Record.usr_login).isEmpty()) record.usr_login = Record.usr_login;
-                if (!S(Record.usr_password).isEmpty()) record.usr_password = Record.usr_password;
-                if (!S(Record.usr_email).isEmpty()) record.usr_email = Record.usr_email;
-                if (!S(Record.usr_gender).isEmpty()) record.usr_gender = Record.usr_gender;
-                if (!S(Record.usr_firstname).isEmpty()) record.usr_firstname = Record.usr_firstname;
-                if (!S(Record.usr_lastname).isEmpty()) record.usr_lastname = Record.usr_lastname;
-                if (!S(Record.usr_phone).isEmpty()) record.usr_phone = Record.usr_phone;
-                if (!S(Record.usr_birthday).isEmpty()) record.usr_birthday = Record.usr_birthday;
-                if (!S(Record.usr_role).isEmpty()) record.usr_role = Record.usr_role;
-                if (!S(Record.usr_status).isEmpty()) record.usr_status = Record.usr_status;
-                if (!S(Record.usr_image).isEmpty()) record.usr_image = Record.usr_image;
+                    if (!S(Record.usr_login).isEmpty()) record.usr_login = Record.usr_login;
+                    if (!S(Record.usr_password).isEmpty()) record.usr_password = Record.usr_password;
+                    if (!S(Record.usr_email).isEmpty()) record.usr_email = Record.usr_email;
+                    if (!S(Record.usr_gender).isEmpty()) record.usr_gender = Record.usr_gender;
+                    if (!S(Record.usr_firstname).isEmpty()) record.usr_firstname = Record.usr_firstname;
+                    if (!S(Record.usr_lastname).isEmpty()) record.usr_lastname = Record.usr_lastname;
+                    if (!S(Record.usr_phone).isEmpty()) record.usr_phone = Record.usr_phone;
+                    if (!S(Record.usr_birthday).isEmpty()) record.usr_birthday = Record.usr_birthday;
+                    if (!S(Record.usr_role).isEmpty()) record.usr_role = Record.usr_role;
+                    if (!S(Record.usr_status).isEmpty()) record.usr_status = Record.usr_status;
+                    if (!S(Record.usr_image).isEmpty()) record.usr_image = Record.usr_image;
 
                     record.save().then(function (record) {
                         reply(null, record);
@@ -210,16 +210,16 @@ module.exports = function (app) {
                     }
 
                     // Update fields
-                if (!S(Record.usr_login).isEmpty()) record.usr_login = Record.usr_login;
-                if (!S(Record.usr_email).isEmpty()) record.usr_email = Record.usr_email;
-                if (!S(Record.usr_gender).isEmpty()) record.usr_gender = Record.usr_gender;
-                if (!S(Record.usr_firstname).isEmpty()) record.usr_firstname = Record.usr_firstname;
-                if (!S(Record.usr_lastname).isEmpty()) record.usr_lastname = Record.usr_lastname;
-                if (!S(Record.usr_phone).isEmpty()) record.usr_phone = Record.usr_phone;
-                if (!S(Record.usr_birthday).isEmpty()) record.usr_birthday = Record.usr_birthday;
-                if (!S(Record.usr_role).isEmpty()) record.usr_role = Record.usr_role;
-                if (!S(Record.usr_status).isEmpty()) record.usr_status = Record.usr_status;
-                if (!S(Record.usr_image).isEmpty()) record.usr_image = Record.usr_image;
+                    if (!S(Record.usr_login).isEmpty()) record.usr_login = Record.usr_login;
+                    if (!S(Record.usr_email).isEmpty()) record.usr_email = Record.usr_email;
+                    if (!S(Record.usr_gender).isEmpty()) record.usr_gender = Record.usr_gender;
+                    if (!S(Record.usr_firstname).isEmpty()) record.usr_firstname = Record.usr_firstname;
+                    if (!S(Record.usr_lastname).isEmpty()) record.usr_lastname = Record.usr_lastname;
+                    if (!S(Record.usr_phone).isEmpty()) record.usr_phone = Record.usr_phone;
+                    if (!S(Record.usr_birthday).isEmpty()) record.usr_birthday = Record.usr_birthday;
+                    if (!S(Record.usr_role).isEmpty()) record.usr_role = Record.usr_role;
+                    if (!S(Record.usr_status).isEmpty()) record.usr_status = Record.usr_status;
+                    if (!S(Record.usr_image).isEmpty()) record.usr_image = Record.usr_image;
 
                     record.save().then(function (record) {
                         reply(null, record);

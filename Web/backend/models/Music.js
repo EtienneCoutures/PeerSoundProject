@@ -78,7 +78,7 @@ module.exports = function (app) {
               validate: {
               }
             },
-            usr_id:{
+            usr_id: {
               type: Sequelize.INTEGER,
               references: 'user', // <<< Note, its table's name, not object name
               referencesKey: 'usr_id' // <<< Note, its a column name

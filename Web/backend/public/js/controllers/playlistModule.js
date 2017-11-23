@@ -1,5 +1,5 @@
 /**
- * Music Module
+ * Playlist Module
  */
 define([
     'angular',
@@ -9,19 +9,19 @@ define([
 ], function (angular, _, S, moment) {
     'use strict';
     return angular
-        .module('musicModule', [])
+        .module('playlistModule', [])
         .config(['$routeProvider', function ($routeProvider) {
             $routeProvider
-                .when('/music', {
-                    templateUrl: '/partials/music/index',
-                    controller: 'MusicController'
+                .when('/playlist', {
+                    templateUrl: '/partials/playlist/index',
+                    controller: 'PlaylistController'
                 })
-                .when('/music/:music_id', {
-                    templateUrl: '/partials/music/form',
-                    controller: 'SaveMusicController'
+                .when('/playlist/:playlist_id', {
+                    templateUrl: '/partials/playlist/form',
+                    controller: 'SavePlaylistController'
                 });
         }])
-        .controller('MusicController', [
+        .controller('PlaylistController', [
             '$scope',
             '$translatePartialLoader',
             '$location',
@@ -29,30 +29,24 @@ define([
             function ($scope, $translatePartialLoader, $location, Restangular) {
                 var query = $location.search(),
                     pending = !!query.pending;
-                $translatePartialLoader.addPart('music');
+                $translatePartialLoader.addPart('playlist');
 
-                $scope.MusicColumns = [{
-                    field: 'music_name',
-                    label: 'music_name',
+                $scope.PlaylistColumns = [{
+                    field: 'playlist_name',
+                    label: 'playlist_name',
                     sortable: true,
                     filter: 'text'
                 }, {
-                    field: 'music_picture_default',
-                    label: 'music_picture_default',
+                    field: 'playlist_style',
+                    label: 'playlist_style',
                     sortable: true,
                     filter: 'text'
-                }, {
-                    field: 'music_source',
-                    label: 'music_source',
-                    sortable: true,
-                    filter: 'enum',
-                    values: ["youtube","spotify","deezer","soundcloud", "else"]
                 }];
 
-                $scope.loadMusicList = function (dtRequest, dtRefresh) {
+                $scope.loadPlaylistList = function (dtRequest, dtRefresh) {
                     if (typeof dtRequest != "object" || typeof dtRefresh != "function") return;
 
-                    return Restangular.all('music').get('', {
+                    return Restangular.all('playlist').get('', {
                         where: dtRequest.filters,
                         limit: dtRequest.limit,
                         page: dtRequest.page,
@@ -62,29 +56,29 @@ define([
                     });
                 };
 
-                $scope.MusicActions = function (refresh) {
+                $scope.PlaylistActions = function (refresh) {
                     return [{
                         class: 'btn btn-primary',
                         label: 'Edit',
                         action: function (row) {
-                            $location.url('/music/' + row.music_id);
+                            $location.url('/playlist/' + row.playlist_id);
                         }
                     }, {
                         class: 'btn btn-primary',
                         label: 'Delete',
                         action: function (row) {
-                            Restangular.one('music', row.music_id).remove().then(function(result) {
-                                if (result.code == 0) return $location.url('/music');
+                            Restangular.one('playlist', row.playlist_id).remove().then(function(result) {
+                                if (result.code == 0) return $location.url('/playlist');
                                 $scope.errors = result.errors;
                                 $scope.querying = false;
                             });
-                            $location.url('/music/');
+                            $location.url('/playlist/');
                         }
                     }]
                 };
             }
         ])
-        .controller('SaveMusicController', [
+        .controller('SavePlaylistController', [
             '$scope',
             '$translatePartialLoader',
             '$location',
@@ -92,28 +86,28 @@ define([
             'Restangular',
             '$translate',
             function ($scope, $translatePartialLoader, $location, $routeParams, Restangular, $translate) {
-                var music_id = $routeParams.music_id;
-                $translatePartialLoader.addPart('music');
+                var playlist_id = $routeParams.playlist_id;
+                $translatePartialLoader.addPart('playlist');
 
-                $scope.Music = {
+                $scope.Playlist = {
                     isNew: true,
-                    usr_id: $scope.myself.usr_id
+                    playlist_creator: $scope.myself.usr_id
                 };
-                if (Number.isInteger(parseInt(music_id))) {
-                    $scope.Music.isNew = false;
+                if (Number.isInteger(parseInt(playlist_id))) {
+                    $scope.Playlist.isNew = false;
 
-                    Restangular.one('music', music_id).get().then(function(result) {
-                        if (result.code != 0) return $location.url('/music');
+                    Restangular.one('playlist', playlist_id).get().then(function(result) {
+                        if (result.code != 0) return $location.url('/playlist');
 
-                        $scope.Music = result.Music;
+                        $scope.Playlist = result.Playlist;
                     });
                 }
 
                 $scope.save = function() {
                     $scope.querying = true;
 
-                    Restangular.all('music').post($scope.Music).then(function(result) {
-                        if (result.code == 0) return $location.url('/music');
+                    Restangular.all('playlist').post($scope.Playlist).then(function(result) {
+                        if (result.code == 0) return $location.url('/playlist');
                         $scope.errors = result.errors;
                         $scope.querying = false;
                     });
