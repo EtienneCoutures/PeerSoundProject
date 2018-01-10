@@ -29,15 +29,15 @@ var new_item = [{
     playlist: "RapFr",
     titre: "fenetre sur rue"
   }, {
-    user_name: "KETAMAX",
+    user_name: "KETMAX",
     album: "accuse de reflexion",
-    artist: "davoka",
+    artist: "oxmo",
     playlist: "RapFr",
     titre: "amour"
   }, {
     user_name: "KEDIRA",
     album: "punk",
-    artist: "pink",
+    artist: "IAM",
     playlist: "RapFr",
     titre: "petit frere"
   }, {
@@ -68,35 +68,21 @@ menu_items.forEach(function(item) { %>
 }); %>
 </div-->
 <!-- end row -->
+
 <div class="row"><%
 new_item.forEach(function(item) { %>
-<div class="notif">
-    <div>
-        <div class="col-md-3">
-            <div id="logo" >
-              <div class="usrimage"><img  src="/img/point.png" style="width:69px;height:57px;"></div>
-            </div>
-          </div>
-        <div class="col-md-6">
-          <div id="txt">
-            <p><li> Title : <%= item.titre %> </li></p>
-            <p><li> Artiste : <%= item.artist %> </li></p>
-            <p><li> Playlist : <%= item.playlist %></li></p>
-            <p><li> UserName : <%= item.user_name %></li></p>
-          </div>
-        </div>
-        <div class="col-md-3">
-            <div class="logoImg" >
-                <img src="/img/logo2.png" style="width:69px;height:57px;"><img>
-            </div>
-        </div>
-
-    </div>
-    <div class="row">
-      <div>
-        <button id="acces" align="left"><a href="#/download">Acceder à la page</a></button>
-      </div>
-    </div>
+<div class="news">
+  <div class="text">
+    <h2><b>Playlist : <%= item.playlist %></b></h2>
+    <div class="fakeimg">Image</div>
+    <h5><%= item.user_name %> viens de vous inviter à rejoindre la playlist <%= item.playlist %></h5>
+    <h5>Title: <%= item.titre %></h5>
+    <h5>Artiste: <%= item.artist %></h5>
+    <h5>UserName: <%= item.user_name%></h5>
+  </div>
+  <div class="btnvalidate">
+    <button class="btn playlist">Acces to playlist</button>
+  </div>
 </div>
 <%
 }); %>

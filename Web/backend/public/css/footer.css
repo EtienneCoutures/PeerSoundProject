@@ -9,7 +9,7 @@
 }
 
 .button1 {
-background: #76B3FA;
+background: #c0c0c0;
  border-radius: 100px;
  padding: 10px 60px;
  color: black;
@@ -35,8 +35,13 @@ background: #76B3FA;
 }
 
 .boutonCGU {
-  background-color: #e7e7e7;
-  color: black;
-  border: 2px solid #2F4F4F ;
-  font-size: 12px;
+  background: #c0c0c0;
+   border-radius: 100px;
+   padding: 10px 60px;
+   color: black;
+   text-decoration: none;
+   margin: 0 8px;
+   font-size: 15px;
+   border: 2px solid #2F4F4F ;
+   margin-top: -5px;
 }
