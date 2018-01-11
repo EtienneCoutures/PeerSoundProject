@@ -5,6 +5,23 @@
   top: 13px;
 }
 
+#header  {
+    height: 5%;
+    background-color: #2d353c;
+}
+.container-fluid .navbar-header {
+    margin: 0;
+    opacity: 0,98;
+}
+.navbar-header .navbar-brand {
+    width: 33.3333333%;
+    margin: 0;
+}
+.navbar-header .navbar-toggle {
+    float: left;
+    margin-right: 0;
+}
+
  #search {
   background-color: #ffffff;   /* Couleur de fond */
   border-style: outset;   /* Style de la bordure  */
@@ -66,5 +83,5 @@ hr {
 }
 
 .dynamic{
-  
+
 }

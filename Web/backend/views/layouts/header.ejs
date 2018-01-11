@@ -60,8 +60,9 @@
          class="header navbar navbar-default navbar-fixed-top"
          id="header">
         <!-- begin container-fluid -->
-        <div class="container-fluid row">
-            <div class="navbar-header col-md-12" style="border-">
+        <!-- begin navbar -->
+      <!--  <div class="container-fluid row"> -->
+          <!--  <div class="navbar col-md-12">-->
                 <!-- begin mobile sidebar expand / collapse button -->
                 <div class="col-md-2">
                 <!-- end mobile sidebar expand / collapse button -->
@@ -111,21 +112,17 @@
 
                   </div> <!-- container navbar -->
                     <!-- end header navigation right -->
-                </div>
+                <!--</div>-->
 
             </div>
-        </div>
+      <!--</div>-->
         <!-- end container-fluid -->
     </div>
     <!-- end #header -->
 
     <!-- begin #sidebar -->
-    <div ng-if="!!myself" id="sidebar" class="sidebar">
-        <!-- begin sidebar scrollbar -->
+     <div ng-if="!!myself" id="sidebar" class="sidebar">
         <div data-scrollbar="true" data-height="100%">
-
-            <!-- begin sidebar nav -->
-
             <ul class="nav">
                 <li class="nav-header" translate></li>
                 <li class="{{__controller == 'music' ? 'active' : ''}}">
@@ -162,20 +159,17 @@
                   <a href="#">Hardcore</a>
                   <hr>
                 </li>
-                <!-- begin sidebar minify button -->
                 <li>
                     <a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify">
                         <i class="fa fa-angle-double-left"></i>
                     </a>
                 </li>
-                <!-- end sidebar minify button -->
             </ul>
-            <!-- end sidebar nav -->
         </div>
-        <!-- end sidebar scrollbar -->
     </div>
-    <div ng-if="!!myself"
-         class="sidebar-bg"></div>
+       <div ng-if="!!myself"
+         class="sidebar-bg">
+       </div>
     <!-- end #sidebar -->
 
     <!-- begin #content -->

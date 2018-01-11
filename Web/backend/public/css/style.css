@@ -5,6 +5,7 @@
     margin-left: -15px;
     margin-right: -15px;
 }
+/*
 .container-fluid .navbar-header {
     margin: 0;
     background-color: #2d353c;
@@ -17,7 +18,8 @@
 .navbar-header .navbar-toggle {
     float: left;
     margin-right: 0;
-}
+}*/
+
 span.select2 {
     width: 100% !important;
 }
