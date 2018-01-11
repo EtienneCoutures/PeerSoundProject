@@ -1,6 +1,6 @@
 .news{
-  width: 800px;
-    height: 250px;
+  width: 705px;
+    height: 235px;
     border: 1px solid #c0c0c0;
     clear: both;
     text-align: center;
@@ -12,10 +12,9 @@
 }
 
 .text{
-
   border-bottom: 1px solid grey;
   margin-bottom: 10px;
-  margin-top: 25px;
+  margin-top: 5px;
 }
 
 .fakeimg {
@@ -30,11 +29,11 @@
 .btn{
   border: none; /* Remove borders */
   color: white; /* Add a text color */
-  padding: 14px 28px; /* Add some padding */
+  padding: 5px 15px; /* Add some padding */
   cursor: pointer;
   background-color: grey;
 }
 
 .btnvalidate {
-  margin-top: 20px;
+  margin-top: 10px;
 }
