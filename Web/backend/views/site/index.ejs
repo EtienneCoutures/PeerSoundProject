@@ -72,12 +72,19 @@ menu_items.forEach(function(item) { %>
 <div class="row"><%
 new_item.forEach(function(item) { %>
 <div class="news">
-  <div class="text">
-    <h2><b>Playlist : <%= item.playlist %></b></h2>
-    <h5><%= item.user_name %> viens de vous inviter à rejoindre la playlist <%= item.playlist %></h5>
-    <h5>Title: <%= item.titre %></h5>
-    <h5>Artiste: <%= item.artist %></h5>
-    <h5>UserName: <%= item.user_name%></h5>
+  <div class="entity">
+    <div class="col-md-10">
+      <div class="text">
+        <h2><b>Playlist : <%= item.playlist %></b></h2>
+        <h5><%= item.user_name %> viens de vous inviter à rejoindre la playlist <%= item.playlist %></h5>
+        <h5>Title: <%= item.titre %></h5>
+        <h5>Artiste: <%= item.artist %></h5>
+        <h5>UserName: <%= item.user_name%></h5>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <img src="/img/france.png" alt="logo" id="imgplaylist">
+    </div>
   </div>
   <div class="btnvalidate">
     <button class="btn playlist">Acces to playlist</button>
