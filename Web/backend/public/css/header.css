@@ -61,7 +61,8 @@
 }
 
 #logoPSP{
-  top:5px;
+  width:40px;
+  height:30px;
 }
 
 #interogation{
@@ -69,11 +70,13 @@
 }
 
 #france {
-  margin-top: 3px;
+  width:30px;
+  height:25px;
 }
 
 #notif{
-  margin-top: 2px;
+  width:30px;
+  height:25px;
 }
 
 hr {
