@@ -1,5 +1,6 @@
 .news{
   width: 705px;
+  position: relative;
     height: 235px;
     border: 1px solid #c0c0c0;
     clear: both;
@@ -8,7 +9,7 @@
     margin-top: 10px;
     padding: 10px;
     border-radius: 5px;
-    background-color: white;
+    background-color:white;
 }
 
 .text{

@@ -2,96 +2,96 @@
 
 <%
 var menu_items = [{
-    label: 'music',
-    url: '#/music',
-    icon: 'fa-cube'
+  label: 'music',
+  url: '#/music',
+  icon: 'fa-cube'
 }, {
-    label: 'user',
-    url: '#/user',
-    icon: 'fa-cube'
+  label: 'user',
+  url: '#/user',
+  icon: 'fa-cube'
 }].sort(function (a, b) {
-    if (a.label == b.label) return 0;
-    return a.label > b.label ? 1 : -1;
+  if (a.label == b.label) return 0;
+  return a.label > b.label ? 1 : -1;
 });
 %>
 
 <%
 var new_item = [{
-    user_name: "MrBiscotte",
-    album: "ecole du micro d'argent",
-    artist: "IAM",
-    playlist: "RapFr",
-    titre: "petit frere"
+  user_name: "MrBiscotte",
+  album: "ecole du micro d'argent",
+  artist: "IAM",
+  playlist: "RapFr",
+  titre: "petit frere"
 }, {
-    user_name: "ITIZ",
-    album: "l'autre",
-    artist: "TSR",
-    playlist: "RapFr",
-    titre: "fenetre sur rue"
-  }, {
-    user_name: "KETMAX",
-    album: "accuse de reflexion",
-    artist: "oxmo",
-    playlist: "RapFr",
-    titre: "amour"
-  }, {
-    user_name: "KEDIRA",
-    album: "punk",
-    artist: "IAM",
-    playlist: "RapFr",
-    titre: "petit frere"
-  }, {
-    user_name: "GABO",
-    album: "ecole du micro d'argent",
-    artist: "toto",
-    playlist: "RapFr",
-    titre: "petit frere"
+  user_name: "ITIZ",
+  album: "l'autre",
+  artist: "TSR",
+  playlist: "RapFr",
+  titre: "fenetre sur rue"
+}, {
+  user_name: "KETMAX",
+  album: "accuse de reflexion",
+  artist: "oxmo",
+  playlist: "RapFr",
+  titre: "amour"
+}, {
+  user_name: "KEDIRA",
+  album: "punk",
+  artist: "IAM",
+  playlist: "RapFr",
+  titre: "petit frere"
+}, {
+  user_name: "GABO",
+  album: "ecole du micro d'argent",
+  artist: "toto",
+  playlist: "RapFr",
+  titre: "petit frere"
 }];
 %>
 
 <!-- begin row -->
 <!--div class="row"><%
 menu_items.forEach(function(item) { %>
-    <div class="col-md-3 col-sm-6">
-        <div class="widget widget-stats widget-thumbnail bg-green" onclick="window.location.href = '<%= item.url %>'">
-            <div class="stats-icon"><i class="fa <%= item.icon %>"></i></div>
-            <div class="stats-info">
-                <h4 translate><%= item.label %></h4>
-                <p translate>Module</p>
-            </div>
-            <div class="stats-link">
-                <a href="<%= item.url %>">{{ 'View Detail' | translate }}
-                    <i class="fa fa-arrow-circle-o-right"></i></a>
-            </div>
-        </div>
-    </div><%
+<div class="col-md-3 col-sm-6">
+<div class="widget widget-stats widget-thumbnail bg-green" onclick="window.location.href = '<%= item.url %>'">
+<div class="stats-icon"><i class="fa <%= item.icon %>"></i></div>
+<div class="stats-info">
+<h4 translate><%= item.label %></h4>
+<p translate>Module</p>
+</div>
+<div class="stats-link">
+<a href="<%= item.url %>">{{ 'View Detail' | translate }}
+<i class="fa fa-arrow-circle-o-right"></i></a>
+</div>
+</div>
+</div><%
 }); %>
 </div-->
 <!-- end row -->
 
 <div class="row"><%
-new_item.forEach(function(item) { %>
-<div class="news">
-  <div class="entity">
-    <div class="col-md-10">
+  new_item.forEach(function(item) { %>
+    <div class="news">
+      <div class="row">
+        <div class="col-md-10">
+          <h2><b><%= item.playlist %></b></h2>
+        </div>
+        <div class="col-md-2">
+          <img src="/img/france.png" alt="logo" id="imgplaylist">
+        </div>
+      </div>
       <div class="text">
-        <h2><b>Playlist : <%= item.playlist %></b></h2>
         <h5><%= item.user_name %> viens de vous inviter à rejoindre la playlist <%= item.playlist %></h5>
         <h5>Title: <%= item.titre %></h5>
         <h5>Artiste: <%= item.artist %></h5>
         <h5>UserName: <%= item.user_name%></h5>
       </div>
+      <div class="btnvalidate">
+        <button class="btn playlist">Acces to playlist</button>
+      </div>
     </div>
-    <div class="col-md-2">
-      <img src="/img/france.png" alt="logo" id="imgplaylist">
-    </div>
+    <%
+  }); %>
+  <div style="margin:64px 5px 2em 0">
   </div>
-  <div class="btnvalidate">
-    <button class="btn playlist">Acces to playlist</button>
-  </div>
-</div>
-<%
-}); %>
-<div style="margin:64px 5px 2em 0">
-</div>
 </div>
