@@ -10,6 +10,7 @@
     margin: 0;
     background-color: #2d353c;
     opacity: 0,98;
+    height: 50px;                     
 }
 .navbar-header .navbar-brand {
     width: 33.3333333%;
