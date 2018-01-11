@@ -51,6 +51,7 @@
   margin: 0px 0 0 0;   /* Espace autour du bouton : haut droite bas gauche  */
   text-transform: uppercase;   /* Transforme le texte en majuscules */
   color: #ffffff;   /* Couleur du texte */
+  width:100%;
 }
 
 /* Bouton valider quand survolé par la souris */
@@ -63,6 +64,11 @@
 #logoPSP{
   width:40px;
   height:30px;
+}
+
+#seek {
+  widht:17px;
+  height:17px;
 }
 
 #interogation{
