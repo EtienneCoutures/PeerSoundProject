@@ -88,9 +88,11 @@ menu_items.forEach(function(item) { %>
         <h5>Artiste: <%= item.artist %></h5>
         <h5>UserName: <%= item.user_name%></h5>
       </div>
+      <a href="#/playlist" class="MyPlaylist">
       <div class="btnvalidate">
-        <button class="btn playlist">Acces to playlist</button>
+        <button class="btn playlist" href="#/">Acces to playlist</button>
       </div>
+    </a>
     </div>
     <%
   }); %>
