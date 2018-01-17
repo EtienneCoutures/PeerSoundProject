@@ -17,6 +17,14 @@ define([
                 .when('/download', {
                     templateUrl: '/partials/site/download',
                     controller: 'DownloadController'
+                })
+                .when('/fav', {
+                    templateUrl: '/partials/site/fav',
+                    controller: 'FavController'
+                })
+                .when('/friend', {
+                    templateUrl: '/partials/site/friend',
+                    controller: 'FriendController'
                 });
         }])
         .controller('SiteController', [
@@ -25,6 +33,16 @@ define([
             }
         ])
         .controller('DownloadController', [
+            '$scope',
+            function ($scope) {
+            }
+        ])
+        .controller('FriendController', [
+            '$scope',
+            function ($scope) {
+            }
+        ])
+        .controller('FavController', [
             '$scope',
             function ($scope) {
             }
