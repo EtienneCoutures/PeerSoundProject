@@ -33,6 +33,22 @@ module.exports = function (app) {
           res.render('site/download')
           });
 
+          /**
+            * friend
+          */
+          router.get('/friend',
+          function (req, res, next) {
+            res.render('site/friend')
+            });
+
+            /**
+              * fav Layout
+            */
+            router.get('/fav',
+            function (req, res, next) {
+              res.render('site/fav')
+              });
+
     /**
      * SignUp
      */
