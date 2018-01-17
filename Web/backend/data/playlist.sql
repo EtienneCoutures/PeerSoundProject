@@ -53,3 +53,5 @@ ALTER TABLE `playlist`
 --
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
+
+-- insert into playlist values (1, "first_playlist", "rock", "c'est une playlist de test", NULL, '2018-01-27 00:00:00', '2018-01-17 00:00:00', 1);

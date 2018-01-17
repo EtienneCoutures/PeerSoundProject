@@ -35,6 +35,10 @@
   background-color: grey;
 }
 
+.panel-inverse {
+  margin-bottom: 50px;
+}
+
 #imgplaylist {
   margin-top: 10px;
   height: 50px;
