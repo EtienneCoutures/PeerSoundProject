@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<html>
+<head>
+<meta charset=utf-8 />
+
+<link href="/css/footer.css" rel="stylesheet"/>
+
+</head>
+
+<body>
+</div>
+  <div class="footer">
+    <div class="col-md-5">
+      <button class="waves-effect waves-light btn grey" style="background-color:#e0e0e0" align="left"><a href="#/account">CGU</a></button>
+    </div>
+    <div class="col-md-5">
+      <button class="waves-effect waves-light btn grey" style="background-color:#e0e0e0" align="left"><a href="#/download">Dowload Plug/Soft</a></button>
+    </div>
+    <div class="col-md-2">
+      <a target="_blank"><img id=""src="/img/logo2.png" align="right" style="width:45px;">
+    </div>
+</div>
+</body>
+  <!-- begin scroll to top btn -->
+  <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+  <!-- end scroll to top btn -->
+
+<!-- ================== BEGIN BASE JS ================== -->
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+<script src="/node_modules/requirejs/require.js"></script>
+
+<!--inline scripts related to this page-->
+<script>
+    // obtain requirejs config
+    require(['require', './js/config-require'], function (require, config) {
+        // update global require config
+        window.require.config(config);
+
+        // load app
+        require(['./js/main.js']);
+    });
+</script>
+</body>
+</html>
