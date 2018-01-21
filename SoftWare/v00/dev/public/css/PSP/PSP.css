@@ -1,0 +1,40 @@
+.padding-0{
+    padding-right:0;
+    padding-left:0;
+}
+
+.row.no-gutter {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.row.no-gutter [class*='col-']:not(:first-child),
+.row.no-gutter [class*='col-']:not(:last-child) {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.row > div {
+}
+
+alt-grid [class*="col-"] {padding-left:0;padding-right:0}
+.alt-grid .row {margin-left:0;margin-right:0}
+
+/* container adjusted */
+.alt-grid .container {width:100%;max-width:none;padding:0;}
+
+.container-fluid {
+    padding: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.container {
+    padding: 0px;
+    margin: 0px;
+}
+
+.menubar {
+  height : 5%;
+  background-color : #363636;
+}

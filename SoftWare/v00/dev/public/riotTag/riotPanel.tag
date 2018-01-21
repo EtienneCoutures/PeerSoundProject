@@ -1,17 +1,40 @@
 <riotPanel>
 
-  <div id="panel">Hello</div>
+  <div id="panel">
 
-<script src="../js/jquery/jquery-3.2.1.min.js"></script>
+      <div each={ elements } data-is={ element } param={ param }></div>
+
+  </div>
+
 <script>
 
-  this.width = opts.width;
-  this.height = opts.height;
-  this.content = opts.content;
+  var self = this;
 
-  $('#panel').height = this.height;
-  $('#panel').width = this.width;
+  this.name = opts.name;
+  this.elements = opts.elements;
+  this.color = opts.color;
+
+  this.root.riot = false;
+
+  this.on('mount', function() {
+    console.log('mounted');
+    console.log('this: ', this);
+  })
+
+  console.log('this.elements: ', this.elements);
 
 </script>
+
+<style scoped>
+  :scope {
+     border: 2px solid;
+     height: 100%;
+     width: 100%;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     background-color: #484a4c;
+  }
+</style>
 
 </riotPanel>
