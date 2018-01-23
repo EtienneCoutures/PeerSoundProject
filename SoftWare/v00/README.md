@@ -20,4 +20,6 @@ Suivi :
 
 - **v00.00** : Projet exemple nodeJS et Electron
 
-- **v00.dev** : Version en cours de développement, ajout riotJS et début tag riot pour les panels
+- **v00.01** : version à 1/4 de la bêta
+
+- **v00.dev** : Version en cours de développement
