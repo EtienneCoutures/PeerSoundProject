@@ -3,7 +3,7 @@
 <div class="row align"
   <div class="guild">
     <div class="guild-inner" draggable="false" style="border-radius: 25px; background-color: rgb(47, 49, 54);margin-top:10px;margin-bottom:10px;">
-      <div class="social-icon"></div>
+      <div class="social-icon" style="overflow: hidden; right: 10px"></div>
     </div>
     <div class="badge">{ nbNotifications }</div>
   </div>

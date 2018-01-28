@@ -11,29 +11,31 @@
     </svg>
   </header>
 
-  <div class="popout popout-bottom" style="z-index: 1000; overflow: hidden; visibility: hidden; left: 120px; top: 60px; height: 192px; width: 216px; transform: translateY(0%) translateX(-50%) translateZ(0px);">
+  <div class="popout popout-bottom" ref="popout" style="z-index: 1000; overflow: hidden; visibility: hidden; left: 120px; top: 40px; height: 192px; width: 216px; transform: translateY(0%) translateX(-50%) translateZ(0px);">
     <div class="menu-3BZuDT">
       <div class="item-rK1j5B">
-        <div class="icon-3ICDZz" style="background-image: url(&quot;/assets/6a711bd91522e885413464a88a4e3c69.svg&quot;);">
+        <div class="icon-3ICDZz" style="background-image: url(&quot;../images/invitePeople.svg&quot;);">
+        </div>
+        <div class="label-HtH0tJ">Inviter des gens</div>
+      </div>
+      <div class="separator-1hpa3S"></div>
+      <div class="item-rK1j5B">
+        <div class="icon-3ICDZz" style="background-image: url(&quot;../images/playlistNotif.svg&quot;);">
         </div>
         <div class="label-HtH0tJ">Notifications</div>
       </div>
       <div class="item-rK1j5B">
-        <div class="icon-3ICDZz" style="background-image: url(&quot;/assets/6afcd5d6a8c9d467e27e1bb48755dce0.svg&quot;);"></div>
+        <div class="icon-3ICDZz" style="background-image: url(&quot;../images/editPlaylist.svg&quot;);"></div>
         <div class="label-HtH0tJ">Confidentialité</div>
       </div>
       <div class="separator-1hpa3S"></div>
       <div class="item-rK1j5B">
-        <div class="icon-3ICDZz" style="background-image: url(&quot;/assets/bc11a9099f5729962c095cb49d5042f6.svg&quot;);"></div>
-        <div class="label-HtH0tJ">Changer de pseudo</div>
-      </div>
-      <div class="item-rK1j5B">
-        <div class="icon-3ICDZz" style="background-image: url(&quot;/assets/858df73648ac3877a22156da2e69a5fd.svg&quot;);"></div>
-        <div class="label-HtH0tJ">Cacher salons muets</div>
+        <div class="icon-3ICDZz" style="background-image: url(&quot;../images/editPlaylistName.svg&quot;);"></div>
+        <div class="label-HtH0tJ">Changer le nom</div>
       </div>
       <div class="separator-1hpa3S"></div>
       <div class="item-rK1j5B leave-2bjeRM">
-        <div class="icon-3ICDZz" style="background-image: url(&quot;/assets/00de6b3cbb5c4dbcec817c91262f5f5b.svg&quot;);"></div>
+        <div class="icon-3ICDZz" style="background-image: url(&quot;../images/leavePlaylist.svg&quot;);"></div>
         <div class="label-HtH0tJ">Quitter la playlist</div>
       </div>
     </div>
@@ -44,11 +46,12 @@
   this.playlistName = opts.param.currentPlaylist.name;
 
   this.on('mount', function(e) {
-    console.log('this: ', this); 
+    console.log('this.menubar: ', this);
   });
 
   showPlaylistOptions(e) {
-    console.log('PlaylistOptions');
+    this.refs.popout.style.visibility = this.refs.popout.style.visibility
+                                      == "visible" ? "hidden" : "visible";
   }
 
   </script>

@@ -15,8 +15,8 @@
   <style>
 
  .guild {
-   height:80px;
-   width:80px;
+   height:80px !important;
+   width:80px !important;
  }
 
 .guilds-add {
@@ -25,7 +25,7 @@
   border:1px dashed #535559;
   border-radius:50%;
   color:#535559;
-  font-size:40px;
+  font-size:60px;
   font-weight:300;
   height:100%;
   line-height:100%;

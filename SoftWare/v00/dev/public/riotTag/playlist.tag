@@ -1,8 +1,8 @@
 <playlist>
 
 <div class="row align">
-  <div class="arrow-right" ref="arrow" name="arrow"></div>
-  <div onclick={ handler } id={ id } class="crop" style="background-image: url('{ image }')">
+  <!-- <div class="arrow-right" ref="arrow" name="arrow"></div> -->
+  <div onclick={ handler } id={ id } ref="playlist" class="crop" style="background-image: url('{ image }')">
   </div>
 </div>
 
@@ -21,8 +21,8 @@
   handler(e) {
     $('.current').removeClass('current');
     e.srcElement.className += " current";
-    $('.arrow-right').css("display", "none");
-    this.refs.arrow.style.display = "block";
+    //$('.arrow-right').css("display", "none");
+    //this.refs.arrow.style.display = "block";
   }
 
   </script>
@@ -48,6 +48,7 @@
 
   .current {
     margin-left : 20px;
+    border-radius : 30% !important;
   }
 
   .crop {

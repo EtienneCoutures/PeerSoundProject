@@ -12,12 +12,12 @@
   this.elements = opts.elements;
   this.color = opts.color || "#484a4c";
   this.borders = opts.borders;
+  this.alignItems = opts.alignItems;
+  this.flexDirection = opts.flexDirection;
 
   this.root.riot = false;
 
   this.on('mount', function() {
-    console.log('this.root.style: ', this.root.style);
-    console.log('this.elements; ', this.elements);
     this.root.style.backgroundColor = this.color;
 
     if (this.borders) {
@@ -30,6 +30,9 @@
       this.root.style.border = "2px solid black";
     }
 
+    this.root.style.alignItems = this.alignItems || "center";
+    this.root.style.flexDirection = this.flexDirection || "column";
+
   })
 
 </script>
@@ -39,8 +42,6 @@
      height: 100%;
      width: 100%;
      display: flex;
-     flex-direction: column;
-     align-items: center;
   }
 </style>
 
