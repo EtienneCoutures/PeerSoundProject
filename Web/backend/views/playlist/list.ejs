@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="/css/playlist.css" rel="stylesheet"/>
+</head>
+<body>
+  <div ng-if="!!myself">
+<div class="row">
+  <div class="addPlaylist">
+    <div class="col-md-8" style="margin-top:10px;">
+      <span>Playlist de {{myself.usr_email | ucfirst}}</span>
+    </div>
+    <div class="col-md-4">
+      <li class="{{__controller == 'playlist' ? 'active' : ''}}">
+      <div href="#/playlist/new" class="bnt glyphicon glyphicon-plus" style="font-size:15px;"></div>
+      <button href="#/playlist/new" type="button" class=" btn">Creer une nouvelle playlist</button>
+    </li>
+    </div>
+  </div>
+      <table class="notifTable">
+        <thead>
+          <tr>
+            <th>Musique</th>
+            <th>Playlist</th>
+            <th>Suggestion</th>
+          </tr>
+        </thead>
+      <tbody>
+        <tr>
+          <td>toto</td>
+          <td>cell2_1</td>
+          <td>cell3_1</td>
+        </tr>
+        <tr>
+          <td>cell1_2</td>
+          <td>cell2_2</td>
+          <td>cell3_2</td>
+        </tr>
+      </tbody>
+    </table>
+<div class="Title">
+  <span><center>Vos invitation en attente</center></span>
+</div>
+<div class="row">
+  <table class="notifTable">
+    <thead>
+      <tr>
+        <th>Music</th>
+        <th>Playlist</th>
+        <th>validation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>iam</td>
+        <td>Rap Fr</td>
+        <td>
+          <div class="col-md-6">
+          <span class="glyphicon glyphicon-ok" style="font-size:20px; margin-top:15px;"></span>
+        </div>
+        <div class="col-md-6">
+          <span class="glyphicon glyphicon-remove" style="font-size:20px; margin-top:15px;"></span>
+        </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="Title">
+    <span><center>Playlist Administré</center></span>
+  </div>
+  <div class="row">
+    <table class="notifTable">
+      <thead>
+        <tr>
+          <th>Gestion Playlist</th>
+          <th>Derniere Musique</th>
+          <th>playlist</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="glyphicon glyphicon-wrench"></span></td>
+          <td>Apero MrBiscotte</td>
+          <td>TB</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+</div>
+</body>
+</html>

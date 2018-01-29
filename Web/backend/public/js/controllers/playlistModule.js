@@ -16,11 +16,20 @@ define([
                     templateUrl: '/partials/playlist/index',
                     controller: 'PlaylistController'
                 })
+                .when('/playlist/list', {
+                    templateUrl: '/partials/playlist/list',
+                    controller: 'PlaylistListController'
+                })
                 .when('/playlist/:playlist_id', {
                     templateUrl: '/partials/playlist/form',
                     controller: 'SavePlaylistController'
                 });
         }])
+        .controller('PlaylistListController', [
+            '$scope',
+            function ($scope) {
+            }
+        ])
         .controller('PlaylistController', [
             '$scope',
             '$translatePartialLoader',
