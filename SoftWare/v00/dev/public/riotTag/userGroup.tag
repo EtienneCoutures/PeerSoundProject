@@ -1,6 +1,6 @@
 <usergroup>
 
-  <h2 class="old-h2">{ name }—{ nbUser }</h2>
+  <h3 class="old-h2"><label style="color : #898989;">{ name }—{ nbUser }</label></h3>
 
   <div each={ users } data-is={ element } param={ param }></div>
 
@@ -21,7 +21,9 @@
   <style>
 
 :scope {
-  margin-top: 60px;
+  margin-top: 40px;
+  margin-left: 40px;
+  margin-bottom: 20px;
 }
 
   .old-h2 {

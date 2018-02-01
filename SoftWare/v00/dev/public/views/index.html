@@ -10,6 +10,7 @@
     <script src="../js/jquery/jquery-3.2.1.min.js"></script>
     <script src="../js/tether-1.3.3/tether.js"></script>
     <script src="../js/bootstrap/bootstrap.js"></script>
+    <script src="../js/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
     <script>if (window.module) module = window.module;</script>
 
     <link rel="stylesheet" type="text/css" href="../css/PSP/PSP.css">
@@ -17,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="../css/PSP/soundcloud.css">
     <link rel="stylesheet" type="text/css" href="../css/tether-1.3.3/tether.css">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="../css/mCustomScrollbar/jquery.mCustomScrollbar.min.css" />
 
     <script src="../js/riotJS/riot.js"></script>
     <script src="../js/riotJS/riot+compiler.js"></script>
@@ -38,7 +40,7 @@
     <title>PSP Software</title>
   </head>
 
-  <body style="margin: 0px;padding-left: 0px;padding-right: 0px;">
+  <body style="margin: 0px;padding-left: 0px;padding-right: 0px;overflow: hidden">
 
     <div class="container-fluid p-0">
 
@@ -46,7 +48,12 @@
 
         <!-- playlists -->
         <div class="col-md-1">
-          <riotPanel id="playlistPanel"></riotPanel>
+          <div style="height:10%">
+            <riotPanel id="socialBtn"></riotPanel>
+          </div>
+          <div style="height:90%">
+            <riotPanel id="playlistPanel"></riotPanel>
+          </div>
         </div>
 
           <!-- musics -->
@@ -69,7 +76,7 @@
           <!-- middle panel -->
           <div class="col-md-7">
 
-            <div class="menubar"></div>
+            <div class="middle-menubar"></div>
 
             <div style="height:95%">
 
@@ -89,7 +96,7 @@
           <!-- users -->
           <div class="col-md-2">
 
-            <div class="menubar">
+            <div class="middle-menubar">
             </div>
 
             <div style="height:95%">
@@ -111,9 +118,26 @@
   var menubar = [{element : "menubar", param : { currentPlaylist : {name : "playlist1", id : '1'
   , image : "../images/hardcore2.jpg"}}}];
 
-  var playlists = [
-                  {element : "socialbtn", param : {}}
-                , {element : "separator", param : {}}
+  var socialBtn = [{element : "socialbtn", param : {}}
+                  , {element : "separator", param : {}}
+                ];
+
+  var playlists = [{element : "playlist", param : {name : "playlist1", id : '1'
+                  , image : "../images/hardcore2.jpg"}}
+                , {element : "playlist", param : {name : "playlist2", id : '2'
+                  , image : "../images/angerfist.jpg"}}
+                , {element : "playlist", param : {name : "playlist3", id : '3'
+                  , image : "../images/lsd.jpg"}}
+                , {element : "playlist", param : {name : "playlist4", id : '4'
+                  , image : "../images/acidcore.jpg"}}
+                , {element : "playlist", param : {name : "playlist1", id : '1'
+                  , image : "../images/hardcore2.jpg"}}
+                , {element : "playlist", param : {name : "playlist2", id : '2'
+                  , image : "../images/angerfist.jpg"}}
+                , {element : "playlist", param : {name : "playlist3", id : '3'
+                  , image : "../images/lsd.jpg"}}
+                , {element : "playlist", param : {name : "playlist4", id : '4'
+                  , image : "../images/acidcore.jpg"}}
                 , {element : "playlist", param : {name : "playlist1", id : '1'
                   , image : "../images/hardcore2.jpg"}}
                 , {element : "playlist", param : {name : "playlist2", id : '2'
@@ -133,6 +157,41 @@
                 , {element : "music", param : {name : "music6", id : '6'}}
                 , {element : "music", param : {name : "music7", id : '7'}}
                 , {element : "music", param : {name : "music8", id : '8'}}
+                , {element : "music", param : {name : "music2", id : '2'}}
+                , {element : "music", param : {name : "music3", id : '3'}}
+                , {element : "music", param : {name : "music4", id : '4'}}
+                , {element : "music", param : {name : "music5", id : '5'}}
+                , {element : "music", param : {name : "music6", id : '6'}}
+                , {element : "music", param : {name : "music7", id : '7'}}
+                , {element : "music", param : {name : "music8", id : '8'}}
+                , {element : "music", param : {name : "music2", id : '2'}}
+                , {element : "music", param : {name : "music3", id : '3'}}
+                , {element : "music", param : {name : "music4", id : '4'}}
+                , {element : "music", param : {name : "music5", id : '5'}}
+                , {element : "music", param : {name : "music6", id : '6'}}
+                , {element : "music", param : {name : "music7", id : '7'}}
+                , {element : "music", param : {name : "music8", id : '8'}}
+                , {element : "music", param : {name : "music2", id : '2'}}
+                , {element : "music", param : {name : "music3", id : '3'}}
+                , {element : "music", param : {name : "music4", id : '4'}}
+                , {element : "music", param : {name : "music5", id : '5'}}
+                , {element : "music", param : {name : "music6", id : '6'}}
+                , {element : "music", param : {name : "music7", id : '7'}}
+                , {element : "music", param : {name : "music8", id : '8'}}
+                , {element : "music", param : {name : "music2", id : '2'}}
+                , {element : "music", param : {name : "music3", id : '3'}}
+                , {element : "music", param : {name : "music4", id : '4'}}
+                , {element : "music", param : {name : "music5", id : '5'}}
+                , {element : "music", param : {name : "music6", id : '6'}}
+                , {element : "music", param : {name : "music7", id : '7'}}
+                , {element : "music", param : {name : "music8", id : '8'}}
+                , {element : "music", param : {name : "music2", id : '2'}}
+                , {element : "music", param : {name : "music3", id : '3'}}
+                , {element : "music", param : {name : "music4", id : '4'}}
+                , {element : "music", param : {name : "music5", id : '5'}}
+                , {element : "music", param : {name : "music6", id : '6'}}
+                , {element : "music", param : {name : "music7", id : '7'}}
+                , {element : "music", param : {name : "music8", id : '8'}}
                 ];
 
   var messages = [
@@ -145,12 +204,22 @@
   var users = [{element : "usergroup", param : {name : "Administrateur"
         , nbUser : 1, users : [{element : "user", param : {name : "PSPAdmin"
           , image : "../images/PSPAdmin.jpeg", status : "afk"}}]}}
-          , {element : "usergroup", param : {name : "En ligne", nbUser : 2
+          , {element : "usergroup", param : {name : "En ligne", nbUser : 6
   , users : [{element : "user", param : {name : "KETAMAX"
-              , image : "../images/ketamax.jpg", status : "online"}}
+              , image : "../images/ketamax.jpg", status : "online"
+              , admin : true}}
             , {element : "user", param : {name : "ITIZ"
-              , image : "../images/itiz.png", status : "afk"}}]}}
-          , {element : "usergroup", param : {name : "Hors ligne", nbUser : 4
+              , image : "../images/itiz.png", status : "afk"}}
+            , {element : "user", param : {name : "TuturLaVoiture"
+              , image : "../images/psp.png", status : "afk"}}
+            , {element : "user", param : {name : "Angry_Capitalist"
+              , image : "../images/psp.png", status : "online"}}
+            , {element : "user", param : {name : "TuturLaVoiture"
+              , image : "../images/psp.png", status : "afk"}}
+            , {element : "user", param : {name : "Angry_Capitalist"
+              , image : "../images/psp.png", status : "online"}}
+            ]}}
+          , {element : "usergroup", param : {name : "Hors ligne", nbUser : 9
   , users : [{element : "user", param : {name : "MrBiscotte"
               , image : "../images/hugo.png", status : "offline"}}
             , {element : "user", param : {name : "Khedira"
@@ -158,23 +227,40 @@
             , {element : "user", param : {name : "gabo34"
               , image : "../images/psp.png", status : "offline"}}
             , {element : "user", param : {name : "henryTeteDeBois"
-              , image : "../images/psp.png", status : "offline"}}]}}];
+              , image : "../images/psp.png", status : "offline"}}
+            , {element : "user", param : {name : "MomoLaFrite"
+              , image : "../images/psp.png", status : "offline"}}
+            , {element : "user", param : {name : "Khedira"
+              , image : "../images/psp.png", status : "offline"}}
+            , {element : "user", param : {name : "gabo34"
+              , image : "../images/psp.png", status : "offline"}}
+            , {element : "user", param : {name : "henryTeteDeBois"
+              , image : "../images/psp.png", status : "offline"}}
+            , {element : "user", param : {name : "MomoLaFrite"
+              , image : "../images/psp.png", status : "offline"}}
+            ]}}];
 
   var userSettings = [{element : "usersettings", param : {name : "KETAMAX"
               , image : "../images/ketamax.jpg", status : "online"}}]
 
-  riot.mount('#playlistPanel', {elements : playlists, name : "my playlists"
-  , color : '#212326', borders : ["", "", "", ""]});
-  riot.mount('#musicPanel', {elements : musics, name : "music panel"
-  , borders : ["", "", "", ""], alignItems : "left"});
+  riot.mount('#socialBtn', {elements : socialBtn, name : "socialBtn"
+    , color : '#212326', borders : ["", "", "", ""]});
+  riot.mount('#playlistPanel', {elements : playlists, name : "playlists"
+    , color : '#212326', borders : ["", "", "", ""], scrollBar : true});
+  riot.mount('#musicPanel', {elements : musics, name : "musics"
+    , borders : ["", "", "", ""], alignItems : "left", scrollBar : true
+  , color: '#363636'});
+
   //riot.mount('#messages', {elements : messages, name : "message panel"});
-  //riot.mount('#mediaplayer', {elements : mediaplayer, name : "mediaplayer"});
+  /*riot.mount('#mediaplayer', {elements : mediaplayer, name : "mediaplayer"
+  , borders : ["","","",""]});*/
+
   riot.mount('#users', {elements : users, name : "users"
-  , borders : ["", "", "", ""]});
+    , borders : ["", "", "", ""], scrollBar : true, color: '#363636'});
   riot.mount('#menubar', {elements : menubar, name : "menubar", color : '#363636'
-  , borders : ["", "", "", ""]});
-  riot.mount('#userSettings', {elements : userSettings, color: '#363636'
-  , borders : ["", "", "", ""], alignItems : "left", flexDirection : "row"});
+    , borders : ["", "", "", ""]});
+  riot.mount('#userSettings', {elements : userSettings, color: '#2C2C2C'
+    , borders : ["", "", "", ""], alignItems : "left", flexDirection : "row"});
 
   </script>
 </body>

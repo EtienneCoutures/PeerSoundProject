@@ -39,6 +39,11 @@ alt-grid [class*="col-"] {padding-left:0;padding-right:0}
   background-color : #363636;
 }
 
+.middle-menubar {
+  height : 5%;
+  background-color: #484a4c;
+}
+
 .align {
   display : flex;
   justify-content: center; /* align horizontal */

@@ -15,7 +15,7 @@
 
   this.on('mount', function() {
     console.log('refs: ', this.refs);
-    this.refs.arrow.style.display = "none";
+    //this.refs.arrow.style.display = "none";
   })
 
   handler(e) {
@@ -34,17 +34,8 @@
     height: 80px;
     margin-top: 10px;
     margin-bottom: 10px;
+    margin-left: 45px;
   }
-
-  .arrow-right {
-  width: 0;
-  height: 0;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  display : "none";
-  border-left: 10px solid black;
-}
-
 
   .current {
     margin-left : 20px;
@@ -64,6 +55,7 @@
     width : 80px;
     height: 60px;
   }
+
   </style>
 
 </playlist>

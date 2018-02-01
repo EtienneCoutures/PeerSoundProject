@@ -1,6 +1,6 @@
 <riotPanel>
 
-  <div id="panel">
+  <div id="{ name }_panel" class="panel">
     <div each={ elements } data-is={ element } param={ param }></div>
   </div>
 
@@ -14,6 +14,7 @@
   this.borders = opts.borders;
   this.alignItems = opts.alignItems;
   this.flexDirection = opts.flexDirection;
+  this.scrollBar = (opts.scrollBar || false);
 
   this.root.riot = false;
 
@@ -33,6 +34,13 @@
     this.root.style.alignItems = this.alignItems || "center";
     this.root.style.flexDirection = this.flexDirection || "column";
 
+    console.log('this.refs:', this.refs);
+
+    if (this.scrollBar) {
+      $('#' + this.name + '_panel').mCustomScrollbar({
+        theme : "minimal"
+      });
+    }
   })
 
 </script>
@@ -42,6 +50,12 @@
      height: 100%;
      width: 100%;
      display: flex;
+  }
+
+  .panel {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
   }
 </style>
 
