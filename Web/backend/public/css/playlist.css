@@ -1,0 +1,51 @@
+.addPlaylist{
+  width: 100%;
+  position: relative;
+    height: 55px;
+    clear: both;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color:#FFFFFF;
+}
+
+.Title{
+  margin-top: 25px;
+  margin-bottom: 25px;
+  border: 1px solid #D0D9D9;
+}
+
+body{
+  background-color: white;
+}
+
+
+table.notifTable {
+  font-family: "Courier New", Courier, monospace;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+table.notifTable td, table.notifTable th {
+  border: 2px solid #FFFFFF;
+  padding: 9px 0px;
+  width: 300px;
+}
+table.notifTable tbody td {
+  font-size: 17px;
+}
+table.notifTable thead {
+    border-bottom: 2px solid #D0D9D9;
+    background-color: white;
+}
+table.notifTable thead th {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #D0D9D9;
+}
+table.notifTable tfoot td {
+  font-size: 8px;
+}
