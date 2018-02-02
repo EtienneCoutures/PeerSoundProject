@@ -14,6 +14,10 @@
 
   <style>
 
+  :scope {
+    margin-bottom: 20px;
+  }
+
  .guild {
    height:80px !important;
    width:80px !important;
