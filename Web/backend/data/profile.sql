@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS `profile` (
   `profile_id` int NOT NULL,
   `profile_insert` datetime NOT NULL,
   `usr_id` int NOT NULL,
+  `image` LONGBLOB NOT NULL,
   /* set fields here, pour l'instant j'ai la flemme*/
   foreign key (`usr_id`) references user(`usr_id`),
   primary key (`profile_id`)
