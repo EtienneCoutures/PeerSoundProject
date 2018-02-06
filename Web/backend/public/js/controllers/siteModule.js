@@ -29,7 +29,16 @@ define([
         }])
         .controller('SiteController', [
             '$scope',
-            function ($scope) {
+            'Restangular',
+            '$location',
+            function ($scope, Restangular, $location) {
+              $scope.redirectToUser = function(name) {
+                Restangular.one('user/', name).get().then(function(result) {
+                  return $location.url('/user/' + result.User.usr_id)
+                    /*$scope.errors = result.errors;
+                    $scope.querying = false*/
+                });
+              }
             }
         ])
         .controller('DownloadController', [

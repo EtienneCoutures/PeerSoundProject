@@ -17,8 +17,12 @@ define([
                     controller: 'UserController'
                 })
                 .when('/user/:usr_id', {
-                    templateUrl: '/partials/user/form',
-                    controller: 'SaveUserController'
+                    templateUrl: '/partials/user/user',
+                    controller: 'SeeUserController'
+                })
+                .when('/myself', {
+                  templateUrl: '/partials/user/form',
+                  controller: 'SaveUserController'
                 });
         }])
         .controller('UserController', [
@@ -30,6 +34,8 @@ define([
                 var query = $location.search(),
                     pending = !!query.pending;
                 $translatePartialLoader.addPart('user');
+
+
 
                 $scope.UserColumns = [{
                     field: 'usr_login',
@@ -89,6 +95,15 @@ define([
                 };
             }
         ])
+        .controller('SeeUserController', [
+            '$scope',
+            '$routeParams',
+            '$location',
+            function ($scope, $routeParams, $location) {
+              if ($routeParams.usr_id == $scope.myself.usr_id)
+                return $location.url('/myself');
+            }
+        ])
         .controller('SaveUserController', [
             '$scope',
             '$translatePartialLoader',
@@ -97,7 +112,7 @@ define([
             'Restangular',
             '$translate',
             function ($scope, $translatePartialLoader, $location, $routeParams, Restangular, $translate) {
-                var usr_id = $routeParams.usr_id;
+                var usr_id = $scope.myself.usr_id;
                 $translatePartialLoader.addPart('user');
 
                 $scope.User = {

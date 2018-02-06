@@ -86,7 +86,7 @@ menu_items.forEach(function(item) { %>
         <h5><%= item.user_name %> viens de vous inviter à rejoindre la playlist <%= item.playlist %></h5>
         <h5>Title: <%= item.titre %></h5>
         <h5>Artiste: <%= item.artist %></h5>
-        <h5>UserName: <%= item.user_name%></h5>
+        <a ng-href='#' ng-click="redirectToUser('itiz')"><h5> UserName: <%= item.user_name%></h5></a>
       </div>
       <a href="#/playlist" class="MyPlaylist">
       <div class="btnvalidate">
