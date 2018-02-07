@@ -34,9 +34,9 @@ define([
             function ($scope, Restangular, $location) {
               $scope.redirectToUser = function(name) {
                 Restangular.one('user/', name).get().then(function(result) {
+                  if (result.User.usr_id == $scope.myself.id)
+                    return $location.url('/myself')
                   return $location.url('/user/' + result.User.usr_id)
-                    /*$scope.errors = result.errors;
-                    $scope.querying = false*/
                 });
               }
             }

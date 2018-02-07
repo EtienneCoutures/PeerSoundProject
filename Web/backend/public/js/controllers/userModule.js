@@ -99,11 +99,24 @@ define([
             '$scope',
             '$routeParams',
             '$location',
-            function ($scope, $routeParams, $location) {
-              if ($routeParams.usr_id == $scope.myself.usr_id)
-                return $location.url('/myself');
-            }
-        ])
+            'Restangular',
+            function ($scope, $routeParams, $location, Restangular) {
+              var id = $routeParams.usr_id;
+              if (id == $scope.myself.usr_id) {
+                return $location.url('/myself'); }
+
+                var id;
+
+                Restangular.one('user', id).get().then(function(result){
+                    id = result.usr_id;
+                    $scope.user_login = result.User.usr_login;
+                })
+
+                $scope.follow = function() {
+                  
+                }
+
+            }])
         .controller('SaveUserController', [
             '$scope',
             '$translatePartialLoader',
