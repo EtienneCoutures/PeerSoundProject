@@ -113,7 +113,7 @@ define([
                 })
 
                 $scope.follow = function() {
-                  
+              //    Restangular.one('follow', id)
                 }
 
             }])
