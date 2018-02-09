@@ -55,7 +55,6 @@ define([
             '$scope',
             'Restangular',
             function ($scope, Restangular) {
-              console.log("follower ok")
 
               $scope.users = []
 

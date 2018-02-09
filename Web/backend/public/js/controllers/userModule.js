@@ -20,6 +20,10 @@ define([
                     templateUrl: '/partials/user/user',
                     controller: 'SeeUserController'
                 })
+                .when('/unknowUser', {
+                  templateUrl: '/partials/user/unknowUser',
+                  controller: 'UnknowUserController'
+                })
                 .when('/myself', {
                   templateUrl: '/partials/user/form',
                   controller: 'SaveUserController'
@@ -106,6 +110,10 @@ define([
                 return $location.url('/myself'); }
 
                 Restangular.one('user', id).get().then(function(result){
+                  console.log(result)
+                  if (result.code == 1) {
+                  $location.url('/unknowUser');
+                  }
                     $scope.user_login = result.User.usr_login;
                 })
 
@@ -113,38 +121,36 @@ define([
 
                 $scope.isFollowed = function() {
                   Restangular.one('/follow/me/', id, $scope.myself.usr_id).get({"id": id, "me": $scope.myself.usr_id}).then(function(result) {
-                    console.log(result)
                     if (result.followed > 0) {
-                      console.log("recu")
                       $scope.follow_date = result.date;
                       $scope.followed = true;
                   }
                     else {
                       $scope.followed = false
                     }
-                    console.log("la il est : " + $scope.followed)
                   })
                 }
-
-                console.log("followed : => " + $scope.followed)
 
 
                 $scope.Follow = function() {
                   Restangular.all("/follow/" + id + "/" + $scope.myself.usr_id).post().then(function(result) {
                       if (result.code == 0) {$scope.followed = true}
-                      console.log(result)
                   })
                 }
 
                 $scope.unFollow = function() {
                   Restangular.one('/follow/delete').get({"id": id, "me": $scope.myself.usr_id}).then(function(result) {
                       if (result.code == 0) {$scope.followed = false}
-                      console.log(result)
                   })
                 }
 
 
             }])
+            .controller('UnknowUserController', [
+                '$scope',
+                function ($scope) {
+                }
+            ])
         .controller('SaveUserController', [
             '$scope',
             '$translatePartialLoader',
