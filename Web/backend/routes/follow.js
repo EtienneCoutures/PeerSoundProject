@@ -25,7 +25,7 @@ module.exports = function (app) {
       });
 
 
-          router.get('/test',
+          /*router.get('/test',
           function (req, res) {
             app.models["Follow"].findAndCountAll().then(function (result) {
               console.log("lallalal")
@@ -33,26 +33,25 @@ module.exports = function (app) {
               res.json(result);
             });
           });
-
+*/
 
 
 
           router.get('/me',
           function (req, res) {
             app.models["Follow"].find({"where":{
-              "follower_usr_id": req.query.id,
-              "followed_usr_id": req.query.me
+              "follower_usr_id": req.query.me,
+              "followed_usr_id": req.query.id
             }
           }).then(function (result, err) {
             if (err) {return res.json({code: 1})}
-            console.log(result)
             if (!result) {
               return res.json({
                 "followed": 0
               })
             }
             return res.json({
-              "followed": result.count,
+              "followed": 1,
               "date": result.dataValues.follow_insert
             });
           });

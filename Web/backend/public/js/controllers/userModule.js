@@ -113,20 +113,19 @@ define([
 
                 $scope.isFollowed = function() {
                   Restangular.one('/follow/me/', id, $scope.myself.usr_id).get({"id": id, "me": $scope.myself.usr_id}).then(function(result) {
+                    console.log(result)
                     if (result.followed > 0) {
                       console.log("recu")
                       $scope.follow_date = result.date;
                       $scope.followed = true;
-                    }
+                  }
                     else {
-                      console.log("recu")
                       $scope.followed = false
                     }
-
+                    console.log("la il est : " + $scope.followed)
                   })
                 }
 
-                $scope.isFollowed()
                 console.log("followed : => " + $scope.followed)
 
 
