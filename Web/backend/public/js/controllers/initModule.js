@@ -44,7 +44,22 @@ define([
 
                 $scope.login = function(user) {
                     $scope.myself = user;
-                };
+                    $scope.follow()
+                  };
+
+                $scope.follow = function() {
+                if ($scope.myself.usr_id)
+                {
+                  Restangular.one("follow/followed/", $scope.myself.usr_id).get().then(function(result) {
+                    console.log(result.Follow.length)
+                    $scope.nbFollowed = result.Follow.length;
+                  });
+                  Restangular.one("follow/follower/", $scope.myself.usr_id).get().then(function(result) {
+                    console.log(result.Follow.length)
+                    $scope.nbFollowers = result.Follow.length;
+                  });
+                }
+              }
 
                 $scope.logout = function() {
                     $scope.myself = null;

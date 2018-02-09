@@ -16,8 +16,10 @@
               <br>
               {{ user_login }}
               <br>
-              <button ng-click='follow()'>Follow ce fils de pute</button>
-            </div>
+
+              <button ng-if='followed === true' ng-click='unFollow()'>unFollow</button>
+              <button ng-if='followed === false' ng-click='Follow()'>Follow</button>
+          </div>
         </div>
         <!-- end panel -->
     </div>

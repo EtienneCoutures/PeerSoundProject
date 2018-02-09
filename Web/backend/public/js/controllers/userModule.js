@@ -105,16 +105,29 @@ define([
               if (id == $scope.myself.usr_id) {
                 return $location.url('/myself'); }
 
-                var id;
-
                 Restangular.one('user', id).get().then(function(result){
-                    id = result.usr_id;
                     $scope.user_login = result.User.usr_login;
+                    console.log($scope.user_login)
                 })
 
-                $scope.follow = function() {
-              //    Restangular.one('follow', id)
+                Restangular.one('/follow/me/', id, $scope.myself.usr_id).get({"id": id, "me": $scope.myself.usr_id}).then(function(result) {
+                  if (result.res[0] && result.res[0].follow_id) { $scope.followed = true ; $scope.follow_date = result.date }
+                  else ($scope.followed = false)
+                })
+
+                $scope.Follow = function() {
+                  Restangular.all("/follow/" + id + "/" + $scope.myself.usr_id).post().then(function(result) {
+                      if (result.code == 0) {$scope.followed = true}
+                  })
                 }
+
+                $scope.unFollow = function() {
+                  console.log("unfollow")
+                  Restangular.one('/follow/delete').get({"id": id, "me": $scope.myself.usr_id}).then(function(result) {
+                      if (result.code == 0) {$scope.followed = false}
+                  })
+                }
+                console.log("followed : => " + $scope.followed)
 
             }])
         .controller('SaveUserController', [

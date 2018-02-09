@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS `music_of`;
 
 
 CREATE TABLE IF NOT EXISTS `music_of` (
-  `music_of_id` int NOT NULL,
+  `music_of_id` int NOT NULL AUTO_INCREMENT,
   `music_of_insert` datetime NOT NULL,
   `added_by` int NOT NULL,
   `music_id` int NOT NULL,

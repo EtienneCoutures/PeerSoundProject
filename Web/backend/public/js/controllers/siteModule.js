@@ -32,6 +32,12 @@ define([
             'Restangular',
             '$location',
             function ($scope, Restangular, $location) {
+
+              Restangular.one("follow/follower/", $scope.myself.usr_id).get().then(function(result) {
+                console.log(result.Follow.length)
+                $scope.nbFollowers = result.Follow.length;
+              });
+
               $scope.redirectToUser = function(name) {
                 Restangular.one('user/', name).get().then(function(result) {
                   if (result.User.usr_id == $scope.myself.id)

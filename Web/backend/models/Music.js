@@ -66,7 +66,7 @@ module.exports = function (app) {
               validate: {
               }
             },
-            music_url: {
+            url: {
               type: Sequelize.TEXT,
               defaultValue: "",
               validate: {

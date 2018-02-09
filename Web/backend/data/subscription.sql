@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS `subscription`;
 
 
 CREATE TABLE IF NOT EXISTS `subscription` (
-  `sub_id` int NOT NULL,
+  `sub_id` int NOT NULL AUTO_INCREMENT,
   `sub_insert` datetime NOT NULL,
   `usr_id` int NOT NULL,
   `playlist_id` int NOT NULL,

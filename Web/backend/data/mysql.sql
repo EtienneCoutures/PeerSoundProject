@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `playlist`;
 -- Structure of the table `user`
 --
 CREATE TABLE IF NOT EXISTS `user` (
-  `usr_id` int NOT NULL,
+  `usr_id` int NOT NULL AUTO_INCREMENT,
   `usr_login` varchar(255),
   `usr_password` varchar(255) NOT NULL,
   `usr_email` varchar(255) NOT NULL,

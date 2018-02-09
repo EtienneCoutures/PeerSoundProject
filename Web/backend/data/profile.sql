@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS `profile`;
 
 
 CREATE TABLE IF NOT EXISTS `profile` (
-  `profile_id` int NOT NULL,
+  `profile_id` int NOT NULL AUTO_INCREMENT,
   `profile_insert` datetime NOT NULL,
   `usr_id` int NOT NULL,
   `image` LONGBLOB NOT NULL,

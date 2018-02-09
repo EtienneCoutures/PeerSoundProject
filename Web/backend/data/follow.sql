@@ -6,7 +6,7 @@ START TRANSACTION;
 DROP TABLE IF EXISTS `follow`;
 
 CREATE TABLE IF NOT EXISTS `follow` (
-  `follow_id` int NOT NULL,
+  `follow_id` int NOT NULL AUTO_INCREMENT,
   `follow_insert` datetime NOT NULL,
   `followed_usr_id` int NOT NULL,
   `follower_usr_id` int NOT NULL,
@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS `follow` (
   primary key (`follow_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
+ALTER TABLE follow AUTO_INCREMENT=1;
 
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;

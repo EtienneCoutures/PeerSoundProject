@@ -102,12 +102,13 @@
                   <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                     <span>{{myself.usr_email | ucfirst}}</span> <b class="caret"></b>
                   </a>
-                  <ul class="dropdown-menu animated fadeInLeft">
+                  <ul class="dropdown-menu animated fadeInLeft" ng-init="follow()">
                     <li class="arrow"></li>
                     <li><a ng-href="#/user/{{myself.usr_id}}" translate>Edit Profile</a></li>
                     <li class="divider"></li>
                     <li><a href="/logout" translate>Log Out</a></li>
-                    <li><a href="#/friend">Amis</a></li>
+                    <li><a href="#/friend">Followers ({{nbFollowers}})</a></li>
+                    <li><a href="#/friend">Followed ({{nbFollowed}})</a></li>
                     <li><a href="#">playlist</a></li>
                     <li><a href="#/fav">favoris</a></li>
                   </ul>

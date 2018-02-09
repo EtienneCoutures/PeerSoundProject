@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS `music`;
 -- Structure of the table `music`
 --
 CREATE TABLE IF NOT EXISTS `music` (
-  `music_id` int NOT NULL,
+  `music_id` int NOT NULL AUTO_INCREMENT,
   `music_name` varchar(255) NOT NULL,
   `music_description` text NOT NULL,
   `music_comment` text,
