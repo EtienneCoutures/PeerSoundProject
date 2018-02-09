@@ -24,34 +24,38 @@ module.exports = function (app) {
         console.log("connecté depuis follow");
       });
 
-    router.get('/me',
-        function(req, res) {
-          var requete = "SELECT * from follow where followed_usr_id='" + req.query.id + "' AND follower_usr_id='" + req.query.me + "';"
-            con.query(requete,
-            function(err, result, fields) {
-              return res.json({
-                "res": result
-              })
+
+          router.get('/test',
+          function (req, res) {
+            app.models["Follow"].findAndCountAll().then(function (result) {
+              console.log("lallalal")
+              console.log(result)
+              res.json(result);
             });
+          });
+
+
+
+
+          router.get('/me',
+          function (req, res) {
+            app.models["Follow"].find({"where":{
+              "follower_usr_id": req.query.id,
+              "followed_usr_id": req.query.me
+            }
+          }).then(function (result, err) {
+            if (err) {return res.json({code: 1})}
+            res.json({
+              "followed": result.count,
+              "date": result.dataValues.follow_insert
+            });
+          });
         });
 
-    router.get('/follower/:id',
-        function (req, res) {
-            con.query("SELECT * from follow where follower_usr_id='" + req.params.id + "'", function (err, result, fields) {
-               if (err) {return res.json({code: 1})}
-                console.log(result);
-                res.json({
-                    "code": 0,
-                    "Follow": result
-                });
-             });
-        });
 
         router.post('/:id/:me', function(req, res) {
           requete = "insert into follow (follow_insert, followed_usr_id, follower_usr_id) values ('" + new Date().toJSON().slice(0,10).replace(/-/g,'/') + "', '" + req.params.id +"','" + req.params.me + "');"
-          console.log(requete)
           con.query(requete, function(err, result, fields) {
-            console.log(err)
             if (err) {return res.json({
               "code": 1
             })}
@@ -74,18 +78,36 @@ module.exports = function (app) {
           })
         })
 
-        router.get('/followed/:id',
-            function (req, res) {
-              console.log("requete follow")
 
-                con.query("SELECT * from follow where followed_usr_id='" + req.params.id + "'", function (err, result, fields) {
-                   if (err) {return res.json({code: 1})}
-                    console.log(result);
-                    res.json({
-                        "code": 0,
-                        "Follow": result
-                    });
-                 });
-            });
+        router.get('/follower/:id',
+        function (req, res) {
+          app.models["Follow"].findAndCountAll({"where":{
+            "follower_usr_id": req.params.id
+          }
+        }).then(function (result, err) {
+          if (err) {return res.json({code: 1})}
+          res.json({
+            "code": 0,
+            "count": result.count
+          });
+        });
+      });
+
+
+        router.get('/followed/:id',
+        function (req, res) {
+          app.models["Follow"].findAndCountAll({"where":{
+            "followed_usr_id": req.params.id
+          }
+        }).then(function (result, err) {
+          if (err) {return res.json({code: 1})}
+          res.json({
+            "code": 0,
+            "count": result.count
+          });
+        });
+      });
+
+
 
   };

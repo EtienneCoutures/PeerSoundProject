@@ -34,8 +34,7 @@ define([
             function ($scope, Restangular, $location) {
 
               Restangular.one("follow/follower/", $scope.myself.usr_id).get().then(function(result) {
-                console.log(result.Follow.length)
-                $scope.nbFollowers = result.Follow.length;
+                $scope.nbFollowers = result.count;
               });
 
               $scope.redirectToUser = function(name) {

@@ -14,7 +14,6 @@ module.exports = function (app) {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
-                defaultValue: 0,
                 validate: {
                 }
             },
@@ -120,7 +119,6 @@ module.exports = function (app) {
         });
 
         // List of required models
-
         // Define relations of this model
     }
 };

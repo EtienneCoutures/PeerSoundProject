@@ -45,8 +45,6 @@ CREATE TABLE IF NOT EXISTS `music` (
 --
 -- Index of the table `music`
 --
-ALTER TABLE `music`
-  MODIFY `music_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

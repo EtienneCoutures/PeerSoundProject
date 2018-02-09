@@ -9,7 +9,6 @@ module.exports = function (app) {
           type: Sequelize.INTEGER,
           primaryKey: true,
           autoIncrement: true,
-          defaultValue: 0,
           validate: {
           }
       },
@@ -36,9 +35,10 @@ module.exports = function (app) {
         // Define model options
         timestamps: true,
         createdAt: 'follow_insert',
+        updatedAt: 'follow_insert',
         freezeTableName: true,
         tableName: 'follow'
     });
-
   }
+  sequelize.sync();
 };

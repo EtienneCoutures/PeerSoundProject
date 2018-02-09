@@ -107,24 +107,26 @@ define([
 
                 Restangular.one('user', id).get().then(function(result){
                     $scope.user_login = result.User.usr_login;
-                    console.log($scope.user_login)
                 })
 
                 Restangular.one('/follow/me/', id, $scope.myself.usr_id).get({"id": id, "me": $scope.myself.usr_id}).then(function(result) {
-                  if (result.res[0] && result.res[0].follow_id) { $scope.followed = true ; $scope.follow_date = result.date }
+                  console.log("Ketamine : ")
+                  console.log(result)
+                  if (result.followed == 1) { $scope.followed = true ; $scope.follow_date = result.date }
                   else ($scope.followed = false)
                 })
 
                 $scope.Follow = function() {
                   Restangular.all("/follow/" + id + "/" + $scope.myself.usr_id).post().then(function(result) {
                       if (result.code == 0) {$scope.followed = true}
+                      console.log(result)
                   })
                 }
 
                 $scope.unFollow = function() {
-                  console.log("unfollow")
                   Restangular.one('/follow/delete').get({"id": id, "me": $scope.myself.usr_id}).then(function(result) {
                       if (result.code == 0) {$scope.followed = false}
+                      console.log(result)
                   })
                 }
                 console.log("followed : => " + $scope.followed)
