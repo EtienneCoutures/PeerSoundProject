@@ -22,6 +22,10 @@ define([
                     templateUrl: '/partials/site/fav',
                     controller: 'FavController'
                 })
+                .when('/followed',{
+                  templateUrl: '/partials/site/followed',
+                  controller: 'FollowedController'
+                })
                 .when('/follower', {
                     templateUrl: '/partials/site/follower',
                     controller: 'FollowerController'
@@ -49,6 +53,32 @@ define([
         .controller('DownloadController', [
             '$scope',
             function ($scope) {
+            }
+        ])
+        .controller('FollowedController', [
+            '$scope',
+            'Restangular',
+            function ($scope, Restangular) {
+
+              $scope.users = []
+
+              $scope.getUsers = function() {
+                for (var i = 0 ; i < $scope.followerList.length ; ++i) {
+                    Restangular.one("user/", $scope.followerList[i].followed_usr_id).get().then(function(result) {
+                        $scope.users.push(result.User)
+                    });
+                };
+                console.log($scope.users)
+              };
+
+              Restangular.one("follow/follower/", $scope.myself.usr_id).get().then(function(result) {
+                  $scope.followerNb = result.count;
+                  $scope.followerList = result.rows
+                  $scope.getUsers()
+              })
+
+
+
             }
         ])
         .controller('FollowerController', [
