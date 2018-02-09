@@ -50,10 +50,10 @@ define([
                 $scope.follow = function() {
                 if ($scope.myself.usr_id)
                 {
-                  Restangular.one("follow/followed/", $scope.myself.usr_id).get().then(function(result) {
+                  Restangular.one("follow/followerNb/", $scope.myself.usr_id).get().then(function(result) {
                     $scope.nbFollowed = result.count;
                   });
-                  Restangular.one("follow/follower/", $scope.myself.usr_id).get().then(function(result) {
+                  Restangular.one("follow/followedNb/", $scope.myself.usr_id).get().then(function(result) {
                     $scope.nbFollowers = result.count;
                   });
                 }

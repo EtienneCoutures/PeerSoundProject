@@ -37,6 +37,7 @@ module.exports = function (app) {
             Options.where = Options.where || {};
 
             // Add filters
+            if (!S(Options.where.usr_id).isEmpty()) query.where.usr_id = {like:Options.where.usr_id};
             if (!S(Options.where.usr_firstname).isEmpty()) query.where.usr_firstname = {like:Options.where.usr_firstname + '%'};
             if (!S(Options.where.usr_lastname).isEmpty()) query.where.usr_lastname = {like:Options.where.usr_lastname + '%'};
             if (!S(Options.where.usr_role).isEmpty()) query.where.usr_role = Options.where.usr_role;

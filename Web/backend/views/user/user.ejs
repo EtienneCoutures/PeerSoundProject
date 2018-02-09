@@ -16,9 +16,8 @@
               <br>
               {{ user_login }}
               <br>
-
-              <button ng-if='followed === true' ng-click='unFollow()'>unFollow</button>
-              <button ng-if='followed === false' ng-click='Follow()'>Follow</button>
+              <button ng-if="followed != undefined && followed == true" ng-click='unFollow()'>unFollow</button>
+              <button ng-if="followed != undefined && followed == false" ng-click='Follow()'>Follow</button>
           </div>
         </div>
         <!-- end panel -->

@@ -45,7 +45,13 @@ module.exports = function (app) {
             }
           }).then(function (result, err) {
             if (err) {return res.json({code: 1})}
-            res.json({
+            console.log(result)
+            if (!result) {
+              return res.json({
+                "followed": 0
+              })
+            }
+            return res.json({
               "followed": result.count,
               "date": result.dataValues.follow_insert
             });
@@ -56,6 +62,9 @@ module.exports = function (app) {
         router.post('/:id/:me', function(req, res) {
           requete = "insert into follow (follow_insert, followed_usr_id, follower_usr_id) values ('" + new Date().toJSON().slice(0,10).replace(/-/g,'/') + "', '" + req.params.id +"','" + req.params.me + "');"
           con.query(requete, function(err, result, fields) {
+            console.log("post")
+            console.log("to follow: " + req.params.id)
+            console.log("me : " + req.params.me)
             if (err) {return res.json({
               "code": 1
             })}
@@ -79,7 +88,7 @@ module.exports = function (app) {
         })
 
 
-        router.get('/follower/:id',
+        router.get('/followerNb/:id',
         function (req, res) {
           app.models["Follow"].findAndCountAll({"where":{
             "follower_usr_id": req.params.id
@@ -94,7 +103,37 @@ module.exports = function (app) {
       });
 
 
-        router.get('/followed/:id',
+      router.get('/followed/:id',
+      function (req, res) {
+        app.models["Follow"].findAndCountAll({"where":{
+          "followed_usr_id": req.params.id
+        }
+      }).then(function (result, err) {
+        if (err) {return res.json({code: 1})}
+        res.json({
+          "code": 0,
+          "count": result.count,
+          "rows": result.rows
+        });
+      });
+    });
+
+      router.get('/follower/:id',
+      function (req, res) {
+        app.models["Follow"].findAndCountAll({"where":{
+          "follower_usr_id": req.params.id
+        }
+      }).then(function (result, err) {
+        if (err) {return res.json({code: 1})}
+        res.json({
+          "code": 0,
+          "count": result.count,
+          "rows": result.rows
+        });
+      });
+    });
+
+        router.get('/followedNb/:id',
         function (req, res) {
           app.models["Follow"].findAndCountAll({"where":{
             "followed_usr_id": req.params.id

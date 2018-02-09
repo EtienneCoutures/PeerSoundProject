@@ -22,9 +22,9 @@ define([
                     templateUrl: '/partials/site/fav',
                     controller: 'FavController'
                 })
-                .when('/friend', {
-                    templateUrl: '/partials/site/friend',
-                    controller: 'FriendController'
+                .when('/follower', {
+                    templateUrl: '/partials/site/follower',
+                    controller: 'FollowerController'
                 });
         }])
         .controller('SiteController', [
@@ -33,7 +33,7 @@ define([
             '$location',
             function ($scope, Restangular, $location) {
 
-              Restangular.one("follow/follower/", $scope.myself.usr_id).get().then(function(result) {
+              Restangular.one("follow/followerNb/", $scope.myself.usr_id).get().then(function(result) {
                 $scope.nbFollowers = result.count;
               });
 
@@ -51,9 +51,31 @@ define([
             function ($scope) {
             }
         ])
-        .controller('FriendController', [
+        .controller('FollowerController', [
             '$scope',
-            function ($scope) {
+            'Restangular',
+            function ($scope, Restangular) {
+              console.log("follower ok")
+
+              $scope.users = []
+
+              $scope.getUsers = function() {
+                for (var i = 0 ; i < $scope.followerList.length ; ++i) {
+                    Restangular.one("user/", $scope.followerList[i].follower_usr_id).get().then(function(result) {
+                        $scope.users.push(result.User)
+                    });
+                };
+                console.log($scope.users)
+              };
+
+              Restangular.one("follow/followed/", $scope.myself.usr_id).get().then(function(result) {
+                  $scope.followerNb = result.count;
+                  $scope.followerList = result.rows
+                  $scope.getUsers()
+              })
+
+
+
             }
         ])
         .controller('FavController', [
