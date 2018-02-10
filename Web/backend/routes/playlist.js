@@ -92,7 +92,7 @@ module.exports = function (app) {
         ]),
         function (req, res) {
             var Record = req.body;
-
+            console.log(Record)
             if (!Record["playlist_id"])
                 return createRecord();
             return updateRecord();

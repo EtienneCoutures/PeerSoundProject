@@ -20,6 +20,10 @@ define([
                     templateUrl: '/partials/playlist/list',
                     controller: 'PlaylistListController'
                 })
+                .when('/playlist/new', {
+                  templateUrl : 'partials/playlist/new',
+                  controller: 'NewPlaylistController'
+                })
                 .when('/playlist/:playlist_id', {
                     templateUrl: '/partials/playlist/form',
                     controller: 'SavePlaylistController'
@@ -27,7 +31,49 @@ define([
         }])
         .controller('PlaylistListController', [
             '$scope',
-            function ($scope) {
+            '$location',
+            function ($scope, $location) {
+              $scope.goTo = function(where) {
+                return $location.url('/playlist/' + where);
+              }
+            }
+        ])
+        .controller('NewPlaylistController', [
+            '$scope',
+            'Restangular',
+            '$timeout',
+            function ($scope, Restangular, $timeout) {
+              $scope.playlist = {}
+              $scope.playlist.playlist_creator = $scope.myself.usr_id
+              $scope.savePlaylist = function(params) {
+                /*console.log($scope.playlist.playlist_name)
+                console.log($scope.playlist.playlist_style)
+                console.log($scope.playlist.playlist_description)
+                console.log($scope.playlist.playlist_comment)
+                console.log($scope.playlist.playlist_creator*/
+                Restangular.all('playlist').post($scope.playlist).then(function(result) {
+                    if (result.code == 0)  {
+                      console.log("playlist created")// return $location.url('/music');
+                      $scope.playlist.playlist_name = "";
+                      $scope.playlist.playlist_style = "";
+                      $scope.playlist.playlist_description = "";
+                      $scope.playlist.playlist_comment  = "";
+                      $scope.displayCreated()
+                    }
+                    $scope.errors = result.errors;
+                    $scope.querying = false;
+                });
+              }
+
+              $scope.playlistCreated = false;
+
+                 $scope.displayCreated = function() {
+                    $scope.playlistCreated = true;
+                    $timeout(function() {
+                       $scope.playlistCreated = false;
+                    }, 3000);
+                 };
+
             }
         ])
         .controller('PlaylistController', [
