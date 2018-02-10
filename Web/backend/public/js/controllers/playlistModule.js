@@ -37,7 +37,6 @@ define([
             "Restangular",
             function ($scope, $location, Restangular) {
               $scope.goTo = function(path, id) {
-                console.log(path + id)
                 return $location.url((path + id).toString());
               }
 
@@ -68,11 +67,6 @@ define([
               $scope.playlist = {}
               $scope.playlist.playlist_creator = $scope.myself.usr_id
               $scope.savePlaylist = function(params) {
-                /*console.log($scope.playlist.playlist_name)
-                console.log($scope.playlist.playlist_style)
-                console.log($scope.playlist.playlist_description)
-                console.log($scope.playlist.playlist_comment)
-                console.log($scope.playlist.playlist_creator*/
                 Restangular.all('playlist').post($scope.playlist).then(function(result) {
                     if (result.code == 0)  {
                       console.log("playlist created")// return $location.url('/music');
