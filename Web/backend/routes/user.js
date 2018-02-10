@@ -70,12 +70,14 @@ module.exports = function (app) {
                 },
                 include: []
             };
+            console.log("c'est la bonne fonction")
             app.models["User"].findOne(query).then(function (result) {
                 if (!result) {
                     return res.json({
                         code: 1
                     });
                 }
+              //penser a return result.dataValues, c'est completement con de return un array sur un findOne
                 res.json({
                     "code": 0,
                     "User": result

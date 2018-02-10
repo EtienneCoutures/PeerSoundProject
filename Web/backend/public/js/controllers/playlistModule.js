@@ -52,14 +52,34 @@ define([
               });
 
             }
-        ])
-        .controller('AdminPlaylistController', [
+          ])
+          .controller('AdminPlaylistController', [
             '$scope',
-            function ($scope) {
+            'Restangular',
+            function ($scope, Restangular) {
               console.log("ketamine")
+              $scope.followersId = []
+              $scope.followers = []
+              Restangular.all('follow').get('', {
+                where : {
+                  followed_usr_id: $scope.myself.usr_id
+                }
+              }).then(function(result) {
+                for (var i = 0 ; i != result.length ; ++ i) {
+                  $scope.followersId.push(result[i].follower_usr_id)
+                }
+
+              }).then(function() {
+                for (var i = 0 ; i != $scope.followersId.length ; ++i) {
+                  Restangular.one('user/' + $scope.followersId[i]).get().then(function(act_user){
+                    $scope.followers.push(act_user.User)
+                  })
+                }
+              })
+              // C'est sale et honnetement je m'en veux
             }
-        ])
-        .controller('NewPlaylistController', [
+          ])
+          .controller('NewPlaylistController', [
             '$scope',
             'Restangular',
             '$timeout',
@@ -69,7 +89,6 @@ define([
               $scope.savePlaylist = function(params) {
                 Restangular.all('playlist').post($scope.playlist).then(function(result) {
                     if (result.code == 0)  {
-                      console.log("playlist created")// return $location.url('/music');
                       $scope.playlist.playlist_name = "";
                       $scope.playlist.playlist_style = "";
                       $scope.playlist.playlist_description = "";

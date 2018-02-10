@@ -24,6 +24,46 @@ module.exports = function (app) {
         console.log("connecté depuis follow");
       });
 
+/*  test */
+
+router.get('/',
+    app.requirePermission([
+        ['allow', {
+            users:['@']
+        }],
+        ['deny', {
+            users:'*'
+        }]
+    ]),
+    function (req, res) {
+        var Options = req.query,
+            query = {
+                where: {},
+                include: []
+            };
+        if (typeof Options.where == "string") Options.where = JSON.parse(Options.where);
+        if (typeof Options.limit == "string") Options.limit = parseInt(Options.limit);
+        if (typeof Options.page == "string") Options.page = parseInt(Options.page);
+        if (typeof Options.sort == "string") Options.sort = JSON.parse(Options.sort);
+
+        Options.where = Options.where || {};
+
+        // Add filters
+        if (!S(Options.where.followed_usr_id).isEmpty()) query.where.followed_usr_id = {like:Options.where.followed_usr_id};
+        if (!S(Options.where.follower_usr_id).isEmpty()) query.where.follower_usr_id = {like:Options.where.follower_usr_id};
+
+        query.limit = Options.limit || null;
+        query.offset = Options.limit ? Options.limit * ((Options.page || 1) - 1) : null;
+        query.order = (Options.sort && Options.sort.field) ? (Options.sort.field + (Options.sort.asc ? ' ASC' : ' DESC')) : 'follow_id';
+
+        app.models["Follow"].findAndCountAll(query).then(function (result) {
+            if (!Options.limit) return res.json(result.rows);
+            res.json(result);
+        });
+    });
+
+/* test */
+
 
           /*router.get('/test',
           function (req, res) {
