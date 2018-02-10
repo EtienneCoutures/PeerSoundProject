@@ -41,13 +41,13 @@ define([
                 $scope.nbFollowers = result.count;
               });
 
-              $scope.redirectToUser = function(name) {
+              /*$scope.redirectToUser = function(name) {
                 Restangular.one('user/', name).get().then(function(result) {
                   if (result.User.usr_id == $scope.myself.id)
                     return $location.url('/myself')
                   return $location.url('/user/' + result.User.usr_id)
                 });
-              }
+              }*/
             }
         ])
         .controller('DownloadController', [

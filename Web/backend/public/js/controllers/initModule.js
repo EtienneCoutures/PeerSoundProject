@@ -28,6 +28,14 @@ define([
                     return data;
                 });
 
+                $scope.redirectToUser = function(name) {
+                  Restangular.one('user/', name).get().then(function(result) {
+                    if (result.User.usr_id == $scope.myself.id)
+                      return $location.url('/myself')
+                    return $location.url('/user/' + result.User.usr_id)
+                  });
+                }
+
                 $scope.$on('$routeChangeStart', function() {
                     if (!$scope.myself && $location.path() != '/login') {
                         Restangular.one('auth', 'me').get().then(function(result) {

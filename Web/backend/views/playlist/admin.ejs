@@ -1,5 +1,40 @@
-<center><h4>Page d'administration de playlist</h4></center>
+<style>
+.news{
+  width: 455px;
+  position: relative;
+    height: 150px;
+    border: 1px solid #c0c0c0;
+    clear: both;
+    text-align: center;
+    margin:auto;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+}
+</style>
+<div class="col-md-12">
+  <center>
+    <h4>Page d'administration de playlist</h4>
 
-<div ng-repeat="x in followers">
-  <p> {{ x.usr_login }} </p>  
+    <div style="margin-top:5%">
+      <h5>Ajouter un de vos followers</h5>
+    </center>
+    <div class="news" ng-repeat="x in followers">
+      <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+          <h2><b>{{ x.usr_login }}</b></h2>
+        </div>
+        <div class="col-md-2">
+          <a href=""><img src="img/add.png" ng-click="addUserToPlaylist(x)" style="max-width:15px;max-height:15px;width:auto;height:auto"></a>
+        </div>
+      </div>
+      <div class="text">
+        <a ng-href='#' ng-click="redirectToUser(x.usr_login)"><h5 style="color:blue"> {{x.usr_email}}</h5></a>
+      </div>
+    </div>
+  </div>
+
 </div>

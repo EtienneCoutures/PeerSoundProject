@@ -56,10 +56,12 @@ define([
           .controller('AdminPlaylistController', [
             '$scope',
             'Restangular',
-            function ($scope, Restangular) {
-              console.log("ketamine")
+            '$routeParams',
+            function ($scope, Restangular, $routeParams ) {
+              $scope.playlist_id = $routeParams.playlist_id;
               $scope.followersId = []
               $scope.followers = []
+
               Restangular.all('follow').get('', {
                 where : {
                   followed_usr_id: $scope.myself.usr_id
@@ -76,6 +78,21 @@ define([
                   })
                 }
               })
+
+              $scope.addUserToPlaylist = function(usr) {
+                var sub = {}
+                sub.usr_id = usr.usr_id
+                sub.playlist_id = $scope.playlist_id
+
+                Restangular.all('subscription').post(sub).then(function(result) {
+                  if (result.code == 0)  {
+                  console.log("crée")
+                  }
+                  console.log(result.errors)
+                    $scope.errors = result.errors;
+                    $scope.querying = false;
+                });
+              }
               // C'est sale et honnetement je m'en veux
             }
           ])
