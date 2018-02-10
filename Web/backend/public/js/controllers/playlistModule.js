@@ -37,7 +37,7 @@ define([
             "Restangular",
             function ($scope, $location, Restangular) {
               $scope.goTo = function(path, id) {
-                
+                console.log(path + id)
                 return $location.url((path + id).toString());
               }
 
