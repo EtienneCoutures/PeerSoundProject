@@ -75,14 +75,14 @@
         <tr>
           <th>Gestion Playlist</th>
           <th>Derniere Musique</th>
-          <th>playlist</th>
+          <th>Playlist</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody ng-repeat="x in userPlaylist">
         <tr>
-          <td><span class="glyphicon glyphicon-wrench"></span></td>
+          <td><a href="" class="glyphicon glyphicon-wrench" ng-click="goTo('playlist/', x.playlist_id)"></a></td>
           <td>Apero MrBiscotte</td>
-          <td>TB</td>
+          <td> {{ x.playlist_name }} </td>
         </tr>
       </tbody>
     </table>

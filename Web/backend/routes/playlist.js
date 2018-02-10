@@ -27,7 +27,6 @@ module.exports = function (app) {
                     where: {},
                     include: []
                 };
-
             if (typeof Options.where == "string") Options.where = JSON.parse(Options.where);
             if (typeof Options.limit == "string") Options.limit = parseInt(Options.limit);
             if (typeof Options.page == "string") Options.page = parseInt(Options.page);
@@ -35,8 +34,10 @@ module.exports = function (app) {
 
             Options.where = Options.where || {};
 
+
             // Add filters
             if (!S(Options.where.playlist_name).isEmpty()) query.where.playlist_name = {like:Options.where.playlist_name + '%'};
+            if (!S(Options.where.playlist_creator).isEmpty()) query.where.playlist_creator = {like:Options.where.playlist_creator};
 
             query.limit = Options.limit || null;
             query.offset = Options.limit ? Options.limit * ((Options.page || 1) - 1) : null;
@@ -92,7 +93,6 @@ module.exports = function (app) {
         ]),
         function (req, res) {
             var Record = req.body;
-            console.log(Record)
             if (!Record["playlist_id"])
                 return createRecord();
             return updateRecord();

@@ -25,17 +25,39 @@ define([
                   controller: 'NewPlaylistController'
                 })
                 .when('/playlist/:playlist_id', {
-                    templateUrl: '/partials/playlist/form',
-                    controller: 'SavePlaylistController'
+                  /*  templateUrl: '/partials/playlist/form',
+                    controller: 'SavePlaylistController'*/
+                    templateUrl: 'partials/playlist/admin',
+                    controller: 'AdminPlaylistController'
                 });
         }])
         .controller('PlaylistListController', [
             '$scope',
             '$location',
-            function ($scope, $location) {
-              $scope.goTo = function(where) {
-                return $location.url('/playlist/' + where);
+            "Restangular",
+            function ($scope, $location, Restangular) {
+              $scope.goTo = function(path, id) {
+                
+                return $location.url((path + id).toString());
               }
+
+              $scope.userPlaylist = []
+              Restangular.all('playlist').get('', {
+                  where: {
+                    playlist_creator: $scope.myself.usr_id
+                  }
+              }).then(function (result) {
+                for (var i = 0 ; i != result.length ; ++i) {
+                  $scope.userPlaylist.push(result[i])
+                }
+              });
+
+            }
+        ])
+        .controller('AdminPlaylistController', [
+            '$scope',
+            function ($scope) {
+              console.log("ketamine")
             }
         ])
         .controller('NewPlaylistController', [
