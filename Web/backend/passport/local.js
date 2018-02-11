@@ -178,14 +178,16 @@ module.exports = function (app, passport) {
                     'usr_id': account['usr_id'],
                     'atok_type': 'recovery'
                 }).then(function (recoveryToken) {
-                    console.log(recoveryToken);
                     console.log(email);
+                    console.log(app.mailer);
                     app.mailer.sendMail({
                         to: email,
                         subject: req.translate('system', '[ peersoundproject ] - lost password request'),
                         text: req.translate('mails/lostPasswordRequest', {
                             __LINK__: app.config.servers.self.baseURL + '/lostpassword/' + recoveryToken.atok_token
                         })
+                    }, function(err) {
+                      console.log(err);
                     });
 
                     res.json({
