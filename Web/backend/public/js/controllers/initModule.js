@@ -21,6 +21,11 @@ define([
 
                 $scope.myself = false;
 
+                $scope.searchResult = {
+                  type : "",
+                  result : [],
+                  count: 0
+                }
 
 
                 Restangular.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
@@ -81,29 +86,32 @@ define([
                     'usr_login': value
                   }
                 }).then(function(result) {
-                  console.log(result)
+                  $scope.redirectSearch(type, result)
                 })
               }
-
-
               $scope.searchPlaylist = function(type, value) {
-                  Restangular.one('playlist').get({where : {
-                    'playlist_name': value
-                  }
-                }).then(function(result) {
-                  console.log(result)
-                })
-              }
-
-
-              $scope.searchMusic = function(type, value) {
-                Restangular.one('music').get({where : {
-                  'music_name': value
+                Restangular.one('playlist').get({where : {
+                  'playlist_name': value
                 }
               }).then(function(result) {
-                console.log(result)
+                $scope.redirectSearch(type, result)
               })
             }
+            $scope.searchMusic = function(type, value) {
+              Restangular.one('music').get({where : {
+                'music_name': value
+              }
+            }).then(function(result) {
+              $scope.redirectSearch(type, result)
+            })
+          }
+
+          $scope.redirectSearch = function(type, result) {
+            $scope.searchResult.type = type,
+            $scope.searchResult.result = result
+            $scope.searchResult.count = result.length
+            $location.url('/result');
+          }
 
 
                 $scope.follow = function() {

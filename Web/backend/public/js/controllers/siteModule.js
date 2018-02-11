@@ -26,6 +26,10 @@ define([
                   templateUrl: '/partials/site/followed',
                   controller: 'FollowedController'
                 })
+                .when('/result', {
+                  templateUrl: '/partials/site/result',
+                  controller: 'ResultController'
+                })
                 .when('/follower', {
                     templateUrl: '/partials/site/follower',
                     controller: 'FollowerController'
@@ -53,6 +57,12 @@ define([
         .controller('DownloadController', [
             '$scope',
             function ($scope) {
+            }
+        ])
+        .controller('ResultController', [
+            '$scope',
+            function ($scope) {
+              console.log("page result ok")
             }
         ])
         .controller('FollowedController', [
