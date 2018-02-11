@@ -21,6 +21,8 @@ define([
 
                 $scope.myself = false;
 
+
+
                 Restangular.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
                     if (data.code == -2) {
                         $location.url('/login');
@@ -54,6 +56,15 @@ define([
                     $scope.myself = user;
                     $scope.follow()
                   };
+
+                  $scope.userQuery = function() {
+                      var type = document.getElementById("selectQuery").value
+                      var query = document.getElementById("search").value
+                      if (query)
+                      if (['all', 'playlist', 'user', 'music'].indexOf(type) >= 0) {
+                        console.log("Le type recherche " + query + " dans " + type)
+                      }
+                  }
 
                 $scope.follow = function() {
                 if ($scope.myself.usr_id)

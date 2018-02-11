@@ -24,6 +24,10 @@ define([
                   templateUrl : 'partials/playlist/new',
                   controller: 'NewPlaylistController'
                 })
+                .when('/unknowPlaylist', {
+                  templateUrl: '/partials/playlist/unknowPlaylist',
+                  controller: 'UnknowPlaylistController'
+                })
                 .when('/playlist/:playlist_id', {
                   /*  templateUrl: '/partials/playlist/form',
                     controller: 'SavePlaylistController'*/
@@ -31,6 +35,11 @@ define([
                     controller: 'AdminPlaylistController'
                 });
         }])
+        .controller('UnknowPlaylistController', [
+            '$scope',
+            function ($scope) {
+            }
+        ])
         .controller('PlaylistListController', [
             '$scope',
             '$location',
@@ -58,9 +67,19 @@ define([
             'Restangular',
             '$routeParams',
             '$route',
-            function ($scope, Restangular, $routeParams, $route) {
+            '$location',
+            function ($scope, Restangular, $routeParams, $route, $location) {
               $scope.playlist_id = $routeParams.playlist_id;
 
+              Restangular.one('playlist', $scope.playlist_id).get().then(function(result){
+                if (result.code == 1) {
+                $location.url('/unknowPlaylist');
+                }
+                $scope.playlist = result.Playlist
+                console.log($scope.playlist.playlist_creator)
+                if ($scope.playlist.playlist_creator != $scope.myself.usr_id)
+                  console.log("tu n'a pas le droit :/")
+              })
 
 
               $scope.followersId = [] //Id de tous les followers
@@ -254,7 +273,7 @@ define([
                     $scope.Playlist.isNew = false;
 
                     Restangular.one('playlist', playlist_id).get().then(function(result) {
-                        if (result.code != 0) return $location.url('/playlist');
+                        if (result.code != 0) return $location.url('/unknowPlaylist');
 
                         $scope.Playlist = result.Playlist;
                     });

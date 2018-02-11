@@ -1,27 +1,28 @@
 <center><h2>La page playlist</h2></center>
 
-<center><h4> Créer une nouvelle playlist</h4></center>
-<div>
-<form name="newPlaylist" ng-submit="savePlaylist()">
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input type="text" ng-model="playlist.playlist_name" class="form-control" required>
+<center><h4> Créer une nouvelle playlist</h4>
+  <div>
+    <form name="newPlaylist" ng-submit="savePlaylist()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" ng-model="playlist.playlist_name" class="form-control" style="width:50%;" required>
+      </div>
+      <div class="form-group">
+        <label for="style">Style</label>
+        <input type="text" ng-model="playlist.playlist_style" style="width:50%;" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" ng-model="playlist.playlist_description" style="width:50%;" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="comment">Commentaire</label>
+        <input type="text" ng-model="playlist.playlist_comment" style="width:50%;" class="form-control" required>
+      </div>
+      <button type="submit" style="margin-top:5%" class="btn btn-success">Submit</button>
+    </form>
+    <div ng-if="playlistCreated === true">
+      <h3> Playlist created :)</h3>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="style">Style</label>
-    <input type="text" ng-model="playlist.playlist_style " class="form-control" required>
-  </div>
-  <div class="form-group">
-    <label for="description">Description</label>
-    <input type="text" ng-model="playlist.playlist_description" class="form-control" required>
-  </div>
-  <div class="form-group">
-    <label for="comment">Commentaire</label>
-    <input type="text" ng-model="playlist.playlist_comment" class="form-control" required>
-  </div>
-  <button type="submit"  class="btn btn-success">Submit</button>
-</form>
-<div ng-if="playlistCreated === true">
-  <center><h3> Playlist created :)</h3></center>
-</div>
-</div>
+  <center>

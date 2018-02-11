@@ -84,9 +84,15 @@
             <form role="search" name="searchform" method="get">
               <div class="form-group" id="searchthis">
                 <div class="input-group">
-                  <input id="search" type="text" placeholder="recherche" name="s" class="form-control left-rounded">
+                  <input id="search" type="text" style="width:80%" placeholder="recherche" name="s" class="form-control left-rounded" required>
+                  <select id="selectQuery">
+                    <option selected="selected" value="all">All</option>
+                    <option value="playlist">Playlist</option>
+                    <option value="music">Music</option>
+                    <option value="user">User</option>
+                  </select>
                   <div class="input-group-btn">
-                    <button id="search-btn" type="submit" class="btn btn-inverse"><img id="seek" src="/img/seek.jpg"></button>
+                    <button id="search-btn" type="submit" ng-click="userQuery()" class="btn btn-inverse"><img id="seek" src="/img/seek.jpg"></button>
                   </div>
                 </div>
               </div>
