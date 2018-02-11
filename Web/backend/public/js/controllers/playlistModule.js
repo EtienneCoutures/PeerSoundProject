@@ -127,7 +127,6 @@ define([
                 })
               })
 
-
               $scope.removeUserToPlaylist = function(usr) {
                 var sub = {}
                 sub.usr_id = usr.usr_id

@@ -60,11 +60,51 @@ define([
                   $scope.userQuery = function() {
                       var type = document.getElementById("selectQuery").value
                       var query = document.getElementById("search").value
-                      if (query)
-                      if (['all', 'playlist', 'user', 'music'].indexOf(type) >= 0) {
-                        console.log("Le type recherche " + query + " dans " + type)
+                      if (query) {
+                        if (['all', 'playlist', 'user', 'music'].indexOf(type) >= 0) {
+                          console.log("Le type recherche " + query + " dans " + type)
+                          $scope.searchIn(type, query)
+                        }
                       }
                   }
+
+                  $scope.searchIn = function(type, value) {
+                    if (type == "user") $scope.searchUser(type, value)
+                    else if (type == "playlist") $scope.searchPlaylist(type, value)
+                    else if (type == "music") $scope.searchMusic(type, value)
+                    else console.log("En construction")
+                  }
+
+                /* searching fnct */
+                $scope.searchUser = function(type, value) {
+                  Restangular.one('user').get({where : {
+                    'usr_login': value
+                  }
+                }).then(function(result) {
+                  console.log(result)
+                })
+              }
+
+
+              $scope.searchPlaylist = function(type, value) {
+                  Restangular.one('playlist').get({where : {
+                    'playlist_name': value
+                  }
+                }).then(function(result) {
+                  console.log(result)
+                })
+              }
+
+
+              $scope.searchMusic = function(type, value) {
+                Restangular.one('music').get({where : {
+                  'music_name': value
+                }
+              }).then(function(result) {
+                console.log(result)
+              })
+            }
+
 
                 $scope.follow = function() {
                 if ($scope.myself.usr_id)
