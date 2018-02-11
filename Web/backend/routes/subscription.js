@@ -71,4 +71,71 @@ router.post('/',
             }
         }
     });
+
+    router.get('/',
+        app.requirePermission([
+            ['allow', {
+                users:['@']
+            }],
+            ['deny', {
+                users:'*'
+            }]
+        ]),
+        function (req, res) {
+            var Options = req.query,
+                query = {
+                    where: {},
+                    include: []
+                };
+                console.log("get/sub")
+            if (typeof Options.where == "string") Options.where = JSON.parse(Options.where);
+            if (typeof Options.limit == "string") Options.limit = parseInt(Options.limit);
+            if (typeof Options.page == "string") Options.page = parseInt(Options.page);
+            if (typeof Options.sort == "string") Options.sort = JSON.parse(Options.sort);
+
+            Options.where = Options.where || {};
+
+            // Add filters
+            if (!S(Options.where.usr_id).isEmpty()) query.where.usr_id = {like:Options.where.usr_id};
+            if (!S(Options.where.playlist_id).isEmpty()) query.where.playlist_id = {like:Options.where.playlist_id};
+
+            query.limit = Options.limit || null;
+            query.offset = Options.limit ? Options.limit * ((Options.page || 1) - 1) : null;
+            query.order = (Options.sort && Options.sort.field) ? (Options.sort.field + (Options.sort.asc ? ' ASC' : ' DESC')) : 'sub_id';
+
+            app.models["Subscription"].findAndCountAll(query).then(function (result) {
+                if (!Options.limit) return res.json(result.rows);
+                res.json(result);
+            });
+        });
+
+
+        router.delete('/',
+            app.requirePermission([
+                ['allow', {
+                    users:['@']
+                }],
+                ['deny', {
+                    users:'*'
+                }]
+            ]),
+            function (req, res) {
+              console.log(req.query) //ptete falloir changer ca c'est vrmt pas secur
+                app.models["Subscription"].find({
+                    "where":{
+                        "usr_id": req.query.usr_id,
+                        "playlist_id": req.query.pl_id
+                    }
+                }).then(function(record) {
+                    if (record) {
+                        record.destroy();
+                    }
+
+                    res.json({
+                        code: 0,
+                        message: req.translate('system', '__MODEL__ successfully deleted', {__MODEL__: 'Music'})
+                    });
+                });
+            });
+
 };

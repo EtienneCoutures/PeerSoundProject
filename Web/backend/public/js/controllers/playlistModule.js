@@ -57,27 +57,73 @@ define([
             '$scope',
             'Restangular',
             '$routeParams',
-            function ($scope, Restangular, $routeParams ) {
+            '$route',
+            function ($scope, Restangular, $routeParams, $route) {
               $scope.playlist_id = $routeParams.playlist_id;
-              $scope.followersId = []
-              $scope.followers = []
 
-              Restangular.all('follow').get('', {
+              $scope.followersId = [] //Id de tous les followers
+              $scope.followers = [] //id des followers pas inscrit a la playlist (nom a changer)
+              $scope.subscribed = [] //Id de tous les subscribers de la playlist
+              $scope.subscribedId  = [] //Id des followers deja inscrit a la playlist
+              $scope.subscribedUser = [] //Id des Users inscrit a la playlist
+
+              // va falloir refacto
+
+              Restangular.all('subscription').get('', {
                 where : {
-                  followed_usr_id: $scope.myself.usr_id
+                  playlist_id : $scope.playlist_id
                 }
-              }).then(function(result) {
-                for (var i = 0 ; i != result.length ; ++ i) {
-                  $scope.followersId.push(result[i].follower_usr_id)
+              }).then(function(sub) {
+                for (var i = 0 ; i != sub.length ; ++i ){
+                  $scope.subscribed.push(sub[i])
                 }
+                Restangular.all('follow').get('', {
+                  where : {
+                    followed_usr_id: $scope.myself.usr_id //choppe mes followers
+                  }
+                }).then(function(result) {
 
-              }).then(function() {
-                for (var i = 0 ; i != $scope.followersId.length ; ++i) {
-                  Restangular.one('user/' + $scope.followersId[i]).get().then(function(act_user){
-                    $scope.followers.push(act_user.User)
-                  })
-                }
+                  for (var i = 0 ; i != result.length ; ++ i) {
+                    if ($scope.subscribed.find(x => x.usr_id === result[i].follower_usr_id)) {
+                      console.log(result[i].follower_usr_id + " est deja abonné")
+                      $scope.subscribedId.push(result[i].follower_usr_id)
+                    }//si il suit deja la playlist
+                    else {
+                      $scope.followersId.push(result[i].follower_usr_id)
+                    } //si il la suit pas
+                  }
+                }).then(function() {
+                  for (var i = 0 ; i != $scope.followersId.length ; ++i) {
+                    Restangular.one('user/' + $scope.followersId[i]).get().then(function(act_user){ //recupére lobjet user de mes followers
+                      $scope.followers.push(act_user.User)
+                    })
+                  }
+                  for (var i = 0 ; i != $scope.subscribedId.length ; ++i) {
+                    Restangular.one('user/' + $scope.subscribedId[i]).get().then(function(act_user){ //recupére lobjet user de mes followers
+                      $scope.subscribedUser.push(act_user.User)
+                    })
+                  }
+                })
               })
+
+
+              $scope.removeUserToPlaylist = function(usr) {
+                var sub = {}
+                sub.usr_id = usr.usr_id
+                sub.playlist_id = $scope.playlist_id
+
+                Restangular.all('subscription').remove({
+                    "sender_id" : $scope.myself.usr_id,//useless mais ca pourrait servir plus tard
+                    "usr_id": usr.usr_id,
+                    "pl_id": $scope.playlist_id
+                   }).then(function(result) {
+                  if (result.code == 0)  {
+                    $route.reload()
+                  }
+                    $scope.errors = result.errors;
+                    $scope.querying = false;
+                });
+              }
 
               $scope.addUserToPlaylist = function(usr) {
                 var sub = {}
@@ -86,9 +132,9 @@ define([
 
                 Restangular.all('subscription').post(sub).then(function(result) {
                   if (result.code == 0)  {
+                    $route.reload()
                   console.log("crée")
                   }
-                  console.log(result.errors)
                     $scope.errors = result.errors;
                     $scope.querying = false;
                 });
