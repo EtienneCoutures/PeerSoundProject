@@ -61,6 +61,8 @@ define([
             function ($scope, Restangular, $routeParams, $route) {
               $scope.playlist_id = $routeParams.playlist_id;
 
+
+
               $scope.followersId = [] //Id de tous les followers
               $scope.followers = [] //id des followers pas inscrit a la playlist (nom a changer)
               $scope.subscribed = [] //Id de tous les subscribers de la playlist
@@ -111,6 +113,8 @@ define([
                 var sub = {}
                 sub.usr_id = usr.usr_id
                 sub.playlist_id = $scope.playlist_id
+
+
 
                 Restangular.all('subscription').remove({
                     "sender_id" : $scope.myself.usr_id,//useless mais ca pourrait servir plus tard

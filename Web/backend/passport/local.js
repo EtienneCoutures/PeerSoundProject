@@ -73,9 +73,13 @@ module.exports = function (app, passport) {
                 if (!validator.isEmail(username)) {
                     return done(null, false, req.flash('message', 'Email input is not valid email adress.'));
                 }
+                var n = username.indexOf('@');
+                var login = username.substring(0, n != -1 ? n : username.length);
+
                 account = app.models['User'].build({
                     'usr_email' : username,
-                    'usr_password' : password
+                    'usr_password' : password,
+                    'usr_login': login
                 });
 
                 account.save().then(function(account) {
