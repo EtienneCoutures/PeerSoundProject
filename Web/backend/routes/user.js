@@ -37,6 +37,7 @@ module.exports = function (app) {
             Options.where = Options.where || {};
 
             // Add filters
+            if (!S(Options.where.usr_id).isEmpty()) query.where.usr_id = {like:Options.where.usr_id};
             if (!S(Options.where.usr_firstname).isEmpty()) query.where.usr_firstname = {like:Options.where.usr_firstname + '%'};
             if (!S(Options.where.usr_lastname).isEmpty()) query.where.usr_lastname = {like:Options.where.usr_lastname + '%'};
             if (!S(Options.where.usr_role).isEmpty()) query.where.usr_role = Options.where.usr_role;
@@ -69,18 +70,62 @@ module.exports = function (app) {
                 },
                 include: []
             };
+            console.log("c'est la bonne fonction")
             app.models["User"].findOne(query).then(function (result) {
                 if (!result) {
                     return res.json({
                         code: 1
                     });
                 }
+              //penser a return result.dataValues, c'est completement con de return un array sur un findOne
                 res.json({
                     "code": 0,
                     "User": result
                 });
             });
         });
+
+        router.get('/:name',
+            function (req, res) {
+              console.log("merde")
+                var query = {
+                    where: {
+                        "usr_login": req.params.name
+                    },
+                    include: []
+                };
+                app.models["User"].findOne(query).then(function (result) {
+                    if (!result) {
+                        return res.json({
+                            code: 1
+                        });
+                    }
+                    res.json({
+                        "code": 0,
+                        "User": result
+                    });
+                });
+            });
+
+        /*router.post('/fileupload', {
+          var form = new formidable.IncomingForm();
+          form.parse(req, function (err, fields, files) {
+            res.write('File uploaded');
+            console.log("zizi")
+            res.end();
+          };*/
+          router.post('/fileupload',
+              app.requirePermission([
+                  ['allow', {
+                      users:['@']
+                  }],
+                  ['deny', {
+                      users:'*'
+                  }]
+              ]),
+              function (req, res) {
+                console.log("t'es con")
+              });
 
     // Create / Update a User
     router.post('/',
@@ -220,7 +265,6 @@ module.exports = function (app) {
                     if (!S(Record.usr_role).isEmpty()) record.usr_role = Record.usr_role;
                     if (!S(Record.usr_status).isEmpty()) record.usr_status = Record.usr_status;
                     if (!S(Record.usr_image).isEmpty()) record.usr_image = Record.usr_image;
-
                     record.save().then(function (record) {
                         reply(null, record);
                     }).catch(function (err) {

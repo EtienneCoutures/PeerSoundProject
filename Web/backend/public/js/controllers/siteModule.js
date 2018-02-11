@@ -22,14 +22,32 @@ define([
                     templateUrl: '/partials/site/fav',
                     controller: 'FavController'
                 })
-                .when('/friend', {
-                    templateUrl: '/partials/site/friend',
-                    controller: 'FriendController'
+                .when('/followed',{
+                  templateUrl: '/partials/site/followed',
+                  controller: 'FollowedController'
+                })
+                .when('/follower', {
+                    templateUrl: '/partials/site/follower',
+                    controller: 'FollowerController'
                 });
         }])
         .controller('SiteController', [
             '$scope',
-            function ($scope) {
+            'Restangular',
+            '$location',
+            function ($scope, Restangular, $location) {
+
+              Restangular.one("follow/followerNb/", $scope.myself.usr_id).get().then(function(result) {
+                $scope.nbFollowers = result.count;
+              });
+
+              /*$scope.redirectToUser = function(name) {
+                Restangular.one('user/', name).get().then(function(result) {
+                  if (result.User.usr_id == $scope.myself.id)
+                    return $location.url('/myself')
+                  return $location.url('/user/' + result.User.usr_id)
+                });
+              }*/
             }
         ])
         .controller('DownloadController', [
@@ -37,9 +55,56 @@ define([
             function ($scope) {
             }
         ])
-        .controller('FriendController', [
+        .controller('FollowedController', [
             '$scope',
-            function ($scope) {
+            'Restangular',
+            function ($scope, Restangular) {
+
+              $scope.users = []
+
+              $scope.getUsers = function() {
+                for (var i = 0 ; i < $scope.followerList.length ; ++i) {
+                    Restangular.one("user/", $scope.followerList[i].followed_usr_id).get().then(function(result) {
+                        $scope.users.push(result.User)
+                    });
+                };
+                console.log($scope.users)
+              };
+
+              Restangular.one("follow/follower/", $scope.myself.usr_id).get().then(function(result) {
+                  $scope.followerNb = result.count;
+                  $scope.followerList = result.rows
+                  $scope.getUsers()
+              })
+
+
+
+            }
+        ])
+        .controller('FollowerController', [
+            '$scope',
+            'Restangular',
+            function ($scope, Restangular) {
+
+              $scope.users = []
+
+              $scope.getUsers = function() {
+                for (var i = 0 ; i < $scope.followerList.length ; ++i) {
+                    Restangular.one("user/", $scope.followerList[i].follower_usr_id).get().then(function(result) {
+                        $scope.users.push(result.User)
+                    });
+                };
+                console.log($scope.users)
+              };
+
+              Restangular.one("follow/followed/", $scope.myself.usr_id).get().then(function(result) {
+                  $scope.followerNb = result.count;
+                  $scope.followerList = result.rows
+                  $scope.getUsers()
+              })
+
+
+
             }
         ])
         .controller('FavController', [

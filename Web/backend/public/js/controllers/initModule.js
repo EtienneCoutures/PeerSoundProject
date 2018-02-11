@@ -21,12 +21,22 @@ define([
 
                 $scope.myself = false;
 
+
+
                 Restangular.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
                     if (data.code == -2) {
                         $location.url('/login');
                     }
                     return data;
                 });
+
+                $scope.redirectToUser = function(name) {
+                  Restangular.one('user/', name).get().then(function(result) {
+                    if (result.User.usr_id == $scope.myself.id)
+                      return $location.url('/myself')
+                    return $location.url('/user/' + result.User.usr_id)
+                  });
+                }
 
                 $scope.$on('$routeChangeStart', function() {
                     if (!$scope.myself && $location.path() != '/login') {
@@ -44,7 +54,29 @@ define([
 
                 $scope.login = function(user) {
                     $scope.myself = user;
-                };
+                    $scope.follow()
+                  };
+
+                  $scope.userQuery = function() {
+                      var type = document.getElementById("selectQuery").value
+                      var query = document.getElementById("search").value
+                      if (query)
+                      if (['all', 'playlist', 'user', 'music'].indexOf(type) >= 0) {
+                        console.log("Le type recherche " + query + " dans " + type)
+                      }
+                  }
+
+                $scope.follow = function() {
+                if ($scope.myself.usr_id)
+                {
+                  Restangular.one("follow/followerNb/", $scope.myself.usr_id).get().then(function(result) {
+                    $scope.nbFollowed = result.count;
+                  });
+                  Restangular.one("follow/followedNb/", $scope.myself.usr_id).get().then(function(result) {
+                    $scope.nbFollowers = result.count;
+                  });
+                }
+              }
 
                 $scope.logout = function() {
                     $scope.myself = null;

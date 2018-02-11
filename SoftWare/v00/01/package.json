@@ -1,0 +1,30 @@
+{
+  "name": "PSP_software",
+  "version": "1.0.0",
+  "description": "The Software of the PSP",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/EtienneCoutures/PeerSoundProject",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "PSP",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^1.4.1",
+    "electron-rebuild": "^1.5.7"
+  },
+  "dependencies": {
+    "electron-rebuild": "^1.5.7",
+    "electron-settings": "^2.2.2",
+    "jquery": "^3.1.1",
+    "riot": "^3.3.1",
+    "sqlite3": "^3.1.8"
+  }
+}

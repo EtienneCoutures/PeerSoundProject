@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script>if (typeof module === 'object') {window.module = module;
+       module = undefined;}</script>
+    <script src="../js/jquery/jquery-3.2.1.min.js"></script>
+    <script src="../js/tether-1.3.3/tether.js"></script>
+    <script src="../js/bootstrap/bootstrap.js"></script>
+    <script>if (window.module) module = window.module;</script>
+
+    <link rel="stylesheet" type="text/css" href="../css/PSP/PSP.css">
+    <link rel="stylesheet" type="text/css" href="../css/PSP/disc.css">
+    <link rel="stylesheet" type="text/css" href="../css/tether-1.3.3/tether.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap/bootstrap.css">
+
+    <script src="../js/riotJS/riot.js"></script>
+    <script src="../js/riotJS/riot+compiler.js"></script>
+
+    <script type="riot/tag" src="../riotTag/user.tag"></script>
+    <script type="riot/tag" src="../riotTag/music.tag"></script>
+    <script type="riot/tag" src="../riotTag/message.tag"></script>
+    <script type="riot/tag" src="../riotTag/menubar.tag"></script>
+    <script type="riot/tag" src="../riotTag/playlist.tag"></script>
+    <script type="riot/tag" src="../riotTag/socialBtn.tag"></script>
+    <script type="riot/tag" src="../riotTag/riotPanel.tag"></script>
+    <script type="riot/tag" src="../riotTag/separator.tag"></script>
+    <script type="riot/tag" src="../riotTag/inputChat.tag"></script>
+    <script type="riot/tag" src="../riotTag/mediaplayer.tag"></script>
+    <script type="riot/tag" src="../riotTag/addPlaylist.tag"></script>
+
+    <title>PSP Software</title>
+  </head>
+
+  <body style="margin: 0px;padding-left: 0px;padding-right: 0px;">
+
+    <div class="container-fluid p-0">
+
+      <div class="row no-gutter" style="height:100vh;">
+
+        <!-- playlists -->
+        <div class="col-md-1">
+          <riotPanel id="playlistPanel"></riotPanel>
+          <!--<addPlaylist></addPlaylist>
+          <riotPanel id="addPlaylist"></riotPanel>-->
+        </div>
+
+          <!-- musics -->
+          <div class="col-md-2">
+
+            <div class="menubar">
+              <riotPanel id="menubar"></riotPanel>
+            </div>
+
+            <div style="height:90%">
+              <riotPanel id="musicPanel"></riotPanel>
+            </div>
+
+            <div class="menubar"></div>
+
+          </div>
+
+          <!-- middle panel -->
+          <div class="col-md-7">
+
+            <div class="menubar"></div>
+
+            <div style="height:95%">
+
+              <!-- social -->
+              <div style="height:70%">
+                <riotPanel id="messages"></riotPanel>
+                <riotPanel id="inputChat"></riotPanel>
+              </div>
+
+              <!-- lecteur media -->
+              <div style="height:30%">
+                <riotPanel id="mediaplayer"></riotPanel>
+              </div>
+
+           </div>
+
+         </div>
+          <!-- users -->
+          <div class="col-md-2">
+
+            <div class="menubar">
+            </div>
+
+            <div style="height:95%">
+              <riotPanel id="users"></riotPanel>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+  <script>
+
+  this.currentPlaylist = "playlist1";
+
+  var addPlaylist = [{element : "addPlaylist", param : {name : "addPlaylist"}}];
+
+  var menubar = [{element : "menubar", param : { currentPlaylist : {name : "playlist1", id : '1'
+  , image : "../images/hardcore2.jpg"}}}];
+
+  var playlists = [
+                  {element : "socialbtn", param : {}}
+                , {element : "separator", param : {}}
+                , {element : "playlist", param : {name : "playlist1", id : '1'
+                  , image : "../images/hardcore2.jpg"}}
+                , {element : "playlist", param : {name : "playlist2", id : '2'
+                  , image : "../images/angerfist.jpg"}}
+                , {element : "playlist", param : {name : "playlist3", id : '3'
+                  , image : "../images/lsd.jpg"}}
+                , {element : "playlist", param : {name : "playlist4", id : '4'
+                  , image : "../images/acidcore.jpg"}}
+                , {element : "addplaylist", param : {name : "addPlaylist"}}
+                ];
+
+  var musics = [{element : "music", param : {name : "music1", id : '1'}}
+                , {element : "music", param : {name : "music2", id : '2'}}
+                , {element : "music", param : {name : "music3", id : '3'}}
+                , {element : "music", param : {name : "music4", id : '4'}}
+                , {element : "music", param : {name : "music5", id : '5'}}
+                , {element : "music", param : {name : "music6", id : '6'}}
+                , {element : "music", param : {name : "music7", id : '7'}}
+                , {element : "music", param : {name : "music8", id : '8'}}
+                ];
+
+  var messages = [
+  , {element : "message", param : {user : "toto", content : "hello", id : '1'}}
+  , {element : "message", param : {user : "titi", content : "hey :)", id : '2'}}
+  ]
+
+  var mediaplayer = [{element : "mediaplayer", param : {}}];
+
+  var inputChat = [{element : "inputchat"}];
+
+  var users = [{element : "user", param : {name : "KETAMAX"
+              , image : "../images/hardcore2.jpg", status : "online"}}
+              , {element : "user", param : {name : "ITIZ"
+              , image : "../images/angerfist.jpg", status : "afk"}}];
+
+  riot.mount('#playlistPanel', {elements : playlists, name : "my playlists"
+  , color : '#212326', borders : ["", "", "", ""]});
+  riot.mount('#musicPanel', {elements : musics, name : "music panel"
+  , borders : ["", "", "", ""]});
+  //riot.mount('#messages', {elements : messages, name : "message panel"});
+  //riot.mount('#mediaplayer', {elements : mediaplayer, name : "mediaplayer"});
+  riot.mount('#users', {elements : users, name : "users"
+  , borders : ["", "", "", ""]});
+  riot.mount('#menubar', {elements : menubar, name : "menubar", color : '#363636'
+  , borders : ["", "", "", ""]});
+  //riot.mount('#inputChat', {elements : inputChat});
+
+  </script>
+</body>
+</html>

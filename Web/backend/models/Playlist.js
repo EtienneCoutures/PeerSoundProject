@@ -14,7 +14,6 @@
                  type: Sequelize.INTEGER,
                  primaryKey: true,
                  autoIncrement: true,
-                 defaultValue: 0,
                  validate: {
                  }
              },
@@ -32,7 +31,6 @@
              },
              playlist_description: {
                  type: Sequelize.TEXT,
-                 defaultValue: "",
                  validate: {
                  }
              },

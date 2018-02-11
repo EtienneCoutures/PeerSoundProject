@@ -14,7 +14,6 @@ module.exports = function (app) {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
-                defaultValue: 0,
                 validate: {
                 }
             },
@@ -26,7 +25,6 @@ module.exports = function (app) {
             },
             music_description: {
                 type: Sequelize.TEXT,
-                defaultValue: "",
                 validate: {
                 }
             },
@@ -56,25 +54,22 @@ module.exports = function (app) {
             },
             music_source: {
                 type: Sequelize.ENUM('youtube','spotify','deezer', 'soundcloud', 'else'),
-                defaultValue: "",
+                defaultValue: "youtube",
                 validate: {
                 }
             },
             music_group: {
               type: Sequelize.TEXT,
-              defaultValue: "",
               validate: {
               }
             },
-            music_url: {
+            url: {
               type: Sequelize.TEXT,
-              defaultValue: "",
               validate: {
               }
             },
             music_date: {
               type: Sequelize.TEXT,
-              defaultValue: "",
               validate: {
               }
             },

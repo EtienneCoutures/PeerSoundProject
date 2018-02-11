@@ -17,8 +17,16 @@ define([
                     controller: 'UserController'
                 })
                 .when('/user/:usr_id', {
-                    templateUrl: '/partials/user/form',
-                    controller: 'SaveUserController'
+                    templateUrl: '/partials/user/user',
+                    controller: 'SeeUserController'
+                })
+                .when('/unknowUser', {
+                  templateUrl: '/partials/user/unknowUser',
+                  controller: 'UnknowUserController'
+                })
+                .when('/myself', {
+                  templateUrl: '/partials/user/form',
+                  controller: 'SaveUserController'
                 });
         }])
         .controller('UserController', [
@@ -30,6 +38,8 @@ define([
                 var query = $location.search(),
                     pending = !!query.pending;
                 $translatePartialLoader.addPart('user');
+
+
 
                 $scope.UserColumns = [{
                     field: 'usr_login',
@@ -89,6 +99,58 @@ define([
                 };
             }
         ])
+        .controller('SeeUserController', [
+            '$scope',
+            '$routeParams',
+            '$location',
+            'Restangular',
+            function ($scope, $routeParams, $location, Restangular) {
+              var id = $routeParams.usr_id;
+              if (id == $scope.myself.usr_id) {
+                return $location.url('/myself'); }
+
+                Restangular.one('user', id).get().then(function(result){
+                  console.log(result)
+                  if (result.code == 1) {
+                  $location.url('/unknowUser');
+                  }
+                    $scope.user_login = result.User.usr_login;
+                })
+
+
+
+                $scope.isFollowed = function() {
+                  Restangular.one('/follow/me/', id, $scope.myself.usr_id).get({"id": id, "me": $scope.myself.usr_id}).then(function(result) {
+                    if (result.followed > 0) {
+                      $scope.follow_date = result.date;
+                      $scope.followed = true;
+                  }
+                    else {
+                      $scope.followed = false
+                    }
+                  })
+                }
+
+
+                $scope.Follow = function() {
+                  Restangular.all("/follow/" + id + "/" + $scope.myself.usr_id).post().then(function(result) {
+                      if (result.code == 0) {$scope.followed = true}
+                  })
+                }
+
+                $scope.unFollow = function() {
+                  Restangular.one('/follow/delete').get({"id": id, "me": $scope.myself.usr_id}).then(function(result) {
+                      if (result.code == 0) {$scope.followed = false}
+                  })
+                }
+
+
+            }])
+            .controller('UnknowUserController', [
+                '$scope',
+                function ($scope) {
+                }
+            ])
         .controller('SaveUserController', [
             '$scope',
             '$translatePartialLoader',
@@ -97,7 +159,7 @@ define([
             'Restangular',
             '$translate',
             function ($scope, $translatePartialLoader, $location, $routeParams, Restangular, $translate) {
-                var usr_id = $routeParams.usr_id;
+                var usr_id = $scope.myself.usr_id;
                 $translatePartialLoader.addPart('user');
 
                 $scope.User = {

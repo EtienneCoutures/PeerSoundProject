@@ -66,16 +66,21 @@ module.exports = function (app, passport) {
                     'usr_email': username
                 }
             }).then(function (account) {
-              console.log(account);
                 if (account) {
                     return done(null, false, req.flash('message', req.translate('system', 'Account with same username already exist.')));
                 }
                 if (!validator.isEmail(username)) {
                     return done(null, false, req.flash('message', 'Email input is not valid email adress.'));
                 }
+
+                //set le login par default a mail - @
+                var n = username.indexOf('@');
+                var login = username.substring(0, n != -1 ? n : username.length);
+
                 account = app.models['User'].build({
                     'usr_email' : username,
-                    'usr_password' : password
+                    'usr_password' : password,
+                    'usr_login': login
                 });
 
                 account.save().then(function(account) {

@@ -33,6 +33,7 @@ define([
         appDependencies.push(i);
     });
 
+
     angular.module('MyApp', appDependencies)
         .config(['RestangularProvider', function(RestangularProvider) {
             RestangularProvider.setBaseUrl('/api');
@@ -88,7 +89,7 @@ define([
                 }
             };
         })
-        .directive('googleMap', ['$timeout', '$cookies', function($timeout, $cookies) {
+        /*.directive('googleMap', ['$timeout', '$cookies', function($timeout, $cookies) {
             return {
                 restrict: 'A',
                 scope: {
@@ -117,7 +118,7 @@ define([
                     });
                 }
             };
-        }])
+        }])*/
         .run(function($rootScope, $translate) {
             $rootScope.$on('$translatePartialLoaderStructureChanged', function() {
                 $translate.refresh();
