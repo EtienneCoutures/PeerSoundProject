@@ -45,8 +45,6 @@ define([
             '$location',
             "Restangular",
             function ($scope, $location, Restangular) {
-            
-
               $scope.userPlaylist = []
               Restangular.all('playlist').get('', {
                   where: {
