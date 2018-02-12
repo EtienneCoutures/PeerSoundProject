@@ -20,15 +20,23 @@ module.exports = function (app) {
       },
       followed_usr_id: {
           type: Sequelize.INTEGER,
-          defaultValue: 0,
-          validate: {
+          references : {
+            model: 'User',
+            key: 'usr_id'
           }
+          //defaultValue: 0,
+          //validate: {
+          //}
       },
       follower_usr_id: {
           type: Sequelize.INTEGER,
-          defaultValue: 0,
-          validate: {
+          references : {
+            model: 'User',
+            key: 'usr_id'
           }
+          /*defaultValue: 0,
+          validate: {
+          }*/
       }
     };
     app.models.Follow = sequelize.define('Follow', schema, {
@@ -40,5 +48,17 @@ module.exports = function (app) {
         tableName: 'follow'
     });
   }
+  /*app.models.Follow.hasOne(app.models.User, {
+    foreignKey: {
+      name: 'usr_id',
+      allowNull: false
+    }
+  })
+  app.models.Follow.hasOne(app.models.User, {
+    foreignKey: {
+      name: 'usr_id',
+      allowNull: false
+    }
+  })*/
   sequelize.sync();
 };

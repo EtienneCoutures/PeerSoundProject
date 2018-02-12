@@ -41,5 +41,4 @@ module.exports = function (app) {
     });
   }
   sequelize.sync();
-  console.log("sub ok")
 };

@@ -19,7 +19,11 @@ module.exports = function (app) {
                 type: Sequelize.STRING(255)
             },
             'usr_id': {
-                type: Sequelize.INTEGER(11)
+                type: Sequelize.INTEGER,
+                references : {
+                  model: 'User',
+                  key: 'usr_id'
+                }
             },
             'atok_type': {
                 type: Sequelize.ENUM('access', 'recovery'),
@@ -58,4 +62,4 @@ module.exports = function (app) {
             logger.error(err);
         });
     }
-};
+  };
