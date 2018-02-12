@@ -62,7 +62,12 @@ define([
         .controller('ResultController', [
             '$scope',
             function ($scope) {
-              console.log("page result ok")
+              $scope.result = $scope.searchResult
+
+
+              console.log($scope.result)
+              for (var member in $scope.searchResult) delete $scope.searchResult[member];
+                console.log($scope.result.type)
             }
         ])
         .controller('FollowedController', [
