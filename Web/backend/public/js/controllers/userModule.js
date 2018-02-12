@@ -110,7 +110,6 @@ define([
                 return $location.url('/myself'); }
 
                 Restangular.one('user', id).get().then(function(result){
-                  console.log(result)
                   if (result.code == 1) {
                   $location.url('/unknowUser');
                   }
@@ -120,11 +119,16 @@ define([
 
 
                 $scope.isFollowed = function() {
-                  Restangular.one('/follow/me/', id, $scope.myself.usr_id).get({"id": id, "me": $scope.myself.usr_id}).then(function(result) {
-                    if (result.followed > 0) {
+                  Restangular.one('follow').get({
+                    where :{
+                      "followed_usr_id": id,
+                      "follower_usr_id": $scope.myself.usr_id
+                    }
+                  }).then(function(result) {
+                    if (result.length  > 0) {
                       $scope.follow_date = result.date;
                       $scope.followed = true;
-                  }
+                    }
                     else {
                       $scope.followed = false
                     }
@@ -133,15 +137,28 @@ define([
 
 
                 $scope.Follow = function() {
-                  Restangular.all("/follow/" + id + "/" + $scope.myself.usr_id).post().then(function(result) {
+                  Restangular.all("/follow"/* + id + "/" + $scope.myself.usr_id*/).post({
+                      follower_usr_id : $scope.myself.usr_id,
+                      followed_usr_id : id
+                  }).then(function(result) {
                       if (result.code == 0) {$scope.followed = true}
                   })
                 }
 
                 $scope.unFollow = function() {
-                  Restangular.one('/follow/delete').get({"id": id, "me": $scope.myself.usr_id}).then(function(result) {
-                      if (result.code == 0) {$scope.followed = false}
-                  })
+
+
+
+                  Restangular.one('follow').remove({
+                      "followed_usr_id": id,
+                      "follower_usr_id": $scope.myself.usr_id
+                     }).then(function(result) {
+                    if (result.code == 0)  {
+                      $scope.followed = false
+                    }
+                      $scope.errors = result.errors;
+                      $scope.querying = false;
+                  });
                 }
 
 

@@ -45,9 +45,7 @@ define([
             '$location',
             "Restangular",
             function ($scope, $location, Restangular) {
-              $scope.goTo = function(path, id) {
-                return $location.url((path + id).toString());
-              }
+            
 
               $scope.userPlaylist = []
               Restangular.all('playlist').get('', {

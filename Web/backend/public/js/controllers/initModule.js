@@ -106,6 +106,11 @@ define([
             })
           }
 
+
+          $scope.goTo = function(path, id) {
+            return $location.url((path + id).toString());
+          }
+
           $scope.redirectSearch = function(type, result) {
             $scope.searchResult.type = type,
             $scope.searchResult.result = result

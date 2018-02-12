@@ -88,7 +88,6 @@ module.exports = function (app) {
 
         router.get('/:name',
             function (req, res) {
-              console.log("merde")
                 var query = {
                     where: {
                         "usr_login": req.params.name

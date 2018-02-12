@@ -63,10 +63,8 @@ define([
             '$scope',
             function ($scope) {
               $scope.result = $scope.searchResult
-
-
               console.log($scope.result)
-              for (var member in $scope.searchResult) delete $scope.searchResult[member];
+              //for (var member in $scope.searchResult) delete $scope.searchResult[member];
                 console.log($scope.result.type)
             }
         ])

@@ -2,6 +2,8 @@
 
 <center><h4> Créer une nouvelle playlist</h4>
   <div>
+    <div href="" class="bnt glyphicon glyphicon-hand-left" style="font-size:15px;"></div>
+    <button ng-click="goTo('playlist/', 'list')" type="button" class=" btn">Retourner a vos Playlists</button>
     <form name="newPlaylist" ng-submit="savePlaylist()">
       <div class="form-group">
         <label for="name">Name</label>

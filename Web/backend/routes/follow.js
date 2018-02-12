@@ -10,7 +10,7 @@ module.exports = function (app) {
     app.use('/api/follow', router);
 
 
-    var mysql = require('mysql');
+/*    var mysql = require('mysql');
 
     var con = mysql.createConnection({
       host: "localhost",
@@ -23,8 +23,7 @@ module.exports = function (app) {
         if (err) throw err;
         console.log("connecté depuis follow");
       });
-
-/*  test */
+*/
 
 router.get('/',
     app.requirePermission([
@@ -62,69 +61,97 @@ router.get('/',
         });
     });
 
-/* test */
 
 
-          /*router.get('/test',
-          function (req, res) {
-            app.models["Follow"].findAndCountAll().then(function (result) {
-              console.log("lallalal")
-              console.log(result)
-              res.json(result);
+        router.post('/',
+            app.requirePermission([
+                ['allow', {
+                    users:['@']
+                }],
+                ['deny', {
+                    users:'*'
+                }]
+            ]),
+            function (req, res) {
+                var Record = req.body;
+                if (!Record["follow_id"])
+                    return createRecord();
+                return updateRecord();
+
+                function createRecord() {
+                    var record = app.models["Follow"].build({});
+
+                    // Add fields
+                    if (!S(Record.follower_usr_id).isEmpty()) record.follower_usr_id = Record.follower_usr_id;
+                    if (!S(Record.followed_usr_id).isEmpty()) record.followed_usr_id = Record.followed_usr_id;
+
+                    record.save().then(function (record) {
+                        reply(null, record);
+                    }).catch(function (err) {
+                        reply(err);
+                    });
+                }
+                function updateRecord() {
+                    app.models["Follow"].find({
+                        "where":{
+                            "follow_id": Record["follow_id"]
+                        }
+                    }).then(function (record) {
+                        if (!record) return reply(req.translate('system', 'Record not found'));
+
+                        // Update fields
+
+                    if (!S(Record.follower_usr_id).isEmpty()) record.follower_usr_id = Record.follower_usr_id;
+                    if (!S(Record.followed_usr_id).isEmpty()) record.followed_usr_id = Record.followed_usr_id;
+
+                        record.save().then(function (record) {
+                            reply(null, record);
+                        }).catch(function (err) {
+                            reply(err);
+                        });
+                    });
+                }
+                function reply(err, record) {
+                    if (err) {
+                        res.json({
+                            code: 1,
+                            errors: (err.errors && err.errors.length > 0) ? err.errors : [{message: err.message || err}]
+                        });
+                    } else {
+                        res.json({
+                            "code": 0,
+                        });
+                    }
+                }
             });
-          });
-*/
 
 
+            router.delete('/',
+                app.requirePermission([
+                    ['allow', {
+                        users:['@']
+                    }],
+                    ['deny', {
+                        users:'*'
+                    }]
+                ]),
+                function (req, res) {
+                    app.models["Follow"].find({
+                        "where":{
+                            "follower_usr_id": req.query.follower_usr_id,
+                            "followed_usr_id": req.query.followed_usr_id
+                        }
+                    }).then(function(record) {
+                        if (record) {
+                            record.destroy();
+                        }
 
-          router.get('/me',
-          function (req, res) {
-            app.models["Follow"].find({"where":{
-              "follower_usr_id": req.query.me,
-              "followed_usr_id": req.query.id
-            }
-          }).then(function (result, err) {
-            if (err) {return res.json({code: 1})}
-            if (!result) {
-              return res.json({
-                "followed": 0
-              })
-            }
-            return res.json({
-              "followed": 1,
-              "date": result.dataValues.follow_insert
-            });
-          });
-        });
-
-
-        router.post('/:id/:me', function(req, res) {
-          requete = "insert into follow (follow_insert, followed_usr_id, follower_usr_id) values ('" + new Date().toJSON().slice(0,10).replace(/-/g,'/') + "', '" + req.params.id +"','" + req.params.me + "');"
-          con.query(requete, function(err, result, fields) {
-            console.log("post")
-            console.log("to follow: " + req.params.id)
-            console.log("me : " + req.params.me)
-            if (err) {return res.json({
-              "code": 1
-            })}
-            return res.json({
-              "code": 0
-            })
-          })
-        })
-
-
-
-        router.get('/delete', function(req, res) {
-          con.query("delete from follow where followed_usr_id='" + req.query.id +"' AND follower_usr_id='" + req.query.me + "'", function(err, result, fields) {
-            if (err) {return res.json({
-              "code": 1
-            })}
-            return res.json({
-              "code": 0
-            })
-          })
-        })
+                        res.json({
+                            code: 0,
+                            message: req.translate('system', '__MODEL__ successfully deleted', {__MODEL__: 'Follow'})
+                        });
+                    });
+                });
 
 
         router.get('/followerNb/:id',
@@ -185,7 +212,4 @@ router.get('/',
           });
         });
       });
-
-
-
   };
