@@ -5,47 +5,26 @@
 </head>
 <body>
   <div ng-if="!!myself">
-<div class="row">
-  <div class="addPlaylist">
-    <div class="col-md-8" style="margin-top:10px;">
-      <span>Playlist de {{myself.usr_email | ucfirst}}</span>
+  <div class="row header">
+    <div class=col-md-2>
+      <img src="/img/myPlaylist.png" alt="playlist" style="width:250px; height:200px;">
     </div>
-    <div class="col-md-4">
+    <div class=col-md-8>
+        <h1 style=" font-size:90px; font-family:Arial,Helvetica,sans-serif;  letter-spacing:5px; color:white;"><center>Playlist</center></h1>
+    </div>
+    <div class="col-md-2">
       <li class="{{__controller == 'playlist' ? 'active' : ''}}">
-      <div href="#/playlist/new" class="bnt glyphicon glyphicon-plus" style="font-size:15px;"></div>
-      <button ng-click="goTo('playlist/', 'new')" type="button" class=" btn">Creer une nouvelle playlist</button>
+      <div href="#/playlist/new" class="bnt glyphicon glyphicon-plus" style="font-size:15px; margin-top:100px;"></div>
+      <button ng-click="goTo('playlist/', 'new')" type="button" class=" btn" style="background-color:white;">Creer une nouvelle playlist</button>
     </li>
     </div>
   </div>
-      <table class="notifTable">
-        <thead>
-          <tr>
-            <th>Musique</th>
-            <th>Playlist</th>
-            <th>Suggestion</th>
-          </tr>
-        </thead>
-      <tbody>
-        <tr>
-          <td>toto</td>
-          <td>cell2_1</td>
-          <td>cell3_1</td>
-        </tr>
-        <tr>
-          <td>cell1_2</td>
-          <td>cell2_2</td>
-          <td>cell3_2</td>
-        </tr>
-      </tbody>
-    </table>
-<div class="Title">
-  <span><center>Vos invitation en attente</center></span>
-</div>
+  <h2 style="font-family:Arial,Helvetica,sans-serif;"><center>Vos invitation en attente</center></h2>
 <div class="row">
   <table class="notifTable">
     <thead>
       <tr>
-        <th>Music</th>
+        <th>Invité par </th>
         <th>Playlist</th>
         <th>validation</th>
       </tr>
@@ -66,11 +45,9 @@
     </tbody>
   </table>
   </div>
-  <div class="Title">
-    <span><center>Playlist Administré</center></span>
-  </div>
+    <h2 style="font-family:Arial,Helvetica,sans-serif;"><center>Playlist Administré</center></h2>
   <div class="row">
-    <table class="notifTable">
+    <table class="notifTable" style="margin-bottom:60px;">
       <thead>
         <tr>
           <th>Gestion Playlist</th>
