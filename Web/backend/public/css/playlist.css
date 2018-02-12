@@ -1,66 +1,67 @@
-.addPlaylist{
-  width: 100%;
-  position: relative;
-    height: 55px;
-    clear: both;
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 15px;
-    padding: 10px;
-    border-radius: 5px;
-    background-color:#FFFFFF;
-}
-
-hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0;
-}
-
-.Title{
-  margin-top: 25px;
-  margin-bottom: 25px;
-  border: 1px solid #C5BFBD;
-  width: 100%;
-}
 
 .header{
-  background-color: #C5BFBD;
+  background-color: #D8D8D8;
 }
 
 
 body{
   background-color: white;
+  font-family: Arial,Helvetica,sans-serif;
 }
 
 
 table.notifTable {
-  font-family: "Courier New", Courier, monospace;
+  font-family: Arial,Helvetica,sans-serif;
   width: 100%;
   text-align: center;
   border-collapse: collapse;
 }
 table.notifTable td, table.notifTable th {
   border: 2px solid #DDDDDD;
-  padding: 9px 0px;
+  padding: 25px 1px;
   width: 300px;
 }
 table.notifTable tbody td {
   font-size: 17px;
 }
 table.notifTable thead {
-    border-bottom: 2px solid #C5BFBD;
-    background-color: white;
+    border-bottom: 2px solid #E2FCFC;
+    background-color: #222222;
 }
 table.notifTable thead th {
   font-size: 16px;
   font-weight: bold;
   text-align: center;
-  background-color: #C5BFBD;
+  background-color: #222222;
+  color: white;
 }
 table.notifTable tfoot td {
   font-size: 8px;
+}
+
+.newPlaylist{
+  border: 5px solid grey;
+  width: 1100px;
+  height: 400px;
+  border-radius: 10px;
+  background-color: #D1D1D1;
+  opacity: 0.6;
+}
+
+.btn{
+  border: none; /* Remove borders */
+  padding: 5px 15px; /* Add some padding */
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+
+.form-control{
+  border-radius: 5px;
+
+}
+
+.label-txt{
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 20px;
 }
