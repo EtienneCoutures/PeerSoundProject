@@ -31,11 +31,22 @@ define([
                 .when('/playlist/:playlist_id', {
                   /*  templateUrl: '/partials/playlist/form',
                     controller: 'SavePlaylistController'*/
+                    templateUrl: 'partials/playlist/adminUser',
+                    controller: 'AdminUserPlaylistController'
+                })
+                .when('/playlist/:playlist_id/admin', {
+                  /*  templateUrl: '/partials/playlist/form',
+                    controller: 'SavePlaylistController'*/
                     templateUrl: 'partials/playlist/admin',
                     controller: 'AdminPlaylistController'
                 });
         }])
         .controller('UnknowPlaylistController', [
+            '$scope',
+            function ($scope) {
+            }
+        ])
+        .controller('AdminUserPlaylistController', [
             '$scope',
             function ($scope) {
             }
@@ -66,7 +77,7 @@ define([
             '$location',
             function ($scope, Restangular, $routeParams, $route, $location) {
               $scope.playlist_id = $routeParams.playlist_id;
-              
+
               Restangular.one('playlist', $scope.playlist_id).get().then(function(result){
                 if (result.code == 1) {
                 $location.url('/unknowPlaylist');
