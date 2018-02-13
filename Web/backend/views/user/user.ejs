@@ -3,9 +3,7 @@
 <html>
 <head>
 <meta charset=utf-8 />
-
 <link href="/css/user.css" rel="stylesheet"/>
-
 </head>
 <br>
 <body>
@@ -15,36 +13,26 @@
         <div class="panel panel-inverse" style="margin-bottom:50px">
             <div class="panel-body">
               <div class="news">
-                <div class="row">
-                  <div class="col-md-2">
-                  </div>
-                  <div class="col-md-8">
-                    <h2><b>{{ user_login }}</b></h2>
-                  </div>
-                  <div class="col-md-2">
-                    <img src="/img/myAccount.png" alt="logo" id="imgplaylist">
-                  </div>
-                </div>
-                <div class="text">
-                </div>
               <div class="row">
                 <div class="col-md-12">
-                  <table class="notifTable" ng-repeat="x in userPlaylist">
-                    <thead>
-                      <tr>
-                        <th>Playlist de {{user_login}}</th>
-                        <th>Musique Favorite de {{user_login}}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Apero MrBiscotte</td>
-                        <td> ZIZI BOUCHE </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  <img src="/img/myAccount.png" class="img-rounded" style="widht:50px; height:50px;">
                 </div>
               </div>
+                <div class="row">
+                    <h2>Nom de l'user Avec son ID</h2>
+                    <p>Je vais voir avec toi demain comment bien le faire</p>
+                    <div class="btn-group">
+                    <button type="button" class="btn btn-primary">Amis</button>
+                    <button type="button" class="btn btn-primary">Envoyer une musique</button>
+                    <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Sony <span class="caret"></span></button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Soon</a></li>
+                        <li><a href="#">toto</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               <div class="row">
               <div class="col-md-6">
               <div  class="btn playlist" data-ng-init="isFollowed()">
