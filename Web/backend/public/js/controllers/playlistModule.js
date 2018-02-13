@@ -48,9 +48,22 @@ define([
         ])
         .controller('AdminUserPlaylistController', [
             '$scope',
-            function ($scope) {
+            '$location',
+            "Restangular",
+            function ($scope, $location, Restangular) {
+              $scope.userPlaylist = []
+              Restangular.all('playlist').get('', {
+                  where: {
+                    playlist_creator: $scope.myself.usr_id
+                  }
+              }).then(function (result) {
+                for (var i = 0 ; i != result.length ; ++i) {
+                  $scope.userPlaylist.push(result[i])
+                }
+              });
+
             }
-        ])
+          ])
         .controller('PlaylistListController', [
             '$scope',
             '$location',
@@ -66,7 +79,6 @@ define([
                   $scope.userPlaylist.push(result[i])
                 }
               });
-
             }
           ])
           .controller('AdminPlaylistController', [
