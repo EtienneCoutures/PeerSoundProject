@@ -21,7 +21,7 @@ module.exports = function (app) {
       followed_usr_id: {
           type: Sequelize.INTEGER,
           references : {
-            model: 'User',
+            model: 'user',
             key: 'usr_id'
           }
           //defaultValue: 0,
@@ -31,7 +31,7 @@ module.exports = function (app) {
       follower_usr_id: {
           type: Sequelize.INTEGER,
           references : {
-            model: 'User',
+            model: 'user',
             key: 'usr_id'
           }
           /*defaultValue: 0,
@@ -48,6 +48,10 @@ module.exports = function (app) {
         tableName: 'follow'
     });
   }
+  require('./User')(app)
+  app.models.Follow.belongsTo(app.models.User, {as: 'Follower', foreignKey: 'follower_usr_id', otherKey: "usr_id"})
+  app.models.Follow.belongsTo(app.models.User, {as: 'Followed', foreignKey: 'followed_usr_id', otherKey: "usr_id"})
+
   /*app.models.Follow.hasOne(app.models.User, {
     foreignKey: {
       name: 'usr_id',

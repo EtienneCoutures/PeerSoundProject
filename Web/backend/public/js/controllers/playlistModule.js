@@ -66,7 +66,7 @@ define([
             '$location',
             function ($scope, Restangular, $routeParams, $route, $location) {
               $scope.playlist_id = $routeParams.playlist_id;
-
+              
               Restangular.one('playlist', $scope.playlist_id).get().then(function(result){
                 if (result.code == 1) {
                 $location.url('/unknowPlaylist');

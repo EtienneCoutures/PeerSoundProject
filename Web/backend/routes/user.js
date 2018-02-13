@@ -50,6 +50,8 @@ module.exports = function (app) {
 
             app.models["User"].findAndCountAll(query).then(function (result) {
               if (!Options.limit) return res.json(result.rows);
+
+
               res.json(result);
             });
         });
@@ -71,13 +73,22 @@ module.exports = function (app) {
                 },
                 include: []
             };
-            console.log("c'est la bonne fonction")
             app.models["User"].findOne(query).then(function (result) {
                 if (!result) {
                     return res.json({
                         code: 1
                     });
                 }
+
+                result.countFollowing().then(function(result) {
+                  console.log("il suit : " + result + " personnes (countFollowing)")
+
+                })
+
+                result.countFollowers().then(function(result) {
+                  console.log("il a : " + result + " followers (countFollowers)")
+
+                })
               //penser a return result.dataValues, c'est completement con de return un array sur un findOne
                 res.json({
                     "code": 0,
