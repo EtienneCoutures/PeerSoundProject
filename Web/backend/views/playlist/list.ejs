@@ -9,13 +9,12 @@
     <div class=col-md-2>
       <img src="/img/myPlaylist.png" alt="playlist" style="width:250px; height:200px;">
     </div>
-    <div class=col-md-8>
+    <div class="col-md-6">
     </div>
     <div class="col-md-2">
-      <li class="{{__controller == 'playlist' ? 'active' : ''}}">
-      <div href="#/playlist/new" class="bnt glyphicon glyphicon-plus" style="font-size:15px; margin-top:100px;"></div>
-      <button ng-click="goTo('playlist/', 'new')" type="button" class=" btn" style="background-color:white;">Creer une nouvelle playlist</button>
-    </li>
+      <!--<li class="{{__controller == 'playlist' ? 'active' : ''}}"> -->
+      <button ng-click="goTo('playlist/', 'new')" type="button" class="btn" style="background-color:white;border-color:black;"><div href="#" class="bnt glyphicon glyphicon-plus" style="font-size:15px;"></div>  Creer une nouvelle playlist</button>
+    <!--</li>-->
     </div>
   </div>
   <h2 style="font-family:Arial,Helvetica,sans-serif;"><center>Vos invitation en attente</center></h2>
@@ -56,7 +55,10 @@
       </thead>
       <tbody ng-repeat="x in userPlaylist">
         <tr>
-          <td><a href="" class="glyphicon glyphicon-wrench" ng-click="goTo('playlist/', x.playlist_id)"></a></td>
+          <td>
+            <a href="" class="glyphicon glyphicon-eye-open" ng-click="goTo('playlist/', x.playlist_id)"></a>
+            <a href="" class="glyphicon glyphicon-wrench" ng-if="playlist.playlist_creator == myself.usr_id" ng-click="goTo('playlist/', x.playlist_id + '/admin')"></a>
+          </td>
           <td>Apero MrBiscotte</td>
           <td> {{ x.playlist_name }} </td>
         </tr>

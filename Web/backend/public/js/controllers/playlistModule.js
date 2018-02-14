@@ -87,9 +87,17 @@ define([
         .controller('PlaylistListController', [
             '$scope',
             '$location',
-            "Restangular",
-            function ($scope, $location, Restangular) {
+            'Restangular',
+            '$routeParams',
+            function ($scope, $location, Restangular, $routeParams) {
               $scope.userPlaylist = []
+
+              Restangular.one('playlist').get({where: {
+                playlist_id: $routeParams.playlist_id
+              }}).then(function(result) {
+                $scope.playlist = result[0]
+              })
+
               Restangular.all('playlist').get('', {
                   where: {
                     playlist_creator: $scope.myself.usr_id

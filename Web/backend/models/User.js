@@ -101,7 +101,7 @@ module.exports = function (app) {
               defaultValue: null,
               validate:{
               },
-              /*nb_followers: {
+            /*  nb_followers: {
                 type: Sequelize.INTEGER,
                 defaultValue: 0,
                 validate: {
