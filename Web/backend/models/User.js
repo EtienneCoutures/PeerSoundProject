@@ -100,7 +100,19 @@ module.exports = function (app) {
               type: Sequelize.BLOB,
               defaultValue: null,
               validate:{
-              }
+              },
+              /*nb_followers: {
+                type: Sequelize.INTEGER,
+                defaultValue: 0,
+                validate: {
+                }
+              },
+              nb_following: {
+                type: Sequelize.INTEGER,
+                defaultValue: 0,
+                validate: {
+                }
+              }*/
             }
         };
 
@@ -120,8 +132,12 @@ module.exports = function (app) {
         require('./Follow')(app)
         app.models.User.hasMany(app.models.Follow, {as: 'Following', foreignKey: 'follower_usr_id', sourceKey: 'usr_id'})
         app.models.User.hasMany(app.models.Follow, {as: 'Followers', foreignKey: 'followed_usr_id', sourceKey: 'usr_id'})
-        sequelize.sync()
-        console.log(app.models.User.Instance.prototype)
+        //console.log(app.models.User.Instance.prototype)
+       sequelize.sync({ alter: true }).then(function(res) {
+        console.log("user c'est synch genre")
+      }).catch(function (err) {
+          logger.error(err);
+      });
         // List of required models
         // Define relations of this model
     }

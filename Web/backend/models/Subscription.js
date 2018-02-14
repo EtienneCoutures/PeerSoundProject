@@ -40,5 +40,5 @@ module.exports = function (app) {
         tableName: 'Subscription'
     });
   }
-  sequelize.sync();
+  //sequelize.sync().then(function() { console.log("ok")})
 };

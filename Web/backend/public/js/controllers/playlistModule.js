@@ -29,14 +29,10 @@ define([
                   controller: 'UnknowPlaylistController'
                 })
                 .when('/playlist/:playlist_id', {
-                  /*  templateUrl: '/partials/playlist/form',
-                    controller: 'SavePlaylistController'*/
                     templateUrl: 'partials/playlist/adminUser',
                     controller: 'AdminUserPlaylistController'
                 })
                 .when('/playlist/:playlist_id/admin', {
-                  /*  templateUrl: '/partials/playlist/form',
-                    controller: 'SavePlaylistController'*/
                     templateUrl: 'partials/playlist/admin',
                     controller: 'AdminPlaylistController'
                 });

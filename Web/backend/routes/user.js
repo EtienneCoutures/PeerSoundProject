@@ -125,18 +125,7 @@ module.exports = function (app) {
             console.log("zizi")
             res.end();
           };*/
-          router.post('/fileupload',
-              app.requirePermission([
-                  ['allow', {
-                      users:['@']
-                  }],
-                  ['deny', {
-                      users:'*'
-                  }]
-              ]),
-              function (req, res) {
-                console.log("t'es con")
-              });
+
 
     // Create / Update a User
     router.post('/',

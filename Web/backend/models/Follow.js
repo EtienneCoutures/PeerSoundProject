@@ -49,8 +49,21 @@ module.exports = function (app) {
     });
   }
   require('./User')(app)
-  app.models.Follow.belongsTo(app.models.User, {as: 'Follower', foreignKey: 'follower_usr_id', otherKey: "usr_id"})
-  app.models.Follow.belongsTo(app.models.User, {as: 'Followed', foreignKey: 'followed_usr_id', otherKey: "usr_id"})
+  app.models.Follow.belongsTo(app.models.User, {
+    as: 'Follower',
+    foreignKey: 'follower_usr_id',
+    otherKey: "usr_id",
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+  })
+
+  app.models.Follow.belongsTo(app.models.User, {
+    as: 'Followed',
+    foreignKey: 'followed_usr_id',
+    otherKey: "usr_id",
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+  })
 
   /*app.models.Follow.hasOne(app.models.User, {
     foreignKey: {
@@ -64,5 +77,10 @@ module.exports = function (app) {
       allowNull: false
     }
   })*/
-  sequelize.sync();
+  //sequelize.sync();
+  sequelize.sync({ alter: true }).then(function(res) {
+   console.log("c'est synch genre")
+ }).catch(function (err) {
+     logger.error(err);
+ });
 };

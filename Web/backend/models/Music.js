@@ -92,7 +92,6 @@ module.exports = function (app) {
         });
 
         // List of required models
-        sequelize.sync()
         // Define relations of this model
     }
 };
