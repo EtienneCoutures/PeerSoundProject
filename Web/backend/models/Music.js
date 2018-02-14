@@ -63,7 +63,7 @@ module.exports = function (app) {
               validate: {
               }
             },
-            url: {
+            music_url: {
               type: Sequelize.TEXT,
               validate: {
               }
