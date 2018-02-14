@@ -29,8 +29,8 @@ define([
                   controller: 'UnknowPlaylistController'
                 })
                 .when('/playlist/:playlist_id', {
-                    templateUrl: 'partials/playlist/adminUser',
-                    controller: 'AdminUserPlaylistController'
+                    templateUrl: 'partials/playlist/pl_view',
+                    controller: 'ViewPlaylistController'
                 })
                 .when('/playlist/:playlist_id/admin', {
                     templateUrl: 'partials/playlist/admin',
@@ -42,21 +42,45 @@ define([
             function ($scope) {
             }
         ])
-        .controller('AdminUserPlaylistController', [
+        .controller('ViewPlaylistController', [
             '$scope',
             '$location',
-            "Restangular",
-            function ($scope, $location, Restangular) {
+            'Restangular',
+            '$routeParams',
+            '$route',
+            function ($scope, $location, Restangular, $routeParams, $route) {
               $scope.userPlaylist = []
+              $scope.displayNewName = false;
+
+              Restangular.one('playlist').get({where: {
+                playlist_id: $routeParams.playlist_id
+              }}).then(function(result) {
+                $scope.playlist = result[0]
+              })
+
+
               Restangular.all('playlist').get('', {
                   where: {
                     playlist_creator: $scope.myself.usr_id
                   }
               }).then(function (result) {
                 for (var i = 0 ; i != result.length ; ++i) {
-                  $scope.userPlaylist.push(result[i])
+                  $scope.userPlaylist.push(result[i]) // ca ca sert a rien faut l'enlever
                 }
               });
+
+              $scope.changeName = function() {
+                var name =  document.getElementById('newNameInput').value;
+                if (name != "") {
+                  Restangular.all('playlist').post({playlist_id: $routeParams.playlist_id,  playlist_name: name}).then(function(result) {
+                    $route.reload()
+                  })
+                }
+              }
+
+              $scope.displayNameInput = function() {
+                $scope.displayNewName = ($scope.displayNewName == true ? false : true);
+              }
 
             }
           ])
