@@ -1,22 +1,12 @@
-<style>
-.news{
-  width: 455px;
-  position: relative;
-  height: 150px;
-  border: 1px solid #c0c0c0;
-  clear: both;
-  text-align: center;
-  margin:auto;
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  background-color: white;
-}
-</style>
+<!DOCTYPE html>
+<html>
+<head>
+<link href="/css/playlist.css" rel="stylesheet"/>
+</head>
+<body>
 <div class="col-md-12">
   <center>
-    <h4>Page d'administration de playlist</h4>
-
+    <h4>Page d'administration de playlis</h4>
     <div style="margin-top:5%;">
       <h5>Ajouter un de vos followers</h5>
     </center>
@@ -28,7 +18,7 @@
           <h2><b>{{ x.usr_login }}</b></h2>
         </div>
         <div class="col-md-2">
-          <a href=""><img src="img/adduser.png" ng-click="addUserToPlaylist(x)" style="max-width:15px;max-height:15px;width:auto;height:auto"></a>
+          <a href=""><img src="/img/adduser.png" ng-click="addUserToPlaylist(x)" style="max-width:15px;max-height:15px;width:auto;height:auto"></a>
         </div>
       </div>
       <div class="text">
@@ -36,9 +26,7 @@
       </div>
     </div>
   </div>
-
   <hr>
-
   <div style="margin-top:15%">
     <center>
       <h5>Followers suivants la playlist</h5>
@@ -51,7 +39,7 @@
           <h2><b>{{ x.usr_login }}</b></h2>
         </div>
         <div class="col-md-2">
-          <a href=""><img src="img/remove.png" ng-click="removeUserToPlaylist(x)" style="max-width:15px;max-height:15px;width:auto;height:auto"></a>
+          <a href=""><img src="/img/remove.png" ng-click="removeUserToPlaylist(x)" style="max-width:15px;max-height:15px;width:auto;height:auto"></a>
         </div>
       </div>
       <div class="text">
@@ -60,3 +48,5 @@
     </div>
   </div>
 </div>
+</body>
+</html>

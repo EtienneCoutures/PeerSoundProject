@@ -21,6 +21,11 @@ define([
 
                 $scope.myself = false;
 
+                $scope.searchResult = {
+                  type : "",
+                  result : [],
+                  count: 0
+                }
 
 
                 Restangular.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
@@ -60,11 +65,59 @@ define([
                   $scope.userQuery = function() {
                       var type = document.getElementById("selectQuery").value
                       var query = document.getElementById("search").value
-                      if (query)
-                      if (['all', 'playlist', 'user', 'music'].indexOf(type) >= 0) {
-                        console.log("Le type recherche " + query + " dans " + type)
+                      if (query) {
+                        if (['all', 'playlist', 'user', 'music'].indexOf(type) >= 0) {
+                          console.log("Le type recherche " + query + " dans " + type)
+                          $scope.searchIn(type, query)
+                        }
                       }
                   }
+
+                  $scope.searchIn = function(type, value) {
+                    if (type == "user") $scope.searchUser(type, value)
+                    else if (type == "playlist") $scope.searchPlaylist(type, value)
+                    else if (type == "music") $scope.searchMusic(type, value)
+                    else console.log("En construction")
+                  }
+
+                /* searching fnct */
+                $scope.searchUser = function(type, value) {
+                  Restangular.one('user').get({where : {
+                    'usr_login': value
+                  }
+                }).then(function(result) {
+                  $scope.redirectSearch(type, result)
+                })
+              }
+              $scope.searchPlaylist = function(type, value) {
+                Restangular.one('playlist').get({where : {
+                  'playlist_name': value
+                }
+              }).then(function(result) {
+                $scope.redirectSearch(type, result)
+              })
+            }
+            $scope.searchMusic = function(type, value) {
+              Restangular.one('music').get({where : {
+                'music_name': value
+              }
+            }).then(function(result) {
+              $scope.redirectSearch(type, result)
+            })
+          }
+
+
+          $scope.goTo = function(path, id) {
+            return $location.url((path + id).toString());
+          }
+
+          $scope.redirectSearch = function(type, result) {
+            $scope.searchResult.type = type,
+            $scope.searchResult.result = result
+            $scope.searchResult.count = result.length
+            $location.url('/result');
+          }
+
 
                 $scope.follow = function() {
                 if ($scope.myself.usr_id)

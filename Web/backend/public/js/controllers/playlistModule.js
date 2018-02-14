@@ -31,6 +31,12 @@ define([
                 .when('/playlist/:playlist_id', {
                   /*  templateUrl: '/partials/playlist/form',
                     controller: 'SavePlaylistController'*/
+                    templateUrl: 'partials/playlist/adminUser',
+                    controller: 'AdminUserPlaylistController'
+                })
+                .when('/playlist/:playlist_id/admin', {
+                  /*  templateUrl: '/partials/playlist/form',
+                    controller: 'SavePlaylistController'*/
                     templateUrl: 'partials/playlist/admin',
                     controller: 'AdminPlaylistController'
                 });
@@ -40,15 +46,11 @@ define([
             function ($scope) {
             }
         ])
-        .controller('PlaylistListController', [
+        .controller('AdminUserPlaylistController', [
             '$scope',
             '$location',
             "Restangular",
             function ($scope, $location, Restangular) {
-              $scope.goTo = function(path, id) {
-                return $location.url((path + id).toString());
-              }
-
               $scope.userPlaylist = []
               Restangular.all('playlist').get('', {
                   where: {
@@ -60,6 +62,23 @@ define([
                 }
               });
 
+            }
+          ])
+        .controller('PlaylistListController', [
+            '$scope',
+            '$location',
+            "Restangular",
+            function ($scope, $location, Restangular) {
+              $scope.userPlaylist = []
+              Restangular.all('playlist').get('', {
+                  where: {
+                    playlist_creator: $scope.myself.usr_id
+                  }
+              }).then(function (result) {
+                for (var i = 0 ; i != result.length ; ++i) {
+                  $scope.userPlaylist.push(result[i])
+                }
+              });
             }
           ])
           .controller('AdminPlaylistController', [
@@ -126,7 +145,6 @@ define([
                   }
                 })
               })
-
 
               $scope.removeUserToPlaylist = function(usr) {
                 var sub = {}

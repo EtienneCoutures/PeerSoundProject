@@ -1,25 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<html>
+<head>
+<meta charset=utf-8 />
+<link href="/css/user.css" rel="stylesheet"/>
+</head>
 <br>
+<body>
 <!-- end row -->
 <div class="row">
-    <!-- begin col-12 -->
     <div class="col-md-12">
-        <!-- begin panel -->
         <div class="panel panel-inverse" style="margin-bottom:50px">
-            <div class="panel-heading">
-                <div class="panel-heading-btn">
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                </div>
-                <h4 class="panel-title"><%= translate('user', 'title') %></h4>
-            </div>
             <div class="panel-body">
-              Ketamine
-              <br>
-              {{ user_login }}
-              <br>
-              <div data-ng-init="isFollowed()">
-                <button id="unfollow" ng-if="followed === true" ng-click='unFollow()'>unFollow</button>
-                <button id="follow" ng-if="followed === false" ng-click='Follow()'>Follow</button>
+              <div class="news">
+              <div class="row">
+                <div class="col-md-12">
+                  <img src="/img/myAccount.png" class="img-rounded" style="widht:50px; height:50px;">
+                </div>
               </div>
+                <div class="row">
+                    <h2>Nom de l'user Avec son ID</h2>
+                    <p>Je vais voir avec toi demain comment bien le faire</p>
+                    <div class="btn-group">
+                    <button type="button" class="btn btn-primary">Amis</button>
+                    <button type="button" class="btn btn-primary">Envoyer une musique</button>
+                    <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Sony <span class="caret"></span></button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Soon</a></li>
+                        <li><a href="#">toto</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              <div class="row">
+              <div class="col-md-6">
+              <div  class="btn playlist" data-ng-init="isFollowed()">
+                <button  id="unfollow" ng-if="followed === true" ng-click='unFollow()'>unFollow</button>
+                <button  id="follow" ng-if="followed === false" ng-click='Follow()'>Follow</button>
+              </div>
+            </div>
+              <div class="col-md-6">
+              <a href="#/playlist/" class="MyPlaylist">
+                <button class="btn playlist" href="#/">Envoyer un message à {{user_login}}</button>
+            </a>
+          </div>
+            </div>
+          </div>
             </div>
           </div>
         <!-- end panel -->
@@ -27,3 +54,4 @@
     <!-- end col-12 -->
 </div>
 <!-- end row -->
+</body>

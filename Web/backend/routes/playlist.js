@@ -111,6 +111,7 @@ module.exports = function (app) {
                 record.save().then(function (record) {
                     reply(null, record);
                 }).catch(function (err) {
+                  console.log("error: ", err)
                     reply(err);
                 });
             }

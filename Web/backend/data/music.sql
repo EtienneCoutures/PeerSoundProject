@@ -55,3 +55,5 @@ CREATE TABLE IF NOT EXISTS `music` (
 --
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
+
+--  insert into music values (1, "music", "rock", "c'est une music de test", "commentaire", NULL,'2018-01-27 00:00:00', '2018-01-17 00:00:00', "youtube", "mfDoom", "url", "2011", 1);

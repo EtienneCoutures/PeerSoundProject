@@ -32,7 +32,7 @@
   color: white; /* Add a text color */
   padding: 5px 15px; /* Add some padding */
   cursor: pointer;
-  background-color: grey;
+  background-color: #707478;
 }
 
 .panel-inverse {

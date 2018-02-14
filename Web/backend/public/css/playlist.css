@@ -1,51 +1,81 @@
-.addPlaylist{
-  width: 100%;
-  position: relative;
-    height: 55px;
-    clear: both;
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 15px;
-    padding: 10px;
-    border-radius: 5px;
-    background-color:#FFFFFF;
-}
-
-.Title{
-  margin-top: 25px;
-  margin-bottom: 25px;
-  border: 1px solid #D0D9D9;
-}
-
 body{
   background-color: white;
+  font-family: Arial,Helvetica,sans-serif;
 }
 
 
 table.notifTable {
-  font-family: "Courier New", Courier, monospace;
+  font-family: Arial,Helvetica,sans-serif;
   width: 100%;
   text-align: center;
   border-collapse: collapse;
 }
 table.notifTable td, table.notifTable th {
-  border: 2px solid #FFFFFF;
-  padding: 9px 0px;
+  border: 2px solid #DDDDDD;
+  padding: 25px 1px;
   width: 300px;
 }
 table.notifTable tbody td {
   font-size: 17px;
 }
 table.notifTable thead {
-    border-bottom: 2px solid #D0D9D9;
-    background-color: white;
+    border-bottom: 2px solid #E2FCFC;
+    background-color: #222222;
 }
 table.notifTable thead th {
   font-size: 16px;
   font-weight: bold;
   text-align: center;
-  background-color: #D0D9D9;
+  background-color: #222222;
+  color: white;
 }
 table.notifTable tfoot td {
   font-size: 8px;
+}
+
+.newPlaylist{
+  border: 5px solid grey;
+  width: 1100px;
+  height: 400px;
+  border-radius: 10px;
+  background-color: #D1D1D1;
+  opacity: 0.6;
+}
+
+.btn{
+  border: none; /* Remove borders */
+  padding: 5px 15px; /* Add some padding */
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+
+.panel-txt{
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 40px;
+  margin-top: 60px;
+}
+
+.panel{
+  height: 150px;
+  margin-top: 20px;
+  background-color: #E9E9E9;
+  border: 2px;
+  margin-top: 10px;
+}
+
+
+
+.news{
+  width: 455px;
+  position: relative;
+  height: 150px;
+  border: 1px solid #c0c0c0;
+  clear: both;
+  text-align: center;
+  margin:auto;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: white;
 }

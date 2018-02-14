@@ -37,6 +37,7 @@ module.exports = function (app) {
             Options.where = Options.where || {};
 
             // Add filters
+            if (!S(Options.where.usr_login).isEmpty()) query.where.usr_login = {like:Options.where.usr_login + '%'};
             if (!S(Options.where.usr_id).isEmpty()) query.where.usr_id = {like:Options.where.usr_id};
             if (!S(Options.where.usr_firstname).isEmpty()) query.where.usr_firstname = {like:Options.where.usr_firstname + '%'};
             if (!S(Options.where.usr_lastname).isEmpty()) query.where.usr_lastname = {like:Options.where.usr_lastname + '%'};
@@ -48,8 +49,10 @@ module.exports = function (app) {
             query.order = (Options.sort && Options.sort.field) ? (Options.sort.field + (Options.sort.asc ? ' ASC' : ' DESC')) : 'usr_id';
 
             app.models["User"].findAndCountAll(query).then(function (result) {
-                if (!Options.limit) return res.json(result.rows);
-                res.json(result);
+              if (!Options.limit) return res.json(result.rows);
+
+
+              res.json(result);
             });
         });
 
@@ -70,13 +73,22 @@ module.exports = function (app) {
                 },
                 include: []
             };
-            console.log("c'est la bonne fonction")
             app.models["User"].findOne(query).then(function (result) {
                 if (!result) {
                     return res.json({
                         code: 1
                     });
                 }
+
+                result.countFollowing().then(function(result) {
+                  console.log("il suit : " + result + " personnes (countFollowing)")
+
+                })
+
+                result.countFollowers().then(function(result) {
+                  console.log("il a : " + result + " followers (countFollowers)")
+
+                })
               //penser a return result.dataValues, c'est completement con de return un array sur un findOne
                 res.json({
                     "code": 0,
@@ -87,7 +99,6 @@ module.exports = function (app) {
 
         router.get('/:name',
             function (req, res) {
-              console.log("merde")
                 var query = {
                     where: {
                         "usr_login": req.params.name

@@ -5,6 +5,13 @@
   top: 13px;
 }
 
+.styled-select {
+   width: 102px;
+   height: 32px;
+   overflow: hidden;
+   border: 1px solid #ccc;
+   }
+
 #header  {
     height: 5%;
     background-color: #2d353c;
