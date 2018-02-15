@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS `subscription` (
   primary key (`sub_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 
+alter table subscription add column `usr_role` enum('super-admin','admin','member', 'visitor') NOT NULL DEFAULT "visitor";
 
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;

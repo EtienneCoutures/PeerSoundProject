@@ -78,9 +78,9 @@ module.exports = function (app) {
     }
   })*/
   //sequelize.sync();
-  sequelize.sync({ alter: true }).then(function(res) {
+  /*sequelize.sync({ alter: true }).then(function(res) {
    console.log("c'est synch genre")
  }).catch(function (err) {
      logger.error(err);
- });
+ });*/
 };

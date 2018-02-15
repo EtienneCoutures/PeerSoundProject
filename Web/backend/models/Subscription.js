@@ -20,16 +20,24 @@ module.exports = function (app) {
       },
       usr_id: {
           type: Sequelize.INTEGER,
-          defaultValue: 0,
-          validate: {
+          references : {
+            model: 'user',
+            key: 'usr_id'
           }
       },
       playlist_id: {
           type: Sequelize.INTEGER,
-          defaultValue: 0,
+          references : {
+            model: 'playlist',
+            key: 'playlist_id'
+          }
+        },
+        usr_role: {
+          type: Sequelize.ENUM('super-admin','admin','member', 'visitor'),
+          defaultValue: "visitor",
           validate: {
           }
-      }
+        }
     };
     app.models.Subscription = sequelize.define('Subscription', schema, {
         // Define model options
@@ -39,6 +47,25 @@ module.exports = function (app) {
         freezeTableName: true,
         tableName: 'Subscription'
     });
+
+    require('./User')(app)
+    app.models.Subscription.belongsTo(app.models.User, {
+      as: 'Subscriber',
+      foreignKey: 'usr_id',
+      otherKey: "usr_id",
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE',
+    })
+
+    require('./Playlist')(app)
+    app.models.Subscription.belongsTo(app.models.Playlist, {
+      as: 'Playlist',
+      foreignKey: 'playlist_id',
+      otherKey: "playlist_id",
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE',
+    })
+
   }
-  //sequelize.sync().then(function() { console.log("ok")})
+  //sequelize.sync().then(function() { console.log(app.models.Subscription.Instance.prototype) })
 };

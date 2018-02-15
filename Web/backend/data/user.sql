@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `usr_lastname` varchar(255) NOT NULL,
   `usr_phone` varchar(255) NOT NULL,
   `usr_birthday` date NOT NULL,
-  `usr_role` enum('super-admin','admin','member') NOT NULL DEFAULT "member",
+  --`usr_role` enum('super-admin','admin','member') NOT NULL DEFAULT "member",
   `usr_insert` datetime NOT NULL,
   `usr_update` datetime NOT NULL,
   `usr_status` enum('waiting','active','lock') NOT NULL DEFAULT "active",
