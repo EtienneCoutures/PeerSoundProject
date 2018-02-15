@@ -57,9 +57,9 @@ module.exports = function (app) {
             onDelete: 'CASCADE'
         });
 
-        app.models.AccessToken.sync().then(function () {
+      /*  app.models.AccessToken.sync().then(function () {
         }).catch(function (err) {
             logger.error(err);
-        });
+        });*/
     }
   };

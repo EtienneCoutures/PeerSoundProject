@@ -19,7 +19,7 @@ var express        = require('express'),
     locale         = require('locale'),
 
     passport       = require('passport'),
-
+    sequelize      = require('sequelize'),
     async          = require('async'),
     _              = require('underscore'),
     Promise        = require('bluebird'),
@@ -268,6 +268,11 @@ function loadServices(callback) {
 
 function startServeur(callback) {
     server.listen(options.port);
+    /*sequelize.sync().then(function() {
+      console.log('sequelize is sync')
+    }).catch(function(err) {
+      console.log(err)
+    })*/
     logger.info('Magic happens on port ' + options.port);
     callback();
 }

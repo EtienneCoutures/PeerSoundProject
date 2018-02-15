@@ -9,11 +9,15 @@
       <img src="/img/myPlaylist.png" alt="playlist" style="width:250px; height:200px;">
     </div>
     <div class="col-md-5">
-      <h1 style="font-family:Arial,Helvetica,sans-serif;">Hip-Hop<span class="glyphicon glyphicon-pencil" style="font-size:20px; margin-left:20px;"></span></h1>
+        <h1 style="font-family:Arial,Helvetica,sans-serif;">{{ playlist.playlist_name }}<a href=""><span class="glyphicon glyphicon-pencil" ng-click='displayNameInput()' style="font-size:20px; margin-left:20px;color:black"></span></a></h1>
+      <form ng-if="displayNewName === true">
+        <input id="newNameInput" type="text" required></input>
+        <button type="submit" ng-click='changeName()' class="btn btn-success">Ok</button>
+      </form>
       <h3>Login</h3>
       <dl>
         <dt>nombre de musique sur la playlist: </dt>
-        <dt>Description de la playlist</dt>
+        <dt>{{playlist.playlist_description}}</dt>
         <dd>modifier la playlist <span class="glyphicon glyphicon-pencil" style="font-size:15px; margin-left:20px;"></span></dd>
       </dl>
     </div>

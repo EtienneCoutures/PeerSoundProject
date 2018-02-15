@@ -75,8 +75,10 @@ module.exports = function (app) {
             },
             usr_id: {
               type: Sequelize.INTEGER,
-              references: 'user', // <<< Note, its table's name, not object name
-              referencesKey: 'usr_id' // <<< Note, its a column name
+              references : {
+                model: 'user',
+                key: 'usr_id'
+              }
             }
         };
 
@@ -91,8 +93,13 @@ module.exports = function (app) {
             }
         });
 
+        /*sequelize.sync({ alter: true }).then(function(res) {
+            console.log(app.models.Music.Instance.prototype)
+          }).catch(function (err) {
+              logger.error(err);
+          });*/
+
         // List of required models
-        sequelize.sync()
         // Define relations of this model
     }
 };

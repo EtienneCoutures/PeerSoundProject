@@ -54,8 +54,10 @@
              },
              playlist_creator: {
                type: Sequelize.INTEGER,
-               references: 'user', // <<< Note, its table's name, not object name
-               referencesKey: 'usr_id' // <<< Note, its a column name
+               references : {
+                 model: 'user',
+                 key: 'usr_id'
+               }
              }
          };
 
@@ -70,6 +72,17 @@
              }
          });
 
+         require('./Subscription')(app)
+         require('./User')(app)
+         app.models.Playlist.hasMany(app.models.Subscription, {as: 'Subscriber', foreignKey: 'playlist_id', sourceKey: 'playlist_id'})
+         app.models.Playlist.belongsTo(app.models.User, {
+           as: 'Creator',
+           foreignKey: 'playlist_creator',
+           otherKey: "usr_id",
+           onUpdate: 'CASCADE',
+           onDelete: 'CASCADE',
+         })
+      //  sequelize.sync().then(function() { console.log(app.models.Playlist.Instance.prototype) })
          // List of required models
 
          // Define relations of this model

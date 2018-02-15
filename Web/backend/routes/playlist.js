@@ -36,6 +36,7 @@ module.exports = function (app) {
 
 
             // Add filters
+            if (!S(Options.where.playlist_id).isEmpty()) query.where.playlist_id = {like:Options.where.playlist_id};
             if (!S(Options.where.playlist_name).isEmpty()) query.where.playlist_name = {like:Options.where.playlist_name + '%'};
             if (!S(Options.where.playlist_creator).isEmpty()) query.where.playlist_creator = {like:Options.where.playlist_creator};
 

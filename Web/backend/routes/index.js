@@ -33,7 +33,7 @@ module.exports = function (app) {
           res.render('site/download')
           });
 
-          
+
 
             /**
               * fav Layout

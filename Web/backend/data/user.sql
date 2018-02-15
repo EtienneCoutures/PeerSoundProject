@@ -31,11 +31,13 @@ CREATE TABLE IF NOT EXISTS `user` (
   `usr_lastname` varchar(255) NOT NULL,
   `usr_phone` varchar(255) NOT NULL,
   `usr_birthday` date NOT NULL,
-  `usr_role` enum('super-admin','admin','member') NOT NULL DEFAULT "member",
+  --`usr_role` enum('super-admin','admin','member') NOT NULL DEFAULT "member",
   `usr_insert` datetime NOT NULL,
   `usr_update` datetime NOT NULL,
   `usr_status` enum('waiting','active','lock') NOT NULL DEFAULT "active",
   `usr_image` blob default NULL,
+  --`nb_followers` int NOT NULL,
+  --`nb_following` int NOT NULL,
   primary key (`usr_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
 

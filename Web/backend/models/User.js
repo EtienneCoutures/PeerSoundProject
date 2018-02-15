@@ -72,12 +72,12 @@ module.exports = function (app) {
                 validate: {
                 }
             },
-            usr_role: {
+            /*usr_role: {
                 type: Sequelize.ENUM('super-admin','admin','member'),
                 defaultValue: "member",
                 validate: {
                 }
-            },
+            },*/
             usr_insert: {
                 type: Sequelize.DATE,
                 defaultValue: 0,
@@ -100,7 +100,19 @@ module.exports = function (app) {
               type: Sequelize.BLOB,
               defaultValue: null,
               validate:{
-              }
+              },
+            /*nb_followers: {
+                type: Sequelize.INTEGER,
+                defaultValue: 0,
+                validate: {
+                }
+              },
+              nb_following: {
+                type: Sequelize.INTEGER,
+                defaultValue: 0,
+                validate: {
+                }
+              }*/
             }
         };
 
@@ -118,10 +130,18 @@ module.exports = function (app) {
             }
         });
         require('./Follow')(app)
+        require('./Playlist')(app)
+        require('./Subscription')(app)
         app.models.User.hasMany(app.models.Follow, {as: 'Following', foreignKey: 'follower_usr_id', sourceKey: 'usr_id'})
         app.models.User.hasMany(app.models.Follow, {as: 'Followers', foreignKey: 'followed_usr_id', sourceKey: 'usr_id'})
-        sequelize.sync()
+        app.models.User.hasMany(app.models.Playlist, {as: 'Playlist', foreignKey: 'playlist_creator', sourceKey: 'usr_id'})
+        app.models.User.hasMany(app.models.Subscription, {as: 'Subscription', foreignKey: 'usr_id', sourceKey: 'usr_id'})
+
+    /*   sequelize.sync({ alter: true }).then(function(res) {
         console.log(app.models.User.Instance.prototype)
+      }).catch(function (err) {
+          logger.error(err);
+      });*/
         // List of required models
         // Define relations of this model
     }

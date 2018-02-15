@@ -74,9 +74,7 @@ router.get('/',
             ]),
             function (req, res) {
                 var Record = req.body;
-                if (!Record["follow_id"])
-                    return createRecord();
-                return updateRecord();
+                return createRecord();
 
                 function createRecord() {
                     var record = app.models["Follow"].build({});
@@ -91,26 +89,6 @@ router.get('/',
                         reply(err);
                     });
                 }
-                function updateRecord() {
-                    app.models["Follow"].find({
-                        "where":{
-                            "follow_id": Record["follow_id"]
-                        }
-                    }).then(function (record) {
-                        if (!record) return reply(req.translate('system', 'Record not found'));
-
-                        // Update fields
-
-                    if (!S(Record.follower_usr_id).isEmpty()) record.follower_usr_id = Record.follower_usr_id;
-                    if (!S(Record.followed_usr_id).isEmpty()) record.followed_usr_id = Record.followed_usr_id;
-
-                        record.save().then(function (record) {
-                            reply(null, record);
-                        }).catch(function (err) {
-                            reply(err);
-                        });
-                    });
-                }
                 function reply(err, record) {
                     if (err) {
                         res.json({
@@ -118,6 +96,11 @@ router.get('/',
                             errors: (err.errors && err.errors.length > 0) ? err.errors : [{message: err.message || err}]
                         });
                     } else {
+                      //console.log(app.models.Follow.Instance.prototype)
+                      record.getFollowed().then(function(result) {
+                        console.log(result)
+                      })
+                      console.log("la")
                         res.json({
                             "code": 0,
                         });
