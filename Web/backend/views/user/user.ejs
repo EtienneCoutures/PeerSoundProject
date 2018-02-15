@@ -5,10 +5,40 @@
 <meta charset=utf-8 />
 <link href="/css/user.css" rel="stylesheet"/>
 </head>
-<br>
 <body>
-<!-- end row -->
+
+
 <div class="row">
+  <div class="user">
+    <div class="title">
+      <h3>Music Title TKT JE VAIS LE MODIF DEMAIN</h3>
+    </div>
+    <div class="item">
+      <div class="information">
+        <div class="titles">
+          <div class="col-md-6">
+            <span class="itemTitle">Min</span>
+          </div>
+          <div class="col-md-6">
+            <span class="itemAuthor">Share</span>
+          </div>
+        </div>
+      </div>
+      <div class="information" style="border-top: 1px solid #E4E4E4;">
+        <div class="titles">
+          <div class="col-md-6">
+            <span class="itemTitle">Min</span>
+          </div>
+          <div class="col-md-6">
+            <span class="itemAuthor">Share</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="row">
     <div class="col-md-12">
         <div class="panel panel-inverse" style="margin-bottom:50px">
             <div class="panel-body">
@@ -21,28 +51,24 @@
                 <div class="row">
                     <h2>Nom de l'user Avec son ID</h2>
                     <p>Je vais voir avec toi demain comment bien le faire</p>
-                    <div class="btn-group">
-                    <button type="button" class="btn btn-primary">Amis</button>
-                    <button type="button" class="btn btn-primary">Envoyer une musique</button>
-                    <div class="btn-group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Sony <span class="caret"></span></button>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Soon</a></li>
-                        <li><a href="#">toto</a></li>
-                      </ul>
+
+                      <div class="btn-group">
+                      <button type="button" style="background-color:#DAE9F0; font-size:30px;" class="btn">Amis</button>
+                      <button type="button" style="background-color:#DAE9F0; font-size:30px;" class="btn">Conseiller une playlist</button>
+                      <button data-toggle="collapse" data-target="#playlist" type="button" style="background-color:#DAE9F0;font-size:30px;" class="btn">Lister les playlists</button>
                     </div>
-                  </div>
+
                 </div>
               <div class="row">
               <div class="col-md-6">
-              <div  class="btn playlist" data-ng-init="isFollowed()">
+              <div  class="btn" data-ng-init="isFollowed()">
                 <button  id="unfollow" ng-if="followed === true" ng-click='unFollow()'>unFollow</button>
                 <button  id="follow" ng-if="followed === false" ng-click='Follow()'>Follow</button>
               </div>
             </div>
               <div class="col-md-6">
               <a href="#/playlist/" class="MyPlaylist">
-                <button class="btn playlist" href="#/">Envoyer un message à {{user_login}}</button>
+                <button class="btn" href="#/">Envoyer un message à {{user_login}}</button>
             </a>
           </div>
             </div>
@@ -53,5 +79,6 @@
     </div>
     <!-- end col-12 -->
 </div>
+
 <!-- end row -->
 </body>
