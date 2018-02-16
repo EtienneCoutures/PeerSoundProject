@@ -26,13 +26,9 @@ define([
                   templateUrl: '/partials/site/followed',
                   controller: 'FollowedController'
                 })
-                .when('/result', {
-                  templateUrl: '/partials/site/result',
-                  controller: 'ResultController'
-                })
                 .when('/result/:type/:query', {
                   templateUrl: '/partials/site/result',
-                  controller: 'BetterResultController'
+                  controller: 'ResultController'
                 })
                 .when('/follower', {
                     templateUrl: '/partials/site/follower',
@@ -48,14 +44,6 @@ define([
               Restangular.one("follow/followerNb/", $scope.myself.usr_id).get().then(function(result) {
                 $scope.nbFollowers = result.count;
               });
-
-              /*$scope.redirectToUser = function(name) {
-                Restangular.one('user/', name).get().then(function(result) {
-                  if (result.User.usr_id == $scope.myself.id)
-                    return $location.url('/myself')
-                  return $location.url('/user/' + result.User.usr_id)
-                });
-              }*/
             }
         ])
         .controller('DownloadController', [
@@ -63,7 +51,7 @@ define([
             function ($scope) {
             }
         ])
-        .controller('BetterResultController', [
+        .controller('ResultController', [
             '$scope',
             'Restangular',
             '$routeParams',
@@ -91,15 +79,6 @@ define([
               })
       }
     ])
-      .controller('ResultController', [
-            '$scope',
-            function ($scope) {
-              $scope.result = $scope.searchResult
-              console.log($scope.result)
-              //for (var member in $scope.searchResult) delete $scope.searchResult[member];
-                console.log($scope.result.type)
-            }
-        ])
         .controller('FollowedController', [
             '$scope',
             'Restangular',
@@ -132,8 +111,6 @@ define([
             'Restangular',
             function ($scope, Restangular) {
 
-              console.log("la  =>")
-              console.log($scope.myself)
               $scope.users = []
 
               $scope.getUsers = function() {
