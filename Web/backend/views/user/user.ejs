@@ -6,87 +6,51 @@
 <link href="/css/user.css" rel="stylesheet"/>
 </head>
 <body>
-
-
-<div class="row">
   <div class="user">
     <div class="title">
-      <h3>Music Title TKT JE VAIS LE MODIF DEMAIN</h3>
+      <img src="/img/myAccount.png" class="img-rounded" style="widht:50px; height:50px; margin-top:10px">
+          <h2>ITIZ</h2>
+          <div style="margin-top:10px; margin-bottom:10px;"class="btn-group test">
+            <button type="button" style="background-color:#F7FFFF; font-size:30px;" class="btn">Amis</button>
+            <button type="button" style="background-color:#F7FFFF; font-size:30px;" class="btn">Conseiller une playlist</button>
+            <button data-toggle="collapse" data-target="#playlist" type="button" style="background-color:#F7FFFF;font-size:30px;" class="btn">Lister les playlists</button>
+          </div>
     </div>
-    <div class="item">
-      <div class="information">
-        <div class="titles">
-          <div class="col-md-6">
-            <span class="itemTitle">Min</span>
-          </div>
-          <div class="col-md-6">
-            <span class="itemAuthor">Share</span>
-          </div>
-        </div>
+
+      <div class="information" style="border-top:1px solid black; padding:10px;">
+        <h2>Playlist Administré par ITIZ</h2>
+        <table class="notifTable">
+          <tbody>
+            <tr>
+              <td>Rock</td>
+            </tr>
+            <tr>
+              <td>Techno</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="information" style="border-top: 1px solid #E4E4E4;">
-        <div class="titles">
-          <div class="col-md-6">
-            <span class="itemTitle">Min</span>
-          </div>
-          <div class="col-md-6">
-            <span class="itemAuthor">Share</span>
-          </div>
-        </div>
+
+    <div class="information">
+      <div class="col-md-4">
+      <div  class="btn" data-ng-init="isFollowed()">
+        <button  style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:150px;" id="unfollow" ng-if="followed === true" ng-click='unFollow()'>unFollow</button>
+        <button  style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:150px;" id="follow" ng-if="followed === false" ng-click='Follow()'>Follow</button>
       </div>
+    </div>
+    <div class="col-md-4">
+    </div>
+      <div class="col-md-4">
+        <button style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:290px;" class="btn" href="#" ng-click="toogleDisplayMessage(true)">Envoyer un message à {{user_login}}</button>
+        <br>
+        <div ng-if="displayMessageInpunt === true">
+          <form>
+        <input type="text" id="messageInput" required></input>
+        <button type="submit" ng-click="sendMessage(id, messageContent())" style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:150px;" href="" class="glyphicon glyphicon-send"></button>
+        <a href="" class="glyphicon glyphicon-remove" ng-click="toogleDisplayMessage(false)"></a>
+      </form>
+      </div>
+  </div>
     </div>
   </div>
-</div>
-
-  <div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-inverse" style="margin-bottom:50px">
-            <div class="panel-body">
-              <div class="news">
-              <div class="row">
-                <div class="col-md-12">
-                  <img src="/img/myAccount.png" class="img-rounded" style="widht:50px; height:50px;">
-                </div>
-              </div>
-                <div class="row">
-                    <h2>Nom de l'user Avec son ID</h2>
-                    <p>Je vais voir avec toi demain comment bien le faire</p>
-
-                      <div class="btn-group">
-                      <button type="button" style="background-color:#DAE9F0; font-size:30px;" class="btn">Amis</button>
-                      <button type="button" style="background-color:#DAE9F0; font-size:30px;" class="btn">Conseiller une playlist</button>
-                      <button data-toggle="collapse" data-target="#playlist" type="button" style="background-color:#DAE9F0;font-size:30px;" class="btn">Lister les playlists</button>
-                    </div>
-
-                </div>
-              <div class="row">
-              <div class="col-md-6">
-              <div  class="btn" data-ng-init="isFollowed()">
-                <button  id="unfollow" ng-if="followed === true" ng-click='unFollow()'>unFollow</button>
-                <button  id="follow" ng-if="followed === false" ng-click='Follow()'>Follow</button>
-              </div>
-            </div>
-              <div class="col-md-6">
-              <div class="MyPlaylist">
-                <button class="btn" href="#" ng-click="toogleDisplayMessage(true)">Envoyer un message à {{user_login}}</button>
-                <br>
-                <div ng-if="displayMessageInpunt === true">
-                  <form>
-                <input type="text" id="messageInput" required></input>
-                <button type="submit" ng-click="sendMessage(id, messageContent())" style="background-color:white;" href="" class="glyphicon glyphicon-send"></button>
-                <a href="" class="glyphicon glyphicon-remove" ng-click="toogleDisplayMessage(false)"></a>
-              </form>
-              </div>
-            </div>
-          </div>
-            </div>
-          </div>
-            </div>
-          </div>
-        <!-- end panel -->
-    </div>
-    <!-- end col-12 -->
-</div>
-
-<!-- end row -->
 </body>

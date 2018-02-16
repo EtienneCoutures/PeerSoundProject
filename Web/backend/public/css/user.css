@@ -1,3 +1,8 @@
+body{
+  background-color: white;
+  font-family: Arial,Helvetica,sans-serif;
+}
+
 .news{
   width: 100%;
   position: relative;
@@ -35,7 +40,6 @@
   -o-transition:All 1s ease;
   background-color: #fff;
   margin: auto;
-  height: 250px;
   margin-top: 55px;
   margin-bottom: 50px;
   display: block;
@@ -63,16 +67,48 @@
 }
 
 .user .information {
-  width: 90%;
+  width: 100%;
   display: block;
   float: left;
   text-align: center;
-  padding: 10px 0px;
+  padding: 50px 0px;
   margin: 0;
 }
 
 .user .title {
-  border-bottom: 1px solid #E4E4E4;
   width: 100%;
   text-align: center;
+}
+
+.bouttonfollow{
+  border-top: 1px solid #E4E4E4;
+  text-align: center;
+}
+
+.test:hover{
+  background-color: white;
+}
+
+/* List.ejs*/
+table.notifTable {
+  font-family: Arial,Helvetica,sans-serif;
+  width: 100%;
+  margin-top: 40px;
+  text-align: center;
+  border-collapse: collapse;
+}
+table.notifTable td, table.notifTable th {
+  border: 2px solid #DDDDDD;
+  padding: 25px 1px;
+  width: 300px;
+}
+table.notifTable tbody td {
+  font-size: 17px;
+  background-color:#F7FFFF;
+  border-color: black;
+}
+
+table.notifTable td:hover{
+  background-color: white;
+  cursor: pointer;
 }
