@@ -30,6 +30,10 @@ define([
                   templateUrl: '/partials/site/result',
                   controller: 'ResultController'
                 })
+                .when('/result/:type/:query', {
+                  templateUrl: '/partials/site/result',
+                  controller: 'BetterResultController'
+                })
                 .when('/follower', {
                     templateUrl: '/partials/site/follower',
                     controller: 'FollowerController'
@@ -59,7 +63,35 @@ define([
             function ($scope) {
             }
         ])
-        .controller('ResultController', [
+        .controller('BetterResultController', [
+            '$scope',
+            'Restangular',
+            '$routeParams',
+            function ($scope, Restangular, $routeParams) {
+              $scope.type = $routeParams.type
+              var where;
+              if ($scope.type == 'user') {
+                where = {
+                  'usr_login': $routeParams.query
+                }
+              }
+              if ($scope.type == 'playlist') {
+                where = {
+                  'playlist_name': $routeParams.query
+                }
+              }
+              if ($scope.type == 'music') {
+                where = {
+                  'music_name': $routeParams.query
+                }
+              }
+              Restangular.one($scope.type).get({ where
+              }).then(function(result) {
+                $scope.result = result
+              })
+      }
+    ])
+      .controller('ResultController', [
             '$scope',
             function ($scope) {
               $scope.result = $scope.searchResult
@@ -133,7 +165,7 @@ define([
             'Restangular',
             '$location',
             function ($scope, Restangular, $location) {
-                if ($scope.myself && $scope.myself.usr_id) $location.url('/') 
+                if ($scope.myself && $scope.myself.usr_id) $location.url('/')
                 $scope.$view = 'login';
                 $scope.User = {};
 

@@ -102,10 +102,8 @@ define([
                   }
 
                   $scope.searchIn = function(type, value) {
-                    if (type == "user") $scope.searchUser(type, value)
-                    else if (type == "playlist") $scope.searchPlaylist(type, value)
-                    else if (type == "music") $scope.searchMusic(type, value)
-                    else console.log("En construction")
+                    if (type == 'all') console.log("En construction")
+                    $location.url('/result/' + type + '/' + value)
                   }
 
                 /* searching fnct */

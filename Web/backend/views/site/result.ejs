@@ -16,8 +16,8 @@
 
 <center>La page de resultat de recherche</center>
 
-<div ng-if="result.type == 'user'">
-  <div class="news" ng-repeat="x in result.result" style="margin-bottom:15px">
+<div ng-if="type == 'user'">
+  <div class="news" ng-repeat="x in result" style="margin-bottom:15px">
     <div class="row">
       <div class="col-md-2">
       </div>
@@ -31,8 +31,8 @@
   </div>
 </div>
 
-<div ng-if="result.type == 'playlist'">
-  <div class="news" ng-repeat="x in result.result" style="margin-bottom:15px">
+<div ng-if="type == 'playlist'">
+  <div class="news" ng-repeat="x in result" style="margin-bottom:15px">
     <div class="row">
       <div class="col-md-2">
       </div>
@@ -46,8 +46,8 @@
   </div>
 </div>
 
-<div ng-if="result.type == 'music'">
-  <div class="news" ng-repeat="x in result.result" style="margin-bottom:15px">
+<div ng-if="type == 'music'">
+  <div class="news" ng-repeat="x in result" style="margin-bottom:15px">
     <div class="row">
       <div class="col-md-2">
       </div>

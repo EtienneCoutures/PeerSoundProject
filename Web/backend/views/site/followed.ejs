@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-
   <center><h1>You are Following {{ followerNb }} user(s)</h1></center>
-
   <div class="news" ng-repeat="x in users" style="margin-bottom:15px">
     <div class="row">
       <div class="col-md-2">
@@ -16,9 +14,5 @@
       <a ng-href='#' ng-click="redirectToUser(x.usr_login)"><h5 style="color:blue"> {{x.usr_email}}</h5></a>
     </div>
   </div>
-
-
-
 </body>
-
 </html>
