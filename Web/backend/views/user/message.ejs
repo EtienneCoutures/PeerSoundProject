@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html>
 <body>
+  <div ng-if="myself.messages.length" data-ng-init="init()">
+    <h1>You have {{ myself.messages.length }} message(s)</h1>
 
-  <h1>You have {{ messages.length }} message(s)</h1>
-
-  <div ng-repeat='x in messages'>
-    <p> {{ x.sender_id }}</p>
-    <p> {{ x.content }}</p>
-
+    <div class="news" ng-repeat="x in myself.messages" style="margin-bottom:15px">
+      <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+          <h2><b>From : {{ sender_usr[$index].usr_login  }}</b></h2>
+        </div>
+        <div class="col-md-2">
+          <a href="" class="glyphicon glyphicon-trash" ng-click="goDeleteMessage(x.message_id)"></a>
+          <a href="" class="glyphicon glyphicon-ok" ng-click="readMessage(x.message_id)"></a>
+        </div>
+      </div>
+      <div class="text">
+        {{ x.content }}
+      </div>
+    </div>
   </div>
+  <div ng-if="!(myself.messages.length)">
+    <h1>You have no message</h1>
+  </div> 
 
 </body>
 

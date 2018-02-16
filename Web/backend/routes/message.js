@@ -35,7 +35,6 @@ module.exports = function (app) {
               if (!S(Record.sender_id).isEmpty()) record.sender_id = Record.sender_id;
               if (!S(Record.dest_id).isEmpty()) record.dest_id = Record.dest_id;
               if (!S(Record.content).isEmpty()) record.content = Record.content;
-              record.message_update =
 
               record.save().then(function (record) {
                   reply(null, record);
@@ -61,10 +60,11 @@ module.exports = function (app) {
                   }*/
 
                   // Update fields
-
+                  console.log("on y est")
               if (!S(Record.sender_id).isEmpty()) record.sender_id = Record.sender_id;
               if (!S(Record.dest_id).isEmpty()) record.dest_id = Record.dest_id;
               if (!S(Record.content).isEmpty()) record.content = Record.content;
+              if (!S(Record.is_read).isEmpty()) record.is_read = Record.is_read ;
 
 
                   record.save().then(function (record) {
@@ -114,6 +114,8 @@ module.exports = function (app) {
               // Add filters
               if (!S(Options.where.dest_id).isEmpty()) query.where.dest_id = {like:Options.where.dest_id};
               if (!S(Options.where.sender_id).isEmpty()) query.where.sender_id = {like:Options.where.sender_id};
+              if (!S(Options.where.is_read).isEmpty()) query.where.is_read = {like:Options.where.is_read};
+
 
               query.limit = Options.limit || null;
               query.offset = Options.limit ? Options.limit * ((Options.page || 1) - 1) : null;
@@ -124,5 +126,32 @@ module.exports = function (app) {
                   res.json(result);
               });
           });
+
+          router.delete('/',
+              app.requirePermission([
+                  ['allow', {
+                      users:['@']
+                  }],
+                  ['deny', {
+                      users:'*'
+                  }]
+              ]),
+              function (req, res) {
+                console.log(req.query)
+                  app.models["Message"].find({
+                      "where":{
+                          "message_id": req.query.message_id
+                      }
+                  }).then(function(record) {
+                      if (record) {
+                          record.destroy();
+                      }
+
+                      res.json({
+                          code: 0,
+                          message: req.translate('system', '__MODEL__ successfully deleted', {__MODEL__: 'Message'})
+                      });
+                  });
+              });
 
 };

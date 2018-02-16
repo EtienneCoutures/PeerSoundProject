@@ -101,7 +101,7 @@ define([
             function ($scope, Restangular) {
 
               console.log("la  =>")
-              console.log($scope.myself)  
+              console.log($scope.myself)
               $scope.users = []
 
               $scope.getUsers = function() {
@@ -133,6 +133,7 @@ define([
             'Restangular',
             '$location',
             function ($scope, Restangular, $location) {
+                if ($scope.myself && $scope.myself.usr_id) $location.url('/') 
                 $scope.$view = 'login';
                 $scope.User = {};
 

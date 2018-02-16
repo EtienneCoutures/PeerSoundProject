@@ -10,7 +10,7 @@
     margin: 0;
     background-color: #2d353c;
     opacity: 0,98;
-    height: 50px;                     
+    height: 50px;
 }
 .navbar-header .navbar-brand {
     width: 33.3333333%;
@@ -20,6 +20,20 @@
     float: left;
     margin-right: 0;
 }*/
+
+.news{
+  width: 455px;
+  position: relative;
+  height: 150px;
+  border: 1px solid #c0c0c0;
+  clear: both;
+  text-align: center;
+  margin:auto;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: white;
+}
 
 span.select2 {
     width: 100% !important;

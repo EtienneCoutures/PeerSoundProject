@@ -15,11 +15,13 @@ define([
             '$translate',
             '$cookies',
             'Restangular',
-            function($scope, $translatePartialLoader, $location, $translate, $cookies, Restangular) {
+            '$route',
+            function($scope, $translatePartialLoader, $location, $translate, $cookies, Restangular, $route) {
                 $translatePartialLoader.addPart('system');
                 $translatePartialLoader.addPart('site');
 
                 $scope.myself = false;
+                $scope.sender_usr = []
 
                 $scope.searchResult = {
                   type : "",
@@ -27,13 +29,19 @@ define([
                   count: 0
                 }
 
-                if ($scope.myself.usr_id) {console.log("emesage");$scope.getMessage()}
-                else console.log("pas user id")
                 $scope.getMessage = function() {
                   Restangular.one('message').get({where: {
-                    dest_id: $scope.myself.id
+                    dest_id: $scope.myself.usr_id,
+                    is_read: false
                   }}).then(function(result) {
-                    $scope.messages = result
+                    $scope.myself.messages = result
+                    for (var i = 0 ; i != $scope.myself.messages.length ; ++i) {
+                    Restangular.one('user').get({where: {
+                      usr_id: $scope.myself.messages[i].sender_id
+                    }}).then(function(result) {
+                        $scope.sender_usr.push(result[0])
+                    })
+                  }
                   })
                 }
 
@@ -75,7 +83,9 @@ define([
                 });
 
                 $scope.login = function(user) {
-                    $scope.myself = user;
+                  $scope.myself = user;
+                  console.log("ji")
+
                     $scope.follow()
                     $scope.getMessage()
                   };
@@ -150,6 +160,8 @@ define([
               }
 
                 $scope.logout = function() {
+                    if ($scope.myself && $scope.myself.messages) $scope.myself.messages = null;
+                    console.log($scope.myself.messages)
                     $scope.myself = null;
                     $location.url('/login');
                     Restangular.one('auth', 'logout').get().then(function(result) {
