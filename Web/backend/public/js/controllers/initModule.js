@@ -27,6 +27,22 @@ define([
                   count: 0
                 }
 
+                if ($scope.myself.usr_id) {console.log("emesage");$scope.getMessage()}
+                else console.log("pas user id")
+                $scope.getMessage = function() {
+                  Restangular.one('message').get({where: {
+                    dest_id: $scope.myself.id
+                  }}).then(function(result) {
+                    $scope.messages = result
+                  })
+                }
+
+                $scope.sendMessage = function(to, mess) {
+                  if (!mess) return
+                  Restangular.all('message').post({sender_id: $scope.myself.usr_id, dest_id: to, content: mess}).then(function(result) {
+                    console.log(result)
+                  });
+                }
 
                 Restangular.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
                     if (data.code == -2) {
@@ -48,6 +64,7 @@ define([
                         Restangular.one('auth', 'me').get().then(function(result) {
                             $scope.myself = result.account;
                             $scope.loaded = true;
+                            $scope.getMessage()
                         }).catch(function(err) {
                             $location.url('/login');
                             $scope.loaded = true;
@@ -60,6 +77,7 @@ define([
                 $scope.login = function(user) {
                     $scope.myself = user;
                     $scope.follow()
+                    $scope.getMessage()
                   };
 
                   $scope.userQuery = function() {

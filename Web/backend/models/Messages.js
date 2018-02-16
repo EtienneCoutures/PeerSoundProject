@@ -18,12 +18,6 @@ module.exports = function (app) {
           validate: {
           }
       },
-      message_update: {
-          type: Sequelize.DATE,
-          defaultValue: 0,
-          validate: {
-          }
-      },
       sender_id: {
           type: Sequelize.INTEGER,
           references : {

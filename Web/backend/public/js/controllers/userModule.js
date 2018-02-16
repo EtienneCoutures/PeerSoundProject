@@ -24,6 +24,10 @@ define([
                   templateUrl: '/partials/user/unknowUser',
                   controller: 'UnknowUserController'
                 })
+                .when('/message', {
+                  templateUrl: '/partials/user/message',
+                  controller: 'MessageController'
+                })
                 .when('/myself', {
                   templateUrl: '/partials/user/form',
                   controller: 'SaveUserController'
@@ -105,23 +109,31 @@ define([
             '$location',
             'Restangular',
             function ($scope, $routeParams, $location, Restangular) {
-              var id = $routeParams.usr_id;
-              if (id == $scope.myself.usr_id) {
+              $scope.id = $routeParams.usr_id;
+              if ($scope.id == $scope.myself.usr_id) {
                 return $location.url('/myself'); }
 
-                Restangular.one('user', id).get().then(function(result){
+                $scope.displayMessageInpunt = false
+
+              Restangular.one('user', $scope.id).get().then(function(result){
                   if (result.code == 1) {
                   $location.url('/unknowUser');
                   }
                     $scope.user_login = result.User.usr_login;
                 })
 
+                $scope.toogleDisplayMessage = function(value) {
+                  $scope.displayMessageInpunt = value
+                }
 
+                $scope.messageContent = function() {
+                  return document.getElementById('messageInput').value
+                }
 
                 $scope.isFollowed = function() {
                   Restangular.one('follow').get({
                     where :{
-                      "followed_usr_id": id,
+                      "followed_usr_id": $scope.id,
                       "follower_usr_id": $scope.myself.usr_id
                     }
                   }).then(function(result) {
@@ -139,7 +151,7 @@ define([
                 $scope.Follow = function() {
                   Restangular.all("/follow"/* + id + "/" + $scope.myself.usr_id*/).post({
                       follower_usr_id : $scope.myself.usr_id,
-                      followed_usr_id : id
+                      followed_usr_id : $scope.id
                   }).then(function(result) {
                       if (result.code == 0) {$scope.followed = true}
                   })
@@ -150,7 +162,7 @@ define([
 
 
                   Restangular.one('follow').remove({
-                      "followed_usr_id": id,
+                      "followed_usr_id": $scope.id,
                       "follower_usr_id": $scope.myself.usr_id
                      }).then(function(result) {
                     if (result.code == 0)  {
@@ -164,6 +176,11 @@ define([
 
             }])
             .controller('UnknowUserController', [
+                '$scope',
+                function ($scope) {
+                }
+            ])
+            .controller('MessageController', [
                 '$scope',
                 function ($scope) {
                 }

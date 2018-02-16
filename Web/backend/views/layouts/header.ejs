@@ -99,7 +99,8 @@
           </div>
           <div class="col-md-6">
             <div class="col-md-4 navbar-brand">
-              <img id="notif" src="/img/music.png">
+              <img id="notif" ng-if="!(messages.length)" src="/img/music.png">
+              <a href="/#/message"><img id="notif" ng-if="messages.length > 0" src="/img/musicNotif.png"></a>
             </div>
             <div class="col-md-6">
               <ul class="nav navbar-nav navbar-right">

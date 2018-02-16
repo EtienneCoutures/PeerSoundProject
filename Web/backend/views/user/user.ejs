@@ -67,9 +67,17 @@
               </div>
             </div>
               <div class="col-md-6">
-              <a href="#/playlist/" class="MyPlaylist">
-                <button class="btn" href="#/">Envoyer un message à {{user_login}}</button>
-            </a>
+              <div class="MyPlaylist">
+                <button class="btn" href="#" ng-click="toogleDisplayMessage(true)">Envoyer un message à {{user_login}}</button>
+                <br>
+                <div ng-if="displayMessageInpunt === true">
+                  <form>
+                <input type="text" id="messageInput" required></input>
+                <button type="submit" ng-click="sendMessage(id, messageContent())" style="background-color:white;" href="" class="glyphicon glyphicon-send"></button>
+                <a href="" class="glyphicon glyphicon-remove" ng-click="toogleDisplayMessage(false)"></a>
+              </form>
+              </div>
+            </div>
           </div>
             </div>
           </div>

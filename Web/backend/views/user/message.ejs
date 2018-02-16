@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+  <h1>You have {{ messages.length }} message(s)</h1>
+
+  <div ng-repeat='x in messages'>
+    <p> {{ x.sender_id }}</p>
+    <p> {{ x.content }}</p>
+
+  </div>
+
+</body>
+
+</html>
