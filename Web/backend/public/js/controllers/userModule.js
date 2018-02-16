@@ -199,7 +199,6 @@ define([
 
                   $scope.readMessage = function(params) {
                     Restangular.all('message').post({message_id: params, is_read: true}).then(function(result) {
-
                     })
                   }
                 }
