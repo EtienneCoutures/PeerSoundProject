@@ -32,6 +32,13 @@ table.notifTable thead th {
 table.notifTable tfoot td {
   font-size: 8px;
 }
+
+.btn{
+  border: none; /* Remove borders */
+  padding: 5px 15px; /* Add some padding */
+  cursor: pointer;
+  border-radius: 10px;
+}
 /* new.ejs*/
 
 .form{
@@ -45,12 +52,6 @@ table.notifTable tfoot td {
   font-size: 25px;
 }
 
-.form-control{
-  height:40px;
-  width: 50%;
-  color: black;
-}
-
 .newPlaylist{
   border: 3px solid #003047;
   width: 1500px;
@@ -60,13 +61,11 @@ table.notifTable tfoot td {
   opacity: 0.6;
 }
 
-.btn{
-  border: none; /* Remove borders */
-  padding: 5px 15px; /* Add some padding */
-  cursor: pointer;
-  border-radius: 10px;
+.form-control{
+  height:40px;
+  width: 50%;
+  color: black;
 }
-
 
 .panel-txt{
   font-family: Arial,Helvetica,sans-serif;
@@ -92,6 +91,8 @@ table.notifTable tfoot td {
   margin: auto;
   margin-top: 35px;
   margin-bottom: 30px;
+  padding: 20px;
+  height: 250px;
   display: block;
   overflow: hidden;
   border-radius: 5px;
