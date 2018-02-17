@@ -134,10 +134,10 @@ table.notifTable tfoot td {
 
 
 
-/*.news{
-  width: 455px;
+.news{
+  width: 1200px;
   position: relative;
-  height: 150px;
+  height: 650px;
   border: 1px solid #c0c0c0;
   clear: both;
   text-align: center;
@@ -146,4 +146,4 @@ table.notifTable tfoot td {
   padding: 10px;
   border-radius: 5px;
   background-color: white;
-}*/
+}
