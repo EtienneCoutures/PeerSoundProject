@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-  <div ng-if="myself.messages.length" data-ng-init="init()">
+  <div ng-if="myself.messages.length" data-ng-init="getMessage()">
     <h1>You have {{ myself.messages.length }} message(s)</h1>
 
     <div class="news" ng-repeat="x in myself.messages" style="margin-bottom:15px">
@@ -12,8 +12,8 @@
           <h2><b>From : {{ sender_usr[$index].usr_login  }}</b></h2>
         </div>
         <div class="col-md-2">
-          <a href="" class="glyphicon glyphicon-trash" ng-click="goDeleteMessage(x.message_id)"></a>
-          <a href="" class="glyphicon glyphicon-ok" ng-click="readMessage(x.message_id)"></a>
+          <a href='' class="glyphicon glyphicon-trash" ng-click="goDeleteMessage(x.message_id)"></a>
+          <a href='' class="glyphicon glyphicon-ok" ng-click="readMessage(x.message_id)"></a>
         </div>
       </div>
       <div class="text">
@@ -23,8 +23,6 @@
   </div>
   <div ng-if="!(myself.messages.length)">
     <h1>You have no message</h1>
-  </div> 
-
+  </div>
 </body>
-
 </html>

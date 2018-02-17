@@ -212,20 +212,22 @@ define([
                 '$timeout',
                 '$route',
                 function ($scope, $location, Restangular, $timeout, $route) {
-                  //if (!$scope.myself.messages) {return $location.url('/')}
+
 
                   $scope.goDeleteMessage = function(params) {
                     Restangular.one('message').remove({
                         "message_id": params,
                        }).then(function(result) {
-
+                         $route.reload()
                     });
                   }
 
                   $scope.readMessage = function(params) {
                     Restangular.all('message').post({message_id: params, is_read: true}).then(function(result) {
+                      $route.reload()
                     })
                   }
+
                 }
             ])
         .controller('SaveUserController', [

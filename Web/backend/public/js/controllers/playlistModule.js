@@ -202,7 +202,6 @@ define([
                 Restangular.all('subscription').post(sub).then(function(result) {
                   if (result.code == 0)  {
                     $route.reload()
-                  console.log("crée")
                   }
                     $scope.errors = result.errors;
                     $scope.querying = false;
