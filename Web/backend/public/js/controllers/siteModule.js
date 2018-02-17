@@ -57,26 +57,48 @@ define([
             '$routeParams',
             function ($scope, Restangular, $routeParams) {
               $scope.type = $routeParams.type
-              var where;
-              if ($scope.type == 'user') {
-                where = {
-                  'usr_login': $routeParams.query
-                }
+              $scope.all  = {
+                user : [],
+                music : [],
+                playlist: []
               }
-              if ($scope.type == 'playlist') {
-                where = {
-                  'playlist_name': $routeParams.query
-                }
+
+              $scope.whereUser = function() { return { 'usr_login': $routeParams.query } }
+              $scope.wherePlaylist = function() { return { 'playlist_name': $routeParams.query } }
+              $scope.whereMusic = function() { return { 'music_name': $routeParams.query } }
+
+
+              $scope.ptr = {
+                user : $scope.whereUser(),
+                music : $scope.whereMusic(),
+                playlist : $scope.wherePlaylist()
               }
-              if ($scope.type == 'music') {
-                where = {
-                  'music_name': $routeParams.query
-                }
+
+
+              var where = $scope.ptr[$scope.type];
+              if ($scope.type != 'all') {
+                Restangular.one($scope.type).get({ where
+                }).then(function(result) {
+                  $scope.all[$scope.type] = result
+                })
               }
-              Restangular.one($scope.type).get({ where
-              }).then(function(result) {
-                $scope.result = result
-              })
+              else {
+                where = $scope.ptr['user']
+                Restangular.one('user').get({ where
+                }).then(function(result) {
+                  $scope.all['user'] = result
+                })
+                where = $scope.ptr['playlist']
+                Restangular.one('playlist').get({ where
+                }).then(function(result) {
+                  $scope.all['playlist'] = result
+                })
+                where = $scope.ptr['music']
+                Restangular.one('music').get({ where
+                }).then(function(result) {
+                  $scope.all['music'] = result
+                })
+              }
       }
     ])
         .controller('FollowedController', [

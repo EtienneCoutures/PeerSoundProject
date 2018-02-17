@@ -108,12 +108,18 @@ define([
             '$routeParams',
             '$location',
             'Restangular',
-            function ($scope, $routeParams, $location, Restangular) {
+            '$timeout',
+            function ($scope, $routeParams, $location, Restangular, $timeout) {
               $scope.id = $routeParams.usr_id;
-              if ($scope.id == $scope.myself.usr_id) {
-                return $location.url('/myself'); }
+              $scope.displayMessageInpunt = false
+              $scope.sended = false
+              $scope.me = false
 
-                $scope.displayMessageInpunt = false
+              if ($scope.id = $scope.myself.usr_id) {
+               $scope.me = true
+              }
+
+
 
               Restangular.one('user', $scope.id).get().then(function(result){
                   if (result.code == 1) {
@@ -122,8 +128,27 @@ define([
                     $scope.user_login = result.User.usr_login;
                 })
 
+                $scope.editAccount = function() {
+                  $location.url('/myself')
+                }
+
                 $scope.toogleDisplayMessage = function(value) {
                   $scope.displayMessageInpunt = value
+                }
+
+                $scope.messageHandler = function(id, content) {
+                  if (!content) return
+                  Restangular.all('message').post({sender_id: $scope.myself.usr_id, dest_id: id, content: content}).then(function(result) {
+                    if (!result.code) {
+                      $scope.sended = true
+                      document.getElementById('messageInput').value = null
+                      $timeout(function() {
+                          $scope.sended = false
+                      }, 2000);
+                    }
+                    else { console.log("error")
+                  }
+                  });
                 }
 
                 $scope.messageContent = function() {

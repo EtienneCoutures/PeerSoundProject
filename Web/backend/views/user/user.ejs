@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+<style>
+.userButton {
+  background-color:#F7FFFF;
+  font-size:30px;
+
+}
+</style>
 <html lang="fr">
 <html>
 <head>
@@ -11,12 +18,12 @@
       <img src="/img/myAccount.png" class="img-rounded" style="widht:50px; height:50px; margin-top:10px">
           <h2>ITIZ</h2>
           <div style="margin-top:10px; margin-bottom:10px;"class="btn-group test">
-            <button type="button" style="background-color:#F7FFFF; font-size:30px;" class="btn">Amis</button>
-            <button type="button" style="background-color:#F7FFFF; font-size:30px;" class="btn">Conseiller une playlist</button>
-            <button data-toggle="collapse" data-target="#playlist" type="button" style="background-color:#F7FFFF;font-size:30px;" class="btn">Lister les playlists</button>
+            <button ng-if="me === true" type="button"  class="btn userButton" ng-click="editAccount()">Edit</button>
+            <button type="button"  class="btn userButton">Amis</button>
+            <button type="button"  class="btn userButton">Conseiller une playlist</button>
+            <button data-toggle="collapse" data-target="#playlist" type="button"  class="btn userButton">Lister les playlists</button>
           </div>
     </div>
-
       <div class="information" style="border-top:1px solid black; padding:10px;">
         <h2>Playlist Administré par ITIZ</h2>
         <table class="notifTable">
@@ -30,7 +37,6 @@
           </tbody>
         </table>
       </div>
-
     <div class="information">
       <div class="col-md-4">
       <div  class="btn" data-ng-init="isFollowed()">
@@ -41,14 +47,15 @@
     <div class="col-md-4">
     </div>
       <div class="col-md-4">
-        <button style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:290px;" class="btn" href="#" ng-click="toogleDisplayMessage(true)">Envoyer un message à {{user_login}}</button>
+        <button style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:300px;" class="btn" href="#" ng-click="toogleDisplayMessage(true)">Envoyer un message à {{user_login}}</button>
         <br>
         <div ng-if="displayMessageInpunt === true">
           <form>
         <input type="text" id="messageInput" required></input>
-        <button type="submit" ng-click="sendMessage(id, messageContent())" style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:150px;" href="" class="glyphicon glyphicon-send"></button>
+        <button type="submit" ng-click="messageHandler(id, messageContent())" style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:150px;" href="" class="glyphicon glyphicon-send"></button>
         <a href="" class="glyphicon glyphicon-remove" ng-click="toogleDisplayMessage(false)"></a>
       </form>
+      <p ng-if="sended == true">Message sent to {{user_login}} !<p>
       </div>
   </div>
     </div>

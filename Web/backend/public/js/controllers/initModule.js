@@ -45,13 +45,6 @@ define([
                   })
                 }
 
-                $scope.sendMessage = function(to, mess) {
-                  if (!mess) return
-                  Restangular.all('message').post({sender_id: $scope.myself.usr_id, dest_id: to, content: mess}).then(function(result) {
-                    console.log(result)
-                  });
-                }
-
                 Restangular.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
                     if (data.code == -2) {
                         $location.url('/login');
@@ -65,6 +58,10 @@ define([
                       return $location.url('/myself')
                     return $location.url('/user/' + result.User.usr_id)
                   });
+                }
+
+                $scope.redirectTo = function(type, id) {
+                  return $location.url('/' + type +'/' + id)
                 }
 
                 $scope.$on('$routeChangeStart', function() {
@@ -84,8 +81,6 @@ define([
 
                 $scope.login = function(user) {
                   $scope.myself = user;
-                  console.log("ji")
-
                     $scope.follow()
                     $scope.getMessage()
                   };
@@ -95,15 +90,9 @@ define([
                       var query = document.getElementById("search").value
                       if (query) {
                         if (['all', 'playlist', 'user', 'music'].indexOf(type) >= 0) {
-                          console.log("Le type recherche " + query + " dans " + type)
-                          $scope.searchIn(type, query)
+                          $location.url('/result/' + type + '/' + query)
                         }
                       }
-                  }
-
-                  $scope.searchIn = function(type, value) {
-                    if (type == 'all') console.log("En construction")
-                    $location.url('/result/' + type + '/' + value)
                   }
 
                 /* searching fnct */

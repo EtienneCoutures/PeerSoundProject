@@ -85,12 +85,10 @@ menu_items.forEach(function(item) { %>
         <h5><%= item.user_name %> viens de vous inviter à rejoindre la playlist <%= item.playlist %></h5>
         <h5>Title: <%= item.titre %></h5>
         <h5>Artiste: <%= item.artist %></h5>
-        <a ng-href='#' ng-click="redirectToUser('itiz')"><h5> UserName: <%= item.user_name%></h5></a>
+        <h5>User : <%= item.user_name %></h5>
       </div>
-      <a href="#/playlist" class="MyPlaylist">
-      <div class="btnvalidate">
-        <button class="btn playlist" href="#/">Acces to playlist</button>
-      </div>
+        <button class="btn playlist">Acces to playlist</button>
+        <button class="btn playlist" ng-click="redirectTo('user', 1)"><%= item.user_name%></button>
     </a>
     </div>
     <%

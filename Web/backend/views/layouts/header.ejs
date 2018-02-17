@@ -106,11 +106,11 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown navbar-user">
                   <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                    <span>{{myself.usr_email | ucfirst}}</span> <b class="caret"></b>
+                    <span style="color:white;">{{myself.usr_email | ucfirst}}</span> <b style="color:white" class="caret"></b>
                   </a>
                   <ul class="dropdown-menu animated fadeInLeft" ng-init="follow()">
                     <li class="arrow"></li>
-                    <li><a ng-href="#/user/{{myself.usr_id}}" translate>Edit Profile</a></li>
+                    <li><a ng-href="#/myself" translate>Edit Profile</a></li>
                     <li class="divider"></li>
                     <li><a href="" ng-click="logout()" translate>Log Out</a></li>
                     <li><a href="#/follower">Followers ({{nbFollowers}})</a></li>
