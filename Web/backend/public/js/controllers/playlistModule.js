@@ -97,7 +97,6 @@ define([
               }}).then(function(result) {
                 $scope.playlist = result[0]
               })
-
               Restangular.all('playlist').get('', {
                   where: {
                     playlist_creator: $scope.myself.usr_id

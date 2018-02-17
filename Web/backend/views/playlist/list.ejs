@@ -57,7 +57,7 @@
         <tr>
           <td>
             <a href="" class="glyphicon glyphicon-eye-open" ng-click="goTo('playlist/', x.playlist_id)"></a>
-            <a href="" class="glyphicon glyphicon-wrench" ng-if="playlist.playlist_creator == myself.usr_id" ng-click="goTo('playlist/', x.playlist_id + '/admin')"></a>
+            <a href="" class="glyphicon glyphicon-wrench" ng-if="x.playlist_creator == myself.usr_id" ng-click="goTo('playlist/', x.playlist_id + '/admin')"></a>
           </td>
           <td>Apero MrBiscotte</td>
           <td> {{ x.playlist_name }} </td>
