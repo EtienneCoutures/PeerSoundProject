@@ -4,9 +4,10 @@
 <link href="/css/playlist.css" rel="stylesheet"/>
 </head>
 <body>
-    <div class="row">
-      <center><h1 class="label-txt"> <b>Créer une nouvelle playlist</b></h1>
-      <form class="newPlaylist" name="newPlaylist" ng-submit="savePlaylist()">
+  <div class="panel-body">
+    <div class="form-group" style="margin-bottom:5%">
+      <center><h1 class="label-txt"><b>Créer une nouvelle playlist</b></h1>
+      <form class="form-group" name="newPlaylist" ng-submit="savePlaylist()">
         <div class="form">
           <label class="label-txt" for="name">Name</label>
           <input type="text" ng-model="playlist.playlist_name" class="form-control"  required>
@@ -47,5 +48,6 @@
         <h3> Playlist created :)</h3>
       </div>
     </div>
-    <center>
+  </div>
+  </center>
 </body>

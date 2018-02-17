@@ -74,7 +74,6 @@ define([
                 playlist : $scope.wherePlaylist()
               }
 
-
               var where = $scope.ptr[$scope.type];
               if ($scope.type != 'all') {
                 Restangular.one($scope.type).get({ where
