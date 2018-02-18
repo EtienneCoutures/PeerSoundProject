@@ -142,8 +142,11 @@ table.notifTable tfoot td {
   clear: both;
   text-align: center;
   margin:auto;
-  margin-top: 10px;
   padding: 10px;
   border-radius: 5px;
   background-color: white;
+}
+
+.newUser{
+  margin-top: 100px;
 }

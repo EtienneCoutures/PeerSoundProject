@@ -122,7 +122,6 @@ module.exports = function (app) {
           var form = new formidable.IncomingForm();
           form.parse(req, function (err, fields, files) {
             res.write('File uploaded');
-            console.log("zizi")
             res.end();
           };*/
 
