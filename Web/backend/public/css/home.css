@@ -12,6 +12,20 @@
     background-color:white;
 }
 
+/*.news{
+  width: 455px;
+  position: relative;
+  height: 150px;
+  border: 1px solid #c0c0c0;
+  clear: both;
+  text-align: center;
+  margin:auto;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: white;
+}*/
+
 .text{
   border-bottom: 1px solid grey;
   margin-bottom: 10px;

@@ -1,57 +1,63 @@
 <!DOCTYPE html>
+<style>
+.userButton {
+  background-color:#F7FFFF;
+  font-size:30px;
+
+}
+</style>
 <html lang="fr">
 <html>
 <head>
 <meta charset=utf-8 />
 <link href="/css/user.css" rel="stylesheet"/>
 </head>
-<br>
 <body>
-<!-- end row -->
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-inverse" style="margin-bottom:50px">
-            <div class="panel-body">
-              <div class="news">
-              <div class="row">
-                <div class="col-md-12">
-                  <img src="/img/myAccount.png" class="img-rounded" style="widht:50px; height:50px;">
-                </div>
-              </div>
-                <div class="row">
-                    <h2>Nom de l'user Avec son ID</h2>
-                    <p>Je vais voir avec toi demain comment bien le faire</p>
-                    <div class="btn-group">
-                    <button type="button" class="btn btn-primary">Amis</button>
-                    <button type="button" class="btn btn-primary">Envoyer une musique</button>
-                    <div class="btn-group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Sony <span class="caret"></span></button>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Soon</a></li>
-                        <li><a href="#">toto</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              <div class="row">
-              <div class="col-md-6">
-              <div  class="btn playlist" data-ng-init="isFollowed()">
-                <button  id="unfollow" ng-if="followed === true" ng-click='unFollow()'>unFollow</button>
-                <button  id="follow" ng-if="followed === false" ng-click='Follow()'>Follow</button>
-              </div>
-            </div>
-              <div class="col-md-6">
-              <a href="#/playlist/" class="MyPlaylist">
-                <button class="btn playlist" href="#/">Envoyer un message à {{user_login}}</button>
-            </a>
+  <div class="user">
+    <div class="title">
+      <img src="/img/myAccount.png" class="img-rounded" style="widht:50px; height:50px; margin-top:10px">
+          <h2>ITIZ</h2>
+          <div style="margin-top:10px; margin-bottom:10px;"class="btn-group test">
+            <button ng-if="me === true" type="button"  class="btn userButton" ng-click="editAccount()">Edit</button>
+            <button type="button"  class="btn userButton">Amis</button>
+            <button type="button"  class="btn userButton">Conseiller une playlist</button>
+            <button data-toggle="collapse" data-target="#playlist" type="button"  class="btn userButton">Lister les playlists</button>
           </div>
-            </div>
-          </div>
-            </div>
-          </div>
-        <!-- end panel -->
     </div>
-    <!-- end col-12 -->
-</div>
-<!-- end row -->
+      <div class="information" style="border-top:1px solid black; padding:10px;">
+        <h2>Playlist Administré par ITIZ</h2>
+        <table class="notifTable">
+          <tbody>
+            <tr>
+              <td>Rock</td>
+            </tr>
+            <tr>
+              <td>Techno</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <div class="information">
+      <div class="col-md-4">
+      <div  class="btn" data-ng-init="isFollowed()">
+        <button  style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:150px;" id="unfollow" ng-if="followed === true" ng-click='unFollow()'>unFollow</button>
+        <button  style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:150px;" id="follow" ng-if="followed === false" ng-click='Follow()'>Follow</button>
+      </div>
+    </div>
+    <div class="col-md-4">
+    </div>
+      <div class="col-md-4">
+        <button style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:300px;" class="btn" href="#" ng-click="toogleDisplayMessage(true)">Envoyer un message à {{user_login}}</button>
+        <br>
+        <div ng-if="displayMessageInpunt === true">
+          <form>
+        <input type="text" id="messageInput" required></input>
+        <button type="submit" ng-click="messageHandler(id, messageContent())" style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:150px;" href="" class="glyphicon glyphicon-send"></button>
+        <a href="" class="glyphicon glyphicon-remove" ng-click="toogleDisplayMessage(false)"></a>
+      </form>
+      <p ng-if="sended == true">Message sent to {{user_login}} !<p>
+      </div>
+  </div>
+    </div>
+  </div>
 </body>

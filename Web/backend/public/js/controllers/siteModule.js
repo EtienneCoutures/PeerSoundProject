@@ -26,7 +26,7 @@ define([
                   templateUrl: '/partials/site/followed',
                   controller: 'FollowedController'
                 })
-                .when('/result', {
+                .when('/result/:type/:query', {
                   templateUrl: '/partials/site/result',
                   controller: 'ResultController'
                 })
@@ -44,14 +44,6 @@ define([
               Restangular.one("follow/followerNb/", $scope.myself.usr_id).get().then(function(result) {
                 $scope.nbFollowers = result.count;
               });
-
-              /*$scope.redirectToUser = function(name) {
-                Restangular.one('user/', name).get().then(function(result) {
-                  if (result.User.usr_id == $scope.myself.id)
-                    return $location.url('/myself')
-                  return $location.url('/user/' + result.User.usr_id)
-                });
-              }*/
             }
         ])
         .controller('DownloadController', [
@@ -61,13 +53,53 @@ define([
         ])
         .controller('ResultController', [
             '$scope',
-            function ($scope) {
-              $scope.result = $scope.searchResult
-              console.log($scope.result)
-              //for (var member in $scope.searchResult) delete $scope.searchResult[member];
-                console.log($scope.result.type)
-            }
-        ])
+            'Restangular',
+            '$routeParams',
+            function ($scope, Restangular, $routeParams) {
+              $scope.type = $routeParams.type
+              $scope.all  = {
+                user : [],
+                music : [],
+                playlist: []
+              }
+
+              $scope.whereUser = function() { return { 'usr_login': $routeParams.query } }
+              $scope.wherePlaylist = function() { return { 'playlist_name': $routeParams.query } }
+              $scope.whereMusic = function() { return { 'music_name': $routeParams.query } }
+
+
+              $scope.ptr = {
+                user : $scope.whereUser(),
+                music : $scope.whereMusic(),
+                playlist : $scope.wherePlaylist()
+              }
+
+              var where = $scope.ptr[$scope.type];
+              if ($scope.type != 'all') {
+                Restangular.one($scope.type).get({ where
+                }).then(function(result) {
+                  $scope.all[$scope.type] = result
+                })
+              }
+              else {
+                where = $scope.ptr['user']
+                Restangular.one('user').get({ where
+                }).then(function(result) {
+                  $scope.all['user'] = result
+                })
+                where = $scope.ptr['playlist']
+                Restangular.one('playlist').get({ where
+                }).then(function(result) {
+                  $scope.all['playlist'] = result
+                })
+                where = $scope.ptr['music']
+                Restangular.one('music').get({ where
+                }).then(function(result) {
+                  $scope.all['music'] = result
+                })
+              }
+      }
+    ])
         .controller('FollowedController', [
             '$scope',
             'Restangular',
@@ -100,8 +132,6 @@ define([
             'Restangular',
             function ($scope, Restangular) {
 
-              console.log("la  =>")
-              console.log($scope.myself)  
               $scope.users = []
 
               $scope.getUsers = function() {
@@ -133,6 +163,7 @@ define([
             'Restangular',
             '$location',
             function ($scope, Restangular, $location) {
+                if ($scope.myself && $scope.myself.usr_id) $location.url('/')
                 $scope.$view = 'login';
                 $scope.User = {};
 

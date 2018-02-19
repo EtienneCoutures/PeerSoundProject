@@ -1,3 +1,8 @@
+body{
+  background-color: white;
+  font-family: Arial,Helvetica,sans-serif;
+}
+/* Message.ejs*/
 .news{
   width: 100%;
   position: relative;
@@ -18,39 +23,77 @@
   margin-top: 5px;
 }
 
-#imgplaylist {
-  margin-top: 10px;
-  height: 50px;
-  width: 50px;
+/* User.ejs*/
+
+.user {
+  transition:All 1s ease;
+  -webkit-transition:All 1s ease;
+  -moz-transition:All 1s ease;
+  -o-transition:All 1s ease;
+  background-color: #fff;
+  margin: auto;
+  margin-top: 55px;
+  margin-bottom: 50px;
+  display: block;
+  overflow: hidden;
+  border-radius: 5px;
+  border: 1px solid #E4E4E4;
+  -webkit-box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.4);
+  clear: both;
 }
 
-.butonfollow{
+.user .itemTitle {
+  margin: 0;
+  margin-bottom: 5px;
+  font-size: 30px;
+  font-family: Arial,Helvetica,sans-serif;
 }
 
-table.notifTable {
-  font-family: "Courier New", Courier, monospace;
+.user .information {
   width: 100%;
+  display: block;
+  float: left;
+  text-align: center;
+  padding: 50px 0px;
+  margin: 0;
+}
+
+.user .title {
+  width: 100%;
+  text-align: center;
+}
+
+.bouttonfollow{
+  border-top: 1px solid #E4E4E4;
+  text-align: center;
+}
+
+.test:hover{
+  background-color: white;
+}
+
+/* List.ejs*/
+table.notifTable {
+  font-family: Arial,Helvetica,sans-serif;
+  width: 100%;
+  margin-top: 40px;
   text-align: center;
   border-collapse: collapse;
 }
 table.notifTable td, table.notifTable th {
-  border: 2px solid #FFFFFF;
-  padding: 9px 0px;
+  border: 2px solid #DDDDDD;
+  padding: 25px 1px;
   width: 300px;
 }
 table.notifTable tbody td {
   font-size: 17px;
+  background-color:#F7FFFF;
+  border-color: black;
 }
-table.notifTable thead {
-    border-bottom: 2px solid #D0D9D9;
-    background-color: white;
-}
-table.notifTable thead th {
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  background-color: #D0D9D9;
-}
-table.notifTable tfoot td {
-  font-size: 8px;
+
+table.notifTable td:hover{
+  background-color: white;
+  cursor: pointer;
 }

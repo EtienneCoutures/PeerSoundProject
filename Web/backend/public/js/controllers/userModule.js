@@ -24,6 +24,10 @@ define([
                   templateUrl: '/partials/user/unknowUser',
                   controller: 'UnknowUserController'
                 })
+                .when('/message', {
+                  templateUrl: '/partials/user/message',
+                  controller: 'MessageController'
+                })
                 .when('/myself', {
                   templateUrl: '/partials/user/form',
                   controller: 'SaveUserController'
@@ -104,24 +108,57 @@ define([
             '$routeParams',
             '$location',
             'Restangular',
-            function ($scope, $routeParams, $location, Restangular) {
-              var id = $routeParams.usr_id;
-              if (id == $scope.myself.usr_id) {
-                return $location.url('/myself'); }
+            '$timeout',
+            function ($scope, $routeParams, $location, Restangular, $timeout) {
+              $scope.id = $routeParams.usr_id;
+              $scope.displayMessageInpunt = false
+              $scope.sended = false
+              $scope.me = false
 
-                Restangular.one('user', id).get().then(function(result){
+              if ($scope.id = $scope.myself.usr_id) {
+               $scope.me = true
+              }
+
+
+
+              Restangular.one('user', $scope.id).get().then(function(result){
                   if (result.code == 1) {
                   $location.url('/unknowUser');
                   }
                     $scope.user_login = result.User.usr_login;
                 })
 
+                $scope.editAccount = function() {
+                  $location.url('/myself')
+                }
 
+                $scope.toogleDisplayMessage = function(value) {
+                  $scope.displayMessageInpunt = value
+                }
+
+                $scope.messageHandler = function(id, content) {
+                  if (!content) return
+                  Restangular.all('message').post({sender_id: $scope.myself.usr_id, dest_id: id, content: content}).then(function(result) {
+                    if (!result.code) {
+                      $scope.sended = true
+                      document.getElementById('messageInput').value = null
+                      $timeout(function() {
+                          $scope.sended = false
+                      }, 2000);
+                    }
+                    else { console.log("error")
+                  }
+                  });
+                }
+
+                $scope.messageContent = function() {
+                  return document.getElementById('messageInput').value
+                }
 
                 $scope.isFollowed = function() {
                   Restangular.one('follow').get({
                     where :{
-                      "followed_usr_id": id,
+                      "followed_usr_id": $scope.id,
                       "follower_usr_id": $scope.myself.usr_id
                     }
                   }).then(function(result) {
@@ -139,7 +176,7 @@ define([
                 $scope.Follow = function() {
                   Restangular.all("/follow"/* + id + "/" + $scope.myself.usr_id*/).post({
                       follower_usr_id : $scope.myself.usr_id,
-                      followed_usr_id : id
+                      followed_usr_id : $scope.id
                   }).then(function(result) {
                       if (result.code == 0) {$scope.followed = true}
                   })
@@ -150,7 +187,7 @@ define([
 
 
                   Restangular.one('follow').remove({
-                      "followed_usr_id": id,
+                      "followed_usr_id": $scope.id,
                       "follower_usr_id": $scope.myself.usr_id
                      }).then(function(result) {
                     if (result.code == 0)  {
@@ -166,6 +203,31 @@ define([
             .controller('UnknowUserController', [
                 '$scope',
                 function ($scope) {
+                }
+            ])
+            .controller('MessageController', [
+                '$scope',
+                '$location',
+                'Restangular',
+                '$timeout',
+                '$route',
+                function ($scope, $location, Restangular, $timeout, $route) {
+
+
+                  $scope.goDeleteMessage = function(params) {
+                    Restangular.one('message').remove({
+                        "message_id": params,
+                       }).then(function(result) {
+                         $route.reload()
+                    });
+                  }
+
+                  $scope.readMessage = function(params) {
+                    Restangular.all('message').post({message_id: params, is_read: true}).then(function(result) {
+                      $route.reload()
+                    })
+                  }
+
                 }
             ])
         .controller('SaveUserController', [

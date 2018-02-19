@@ -24,19 +24,23 @@
     <div style="font-size:30px; margin-top:60px;"class="col-md-1 glyphicon glyphicon-option-vertical"></div>
   </div>
   <div class="container" ng-repeat="x in userPlaylist" style="margin-bottom:30px">
-    <div class="panel">
-      <div class="panel-txt col-md-12">
-        <div class="col-md-5">
-          <span class="badge">5</span>
-        </div>
-        <div class="col-md-5">
-          <p style="margin:0;">{{ x.playlist_name }}</p>
-        </div>
-        <div class="col-md-2">
-          <p style="margin:0;">{{x.playlist_id}}min</p>
-        </div>
+    <div class="playlist">
+      <div class="title">
+        <h3>Music Title</h3>
+      </div>
+      <div class="item">
+        <div class="information">
+          <div class="titles">
+            <div class="col-md-6">
+              <span class="itemTitle">Min</span>
+            </div>
+            <div class="col-md-6">
+              <span class="itemAuthor">Share</span>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
   </div>
 </body>
 </html>

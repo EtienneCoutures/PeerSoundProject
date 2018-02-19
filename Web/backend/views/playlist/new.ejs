@@ -4,48 +4,73 @@
 <link href="/css/playlist.css" rel="stylesheet"/>
 </head>
 <body>
-  <center><h1 style="font-family:font-family:Arial,Helvetica,sans-serif;"> Créer une nouvelle playlist</h1>
-    <div class="row">
-      <form class="newPlaylist" name="newPlaylist" ng-submit="savePlaylist()">
-        <div class="form-group">
-          <label class="label-txt" for="name">Name</label>
-          <input type="text" ng-model="playlist.playlist_name" class="form-control" style="width:50%;" required>
-        </div>
-        <div class="form-group">
-          <label class="label-txt" for="style">Style</label>
-          <select class="form-control" ng-model="playlist.playlist_style" style="width:50%;" required>
-            <option>Rock</option>
-            <option>Hip-Hop</option>
-            <option>acid</option>
-            <option>Techno</option>
-            <option>Jazz</option>
-            <option>classique</option>
-            <option>Trance</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="label-txt" for="description">Description</label>
-          <input type="text" ng-model="playlist.playlist_description" style="width:50%;" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label class="label-txt" for="comment">Commentaire</label>
-          <input type="text" ng-model="playlist.playlist_comment" style="width:50%;" class="form-control" required>
-        </div>
-        <div class="row" style="margin-top:5px; margin-bottom:5px;">
-          <div class="col-md-3">
-            <div href="" class="bnt glyphicon glyphicon-hand-left" style="font-size:15px;"></div>
-            <button ng-click="goTo('playlist/', 'list')" type="button" class=" btn">Retourner a vos Playlists</button>
+<div class="news newUser">
+  <center><h1 class="label-txt"><b>Créer une nouvelle playlist</b></h1></center>
+  <div class="row">
+    <div class="panel-body">
+      <div class="form-group" style="margin-bottom:5%">
+        <form class="form-group" name="newPlaylist" ng-submit="savePlaylist()">
+          <div class="form">
+            <div class="col-md-2">
+              <label class="label-txt" for="name">Name</label>
+            </div>
+            <div class="col-md-9">
+              <input type="text" style="width:800px;"ng-model="playlist.playlist_name" class="form-control"  required>
+            </div>
+            <div class="col-md-1 glyphicon glyphicon-music" style="font-size:25px; margin-top:10px;"></div>
           </div>
-          <div class="col-md-7">
+          <div class="form">
+            <div class="col-md-2">
+              <label class="label-txt" for="style">Style</label>
+            </div>
+            <div class="col-md-9">
+              <select class="form-control" style="width:800px;" ng-model="playlist.playlist_style"  required>
+                <option>Rock</option>
+                <option>Hip-Hop</option>
+                <option>acid</option>
+                <option>Techno</option>
+                <option>Jazz</option>
+                <option>classique</option>
+                <option>Trance</option>
+              </select>
+            </div>
+            <div class="col-md-1 glyphicon glyphicon-list"style="font-size:25px; margin-top:10px;"></div>
           </div>
-          <div class="col-md-2">
-            <button type="submit"  class="btn btn-success">Submit</button>
+          <div class="form">
+            <div class="col-md-2">
+              <label class="label-txt" for="description">Description</label>
+            </div>
+            <div class="col-md-9">
+              <input type="text" ng-model="playlist.playlist_description" style="width:800px;" class="form-control" required>
+            </div>
+              <div class="col-md-1 glyphicon glyphicon-edit" style="font-size:25px; margin-top:10px;"></div>
           </div>
+          <div class="form">
+            <div class="col-md-2">
+              <label class="label-txt" for="comment">Commentaire</label>
+            </div>
+            <div class="col-md-9">
+              <input type="text"style="width:800px;" ng-model="playlist.playlist_comment" class="form-control" required>
+            </div>
+            <div class="col-md-1 glyphicon glyphicon-pencil" style="font-size:25px; margin-top:10px;"></div>
+          </div>
+          <div class="row" style="margin-top:100px; margin-bottom:5px;">
+            <div class="col-md-4">
+              <div href="" class="bnt glyphicon glyphicon-hand-left" style="font-size:15px;"></div>
+              <button ng-click="goTo('playlist/', 'list')" type="button" class=" btn" style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:350px;">Retourner a vos Playlists</button>
+            </div>
+            <div class="col-md-6">
+            </div>
+            <div class="col-md-2">
+              <button type="submit"  class="btn" style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:150px;">Submit</button>
+            </div>
+          </div>
+        </form>
+        <div ng-if="playlistCreated === true">
+          <h3> Playlist created :)</h3>
         </div>
-      </form>
-      <div ng-if="playlistCreated === true">
-        <h3> Playlist created :)</h3>
       </div>
     </div>
-    <center>
+  </div>
+</div>
 </body>
