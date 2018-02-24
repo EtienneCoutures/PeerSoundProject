@@ -47,9 +47,14 @@ module.exports = function (app) {
             query.limit = Options.limit || null;
             query.offset = Options.limit ? Options.limit * ((Options.page || 1) - 1) : null;
             query.order = (Options.sort && Options.sort.field) ? (Options.sort.field + (Options.sort.asc ? ' ASC' : ' DESC')) : 'usr_id';
-
             app.models["User"].findAndCountAll(query).then(function (result) {
+              if (!result.count) {
+                return res.json({
+                  code : 1
+                })
+              }
               if (!Options.limit) return res.json(result.rows);
+
 
 
               res.json(result);
@@ -80,20 +85,24 @@ module.exports = function (app) {
                     });
                 }
 
-                result.countFollowing().then(function(result) {
-                  console.log("il suit : " + result + " personnes (countFollowing)")
-
+                var pl;
+                var pl_promise = result.getPlaylist().then(function(playlist) {
+                  pl = playlist
                 })
 
-                result.countFollowers().then(function(result) {
-                  console.log("il a : " + result + " followers (countFollowers)")
-
+                var nb_fers;
+                var fe_promise = result.countFollowers().then(function(r_nb_fers) {
+                  nb_fers = r_nb_fers;
                 })
-              //penser a return result.dataValues, c'est completement con de return un array sur un findOne
+
+                Promise.all([pl_promise, fe_promise]).then(function() {
                 res.json({
-                    "code": 0,
-                    "User": result
+                  "code": 0,
+                  "User": result,
+                  "Playlist": pl,
+                  "nbFollowers": nb_fers
                 });
+              });
             });
         });
 

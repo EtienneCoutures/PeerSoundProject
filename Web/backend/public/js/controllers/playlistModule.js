@@ -40,6 +40,7 @@ define([
         .controller('UnknowPlaylistController', [
             '$scope',
             function ($scope) {
+              console.log("keke")
             }
         ])
         .controller('ViewPlaylistController', [
@@ -55,6 +56,9 @@ define([
               Restangular.one('playlist').get({where: {
                 playlist_id: $routeParams.playlist_id
               }}).then(function(result) {
+                if (result.code == 1) {
+                  return $location.url('unknowPlaylist')
+                }
                 $scope.playlist = result[0]
               })
 

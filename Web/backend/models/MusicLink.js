@@ -3,8 +3,7 @@
  */
  'use strict';
  var Sequelize = require('sequelize'),
-     sequelize = global.sequelize,
-     crypt = require('password-hash');
+     sequelize = global.sequelize;
 
      module.exports = function (app) {
          if (!sequelize.isDefined('MusicLink')) {

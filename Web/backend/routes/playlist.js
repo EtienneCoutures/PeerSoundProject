@@ -43,10 +43,13 @@ module.exports = function (app) {
             query.limit = Options.limit || null;
             query.offset = Options.limit ? Options.limit * ((Options.page || 1) - 1) : null;
             query.order = (Options.sort && Options.sort.field) ? (Options.sort.field + (Options.sort.asc ? ' ASC' : ' DESC')) : 'playlist_id';
-
             app.models["Playlist"].findAndCountAll(query).then(function (result) {
-                if (!Options.limit) return res.json(result.rows);
-                res.json(result);
+              if (!result.count)
+              return res.json({
+                  code: 1
+              });
+              if (!Options.limit) return res.json(result.rows);
+              res.json(result);
             });
         });
 
@@ -67,7 +70,7 @@ module.exports = function (app) {
                 },
                 include: []
             };
-
+            console.log("la")
             app.models["Playlist"].findOne(query).then(function (result) {
                 if (!result) {
                     return res.json({

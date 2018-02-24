@@ -20,10 +20,6 @@ define([
                     templateUrl: '/partials/user/user',
                     controller: 'SeeUserController'
                 })
-                .when('/unknowUser', {
-                  templateUrl: '/partials/user/unknowUser',
-                  controller: 'UnknowUserController'
-                })
                 .when('/message', {
                   templateUrl: '/partials/user/message',
                   controller: 'MessageController'
@@ -109,23 +105,25 @@ define([
             '$location',
             'Restangular',
             '$timeout',
-            function ($scope, $routeParams, $location, Restangular, $timeout) {
+            '$window',
+            function ($scope, $routeParams, $location, Restangular, $timeout, $window) {
               $scope.id = $routeParams.usr_id;
               $scope.displayMessageInpunt = false
               $scope.sended = false
               $scope.me = false
 
-              if ($scope.id = $scope.myself.usr_id) {
+              if ($scope.id == $scope.myself.usr_id) {
                $scope.me = true
               }
 
-
-
               Restangular.one('user', $scope.id).get().then(function(result){
                   if (result.code == 1) {
-                  $location.url('/unknowUser');
+                    $scope.user = null
                   }
-                    $scope.user_login = result.User.usr_login;
+                  else
+                  $scope.user = result.User
+                  $scope.playlists = result.Playlist
+                  $scope.nbFollowers = result.nbFollowers
                 })
 
                 $scope.editAccount = function() {
