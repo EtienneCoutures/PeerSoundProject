@@ -12,9 +12,10 @@ PSP_Software
 Description :
 -------------
 
-PSP Software est un logiciel bureau d'écoute de musiques relié au système PSP. Il permet entre autre une écouté hors-ligne.
+PSP Software est un logiciel bureau d'écoute de musiques relié au système PSP. Il permet entre autre une écoute hors-ligne.
 
 Suivi :
 ------
 
-- **v00** : version principale
+- **v00** : version pré-bêta
+- **v01** : bêta
