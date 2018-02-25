@@ -28,7 +28,6 @@ module.exports = function (app) {
                     where: {},
                     include: []
                 };
-
             if (typeof Options.where == "string") Options.where = JSON.parse(Options.where);
             if (typeof Options.limit == "string") Options.limit = parseInt(Options.limit);
             if (typeof Options.page == "string") Options.page = parseInt(Options.page);
@@ -61,7 +60,8 @@ module.exports = function (app) {
             });
         });
 
-    // Render a User
+
+    // Render a User with his follow and playlist
     router.get('/:id(\\d+)',
         app.requirePermission([
             ['allow', {
@@ -85,22 +85,35 @@ module.exports = function (app) {
                     });
                 }
 
-                var pl;
+                /*var allFollowers = [];
+                var allFolloweds = [];*/
+                var pl = [];
+                var f_ers = [];
+                var f_ing = [];
+
                 var pl_promise = result.getPlaylist().then(function(playlist) {
                   pl = playlist
                 })
 
-                var nb_fers;
-                var fe_promise = result.countFollowers().then(function(r_nb_fers) {
-                  nb_fers = r_nb_fers;
+                var fe_promise = result.getFollowers().then(function(r_fers) {
+                  f_ers = r_fers;
+                  /*for (var i = 0 ; i != f_ers.length; ++i) {
+                    f_ers[i].getFollowed().then(function(followers) {
+                      allFollowers.push(followers) })
+                  }*/
                 })
 
-                Promise.all([pl_promise, fe_promise]).then(function() {
+                var fi_promise = result.getFollowing().then(function(r_fing) {
+                  f_ing = r_fing;
+                  })
+
+                Promise.all([pl_promise, fi_promise, fe_promise]).then(function() {
                 res.json({
                   "code": 0,
                   "User": result,
                   "Playlist": pl,
-                  "nbFollowers": nb_fers
+                  "Followers": f_ers,
+                  "Following": f_ing,
                 });
               });
             });

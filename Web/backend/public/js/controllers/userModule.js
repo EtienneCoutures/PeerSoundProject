@@ -107,13 +107,32 @@ define([
             '$timeout',
             '$window',
             function ($scope, $routeParams, $location, Restangular, $timeout, $window) {
+
               $scope.id = $routeParams.usr_id;
               $scope.displayMessageInpunt = false
               $scope.sended = false
               $scope.me = false
+              $scope.followers = []
+              $scope.following = []
+              $scope.toDisplay = 0
 
               if ($scope.id == $scope.myself.usr_id) {
                $scope.me = true
+              }
+
+              var getFollow = function(follower, following) {
+                for (var i = 0 ; i != follower.length ; ++i) {
+                  var act_id = follower[i].follower_usr_id
+                  Restangular.one('user').get({where:{usr_id: act_id}}).then(function(result) {
+                    $scope.followers.push(result[0])
+                  })
+                }
+                for (var i = 0 ; i != following.length ; ++i) {
+                  var act_id = following[i].followed_usr_id
+                  Restangular.one('user').get({where:{usr_id: act_id}}).then(function(result) {
+                    $scope.following.push(result[0])
+                  })
+                }
               }
 
               Restangular.one('user', $scope.id).get().then(function(result){
@@ -123,7 +142,9 @@ define([
                   else
                   $scope.user = result.User
                   $scope.playlists = result.Playlist
-                  $scope.nbFollowers = result.nbFollowers
+                  $scope.nbFollowers = result.Followers.length
+                  $scope.nbFollowing = result.Following.length
+                  getFollow(result.Followers, result.Following)
                 })
 
                 $scope.editAccount = function() {
@@ -181,9 +202,6 @@ define([
                 }
 
                 $scope.unFollow = function() {
-
-
-
                   Restangular.one('follow').remove({
                       "followed_usr_id": $scope.id,
                       "follower_usr_id": $scope.myself.usr_id

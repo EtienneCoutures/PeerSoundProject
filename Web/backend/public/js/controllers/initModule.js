@@ -23,6 +23,7 @@ define([
                 $scope.myself = false;
                 $scope.sender_usr = []
 
+
                 $scope.searchResult = {
                   type : "",
                   result : [],
@@ -96,31 +97,6 @@ define([
                   }
 
                 /* searching fnct */
-                $scope.searchUser = function(type, value) {
-                  Restangular.one('user').get({where : {
-                    'usr_login': value
-                  }
-                }).then(function(result) {
-                  $scope.redirectSearch(type, result)
-                })
-              }
-              $scope.searchPlaylist = function(type, value) {
-                Restangular.one('playlist').get({where : {
-                  'playlist_name': value
-                }
-              }).then(function(result) {
-                $scope.redirectSearch(type, result)
-              })
-            }
-            $scope.searchMusic = function(type, value) {
-              Restangular.one('music').get({where : {
-                'music_name': value
-              }
-            }).then(function(result) {
-              $scope.redirectSearch(type, result)
-            })
-          }
-
 
           $scope.goTo = function(path, id) {
             return $location.url((path + id).toString());
