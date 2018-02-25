@@ -106,7 +106,8 @@ define([
             'Restangular',
             '$timeout',
             '$window',
-            function ($scope, $routeParams, $location, Restangular, $timeout, $window) {
+            '$route',
+            function ($scope, $routeParams, $location, Restangular, $timeout, $window, $route) {
 
               $scope.id = $routeParams.usr_id;
               $scope.displayMessageInpunt = false
@@ -197,7 +198,10 @@ define([
                       follower_usr_id : $scope.myself.usr_id,
                       followed_usr_id : $scope.id
                   }).then(function(result) {
-                      if (result.code == 0) {$scope.followed = true}
+                      if (result.code == 0) {
+                        $scope.followed = true
+                        $route.reload()
+                      }
                   })
                 }
 
@@ -208,6 +212,7 @@ define([
                      }).then(function(result) {
                     if (result.code == 0)  {
                       $scope.followed = false
+                      $route.reload()
                     }
                       $scope.errors = result.errors;
                       $scope.querying = false;
