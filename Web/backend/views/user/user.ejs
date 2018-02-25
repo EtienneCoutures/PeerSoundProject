@@ -13,18 +13,12 @@
 <link href="/css/user.css" rel="stylesheet"/>
 </head>
 <body>
-<div id="unknowUser" ng-if="!user">
-  <div class="col-md-12">
-  <center><h4 style="margin-top:5%">This user don't exist</h4></center>
-  <center><img src="/img/broken.png" id="logoBroken" style="max-width:200px;max-heigth:200px;width:auto;height:auto;margin-top:5%"></img></center>
-  </div>
-</div>
   <div class="user" id="user" ng-if="user">
     <div class="information">
       <div class="col-md-4">
       <div  class="btn" data-ng-init="isFollowed()">
-        <button class="btn" style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:150px;" id="unfollow" ng-if="followed === true" ng-click='unFollow()'>unFollow</button>
-        <button class="btn" style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:150px;" id="follow" ng-if="followed === false" ng-click='Follow()'>Follow</button>
+        <button class="btn" style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:auto;" id="unfollow" ng-if="followed === true" ng-click='unFollow()'>unFollow</button>
+        <button class="btn" style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:auto;" id="follow" ng-if="followed === false" ng-click='Follow()'>Follow</button>
       </div>
     </div>
     <div class="col-md-4">
@@ -32,7 +26,7 @@
     <h2>{{user.usr_login}}</h2>
     </div>
       <div class="col-md-4">
-        <button style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:300px;" class="btn" href="#" ng-click="toogleDisplayMessage(true)">Envoyer un message à {{user.usr_login}}</button>
+        <button style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:auto;" class="btn" href="#" ng-click="toogleDisplayMessage(true)">Envoyer un message à {{user.usr_login}}</button>
         <br>
         <div ng-if="displayMessageInpunt === true">
           <form>
@@ -102,5 +96,13 @@
           </div>
         </div>
 
+
+
+        <div id="unknowUser" ng-if="!user">
+          <div class="col-md-12">
+          <center><h4 style="margin-top:5%">This user don't exist</h4></center>
+          <center><img src="/img/broken.png" id="logoBroken" style="max-width:200px;max-heigth:200px;width:auto;height:auto;margin-top:5%"></img></center>
+          </div>
+        </div>
   </div>
 </body>

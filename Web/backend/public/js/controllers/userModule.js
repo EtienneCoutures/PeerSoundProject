@@ -275,14 +275,14 @@ define([
                     $scope.querying = true;
                     if ($scope.old_password == $scope.User.usr_password) {
                       Restangular.all('user/mod').post($scope.User).then(function(result) {
-                          if (result.code == 0) return $location.url('/user');
+                          if (result.code == 0) return $location.url('/user/' + $scope.myself.usr_id);
                           $scope.errors = result.errors;
                           $scope.querying = false;
                       });
                     }
                     else {
                       Restangular.all('user').post($scope.User).then(function(result) {
-                          if (result.code == 0) return $location.url('/user');
+                          if (result.code == 0) return $location.url('/user/' + $scope.myself.usr_id);
                           $scope.errors = result.errors;
                           $scope.querying = false;
                       });
