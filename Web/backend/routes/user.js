@@ -28,12 +28,15 @@ module.exports = function (app) {
                     where: {},
                     include: []
                 };
+
             if (typeof Options.where == "string") Options.where = JSON.parse(Options.where);
             if (typeof Options.limit == "string") Options.limit = parseInt(Options.limit);
             if (typeof Options.page == "string") Options.page = parseInt(Options.page);
             if (typeof Options.sort == "string") Options.sort = JSON.parse(Options.sort);
 
+
             Options.where = Options.where || {};
+          //penser a regarder le include
 
             // Add filters
             if (!S(Options.where.usr_login).isEmpty()) query.where.usr_login = {like:Options.where.usr_login + '%'};
@@ -46,14 +49,15 @@ module.exports = function (app) {
             query.limit = Options.limit || null;
             query.offset = Options.limit ? Options.limit * ((Options.page || 1) - 1) : null;
             query.order = (Options.sort && Options.sort.field) ? (Options.sort.field + (Options.sort.asc ? ' ASC' : ' DESC')) : 'usr_id';
+
             app.models["User"].findAndCountAll(query).then(function (result) {
               if (!result.count) {
                 return res.json({
                   code : 1
                 })
               }
-              if (!Options.limit) return res.json(result.rows);
 
+              if (!Options.limit) return res.json(result.rows);
 
 
               res.json(result);
@@ -76,7 +80,16 @@ module.exports = function (app) {
                 where: {
                     "usr_id": req.params.id
                 },
-                include: []
+                include: [{
+                  model: app.models.Playlist,
+                  as: "Playlist"
+                },{
+                  model: app.models.Follow,
+                  as:"Followers"
+                },{
+                  model: app.models.Follow,
+                  as:"Following"
+                }]
             };
             app.models["User"].findOne(query).then(function (result) {
                 if (!result) {
@@ -85,36 +98,9 @@ module.exports = function (app) {
                     });
                 }
 
-                /*var allFollowers = [];
-                var allFolloweds = [];*/
-                var pl = [];
-                var f_ers = [];
-                var f_ing = [];
-
-                var pl_promise = result.getPlaylist().then(function(playlist) {
-                  pl = playlist
-                })
-
-                var fe_promise = result.getFollowers().then(function(r_fers) {
-                  f_ers = r_fers;
-                  /*for (var i = 0 ; i != f_ers.length; ++i) {
-                    f_ers[i].getFollowed().then(function(followers) {
-                      allFollowers.push(followers) })
-                  }*/
-                })
-
-                var fi_promise = result.getFollowing().then(function(r_fing) {
-                  f_ing = r_fing;
-                  })
-
-                Promise.all([pl_promise, fi_promise, fe_promise]).then(function() {
                 res.json({
                   "code": 0,
                   "User": result,
-                  "Playlist": pl,
-                  "Followers": f_ers,
-                  "Following": f_ing,
-                });
               });
             });
         });

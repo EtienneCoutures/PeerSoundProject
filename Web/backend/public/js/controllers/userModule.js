@@ -142,10 +142,10 @@ define([
                   }
                   else
                   $scope.user = result.User
-                  $scope.playlists = result.Playlist
-                  $scope.nbFollowers = result.Followers.length
-                  $scope.nbFollowing = result.Following.length
-                  getFollow(result.Followers, result.Following)
+                  $scope.playlists = result.User.Playlist
+                  $scope.nbFollowers = result.User.Followers.length
+                  $scope.nbFollowing = result.User.Following.length
+                  getFollow(result.User.Followers, result.User.Following)
                 })
 
                 $scope.editAccount = function() {

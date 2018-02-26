@@ -33,16 +33,8 @@ define([
                 $scope.getMessage = function() {
                   Restangular.one('message').get({where: {
                     dest_id: $scope.myself.usr_id,
-                    is_read: false
                   }}).then(function(result) {
                     $scope.myself.messages = result
-                    for (var i = 0 ; i != $scope.myself.messages.length ; ++i) {
-                    Restangular.one('user').get({where: {
-                      usr_id: $scope.myself.messages[i].sender_id
-                    }}).then(function(result) {
-                        $scope.sender_usr.push(result[0])
-                    })
-                  }
                   })
                 }
 
@@ -124,7 +116,6 @@ define([
 
                 $scope.logout = function() {
                     if ($scope.myself && $scope.myself.messages) $scope.myself.messages = null;
-                    console.log($scope.myself.messages)
                     $scope.myself = null;
                     $location.url('/login');
                     Restangular.one('auth', 'logout').get().then(function(result) {

@@ -28,10 +28,10 @@
       <div class="col-md-4">
         <button style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:auto;" class="btn" href="#" ng-click="toogleDisplayMessage(true)"><span class="glyphicon glyphicon-envelope"></span> Envoyer un message à {{user.usr_login}}</button>
         <br>
-        <div ng-if="displayMessageInpunt === true">
+        <div ng-if="displayMessageInpunt === true" style="margin-top:15px">
           <form>
-        <input type="text" id="messageInput" required></input>
-        <button type="submit" ng-click="messageHandler(id, messageContent())" style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:150px;" href="" class="glyphicon glyphicon-send"></button>
+        <input type="text" id="messageInput" style="width:235px" required></input>
+        <button type="submit" ng-click="messageHandler(id, messageContent())" style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:auto; height:auto;" href="" class="btn"><span class=" glyphicon glyphicon-send"></span></button>
         <a href="" class="glyphicon glyphicon-remove" ng-click="toogleDisplayMessage(false)"></a>
       </form>
       <p ng-if="sended == true">Message sent to {{user.usr_login}} !<p>

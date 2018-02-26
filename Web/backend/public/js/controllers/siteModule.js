@@ -104,53 +104,20 @@ define([
             '$scope',
             'Restangular',
             function ($scope, Restangular) {
-
-              $scope.users = []
-
-              $scope.getUsers = function() {
-                for (var i = 0 ; i < $scope.followerList.length ; ++i) {
-                    Restangular.one("user/", $scope.followerList[i].followed_usr_id).get().then(function(result) {
-                        $scope.users.push(result.User)
-                    });
-                };
-
-              };
-
               Restangular.one("follow/follower/", $scope.myself.usr_id).get().then(function(result) {
-                  $scope.followerNb = result.count;
-                  $scope.followerList = result.rows
-
-                  $scope.getUsers()
+                  $scope.followedNb = result.count;
+                  $scope.followedList = result.rows
               })
-
-
-
             }
         ])
         .controller('FollowerController', [
             '$scope',
             'Restangular',
             function ($scope, Restangular) {
-
-              $scope.users = []
-
-              $scope.getUsers = function() {
-                for (var i = 0 ; i < $scope.followerList.length ; ++i) {
-                    Restangular.one("user/", $scope.followerList[i].follower_usr_id).get().then(function(result) {
-                        $scope.users.push(result.User)
-
-                    });
-                };
-              };
-
               Restangular.one("follow/followed/", $scope.myself.usr_id).get().then(function(result) {
                   $scope.followerNb = result.count;
                   $scope.followerList = result.rows
-                  $scope.getUsers()
               })
-
-
-
             }
         ])
         .controller('FavController', [
@@ -179,7 +146,6 @@ define([
                     }).then(function(result) {
                         $scope.querying = false;
                         if (result.code != 0) return $scope.errors = result.errors;
-
                         $scope.login(result.account);
                         $location.url('/');
                     });

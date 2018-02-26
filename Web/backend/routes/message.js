@@ -20,7 +20,6 @@ module.exports = function (app) {
       ]),
       function (req, res) {
           var Record = req.body;
-          console.log("lalal")
           if (!Record["message_id"])
               return createRecord();
           return updateRecord();
@@ -60,7 +59,6 @@ module.exports = function (app) {
                   }*/
 
                   // Update fields
-                  console.log("on y est")
               if (!S(Record.sender_id).isEmpty()) record.sender_id = Record.sender_id;
               if (!S(Record.dest_id).isEmpty()) record.dest_id = Record.dest_id;
               if (!S(Record.content).isEmpty()) record.content = Record.content;
@@ -120,9 +118,13 @@ module.exports = function (app) {
               query.limit = Options.limit || null;
               query.offset = Options.limit ? Options.limit * ((Options.page || 1) - 1) : null;
               query.order = (Options.sort && Options.sort.field) ? (Options.sort.field + (Options.sort.asc ? ' ASC' : ' DESC')) : 'message_id';
+              query.include = [{
+                model: app.models.User,
+                as:'Sender'}]
 
               app.models["Message"].findAndCountAll(query).then(function (result) {
                   if (!Options.limit) return res.json(result.rows);
+
                   res.json(result);
               });
           });
