@@ -4,6 +4,7 @@
 <link href="/css/playlist.css" rel="stylesheet"/>
 </head>
 <body>
+  <div ng-if="playlist">
   <div class="row well" style="background-color:#F5F5F5; opacity:0.7;">
     <div class="col-md-6">
       <img src="/img/myPlaylist.png" alt="playlist" style="width:250px; height:200px;">
@@ -42,5 +43,12 @@
       </div>
     </div>
   </div>
+</div>
+<div id="unknowPlaylist" ng-if="!playlist">
+  <div class="col-md-12">
+  <center><h4 style="margin-top:5%">This playlist don't exist</h4></center>
+  <center><img src="/img/broken.png" id="logoBroken" style="max-width:200px;max-heigth:200px;width:auto;height:auto;margin-top:5%"></img></center>
+  </div>
+</div>
 </body>
 </html>

@@ -134,7 +134,7 @@ define([
                     $scope.following.push(result[0])
                   })
                 }
-              }
+              }//bou que c'est vilain
 
               Restangular.one('user', $scope.id).get().then(function(result){
                   if (result.code == 1) {

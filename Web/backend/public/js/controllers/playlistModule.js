@@ -24,10 +24,6 @@ define([
                   templateUrl : 'partials/playlist/new',
                   controller: 'NewPlaylistController'
                 })
-                .when('/unknowPlaylist', {
-                  templateUrl: '/partials/playlist/unknowPlaylist',
-                  controller: 'UnknowPlaylistController'
-                })
                 .when('/playlist/:playlist_id', {
                     templateUrl: 'partials/playlist/pl_view',
                     controller: 'ViewPlaylistController'
@@ -37,12 +33,6 @@ define([
                     controller: 'AdminPlaylistController'
                 });
         }])
-        .controller('UnknowPlaylistController', [
-            '$scope',
-            function ($scope) {
-              console.log("keke")
-            }
-        ])
         .controller('ViewPlaylistController', [
             '$scope',
             '$location',
@@ -57,7 +47,7 @@ define([
                 playlist_id: $routeParams.playlist_id
               }}).then(function(result) {
                 if (result.code == 1) {
-                  return $location.url('unknowPlaylist')
+                    $scope.playlist = null
                 }
                 $scope.playlist = result[0]
               })

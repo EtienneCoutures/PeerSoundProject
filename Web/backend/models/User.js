@@ -72,12 +72,6 @@ module.exports = function (app) {
                 validate: {
                 }
             },
-            /*usr_role: {
-                type: Sequelize.ENUM('super-admin','admin','member'),
-                defaultValue: "member",
-                validate: {
-                }
-            },*/
             usr_insert: {
                 type: Sequelize.DATE,
                 defaultValue: 0,
