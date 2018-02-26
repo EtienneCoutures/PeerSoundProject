@@ -30,13 +30,20 @@ define([
                   count: 0
                 }
 
+
+
                 $scope.getMessage = function() {
                   Restangular.one('message').get({where: {
                     dest_id: $scope.myself.usr_id,
                   }}).then(function(result) {
-                    $scope.myself.messages = result
+                    $scope.myself.messages_read = []
+                    $scope.myself.messages_unread = []
+                    for (var i = 0 ; i != result.length ; ++i) {
+                      result[i].is_read == true ? $scope.myself.messages_read.push(result[i]) :   $scope.myself.messages_unread.push(result[i])
+                    }
                   })
                 }
+
 
                 Restangular.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
                     if (data.code == -2) {

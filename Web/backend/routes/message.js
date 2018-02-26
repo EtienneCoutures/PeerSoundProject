@@ -48,16 +48,6 @@ module.exports = function (app) {
                   }
               }).then(function (record) {
                   if (!record) return reply(req.translate('system', 'Record not found'));
-                  /*if (app.requirePermission.roles('allow', ['super-admin']).check(req.account)) {
-                      // super-admin has all permissions
-                  } else if (app.requirePermission.roles('allow', ['admin']).check(req.account)) {
-                      if (app.requirePermission.roles('allow', ['super-admin']).check(record)) {
-                          return reply(req.translate('system', 'You do not have permissions update this user.'))
-                      }
-                  } else if (req.account['usr_id'] != record['usr_id']) {
-                      return reply(req.translate('system', 'You do not have permissions update this user.'))
-                  }*/
-
                   // Update fields
               if (!S(Record.sender_id).isEmpty()) record.sender_id = Record.sender_id;
               if (!S(Record.dest_id).isEmpty()) record.dest_id = Record.dest_id;
@@ -100,7 +90,8 @@ module.exports = function (app) {
               var Options = req.query,
                   query = {
                       where: {},
-                      include: []
+                      include: [],
+                      order: 'DESC'
                   };
               if (typeof Options.where == "string") Options.where = JSON.parse(Options.where);
               if (typeof Options.limit == "string") Options.limit = parseInt(Options.limit);

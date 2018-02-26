@@ -234,6 +234,7 @@ define([
                 '$route',
                 function ($scope, $location, Restangular, $timeout, $route) {
 
+                  $scope.display = 'unread'
 
                   $scope.goDeleteMessage = function(params) {
                     Restangular.one('message').remove({
