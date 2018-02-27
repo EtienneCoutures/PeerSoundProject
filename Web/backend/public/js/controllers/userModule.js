@@ -121,31 +121,16 @@ define([
                $scope.me = true
               }
 
-              var getFollow = function(follower, following) {
-                for (var i = 0 ; i != follower.length ; ++i) {
-                  var act_id = follower[i].follower_usr_id
-                  Restangular.one('user').get({where:{usr_id: act_id}}).then(function(result) {
-                    $scope.followers.push(result[0])
-                  })
-                }
-                for (var i = 0 ; i != following.length ; ++i) {
-                  var act_id = following[i].followed_usr_id
-                  Restangular.one('user').get({where:{usr_id: act_id}}).then(function(result) {
-                    $scope.following.push(result[0])
-                  })
-                }
-              }//bou que c'est vilain
-
               Restangular.one('user', $scope.id).get().then(function(result){
                   if (result.code == 1) {
                     $scope.user = null
                   }
                   else
+                  console.log(result)
                   $scope.user = result.User
                   $scope.playlists = result.User.Playlist
                   $scope.nbFollowers = result.User.Followers.length
                   $scope.nbFollowing = result.User.Following.length
-                  getFollow(result.User.Followers, result.User.Following)
                 })
 
                 $scope.editAccount = function() {

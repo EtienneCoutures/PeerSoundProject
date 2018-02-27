@@ -85,10 +85,18 @@ module.exports = function (app) {
                   as: "Playlist"
                 },{
                   model: app.models.Follow,
-                  as:"Followers"
+                  as:"Followers",
+                  include: [{
+                    model: app.models.User,
+                     as:"Follower"
+                   }]
                 },{
                   model: app.models.Follow,
-                  as:"Following"
+                  as:"Following",
+                  include: [{
+                    model: app.models.User,
+                    as:"Followed"
+                  }]
                 }]
             };
             app.models["User"].findOne(query).then(function (result) {
@@ -97,7 +105,6 @@ module.exports = function (app) {
                         code: 1
                     });
                 }
-
                 res.json({
                   "code": 0,
                   "User": result,

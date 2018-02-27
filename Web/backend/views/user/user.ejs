@@ -65,33 +65,33 @@
 
 
         <div class="information follower" ng-if="toDisplay == 1" style="border-top:1px solid black; padding:10px;">
-          <div ng-if="followers.length">
+          <div ng-if="user.Followers.length">
             <h2>Utilisateurs suivants {{user.usr_login}} ({{nbFollowers}})</h2>
-            <table ng-if="followers.length" class="notifTable">
-              <tbody ng-repeat="user in followers">
+            <table  class="notifTable">
+              <tbody ng-repeat="user in user.Followers">
                 <tr>
-                  <td ng-click="redirectTo('user', user.usr_id)">{{user.usr_login}}</td>
+                  <td ng-click="redirectTo('user', user.Follower.usr_id)">{{user.Follower.usr_login}}</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <div ng-if="!followers.length">
+          <div ng-if="!user.Followers.length">
             <h2>{{user.usr_login}} ne suit personne</h2>
           </div>
         </div>
 
         <div class="information following" ng-if="toDisplay == 2" style="border-top:1px solid black; padding:10px;">
-          <div ng-if="following.length">
+          <div ng-if="user.Following.length">
             <h2>Utilisateurs que suit {{user.usr_login}} ({{nbFollowing}})</h2>
             <table class="notifTable">
-              <tbody ng-repeat="user in following">
+              <tbody ng-repeat="user in user.Following">
                 <tr>
-                  <td ng-click="redirectTo('user', user.usr_id)">{{user.usr_login}}</td>
+                  <td ng-click="redirectTo('user', user.Followed.usr_id)">{{user.Followed.usr_login}}</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <div ng-if="!following.length">
+          <div ng-if="!user.Following.length">
             <h2>{{user.usr_login}} ne suit personne</h2>
           </div>
         </div>

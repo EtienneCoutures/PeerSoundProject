@@ -2,8 +2,8 @@
 <html>
 <body>
   <div  data-ng-init="getMessage()">
-    <div ng-if="myself.messages_unread.length">
-      <div class="col-md-6">
+    <div class="col-md-6 col-xs-12">
+      <div ng-if="myself.messages_unread.length">
         <h4 style="float:right">You have {{ myself.messages_unread.length }} new message(s)</h4>
         <div class="news" ng-repeat="x in myself.messages_unread" style="margin-bottom:15px">
           <div class="row">
@@ -25,8 +25,9 @@
       <div ng-if="!(myself.messages_unread.length)">
         <h1>You have no new message</h1>
       </div>
-
-      <div class="col-md-6">
+    </div>
+    <div ng-if="myself.messages_read.length">
+      <div class="col-md-6 col-xs-12">
         <h4 style="float:right">Your readed message(s)</h4>
         <div class="news" ng-repeat="x in myself.messages_read" style="margin-bottom:15px">
           <div class="row">
@@ -45,6 +46,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div ng-if="!(myself.messages_read.length)">
+      <h1>You have no archived message</h1>
     </div>
   </div>
 </body>
