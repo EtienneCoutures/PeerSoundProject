@@ -80,11 +80,11 @@ module.exports = function (app) {
                   model: app.models.MusicLink,
                   as: 'MusicLink',
                   required: false,
-                  /*include: [{
+                  include: [{
                     model: app.models.Music,
                     as: 'Music',
                     required: true
-                  }]*/
+                  }]
                 }]
             };
             app.models["Playlist"].findOne(query).then(function (result) {

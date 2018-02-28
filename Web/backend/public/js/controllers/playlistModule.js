@@ -47,21 +47,10 @@ define([
                 if (result.code == 1) {
                     $scope.playlist = null
                 }
-                console.log(result.Playlist)
                 $scope.playlist = result.Playlist
+                $scope.musics = result.Playlist.MusicLink
+                console.log($scope.musics)
               })
-
-
-          /*   Restangular.all('playlist').get('', {
-                  where: {
-                    playlist_creator: $scope.myself.usr_id
-                  }
-              }).then(function (result) {
-                console.log(result)
-                for (var i = 0 ; i != result.length ; ++i) {
-                  $scope.userPlaylist.push(result[i]) // ca ca sert a rien faut l'enlever
-                }
-              });*/
 
               $scope.changeName = function() {
                 var name =  document.getElementById('newNameInput').value;

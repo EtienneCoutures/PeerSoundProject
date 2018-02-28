@@ -49,11 +49,11 @@ CREATE TABLE IF NOT EXISTS `music` (
 --
 -- Constraints for dumped tables
 --
-
+alter table music add column `duration` text NOT NULL DEFAULT "0.0";
 --
 -- Data for tables
 --
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
---  insert into music values (1, "music", "rock", "c'est une music de test", "commentaire", NULL,'2018-01-27 00:00:00', '2018-01-17 00:00:00', "youtube", "mfDoom", "url", "2011", 1);
+--  insert into music values (2, "music", "rap", "c'est une music de test", "commentaire", NULL,'2018-01-27 00:00:00', '2018-01-17 00:00:00', "youtube", "mfDoom", "url", "2011", 1);
