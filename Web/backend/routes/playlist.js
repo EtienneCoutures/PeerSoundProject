@@ -73,7 +73,18 @@ module.exports = function (app) {
                   as: 'Subscriber',
                   where: {
                     usr_id: req.query.id
-                  }
+                  },
+                  required: false
+                }],
+                include: [{
+                  model: app.models.MusicLink,
+                  as: 'MusicLink',
+                  required: false,
+                  /*include: [{
+                    model: app.models.Music,
+                    as: 'Music',
+                    required: true
+                  }]*/
                 }]
             };
             app.models["Playlist"].findOne(query).then(function (result) {

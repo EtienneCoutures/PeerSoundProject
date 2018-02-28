@@ -43,25 +43,25 @@ define([
               $scope.userPlaylist = []
               $scope.displayNewName = false;
 
-              Restangular.one('playlist').get({where: {
-                playlist_id: $routeParams.playlist_id
-              }}).then(function(result) {
+              Restangular.one('playlist', $routeParams.playlist_id).get().then(function(result) {
                 if (result.code == 1) {
                     $scope.playlist = null
                 }
-                $scope.playlist = result[0]
+                console.log(result.Playlist)
+                $scope.playlist = result.Playlist
               })
 
 
-              Restangular.all('playlist').get('', {
+          /*   Restangular.all('playlist').get('', {
                   where: {
                     playlist_creator: $scope.myself.usr_id
                   }
               }).then(function (result) {
+                console.log(result)
                 for (var i = 0 ; i != result.length ; ++i) {
                   $scope.userPlaylist.push(result[i]) // ca ca sert a rien faut l'enlever
                 }
-              });
+              });*/
 
               $scope.changeName = function() {
                 var name =  document.getElementById('newNameInput').value;

@@ -96,7 +96,8 @@ module.exports = function (app) {
                   include: [{
                     model: app.models.User,
                     as:"Followed"
-                  }]
+                  }],
+                  required: false
                 }]
             };
             app.models["User"].findOne(query).then(function (result) {

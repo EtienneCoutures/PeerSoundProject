@@ -93,6 +93,9 @@ module.exports = function (app) {
             }
         });
 
+
+    app.models.Music.hasMany(app.models.MusicLink, {as: 'MusicLink', foreignKey: 'music_id', sourceKey: 'music_id'})
+
         /*sequelize.sync({ alter: true }).then(function(res) {
             console.log(app.models.Music.Instance.prototype)
           }).catch(function (err) {

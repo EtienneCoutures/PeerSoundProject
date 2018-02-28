@@ -74,6 +74,7 @@
 
          require('./Subscription')(app)
          require('./User')(app)
+         require('./MusicLink')(app)
          app.models.Playlist.hasMany(app.models.Subscription, {as: 'Subscriber', foreignKey: 'playlist_id', sourceKey: 'playlist_id'})
          app.models.Playlist.belongsTo(app.models.User, {
            as: 'Creator',
@@ -82,6 +83,9 @@
            onUpdate: 'CASCADE',
            onDelete: 'CASCADE',
          })
+         app.models.Playlist.hasMany(app.models.MusicLink, {as: 'MusicLink', foreignKey: 'playlist_id', sourceKey: 'playlist_id'})
+
+
       //  sequelize.sync().then(function() { console.log(app.models.Playlist.Instance.prototype) })
          // List of required models
 

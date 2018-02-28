@@ -62,8 +62,26 @@
                  }
              });
 
+
+             require('./Playlist')(app)
+             require('./Music')(app)
+             app.models.MusicLink.belongsTo(app.models.Playlist, {
+               as: 'Playlist',
+               foreignKey: 'playlist_id',
+               otherKey: "playlist_id",
+               onUpdate: 'CASCADE',
+               onDelete: 'CASCADE',
+             })
+
+             app.models.MusicLink.belongsTo(app.models.Music, {
+               as: 'Music',
+               foreignKey: 'music_id',
+               otherKey: "music_id",
+               onUpdate: 'CASCADE',
+               onDelete: 'CASCADE',
+             })
+
              sequelize.sync({ alter: true }).then(function(res) {
-              console.log("c'est synch genre")
              }).catch(function (err) {
                 logger.error(err);
              });
