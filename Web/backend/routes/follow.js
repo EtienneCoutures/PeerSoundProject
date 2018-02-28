@@ -97,10 +97,6 @@ router.get('/',
                         });
                     } else {
                       //console.log(app.models.Follow.Instance.prototype)
-                      record.getFollowed().then(function(result) {
-                        console.log(result)
-                      })
-                      console.log("la")
                         res.json({
                             "code": 0,
                         });
@@ -156,7 +152,11 @@ router.get('/',
       function (req, res) {
         app.models["Follow"].findAndCountAll({"where":{
           "followed_usr_id": req.params.id
-        }
+        },
+        include: [{
+          model:app.models.User,
+          as:'Follower'
+        }]
       }).then(function (result, err) {
         if (err) {return res.json({code: 1})}
         res.json({
@@ -169,9 +169,14 @@ router.get('/',
 
       router.get('/follower/:id',
       function (req, res) {
+
         app.models["Follow"].findAndCountAll({"where":{
           "follower_usr_id": req.params.id
-        }
+        },
+        include: [{
+          model:app.models.User,
+          as:'Followed'
+        }]
       }).then(function (result, err) {
         if (err) {return res.json({code: 1})}
         res.json({

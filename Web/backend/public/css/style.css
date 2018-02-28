@@ -5,6 +5,11 @@
     margin-left: -15px;
     margin-right: -15px;
 }
+
+* {
+    font-family: "Segoe UI",Arial,sans-serif;
+  } /* ici on set tout */
+
 /*
 .container-fluid .navbar-header {
     margin: 0;

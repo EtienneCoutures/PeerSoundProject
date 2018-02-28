@@ -23,27 +23,27 @@ define([
                 $scope.myself = false;
                 $scope.sender_usr = []
 
+
                 $scope.searchResult = {
                   type : "",
                   result : [],
                   count: 0
                 }
 
+
+
                 $scope.getMessage = function() {
                   Restangular.one('message').get({where: {
                     dest_id: $scope.myself.usr_id,
-                    is_read: false
                   }}).then(function(result) {
-                    $scope.myself.messages = result
-                    for (var i = 0 ; i != $scope.myself.messages.length ; ++i) {
-                    Restangular.one('user').get({where: {
-                      usr_id: $scope.myself.messages[i].sender_id
-                    }}).then(function(result) {
-                        $scope.sender_usr.push(result[0])
-                    })
-                  }
+                    $scope.myself.messages_read = []
+                    $scope.myself.messages_unread = []
+                    for (var i = 0 ; i != result.length ; ++i) {
+                      result[i].is_read == true ? $scope.myself.messages_read.push(result[i]) :   $scope.myself.messages_unread.push(result[i])
+                    }
                   })
                 }
+
 
                 Restangular.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
                     if (data.code == -2) {
@@ -96,31 +96,6 @@ define([
                   }
 
                 /* searching fnct */
-                $scope.searchUser = function(type, value) {
-                  Restangular.one('user').get({where : {
-                    'usr_login': value
-                  }
-                }).then(function(result) {
-                  $scope.redirectSearch(type, result)
-                })
-              }
-              $scope.searchPlaylist = function(type, value) {
-                Restangular.one('playlist').get({where : {
-                  'playlist_name': value
-                }
-              }).then(function(result) {
-                $scope.redirectSearch(type, result)
-              })
-            }
-            $scope.searchMusic = function(type, value) {
-              Restangular.one('music').get({where : {
-                'music_name': value
-              }
-            }).then(function(result) {
-              $scope.redirectSearch(type, result)
-            })
-          }
-
 
           $scope.goTo = function(path, id) {
             return $location.url((path + id).toString());
@@ -148,7 +123,6 @@ define([
 
                 $scope.logout = function() {
                     if ($scope.myself && $scope.myself.messages) $scope.myself.messages = null;
-                    console.log($scope.myself.messages)
                     $scope.myself = null;
                     $location.url('/login');
                     Restangular.one('auth', 'logout').get().then(function(result) {

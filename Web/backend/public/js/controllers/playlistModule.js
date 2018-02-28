@@ -24,10 +24,6 @@ define([
                   templateUrl : 'partials/playlist/new',
                   controller: 'NewPlaylistController'
                 })
-                .when('/unknowPlaylist', {
-                  templateUrl: '/partials/playlist/unknowPlaylist',
-                  controller: 'UnknowPlaylistController'
-                })
                 .when('/playlist/:playlist_id', {
                     templateUrl: 'partials/playlist/pl_view',
                     controller: 'ViewPlaylistController'
@@ -37,11 +33,6 @@ define([
                     controller: 'AdminPlaylistController'
                 });
         }])
-        .controller('UnknowPlaylistController', [
-            '$scope',
-            function ($scope) {
-            }
-        ])
         .controller('ViewPlaylistController', [
             '$scope',
             '$location',
@@ -55,6 +46,9 @@ define([
               Restangular.one('playlist').get({where: {
                 playlist_id: $routeParams.playlist_id
               }}).then(function(result) {
+                if (result.code == 1) {
+                    $scope.playlist = null
+                }
                 $scope.playlist = result[0]
               })
 
@@ -97,7 +91,6 @@ define([
               }}).then(function(result) {
                 $scope.playlist = result[0]
               })
-
               Restangular.all('playlist').get('', {
                   where: {
                     playlist_creator: $scope.myself.usr_id

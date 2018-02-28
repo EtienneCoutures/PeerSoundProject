@@ -20,10 +20,6 @@ define([
                     templateUrl: '/partials/user/user',
                     controller: 'SeeUserController'
                 })
-                .when('/unknowUser', {
-                  templateUrl: '/partials/user/unknowUser',
-                  controller: 'UnknowUserController'
-                })
                 .when('/message', {
                   templateUrl: '/partials/user/message',
                   controller: 'MessageController'
@@ -109,23 +105,32 @@ define([
             '$location',
             'Restangular',
             '$timeout',
-            function ($scope, $routeParams, $location, Restangular, $timeout) {
+            '$window',
+            '$route',
+            function ($scope, $routeParams, $location, Restangular, $timeout, $window, $route) {
+
               $scope.id = $routeParams.usr_id;
               $scope.displayMessageInpunt = false
               $scope.sended = false
               $scope.me = false
+              $scope.followers = []
+              $scope.following = []
+              $scope.toDisplay = 0
 
-              if ($scope.id = $scope.myself.usr_id) {
+              if ($scope.id == $scope.myself.usr_id) {
                $scope.me = true
               }
 
-
-
               Restangular.one('user', $scope.id).get().then(function(result){
                   if (result.code == 1) {
-                  $location.url('/unknowUser');
+                    $scope.user = null
                   }
-                    $scope.user_login = result.User.usr_login;
+                  else
+                  console.log(result)
+                  $scope.user = result.User
+                  $scope.playlists = result.User.Playlist
+                  $scope.nbFollowers = result.User.Followers.length
+                  $scope.nbFollowing = result.User.Following.length
                 })
 
                 $scope.editAccount = function() {
@@ -178,20 +183,21 @@ define([
                       follower_usr_id : $scope.myself.usr_id,
                       followed_usr_id : $scope.id
                   }).then(function(result) {
-                      if (result.code == 0) {$scope.followed = true}
+                      if (result.code == 0) {
+                        $scope.followed = true
+                        $route.reload()
+                      }
                   })
                 }
 
                 $scope.unFollow = function() {
-
-
-
                   Restangular.one('follow').remove({
                       "followed_usr_id": $scope.id,
                       "follower_usr_id": $scope.myself.usr_id
                      }).then(function(result) {
                     if (result.code == 0)  {
                       $scope.followed = false
+                      $route.reload()
                     }
                       $scope.errors = result.errors;
                       $scope.querying = false;
@@ -213,6 +219,7 @@ define([
                 '$route',
                 function ($scope, $location, Restangular, $timeout, $route) {
 
+                  $scope.display = 'unread'
 
                   $scope.goDeleteMessage = function(params) {
                     Restangular.one('message').remove({
@@ -259,14 +266,14 @@ define([
                     $scope.querying = true;
                     if ($scope.old_password == $scope.User.usr_password) {
                       Restangular.all('user/mod').post($scope.User).then(function(result) {
-                          if (result.code == 0) return $location.url('/user');
+                          if (result.code == 0) return $location.url('/user/' + $scope.myself.usr_id);
                           $scope.errors = result.errors;
                           $scope.querying = false;
                       });
                     }
                     else {
                       Restangular.all('user').post($scope.User).then(function(result) {
-                          if (result.code == 0) return $location.url('/user');
+                          if (result.code == 0) return $location.url('/user/' + $scope.myself.usr_id);
                           $scope.errors = result.errors;
                           $scope.querying = false;
                       });

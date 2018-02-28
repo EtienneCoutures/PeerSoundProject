@@ -13,51 +13,96 @@
 <link href="/css/user.css" rel="stylesheet"/>
 </head>
 <body>
-  <div class="user">
-    <div class="title">
-      <img src="/img/myAccount.png" class="img-rounded" style="widht:50px; height:50px; margin-top:10px">
-          <h2>ITIZ</h2>
-          <div style="margin-top:10px; margin-bottom:10px;"class="btn-group test">
-            <button ng-if="me === true" type="button"  class="btn userButton" ng-click="editAccount()">Edit</button>
-            <button type="button"  class="btn userButton">Amis</button>
-            <button type="button"  class="btn userButton">Conseiller une playlist</button>
-            <button data-toggle="collapse" data-target="#playlist" type="button"  class="btn userButton">Lister les playlists</button>
-          </div>
-    </div>
-      <div class="information" style="border-top:1px solid black; padding:10px;">
-        <h2>Playlist Administré par ITIZ</h2>
-        <table class="notifTable">
-          <tbody>
-            <tr>
-              <td>Rock</td>
-            </tr>
-            <tr>
-              <td>Techno</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  <div class="user" id="user" ng-if="user">
     <div class="information">
       <div class="col-md-4">
       <div  class="btn" data-ng-init="isFollowed()">
-        <button  style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:150px;" id="unfollow" ng-if="followed === true" ng-click='unFollow()'>unFollow</button>
-        <button  style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:150px;" id="follow" ng-if="followed === false" ng-click='Follow()'>Follow</button>
+        <button class="btn" style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:auto;" id="unfollow" ng-if="followed === true" ng-click='unFollow()'><span class="glyphicon glyphicon-heart-empty"></span> unFollow</button>
+        <button class="btn" style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:auto;" id="follow" ng-if="followed === false" ng-click='Follow()'><span class="glyphicon glyphicon-heart"></span> Follow</button>
       </div>
     </div>
     <div class="col-md-4">
+      <img src="/img/myAccount.png" class="img-rounded" style="widht:50px; height:50px; margin-top:10px">
+    <h2>{{user.usr_login}}</h2>
     </div>
       <div class="col-md-4">
-        <button style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:300px;" class="btn" href="#" ng-click="toogleDisplayMessage(true)">Envoyer un message à {{user_login}}</button>
+        <button style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:auto;" class="btn" href="#" ng-click="toogleDisplayMessage(true)"><span class="glyphicon glyphicon-envelope"></span> Envoyer un message à {{user.usr_login}}</button>
         <br>
-        <div ng-if="displayMessageInpunt === true">
+        <div ng-if="displayMessageInpunt === true" style="margin-top:15px">
           <form>
-        <input type="text" id="messageInput" required></input>
-        <button type="submit" ng-click="messageHandler(id, messageContent())" style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:150px;" href="" class="glyphicon glyphicon-send"></button>
+        <input type="text" id="messageInput" style="width:235px" required></input>
+        <button type="submit" ng-click="messageHandler(id, messageContent())" style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:auto; height:auto;" href="" class="btn"><span class=" glyphicon glyphicon-send"></span></button>
         <a href="" class="glyphicon glyphicon-remove" ng-click="toogleDisplayMessage(false)"></a>
       </form>
-      <p ng-if="sended == true">Message sent to {{user_login}} !<p>
+      <p ng-if="sended == true">Message sent to {{user.usr_login}} !<p>
       </div>
-  </div>
     </div>
+    </div>
+    <div class="title">
+          <div style="margin-top:10px; margin-bottom:10px;"class="btn-group test">
+            <button ng-if="me === true" type="button"  class="btn userButton" ng-click="editAccount()">Edit</button>
+            <button data-toggle="collapse" ng-click="toDisplay = 0" type="button"  class="btn userButton">Lister les playlists</button>
+            <button type="button"  ng-click="toDisplay = 1" class="btn userButton">Followers ({{nbFollowers}})</button>
+            <button type="button" ng-click="toDisplay = 2" class="btn userButton">Following ({{nbFollowing}})</button>
+          </div>
+        </div>
+
+        <div class="information playlist" ng-if="!toDisplay" style="border-top:1px solid black; padding:10px;">
+          <div ng-if="playlists.length">
+            <h2>Playlist Administrés par {{user.usr_login}}</h2>
+            <table class="notifTable">
+              <tbody ng-repeat="x in playlists">
+                <tr>
+                  <td ng-click="redirectTo('playlist', x.playlist_id)">{{x.playlist_name}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div ng-if="!playlists.length">
+            <h2>{{user.usr_login}} n'a aucune playlist</h2>
+          </div>
+        </div>
+
+
+        <div class="information follower" ng-if="toDisplay == 1" style="border-top:1px solid black; padding:10px;">
+          <div ng-if="user.Followers.length">
+            <h2>Utilisateurs suivants {{user.usr_login}} ({{nbFollowers}})</h2>
+            <table  class="notifTable">
+              <tbody ng-repeat="user in user.Followers">
+                <tr>
+                  <td ng-click="redirectTo('user', user.Follower.usr_id)">{{user.Follower.usr_login}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div ng-if="!user.Followers.length">
+            <h2>{{user.usr_login}} ne suit personne</h2>
+          </div>
+        </div>
+
+        <div class="information following" ng-if="toDisplay == 2" style="border-top:1px solid black; padding:10px;">
+          <div ng-if="user.Following.length">
+            <h2>Utilisateurs que suit {{user.usr_login}} ({{nbFollowing}})</h2>
+            <table class="notifTable">
+              <tbody ng-repeat="user in user.Following">
+                <tr>
+                  <td ng-click="redirectTo('user', user.Followed.usr_id)">{{user.Followed.usr_login}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div ng-if="!user.Following.length">
+            <h2>{{user.usr_login}} ne suit personne</h2>
+          </div>
+        </div>
+
+
+
+        <div id="unknowUser" ng-if="!user">
+          <div class="col-md-12">
+          <center><h4 style="margin-top:5%">This user don't exist</h4></center>
+          <center><img src="/img/broken.png" id="logoBroken" style="max-width:200px;max-heigth:200px;width:auto;height:auto;margin-top:5%"></img></center>
+          </div>
+        </div>
   </div>
 </body>

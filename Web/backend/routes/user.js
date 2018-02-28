@@ -34,7 +34,9 @@ module.exports = function (app) {
             if (typeof Options.page == "string") Options.page = parseInt(Options.page);
             if (typeof Options.sort == "string") Options.sort = JSON.parse(Options.sort);
 
+
             Options.where = Options.where || {};
+          //penser a regarder le include
 
             // Add filters
             if (!S(Options.where.usr_login).isEmpty()) query.where.usr_login = {like:Options.where.usr_login + '%'};
@@ -49,6 +51,12 @@ module.exports = function (app) {
             query.order = (Options.sort && Options.sort.field) ? (Options.sort.field + (Options.sort.asc ? ' ASC' : ' DESC')) : 'usr_id';
 
             app.models["User"].findAndCountAll(query).then(function (result) {
+              if (!result.count) {
+                return res.json({
+                  code : 1
+                })
+              }
+
               if (!Options.limit) return res.json(result.rows);
 
 
@@ -56,7 +64,8 @@ module.exports = function (app) {
             });
         });
 
-    // Render a User
+
+    // Render a User with his follow and playlist
     router.get('/:id(\\d+)',
         app.requirePermission([
             ['allow', {
@@ -71,7 +80,24 @@ module.exports = function (app) {
                 where: {
                     "usr_id": req.params.id
                 },
-                include: []
+                include: [{
+                  model: app.models.Playlist,
+                  as: "Playlist"
+                },{
+                  model: app.models.Follow,
+                  as:"Followers",
+                  include: [{
+                    model: app.models.User,
+                     as:"Follower"
+                   }]
+                },{
+                  model: app.models.Follow,
+                  as:"Following",
+                  include: [{
+                    model: app.models.User,
+                    as:"Followed"
+                  }]
+                }]
             };
             app.models["User"].findOne(query).then(function (result) {
                 if (!result) {
@@ -79,21 +105,10 @@ module.exports = function (app) {
                         code: 1
                     });
                 }
-
-                result.countFollowing().then(function(result) {
-                  console.log("il suit : " + result + " personnes (countFollowing)")
-
-                })
-
-                result.countFollowers().then(function(result) {
-                  console.log("il a : " + result + " followers (countFollowers)")
-
-                })
-              //penser a return result.dataValues, c'est completement con de return un array sur un findOne
                 res.json({
-                    "code": 0,
-                    "User": result
-                });
+                  "code": 0,
+                  "User": result,
+              });
             });
         });
 
