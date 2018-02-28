@@ -38,13 +38,13 @@
                      key: 'usr_id'
                    }
                  },
-                 music_insert: {
+                 musiclink_insert: {
                      type: Sequelize.DATE,
                      defaultValue: 0,
                      validate: {
                      }
                  },
-                 music_update: {
+                 musiclink_update: {
                      type: Sequelize.DATE,
                      defaultValue: 0,
                      validate: {
