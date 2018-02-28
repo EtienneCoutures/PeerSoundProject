@@ -68,9 +68,14 @@ module.exports = function (app) {
                 where: {
                     "playlist_id": req.params.id
                 },
-                include: []
+                include: [{
+                  model: app.models.Subscription,
+                  as: 'Subscriber',
+                  where: {
+                    usr_id: req.query.id
+                  }
+                }]
             };
-            console.log("la")
             app.models["Playlist"].findOne(query).then(function (result) {
                 if (!result) {
                     return res.json({
@@ -115,7 +120,6 @@ module.exports = function (app) {
                 record.save().then(function (record) {
                     reply(null, record);
                 }).catch(function (err) {
-                  console.log("error: ", err)
                     reply(err);
                 });
             }

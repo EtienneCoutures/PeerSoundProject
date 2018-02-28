@@ -133,14 +133,6 @@ module.exports = function (app) {
                 });
             });
 
-        /*router.post('/fileupload', {
-          var form = new formidable.IncomingForm();
-          form.parse(req, function (err, fields, files) {
-            res.write('File uploaded');
-            res.end();
-          };*/
-
-
     // Create / Update a User
     router.post('/',
         app.requirePermission([

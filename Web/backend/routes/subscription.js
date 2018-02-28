@@ -87,7 +87,6 @@ router.post('/',
                     where: {},
                     include: []
                 };
-                console.log("get/sub")
             if (typeof Options.where == "string") Options.where = JSON.parse(Options.where);
             if (typeof Options.limit == "string") Options.limit = parseInt(Options.limit);
             if (typeof Options.page == "string") Options.page = parseInt(Options.page);
