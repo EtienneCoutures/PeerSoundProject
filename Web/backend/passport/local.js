@@ -22,7 +22,6 @@ module.exports = function (app, passport) {
                     'usr_email': username
                 }
             }).then(function (account) {
-              console.log(account);
                 if (!account) {
                     return done(null, false, req.flash('message', req.translate('system', 'User not found')));
                 }

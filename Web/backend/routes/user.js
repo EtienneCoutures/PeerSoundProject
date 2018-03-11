@@ -89,7 +89,8 @@ module.exports = function (app) {
                   include: [{
                     model: app.models.User,
                      as:"Follower"
-                   }]
+                   }],
+                   required: false
                 },{
                   model: app.models.Follow,
                   as:"Following",

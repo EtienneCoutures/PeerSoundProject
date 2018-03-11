@@ -44,7 +44,6 @@ module.exports = function (app) {
                 });
             }
             function updateRecord() {
-                console.log("update");
                 /*app.models["Music"].find({
                     "where":{
                         "music_id": Record["music_id"]

@@ -119,7 +119,6 @@ router.post('/',
                 }]
             ]),
             function (req, res) {
-              console.log(req.query) //ptete falloir changer ca c'est vrmt pas secur
                 app.models["Subscription"].find({
                     "where":{
                         "usr_id": req.query.usr_id,

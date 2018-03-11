@@ -130,7 +130,6 @@ module.exports = function (app) {
                   }]
               ]),
               function (req, res) {
-                console.log(req.query)
                   app.models["Message"].find({
                       "where":{
                           "message_id": req.query.message_id
