@@ -18,7 +18,7 @@ module.exports = function (app) {
     */
     
     /**
-    *@apiDefine Error Un
+    *@apiDefine Error
     *@apiError UnauthorizedAccess Unauthorized access to the users list
     */
     
