@@ -12,6 +12,16 @@ module.exports = function (app) {
     var router = express.Router();
     app.use('/api/user', router);
 
+    /**
+    *@api {get} /user GET ROUTE USERS
+    *@apiUse Error
+    */
+    
+    /**
+    *@apiDefine Error
+    *@apiError UnauthorizedAccess Unauthorized access to the users list
+    */
+    
     // List All models of User
     router.get('/',
         app.requirePermission([
