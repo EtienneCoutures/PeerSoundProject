@@ -61,6 +61,8 @@ define([
 
               $scope.display = 'all'
 
+              
+
               $scope.all  = {
                 user : [],
                 music : [],

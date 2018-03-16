@@ -91,8 +91,8 @@
           </div>
           <div class="col-md-6">
             <div class="col-md-4 navbar-brand">
-              <img id="notif" ng-if="!(myself.messages.length)" src="/img/music.png">
-              <a href="/#/message"><img id="notif" ng-if="myself.messages.length > 0" src="/img/musicNotif.png"></a>
+              <img id="notif" ng-if="!(myself.messages_unread.length)" src="/img/music.png">
+              <a href="" ng-click="redirectTo('message', '')"><img id="notif" ng-if="myself.messages_unread.length > 0" src="/img/musicNotif.png"></a>
             </div>
             <div class="col-md-6">
               <ul class="nav navbar-nav navbar-right">

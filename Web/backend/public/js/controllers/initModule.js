@@ -86,7 +86,9 @@ define([
                   };
 
                   $scope.userQuery = function() {
-                      var type = document.getElementById("selectQuery").value
+                    /*if (document.getElementById("selectQuery").value) {
+                      var type = document.getElementById("selectQuery").value }*/
+                      var type = 'all'
                       var query = document.getElementById("search").value
                       if (query) {
                         if (['all', 'playlist', 'user', 'music'].indexOf(type) >= 0) {
