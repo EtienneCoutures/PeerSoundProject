@@ -81,19 +81,11 @@
         <div class="container">
           <div class="col-md-6">
             <form role="search" name="searchform" method="get">
-              <div class="form-group" id="searchthis">
-                <div class="input-group">
-                  <input id="search" type="text" style="width:80%" placeholder="recherche" name="s" class="form-control left-rounded" required>
-                  <select class="styled-select" id="selectQuery">
-                    <option selected="selected" value="all">All</option>
-                    <option value="playlist">Playlist</option>
-                    <option value="music">Music</option>
-                    <option value="user">User</option>
-                  </select>
+                <div class="input-group" style="margin-top:9px">
+                  <input id="search" type="text" style="width:100%" placeholder="recherche" name="s" class="form-control left-rounded" required>
                   <div class="input-group-btn">
-                    <button id="search-btn" type="submit" ng-click="userQuery()" class="btn btn-inverse"><img id="seek" src="/img/seek.jpg"></button>
+                    <button id="search-btn" type="submit" ng-click="userQuery()" class="btn btn-inverse"><img id="seek" src="/img/searchicon.png"></button>
                   </div>
-                </div>
               </div>
             </form>
           </div>

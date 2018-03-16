@@ -68,31 +68,48 @@ menu_items.forEach(function(item) { %>
 }); %>
 </div-->
 <!-- end row -->
-<div class="row"><%
+<link rel="stylesheet" href="css/style.css">
+<div class="col-md-10" style="margin-bottom:20px">
+  <center>
+    <h1>Peer Sound Project</h1>
+  <form role="search" name="searchform" method="get">
+        <input id="search" type="text" style="width:70%" placeholder="Que recherchez vous?  Penser a centrer ce texte" name="s" class="form-control left-rounded" required>
+        <select class="styled-select" id="selectQuery">
+          <option selected="selected" value="all">All</option>
+          <option value="playlist">Playlist</option>
+          <option value="music">Music</option>
+          <option value="user">User</option>
+        </select>
+          <button id="search-btn" type="submit" ng-click="userQuery()" class="btn btn-inverse"><img id="seek" src="/img/seek.jpg"></button>
+    </form>
+  </center>
+</div>
+
+
+
+<!--
+<div class="row">
+  <%
   new_item.forEach(function(item) { %>
-    <div class="news">
-      <div class="row">
-        <div class="col-md-2">
+    <div class="col-md-5">
+      <div class="news">
+        <div class="row">
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-8">
+            <h4><b><%= item.playlist %></b></h4>
+          </div>
+          <div class="col-md-2">
+            <img src="/img/myAccount.png" alt="logo" id="imgplaylist">
+          </div>
+          <p>Ajout de truc</p>
         </div>
-        <div class="col-md-8">
-          <h2><b><%= item.playlist %></b></h2>
-        </div>
-        <div class="col-md-2">
-          <img src="/img/myAccount.png" alt="logo" id="imgplaylist">
-        </div>
-      </div>
-      <div class="text">
-        <h5><%= item.user_name %> viens de vous inviter à rejoindre la playlist <%= item.playlist %></h5>
-        <h5>Title: <%= item.titre %></h5>
-        <h5>Artiste: <%= item.artist %></h5>
-        <h5>User : <%= item.user_name %></h5>
-      </div>
         <button class="btn playlist">Acces to playlist</button>
         <button class="btn playlist" ng-click="redirectTo('user', 1)"><%= item.user_name%></button>
-    </a>
+      </a>
     </div>
-    <%
-  }); %>
-  <div style="margin:64px 5px 2em 0">
   </div>
+  <%
+}); %>
 </div>
+-->

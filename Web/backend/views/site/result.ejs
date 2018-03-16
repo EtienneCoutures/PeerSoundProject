@@ -5,8 +5,10 @@
   width: 50px;
 }
 </style>
-<center><h4>La page de resultat de recherche de type {{type}}</h4></center>
 
+
+<div  class="col-md-9">
+  <center><h4>La page de resultat de recherche de type {{type}}</h4></center>
 <div style="margin-bottom:5%">
 <div ng-if="all['user'].length">
   <div class="news" ng-repeat="x in all.user" style="margin-bottom:15px">
@@ -68,3 +70,54 @@
   </div>
 </div>
 </div>
+</div>
+<div class="col-md-3">
+  <center><h2> Filtres </h2></center>
+  <div class="filters">
+    <button class="filter-button">All</button>
+    <br>
+    <button class="filter-button">Musique</button>
+    <br>
+    <button class="filter-button">Playlist</button>
+    <br>
+    <button class="filter-button last">Utilisateur</button>
+    <br>
+  <!--  <button type="button" style="font-size:12px; border-radius:10px; background-color:#6B92A5; color:white; width:100px;margin-top:10px" ng-click="" class="btn">Rafraichir</button>-->
+</div>
+</div>
+
+<style>
+.filter-button{
+  width:100%;
+  height: 25px;
+  background-color: white;
+  font-size: 12px;
+  border: 0px;
+  text-align: left;
+  margin-bottom: 3%;
+}
+
+.last {
+  margin-bottom: 0%;
+}
+
+.filter-button:hover{
+  background-color: #d9e0e7;
+  color:black;
+  border-radius: 10px;
+}
+
+.filters{
+  width: 90%;
+  position: relative;
+  height: auto;
+  border: 1px solid #c0c0c0;
+  clear: both;
+  text-align: center;
+  margin:auto;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color:white;
+}
+</style>
