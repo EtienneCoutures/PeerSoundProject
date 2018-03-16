@@ -57,6 +57,10 @@ define([
             '$routeParams',
             function ($scope, Restangular, $routeParams) {
               $scope.type = $routeParams.type
+              $scope.query = $routeParams.query
+
+              $scope.display = 'all'
+
               $scope.all  = {
                 user : [],
                 music : [],

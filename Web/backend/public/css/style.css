@@ -10,6 +10,9 @@
     font-family: "Segoe UI",Arial,sans-serif;
   } /* ici on set tout */
 
+  html {
+    overflow-y: scroll;
+  }
 /*
 .container-fluid .navbar-header {
     margin: 0;

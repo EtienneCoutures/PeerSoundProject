@@ -10,7 +10,7 @@
 <div  class="col-md-9">
   <center><h4>La page de resultat de recherche de type {{type}}</h4></center>
 <div style="margin-bottom:5%">
-<div ng-if="all['user'].length">
+<div ng-if="all['user'].length && (display == 'all' || display =='user')">
   <div class="news" ng-repeat="x in all.user" style="margin-bottom:15px">
     <div class="row">
       <div class="col-md-2">
@@ -28,7 +28,7 @@
   </div>
 </div>
 
-<div ng-if="all['playlist'].length">
+<div ng-if="all['playlist'].length && (display == 'all' || display =='playlist')">
   <div class="news" ng-repeat="x in all.playlist" style="margin-bottom:15px">
     <div class="row">
       <div class="col-md-2">
@@ -49,7 +49,7 @@
   </div>
 </div>
 
-<div ng-if="all['music'].length">
+<div ng-if="all['music'].length && (display == 'all' || display =='music')">
   <div class="news" ng-repeat="x in all.music" style="margin-bottom:15px">
     <div class="row">
       <div class="col-md-2">
@@ -74,13 +74,13 @@
 <div class="col-md-3">
   <center><h2> Filtres </h2></center>
   <div class="filters">
-    <button class="filter-button">All</button>
+    <button class="filter-button" ng-click="display = 'all'">All</button>
     <br>
-    <button class="filter-button">Musique</button>
+    <button class="filter-button" ng-click="display = 'music'">Musique</button>
     <br>
-    <button class="filter-button">Playlist</button>
+    <button class="filter-button" ng-click="display = 'playlist'">Playlist</button>
     <br>
-    <button class="filter-button last">Utilisateur</button>
+    <button class="filter-button last" ng-click="display = 'user'">Utilisateur</button>
     <br>
   <!--  <button type="button" style="font-size:12px; border-radius:10px; background-color:#6B92A5; color:white; width:100px;margin-top:10px" ng-click="" class="btn">Rafraichir</button>-->
 </div>
@@ -102,9 +102,10 @@
 }
 
 .filter-button:hover{
-  background-color: #d9e0e7;
   color:black;
-  border-radius: 10px;
+  border-radius: 8px;
+  border-left: 3px solid #d9e0e7;
+  border-bottom: 2px solid #d9e0e7;
 }
 
 .filters{
