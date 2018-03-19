@@ -109,6 +109,7 @@ module.exports = function (app) {
                 if (!S(Record.music_group).isEmpty()) record.music_group = Record.music_group;
                 if (!S(Record.music_url).isEmpty()) record.music_url = Record.music_url;
                 if (!S(Record.music_date).isEmpty()) record.music_date = Record.music_date;
+                if (!S(Record.duration).isEmpty()) record.duration = Record.duration;
                 if (!S(Record.usr_id).isEmpty()) record.usr_id = Record.usr_id;
 
 
@@ -135,6 +136,7 @@ module.exports = function (app) {
                     if (!S(Record.music_group).isEmpty()) record.music_group = Record.music_group;
                     if (!S(Record.music_url).isEmpty()) record.music_url = Record.music_url;
                     if (!S(Record.music_date).isEmpty()) record.music_date = Record.music_date;
+                    if (!S(Record.duration).isEmpty()) record.duration = Record.duration;
                     if (!S(Record.usr_id).isEmpty()) record.usr_id = Record.usr_id;
 
                     record.save().then(function (record) {

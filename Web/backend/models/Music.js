@@ -78,10 +78,11 @@ module.exports = function (app) {
               references : {
                 model: 'user',
                 key: 'usr_id'
-              },
-              duration: {
-                type: Sequelize.TEXT
               }
+            },
+            duration: {
+              type: Sequelize.STRING(255),
+              defaultValue: "0.0"
             }
         };
 

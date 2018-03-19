@@ -29,13 +29,13 @@
   </div>
   <div ng-if="musics.length">
     <div class="container" ng-repeat="x in musics" style="margin-bottom:20px;">
-      <div class="playlist" id="{{x.Music.music_id}}" style="height:80px;margin-top:10px;margin-bottom:0px">
+      <div class="playlist" id="{{x.music_id}}" style="height:80px;margin-top:10px;margin-bottom:0px">
         <div>
         <div class="col-md-4">
-          <span class="itemTitle">{{x.Music.music_name}}</span>
+          <span class="itemTitle">{{x.music_name}}</span>
         </div>
         <div class="col-md-4">
-          <span class="itemTitle">{{x.Music.duration}} 3.56</span>
+          <span class="itemTitle">{{x.duration}} 3.56</span>
         </div>
         <div class="col-md-4">
           <span class="itemTitle">Delete</span>

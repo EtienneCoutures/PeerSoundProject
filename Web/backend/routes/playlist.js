@@ -71,9 +71,6 @@ module.exports = function (app) {
                 include: [{
                   model: app.models.Subscription,
                   as: 'Subscriber',
-                  where: {
-                    usr_id: req.query.id
-                  },
                   required: false
                 }],
                 include: [{
@@ -83,11 +80,11 @@ module.exports = function (app) {
                   include: [{
                     model: app.models.Music,
                     as: 'Music',
-                    required: true
+                    required: false
                   }]
                 }]
             };
-            app.models["Playlist"].findOne(query).then(function (result) {
+            app.models["Playlist"].findOne(query).then(function(result) {
                 if (!result) {
                     return res.json({
                         code: 1

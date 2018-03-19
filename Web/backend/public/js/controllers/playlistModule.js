@@ -44,11 +44,19 @@ define([
               $scope.displayNewName = false;
 
               Restangular.one('playlist', $routeParams.playlist_id).get().then(function(result) {
+                console.log(result);
                 if (result.code == 1) {
                     $scope.playlist = null
                 }
                 $scope.playlist = result.Playlist
-                $scope.musics = result.Playlist.MusicLink
+                $scope.musics = [];
+                if (result.Playlist.MusicLink) {
+                  for (var i = 0; i < result.Playlist.MusicLink.length; ++i) {
+                    if (result.Playlist.MusicLink[i].Music) {
+                      $scope.musics.push(result.Playlist.MusicLink[i].Music);
+                    }
+                  }
+                }
                 console.log($scope.musics)
               })
 
@@ -84,9 +92,12 @@ define([
                   where: {
                     playlist_creator: $scope.myself.usr_id
                   }
-              }).then(function (result) {
-                for (var i = 0 ; i != result.length ; ++i) {
-                  $scope.userPlaylist.push(result[i])
+              }).then(function(result) {
+                console.log(result.length);
+                if (result.length) {
+                  for (var i = 0 ; i != result.length ; ++i) {
+                    $scope.userPlaylist.push(result[i])
+                  }
                 }
               });
             }
@@ -310,7 +321,7 @@ define([
                     $scope.querying = true;
 
                     Restangular.all('playlist').post($scope.Playlist).then(function(result) {
-                        if (result.code == 0) return $location.url('/playlist');
+                        if (result.code == 0) return $location.url('/playlist/list');
                         $scope.errors = result.errors;
                         $scope.querying = false;
                     });

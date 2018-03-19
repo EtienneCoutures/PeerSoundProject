@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `music` (
   `music_url` text NOT NULL,
   `music_date` text NOT NULL,
   `usr_id` int NOT NULL,
+  `duration` varchar(255) DEFAULT "0.0",
   foreign key (`usr_id`) references user(`usr_id`),
   primary key (`music_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
@@ -49,7 +50,6 @@ CREATE TABLE IF NOT EXISTS `music` (
 --
 -- Constraints for dumped tables
 --
-alter table music add column `duration` text NOT NULL DEFAULT "0.0";
 --
 -- Data for tables
 --
