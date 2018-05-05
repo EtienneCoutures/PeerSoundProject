@@ -85,7 +85,16 @@ router.post('/',
             var Options = req.query,
                 query = {
                     where: {},
-                    include: []
+                    include: [{
+                      model: app.models.Playlist,
+                      as: 'Playlist',
+                      required: false,
+                      include: {
+                        model: app.models.User,
+                        as: 'Creator',
+                        required: false
+                      }
+                    }]
                 };
             if (typeof Options.where == "string") Options.where = JSON.parse(Options.where);
             if (typeof Options.limit == "string") Options.limit = parseInt(Options.limit);

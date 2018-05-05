@@ -31,6 +31,10 @@ define([
                 .when('/playlist/:playlist_id/admin', {
                     templateUrl: 'partials/playlist/admin',
                     controller: 'AdminPlaylistController'
+                })
+                .when('/playlist/:playlist_id/invite', {
+                    templateUrl: 'partials/playlist/invitation',
+                    controller: 'InvitePlaylistController'
                 });
         }])
         .controller('ViewPlaylistController', [
@@ -40,11 +44,9 @@ define([
             '$routeParams',
             '$route',
             function ($scope, $location, Restangular, $routeParams, $route) {
-              $scope.userPlaylist = []
               $scope.displayNewName = false;
 
               Restangular.one('playlist', $routeParams.playlist_id).get().then(function(result) {
-                console.log(result);
                 if (result.code == 1) {
                     $scope.playlist = null
                 }
@@ -57,8 +59,11 @@ define([
                     }
                   }
                 }
-                console.log($scope.musics)
               })
+
+              $scope.inviteUser = function() {
+                  return $location.url('/playlist/' + $scope.playlist.playlist_id + '/invite');
+              }
 
               $scope.changeName = function() {
                 var name =  document.getElementById('newNameInput').value;
@@ -80,26 +85,96 @@ define([
             '$location',
             'Restangular',
             '$routeParams',
-            function ($scope, $location, Restangular, $routeParams) {
+            '$route',
+            function ($scope, $location, Restangular, $routeParams, $route) {
               $scope.userPlaylist = []
+              $scope.userInvites = []
+              $scope.userSubs = []
 
               Restangular.one('playlist').get({where: {
                 playlist_id: $routeParams.playlist_id
               }}).then(function(result) {
                 $scope.playlist = result[0]
               })
-              Restangular.all('playlist').get('', {
+              var getInvitations = function(callback) {
+                Restangular.all('invitation').get('', {
+                  where: {
+                    invited_usr_id: $scope.myself.usr_id
+                  }
+                }).then(function(result) {
+                  callback(result);
+                });
+              }
+              var getPlaylists = function(callback) {
+                Restangular.all('playlist').get('', {
                   where: {
                     playlist_creator: $scope.myself.usr_id
                   }
-              }).then(function(result) {
-                console.log(result.length);
+                }).then(function(result) {
+                  callback(result);
+                });
+              }
+              var getSubscriptions = function(callback) {
+                Restangular.all('subscription').get('', {
+                  where: {
+                    usr_id: $scope.myself.usr_id
+                  }
+                }).then(function(result) {
+                  callback(result);
+                });
+              }
+
+              getInvitations(function(result) {
+                if (result.length) {
+                  for (var i = 0 ; i != result.length ; ++i) {
+                    $scope.userInvites.push(result[i])
+                  }
+                }
+              })
+              getPlaylists(function(result) {
                 if (result.length) {
                   for (var i = 0 ; i != result.length ; ++i) {
                     $scope.userPlaylist.push(result[i])
                   }
                 }
               });
+              getSubscriptions(function(result) {
+                if (result.length) {
+                  for (var i = 0 ; i != result.length ; ++i) {
+                    $scope.userSubs.push(result[i])
+                  }
+                }
+              })
+
+              $scope.acceptInvite = function(invitation) {
+                  var subscription = {
+                      usr_id: $scope.myself.usr_id,
+                      playlist_id: invitation.Playlist.playlist_id,
+                      usr_role: invitation.invited_role
+                  }
+                  Restangular.all('subscription').post(subscription).then(function(result) {
+                      if (result.code) {
+                          console.log(result.errors)
+                          return $location.url('/playlist/list');
+                      }
+                  });
+                  Restangular.one('invitation', invitation.invitation_id).remove().then(function(result) {
+                    if (result.code) {
+                      console.log("erreur");
+                    } else {
+                      $route.reload();
+                    }
+                  });
+              };
+              $scope.refuseInvite = function(invitation) {
+                  Restangular.one('invitation', invitation.invitation_id).remove().then(function(result) {
+                    if (result.code) {
+                      console.log("erreur");
+                    } else {
+                      $route.reload();
+                    }
+                  });
+              };
             }
           ])
           .controller('AdminPlaylistController', [
@@ -326,6 +401,18 @@ define([
                         $scope.querying = false;
                     });
                 };
+            }
+        ])
+        .controller('InvitePlaylistController', [
+            '$scope',
+            '$translatePartialLoader',
+            '$location',
+            '$routeParams',
+            'Restangular',
+            '$translate',
+            function($scope, $translatePartialLoader, $location, $routeParams, Restangular, $translate) {
+                var playlist_id = $routeParams.playlist_id;
+                console.log(playlist_id);
             }
         ]);
 });

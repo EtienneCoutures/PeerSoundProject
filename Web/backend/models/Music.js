@@ -98,7 +98,7 @@ module.exports = function (app) {
         });
 
 
-    app.models.Music.hasMany(app.models.MusicLink, {as: 'MusicLink', foreignKey: 'music_id', sourceKey: 'music_id'})
+        app.models.Music.hasMany(app.models.MusicLink, {as: 'MusicLink', foreignKey: 'music_id', sourceKey: 'music_id'})
 
         sequelize.sync({ alter: true }).then(function(res) {
           }).catch(function (err) {

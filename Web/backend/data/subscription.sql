@@ -11,12 +11,11 @@ CREATE TABLE IF NOT EXISTS `subscription` (
   `sub_insert` datetime NOT NULL,
   `usr_id` int NOT NULL,
   `playlist_id` int NOT NULL,
+  `usr_role` enum('super-admin','admin','member') NOT NULL DEFAULT "member",	
   foreign key (`usr_id`) references user(`usr_id`),
   foreign key (`playlist_id`) references playlist(`playlist_id`),
   primary key (`sub_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
-
-alter table subscription add column `usr_role` enum('super-admin','admin','member', 'visitor') NOT NULL DEFAULT "visitor";
 
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;

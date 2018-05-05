@@ -120,6 +120,43 @@ define([
                   Restangular.one("follow/followedNb/", $scope.myself.usr_id).get().then(function(result) {
                     $scope.nbFollowers = result.count;
                   });
+                  /*var query = {
+                    "music_name": "Blue Jeans",
+                    "music_description": "Blue Jeans",
+                    "music_comment": "Blue Jeans",
+                    "music_picture_default": "Blue Jeans",
+                    "music_source": "youtube",
+                    "music_group": "Lana Del Rey",
+                    "music_url": "uneadresse",
+                    "music_date": "2015",
+                    "usr_id": $scope.myself.usr_id,
+                    "duration": "4.37"
+                  }
+                  Restangular.all("music").post(query).then(function() {
+                    console.log("good")
+                  }, function() {
+                    console.log("bad")
+                  })*/
+                  /*var query = {
+                    "music_id": 1,
+                    "playlist_id": 1,
+                    "usr_id": $scope.myself.usr_id
+                  };
+                  Restangular.all("musiclink").post(query).then(function() {
+                    console.log("good")
+                  }, function() {
+                    console.log("bad")
+                  })*/
+                  /*var query = {
+                    "invited_usr_id": 2,
+                    "inviter_usr_id": 1,
+                    "playlist_id": 3
+                  };
+                  Restangular.all("invitation").post(query).then(function() {
+                    console.log("good")
+                  }, function() {
+                    console.log("bad")
+                  })*/
                 }
               }
 

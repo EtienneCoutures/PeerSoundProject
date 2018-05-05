@@ -95,6 +95,7 @@ module.exports = function (app) {
               defaultValue: null,
               validate:{
               },
+            }
             /*nb_followers: {
                 type: Sequelize.INTEGER,
                 defaultValue: 0,
@@ -107,7 +108,6 @@ module.exports = function (app) {
                 validate: {
                 }
               }*/
-            }
         };
 
         app.models.User = sequelize.define('User', schema, {

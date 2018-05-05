@@ -53,11 +53,11 @@
                  }
              },
              playlist_creator: {
-               type: Sequelize.INTEGER,
-               references : {
-                 model: 'user',
-                 key: 'usr_id'
-               }
+                 type: Sequelize.INTEGER,
+                 references: {
+                   model: 'user',
+                   key: 'usr_id'
+                 }
              }
          };
 
@@ -77,11 +77,11 @@
          require('./MusicLink')(app)
          app.models.Playlist.hasMany(app.models.Subscription, {as: 'Subscriber', foreignKey: 'playlist_id', sourceKey: 'playlist_id'})
          app.models.Playlist.belongsTo(app.models.User, {
-           as: 'Creator',
-           foreignKey: 'playlist_creator',
-           otherKey: "usr_id",
-           onUpdate: 'CASCADE',
-           onDelete: 'CASCADE',
+             as: 'Creator',
+             foreignKey: 'playlist_creator',
+             otherKey: "usr_id",
+             onUpdate: 'CASCADE',
+             onDelete: 'CASCADE'
          })
          app.models.Playlist.hasMany(app.models.MusicLink, {as: 'MusicLink', foreignKey: 'playlist_id', sourceKey: 'playlist_id'})
 

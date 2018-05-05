@@ -5,66 +5,102 @@
 </head>
 <body>
   <div ng-if="!!myself">
-  <div class="row header">
-    <div class=col-md-2>
-      <img src="/img/myPlaylist.png" alt="playlist" style="width:250px; height:200px;">
+    <div class="row header">
+      <div class=col-md-2>
+        <img src="/img/myPlaylist.png" alt="playlist" style="width:250px; height:200px;">
+      </div>
+      <div class="col-md-7">
+      </div>
+      <div class="col-md-3">
+        <!--<li class="{{__controller == 'playlist' ? 'active' : ''}}"> -->
+        <button ng-click="goTo('playlist/', 'new')" type="button" class="btn" style="background-color:white;border-color:black; margin-top:70px;"><div href="#" class="bnt glyphicon glyphicon-plus" style="font-size:15px;"></div>  Creer une nouvelle playlist</button>
+      <!--</li>-->
+      </div>
     </div>
-    <div class="col-md-7">
-    </div>
-    <div class="col-md-3">
-      <!--<li class="{{__controller == 'playlist' ? 'active' : ''}}"> -->
-      <button ng-click="goTo('playlist/', 'new')" type="button" class="btn" style="background-color:white;border-color:black; margin-top:70px;"><div href="#" class="bnt glyphicon glyphicon-plus" style="font-size:15px;"></div>  Creer une nouvelle playlist</button>
-    <!--</li>-->
-    </div>
-  </div>
-  <h2 style="font-family:Arial,Helvetica,sans-serif;"><center>Vos invitation en attente</center></h2>
-<div class="row">
-  <table class="notifTable" style="background-color:white">
-    <thead>
-      <tr>
-        <th>Invité par </th>
-        <th>Playlist</th>
-        <th>validation</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>ITIZ</td>
-        <td>Rap Fr</td>
-        <td>
-          <div class="col-md-6">
-          <span class="glyphicon glyphicon-ok" style="font-size:20px; margin-top:15px;"></span>
-        </div>
-        <div class="col-md-6">
-          <span class="glyphicon glyphicon-remove" style="font-size:20px; margin-top:15px;"></span>
-        </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
-    <h2 style="font-family:Arial,Helvetica,sans-serif;"><center>Playlist Administré</center></h2>
-  <div class="row">
-    <table class="notifTable" style="margin-bottom:60px;background-color:white">
-      <thead>
-        <tr>
-          <th>Gestion Playlist</th>
-          <th>Derniere Musique</th>
-          <th>Playlist</th>
-        </tr>
-      </thead>
-      <tbody ng-repeat="x in userPlaylist">
-        <tr>
+    <h2 ng-if="userInvites.length" style="font-family:Arial,Helvetica,sans-serif;"><center>Vos invitation en attente</center></h2>
+    <h2 ng-if="!userInvites.length" style="font-family:Arial,Helvetica,sans-serif;"><center>Aucune invitation en attente</center></h2>
+    <div class="row">
+      <table ng-if="userInvites.length" class="notifTable" style="background-color:white">
+        <thead>
+          <tr>
+            <th>Invité par</th>
+            <th>Playlist</th>
+            <th>validation</th>
+          </tr>
+        </thead>
+        <tbody ng-repeat="x in userInvites">
+          <tr>
+            <td> {{ x.Inviter.usr_login }} </td>
+            <td> {{ x.Playlist.playlist_name }}</td>
+            <td>
+              <div class="col-md-6">
+                <span ng-click="acceptInvite(x)" class="glyphicon glyphicon-ok" style="font-size:20px; margin-top:15px;"></span>
+              </div>
+              <div class="col-md-6">
+                <span ng-click="refuseInvite(x)" class="glyphicon glyphicon-remove" style="font-size:20px; margin-top:15px;"></span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <!--tbody>
+          <tr>
+          <td>ITIZ</td>
+          <td>Rap Fr</td>
           <td>
-            <a href="" class="glyphicon glyphicon-eye-open" ng-click="goTo('playlist/', x.playlist_id)"></a>
-            <a href="" class="glyphicon glyphicon-wrench" ng-if="x.playlist_creator == myself.usr_id" ng-click="goTo('playlist/', x.playlist_id + '/admin')"></a>
+            <div class="col-md-6">
+            <span class="glyphicon glyphicon-ok" style="font-size:20px; margin-top:15px;"></span>
+          </div>
+          <div class="col-md-6">
+            <span class="glyphicon glyphicon-remove" style="font-size:20px; margin-top:15px;"></span>
+          </div>
           </td>
-          <td>Coming soon</td>
-          <td> {{ x.playlist_name }} </td>
         </tr>
-      </tbody>
-    </table>
-    </div>
-</div>
+      </tbody-->
+      </table>
+      </div>
+      <h2 ng-if="userPlaylist.length" style="font-family:Arial,Helvetica,sans-serif;"><center>Vos Playlists</center></h2>
+      <h2 ng-if="!userPlaylist.length" style="font-family:Arial,Helvetica,sans-serif;"><center>Vous n'avez pas de Playlist</center></h2>
+      <div class="row">
+        <table ng-if="userPlaylist.length" class="notifTable" style="margin-bottom:60px;background-color:white">
+          <thead>
+            <tr>
+              <th>Gestion Playlist</th>
+              <th>Derniere Musique</th>
+              <th>Playlist</th>
+            </tr>
+          </thead>
+          <tbody ng-repeat="x in userPlaylist">
+            <tr>
+              <td>
+                <a href="" class="glyphicon glyphicon-eye-open" ng-click="goTo('playlist/', x.playlist_id)"></a>
+                <a href="" class="glyphicon glyphicon-wrench" ng-if="x.playlist_creator == myself.usr_id" ng-click="goTo('playlist/', x.playlist_id + '/admin')"></a>
+              </td>
+              <td>Coming soon</td>
+              <td> {{ x.playlist_name }} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h2 ng-if="userSubs.length" style="font-family:Arial,Helvetica,sans-serif;"><center>Playlists Suivies</center></h2>
+      <h2 ng-if="!userSubs.length" style="font-family:Arial,Helvetica,sans-serif;"><center>Aucune Playlist suivie</center></h2>
+      <div class="row">
+        <table ng-if="userSubs.length" class="notifTable" style="margin-bottom:60px;background-color:white">
+          <thead>
+            <tr>
+              <th>Nom de la Playlist</th>
+              <th>Créateur de la Playlist</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody ng-repeat="x in userSubs">
+            <tr>
+              <td> {{ x.Playlist.playlist_name }} </td>
+              <td> {{ x.Playlist.Creator.usr_login }} </td>
+              <td> {{ x.usr_role }} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
 </body>
 </html>

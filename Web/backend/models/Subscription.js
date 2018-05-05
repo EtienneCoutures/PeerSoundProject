@@ -33,8 +33,8 @@ module.exports = function (app) {
           }
         },
         usr_role: {
-          type: Sequelize.ENUM('super-admin','admin','member', 'visitor'),
-          defaultValue: "visitor",
+          type: Sequelize.ENUM('super-admin','admin','member'),
+          defaultValue: "member",
           validate: {
           }
         }
