@@ -120,6 +120,11 @@ define([
                   Restangular.one("follow/followedNb/", $scope.myself.usr_id).get().then(function(result) {
                     $scope.nbFollowers = result.count;
                   });
+                  Restangular.one("musiclink").get().then(function(result) {
+                    console.log(result);
+                  }, function(result) {
+                    console.log("bad")
+                  });
                   /*var query = {
                     "music_name": "Blue Jeans",
                     "music_description": "Blue Jeans",
@@ -133,16 +138,6 @@ define([
                     "duration": "4.37"
                   }
                   Restangular.all("music").post(query).then(function() {
-                    console.log("good")
-                  }, function() {
-                    console.log("bad")
-                  })*/
-                  /*var query = {
-                    "music_id": 1,
-                    "playlist_id": 1,
-                    "usr_id": $scope.myself.usr_id
-                  };
-                  Restangular.all("musiclink").post(query).then(function() {
                     console.log("good")
                   }, function() {
                     console.log("bad")

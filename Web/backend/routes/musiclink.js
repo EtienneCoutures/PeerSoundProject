@@ -38,13 +38,13 @@ module.exports = function (app) {
             Options.where = Options.where || {};
 
             // filters
-            if (!S(Options.where.invited_usr_id).isEmpty()) query.where.music_id = {like:Options.where.music_id};
-            if (!S(Options.where.inviter_usr_id).isEmpty()) query.where.usr_id = {like:Options.where.usr_id};
+            if (!S(Options.where.music_id).isEmpty()) query.where.music_id = {like:Options.where.music_id};
+            if (!S(Options.where.usr_id).isEmpty()) query.where.usr_id = {like:Options.where.usr_id};
             if (!S(Options.where.playlist_id).isEmpty()) query.where.playlist_id = {like:Options.where.playlist_id};
 
             query.limit = Options.limit || null;
             query.offset = Options.limit ? Options.limit * ((Options.page || 1) - 1) : null;
-            query.order = (Options.sort && Options.sort.field) ? (Options.sort.field + (Options.sort.asc ? ' ASC' : ' DESC')) : 'invitation_id';
+            query.order = (Options.sort && Options.sort.field) ? (Options.sort.field + (Options.sort.asc ? ' ASC' : ' DESC')) : 'musiclink_id';
             app.models["MusicLink"].findAndCountAll(query).then(function(result) {
               if (!result.count)
                 return res.json({
