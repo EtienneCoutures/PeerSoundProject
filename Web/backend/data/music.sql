@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `music` (
   `music_picture_default` varchar(255) NOT NULL,
   `music_insert` datetime NOT NULL,
   `music_update` datetime NOT NULL,
-  `music_source` enum('youtube','spotify','deezer','else') NOT NULL,
+  `music_source` enum('youtube','spotify', 'soundcloud', 'deezer','else') NOT NULL,
   `music_group` text NOT NULL,
   `music_url` text NOT NULL,
   `music_date` text NOT NULL,
