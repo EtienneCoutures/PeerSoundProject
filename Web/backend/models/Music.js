@@ -54,7 +54,7 @@ module.exports = function (app) {
             },
             music_source: {
                 type: Sequelize.ENUM('youtube','spotify','deezer', 'soundcloud', 'else'),
-                defaultValue: "youtube",
+                //defaultValue: "youtube",
                 validate: {
                 }
             },
