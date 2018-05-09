@@ -83,6 +83,15 @@ module.exports = function (app, passport) {
                 });
 
                 account.save().then(function(account) {
+                    playlist = app.models['Playlist'].build({
+                      'playlist_name': "Ma Playlist",
+                      'playlist_style': "Mes Favoris",
+                      'playlist_description': "Mes Favoris",
+                      'playlist_comment': "Mes Favoris",
+                      'playlist_creator': account['usr_id']
+                    })
+
+                    playlist.save().then(function() {console.log('good')}, function(error) {console.log(error)});
                     return app.models.AccessToken.create({
                         'atok_token': crypto.randomBytes(32).toString('hex'),
                         'usr_id': account['usr_id'],
@@ -95,6 +104,8 @@ module.exports = function (app, passport) {
                         account.accessTokenID = accessToken.atok_id;
                         return done(null, account);
                     });
+
+
                 }).catch(function (err) {
                     return done(null, false, req.flash('message', req.translate('system',
                         err.errors ? err.errors.map(function (error) {
@@ -103,6 +114,7 @@ module.exports = function (app, passport) {
                             : (req.translate('system', err.message) || JSON.stringify(err))
                     )));
                 });
+
             });
         })
     );
