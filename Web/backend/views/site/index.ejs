@@ -1,115 +1,34 @@
-<link href="/css/home.css" rel="stylesheet"/>
-
-<%
-var menu_items = [{
-  label: 'music',
-  url: '#/music',
-  icon: 'fa-cube'
-}, {
-  label: 'user',
-  url: '#/user',
-  icon: 'fa-cube'
-}].sort(function (a, b) {
-  if (a.label == b.label) return 0;
-  return a.label > b.label ? 1 : -1;
-});
-%>
-
-<%
-var new_item = [{
-  user_name: "MrBiscotte",
-  album: "ecole du micro d'argent",
-  artist: "IAM",
-  playlist: "RapFr",
-  titre: "petit frere"
-}, {
-  user_name: "ITIZ",
-  album: "l'autre",
-  artist: "TSR",
-  playlist: "RapFr",
-  titre: "fenetre sur rue"
-}, {
-  user_name: "KETMAX",
-  album: "accuse de reflexion",
-  artist: "oxmo",
-  playlist: "RapFr",
-  titre: "amour"
-}, {
-  user_name: "KEDIRA",
-  album: "punk",
-  artist: "IAM",
-  playlist: "RapFr",
-  titre: "petit frere"
-}, {
-  user_name: "GABO",
-  album: "ecole du micro d'argent",
-  artist: "toto",
-  playlist: "RapFr",
-  titre: "petit frere"
-}];
-%>
-
-<!-- begin row -->
-<!--div class="row"><%
-menu_items.forEach(function(item) { %>
-<div class="col-md-3 col-sm-6">
-<div class="widget widget-stats widget-thumbnail bg-green" onclick="window.location.href = '<%= item.url %>'">
-<div class="stats-icon"><i class="fa <%= item.icon %>"></i></div>
-<div class="stats-info">
-<h4 translate><%= item.label %></h4>
-<p translate>Module</p>
-</div>
-<div class="stats-link">
-<a href="<%= item.url %>">{{ 'View Detail' | translate }}
-<i class="fa fa-arrow-circle-o-right"></i></a>
-</div>
-</div>
-</div><%
-}); %>
-</div-->
-<!-- end row -->
 <link rel="stylesheet" href="css/style.css">
 <div class="col-md-10" style="margin-bottom:20px">
   <center>
-    <h1>Peer Sound Project</h1>
-  <form role="search" name="searchform" method="get">
-        <input id="search" type="text" style="width:70%" placeholder="Que recherchez vous?  Penser a centrer ce texte" name="s" class="form-control left-rounded" required>
-        <select class="styled-select" id="selectQuery">
-          <option selected="selected" value="all">All</option>
-          <option value="playlist">Playlist</option>
-          <option value="music">Music</option>
-          <option value="user">User</option>
-        </select>
-          <button id="search-btn" type="submit" ng-click="userQuery()" class="btn btn-inverse"><img id="seek" src="/img/seek.jpg"></button>
-    </form>
+   <div style="margin-top:5%;background-color:white;border-radius:10px;">
+     <div >
+     <span style="color:black;font-size:40px;">Peer Sound Project</span>
+     <img src="/img/logoBlack.png" alt="logo" id="img" style="max-height:70px;max-width:70px;vertical-align:middle;margin-top:-15px">
+   </div>
+ </div>
+<div style="margin-bottom:50px;margin-top:50px;color:black;font-size:14px;">
+  <p>Peersoundproject permet à ceux qui aiment la musique de se regrouper pour découvrir et partager leurs perles musicales.</p>
+  Aujourd’hui, ces œuvres ne sont plus sur support matériel, sont stockées sur des serveurs, qui vous permettent souvent de les écouter gratuitement, et sans limite.
+  <p>Cependant, aimer une musique, c’est avoir la version studio, live, alternative et instrumentale.</p>
+  <p>  Aimer un groupe, c’est regarder le live sur Youtube, et écouter l’album sur Deezer.</p>
+    PSP permet aux passionnés, chineurs, et collectionneurs, de pouvoir comme à l’époque des compilations CD, appuyer sur «suivant», et de passer d’une musique hébergée par Youtube, à une autre stockée sur SoundCloud, et de partager leurs playlists avec leurs semblables, comme un bon vieux 45 tours.
+    <p>Quels que soient vos goûts, d’autres les partagent</p>
+  </div>
+  <div>
+    <button type="button" style="font-size:10px;margin-bottom: 15px;background-color:#6B92A5; color:white; width:100px;" ng-click="redirectTo('playlist', 'list')" class="btn">Voir vos playlists</button>
+  </div>
+    <div class="col-md-3" ng-repeat="pl in playlist">
+        <div style="background-color:white;border-radius:10px;height:170px" >
+          <p style="padding-top:15px;color:black">{{$index}} {{pl.playlist_name}}</p>
+          <img src="/img/myPlaylist.png" alt="logo" id="img" style="max-height:70px;max-width:70px">
+          <br>
+          <p style="color:black"> Style : {{pl.playlist_style}}</p>
+          <div>
+            <button type="button" style="font-size:10px; background-color:#6B92A5; color:white; width:100px;" ng-click="redirectTo('playlist', pl.playlist_id)" class="btn">Voir la playlist</button>
+          </div>
+        </div>
+      <br>
+    </div>
   </center>
 </div>
-
-
-
-<!--
-<div class="row">
-  <%
-  new_item.forEach(function(item) { %>
-    <div class="col-md-5">
-      <div class="news">
-        <div class="row">
-          <div class="col-md-2">
-          </div>
-          <div class="col-md-8">
-            <h4><b><%= item.playlist %></b></h4>
-          </div>
-          <div class="col-md-2">
-            <img src="/img/myAccount.png" alt="logo" id="imgplaylist">
-          </div>
-          <p>Ajout de truc</p>
-        </div>
-        <button class="btn playlist">Acces to playlist</button>
-        <button class="btn playlist" ng-click="redirectTo('user', 1)"><%= item.user_name%></button>
-      </a>
-    </div>
-  </div>
-  <%
-}); %>
-</div>
--->
