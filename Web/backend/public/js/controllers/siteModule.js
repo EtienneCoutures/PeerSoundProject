@@ -45,6 +45,11 @@ define([
                 $scope.nbFollowers = result.count;
               });
             }
+
+            Restangular.one('playlist').get({
+            }).then(function(result) {
+              $scope.playlist = result
+            })
         ])
         .controller('DownloadController', [
             '$scope',
@@ -61,7 +66,7 @@ define([
 
               $scope.display = 'all'
 
-            
+
 
               $scope.all  = {
                 user : [],
