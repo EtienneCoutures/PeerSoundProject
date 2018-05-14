@@ -37,7 +37,7 @@ define([
                   $scope.playlist = result
                 })
 */
-
+  console.log($scope.myself)
                 $scope.getMessage = function() {
                   Restangular.one('message').get({where: {
                     dest_id: $scope.myself.usr_id,

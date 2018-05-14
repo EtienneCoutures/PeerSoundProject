@@ -44,12 +44,12 @@ define([
               Restangular.one("follow/followerNb/", $scope.myself.usr_id).get().then(function(result) {
                 $scope.nbFollowers = result.count;
               });
-            }
+              Restangular.one('playlist').get({
+                }).then(function(result) {
+                  $scope.playlist = result
+                })
 
-            Restangular.one('playlist').get({
-            }).then(function(result) {
-              $scope.playlist = result
-            })
+            }
         ])
         .controller('DownloadController', [
             '$scope',
