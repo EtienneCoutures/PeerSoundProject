@@ -86,7 +86,7 @@
          app.models.Playlist.hasMany(app.models.MusicLink, {as: 'MusicLink', foreignKey: 'playlist_id', sourceKey: 'playlist_id'})
 
 
-      //  sequelize.sync().then(function() { console.log(app.models.Playlist.Instance.prototype) })
+//       sequelize.sync().then(function() { console.log(app.models.Playlist.Instance.prototype) })
          // List of required models
 
          // Define relations of this model
