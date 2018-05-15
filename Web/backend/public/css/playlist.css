@@ -9,28 +9,26 @@ table.notifTable {
   width: 100%;
   text-align: center;
   border-collapse: collapse;
+  padding: 2px;
+  border-radius: 10px;
 }
+
 table.notifTable td, table.notifTable th {
-  border: 2px solid #DDDDDD;
-  padding: 25px 1px;
+  padding: 25px 2px;
   width: 300px;
+  font-size: 15px;
 }
-table.notifTable tbody td {
-  font-size: 17px;
-}
-table.notifTable thead {
-    border-bottom: 2px solid #E2FCFC;
-    background-color: #222222;
-}
+
 table.notifTable thead th {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   text-align: center;
   background-color: #222222;
   color: white;
 }
-table.notifTable tfoot td {
-  font-size: 8px;
+
+.notification{
+  border: 4px;
 }
 
 .btn{
@@ -116,6 +114,7 @@ table.notifTable tfoot td {
   font-size: 30px;
   font-family: Arial,Helvetica,sans-serif;
 }
+
 
 .playlist .information {
   width: 90%;
