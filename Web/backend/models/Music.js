@@ -65,6 +65,7 @@ module.exports = function (app) {
             },
             music_url: {
               type: Sequelize.TEXT,
+//              unique: true,
               validate: {
               }
             },
