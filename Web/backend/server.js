@@ -28,7 +28,6 @@ var express        = require('express'),
     nodemailer     = require('nodemailer'),
     path           = require('path'),
 
-
     translate      = require('./translate')(path.resolve('./i18n'), 'en'),
     logger;
 

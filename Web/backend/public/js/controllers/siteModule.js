@@ -114,17 +114,32 @@ define([
         .controller('FollowedController', [
             '$scope',
             'Restangular',
-            function ($scope, Restangular) {
+            '$route',
+            function ($scope, Restangular, $route) {
               Restangular.one("follow/follower/", $scope.myself.usr_id).get().then(function(result) {
                   $scope.followedNb = result.count;
                   $scope.followedList = result.rows
               })
+
+              $scope.unFollow = function(user_id) {
+                Restangular.one('follow').remove({
+                     "followed_usr_id": user_id,
+                     "follower_usr_id": $scope.myself.usr_id
+                    }).then(function(result) {
+                   if (result.code == 0)  {
+                     $route.reload()
+                   }
+                     $scope.errors = result.errors;
+                     $scope.querying = false;
+                 });
+             }
             }
         ])
         .controller('FollowerController', [
             '$scope',
             'Restangular',
-            function ($scope, Restangular) {
+            '$route',
+            function ($scope, Restangular, $route) {
               Restangular.one("follow/followed/", $scope.myself.usr_id).get().then(function(result) {
                   $scope.followerNb = result.count;
                   $scope.followerList = result.rows

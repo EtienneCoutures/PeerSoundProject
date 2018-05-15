@@ -16,12 +16,12 @@ module.exports = function (app) {
     *@api {get} /user GET ROUTE USERS
     *@apiUse Error
     */
-    
+
     /**
     *@apiDefine Error
     *@apiError UnauthorizedAccess Unauthorized access to the users list
     */
-    
+
     // List All models of User
     router.get('/',
         app.requirePermission([
@@ -283,6 +283,7 @@ module.exports = function (app) {
                     if (!S(Record.usr_role).isEmpty()) record.usr_role = Record.usr_role;
                     if (!S(Record.usr_status).isEmpty()) record.usr_status = Record.usr_status;
                     if (!S(Record.usr_image).isEmpty()) record.usr_image = Record.usr_image;
+
                     record.save().then(function (record) {
                         reply(null, record);
                     }).catch(function (err) {

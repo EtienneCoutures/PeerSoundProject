@@ -5,7 +5,7 @@
 </head>
 <body>
   <div ng-if="playlist">
-  <div class="row well" style="background-color:#F5F5F5; opacity:0.7;">
+  <div class="col-md-10" style="background-color:white; opacity:0.7;">
     <div class="col-md-5">
       <img src="/img/myPlaylist.png" alt="playlist" style="width:250px; height:200px;">
     </div>
@@ -44,8 +44,9 @@
       </ul>
     </div>
   </div>
-  <div ng-if="!musics.length">
-    <h3> Cette playlist n'a aucune musique </h3>
+  <br>
+  <div ng-if="!musics.length" class="col-md-10">
+  <h3 style="text-align:center"> Cette playlist n'a aucune musique </h3>
   </div>
   <div ng-if="musics.length">
     <div class="container" ng-repeat="x in musics" style="margin-bottom:20px;">

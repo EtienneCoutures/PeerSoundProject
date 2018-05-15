@@ -126,7 +126,6 @@ define([
                     $scope.user = null
                   }
                   else
-                  console.log(result)
                   $scope.user = result.User
                   $scope.playlists = result.User.Playlist
                   $scope.nbFollowers = result.User.Followers.length
