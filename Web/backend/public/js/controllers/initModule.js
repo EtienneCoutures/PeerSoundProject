@@ -30,6 +30,13 @@ define([
                   count: 0
                 }
 
+                $scope.display = 'all'
+
+                Restangular.one('playlist').get({
+                }).then(function(result) {
+                  $scope.playlist = result
+                   console.log($scope.playlist)
+                })
 
 
                 $scope.getMessage = function() {
