@@ -43,29 +43,53 @@
     <ul class="collection with-header">
       <li class = "collection-header blue-grey lighten-5"><h3 class="center-align ">Gestion de mes playlists</h3></li>
       <li class="collection-item avatar waves-effect waves-light col l12">
-        <div class="col l12" style="margin-top: 25px;">
-        <div class="col l2">
+        <div class="col l12">
+          <div class="col l2" style="margin-top: 15px;">
+            <img src="/img/playlistTemplate.svg" alt="" class="circle">
+          </div>
+          <div class="col l2" style="margin-top: 30px;">
+            <span class="title">Playlist : </span>
+          </div>
+          <div class="col l1" style="margin-top: 30px;">
+          </div>
+          <div class="col l2" style="margin-top: 30px;">
+            <span class="title">Style de musique :</span>
+          </div>
+          <div class="col l1" style="margin-top: 30px;">
+          </div>
+          <div class="col l2" style="margin-top: 30px;">
+            <span class="title">Description :</span>
+          </div>
+        </div>
+      </li>
+      <li class="collection-item avatar waves-effect waves-light col l12" ng-repeat="x in userPlaylist">
+        <div class="col l2" style="margin-top:15px">
           <img src="/img/playlistTemplate.svg" alt="" class="circle">
         </div>
-        <div class="col l2">
-          <span class="title">Playlist : </span>
+        <div class="col l2" style="margin-top:30px">
+          <span>{{ x.playlist_name }}</span>
         </div>
-        <div class="col l2">
-          <span class="title">Nombre de music : </span>
+        <div class="col l1" style="margin-top: 30px;">
         </div>
-        <div class="col l2">
-          <span class="title">Nombre d'utilisateur : </span>
+        <div class="col l2" style="margin-top:30px">
+          <span>{{ x.playlist_style }}</span>
         </div>
-      </div>
-        <div class="secondary-content">
-            <a href="#!">
-              <div class="col l6">
-                <span>Editer</span>
-              </div>
-              <div class="col l6">
-                <i class="material-icons">mode_edit</i>
-              </div>
-            </a>
+        <div class="col l1" style="margin-top: 30px;">
+        </div>
+        <div class="col l2" style="margin-top:30px">
+          <span>{{ x.playlist_description }}</span>
+        </div>
+        <div class="secondary-content" style="margin-top: 15px;">
+          <a href="#/playlist/{{ x.playlist_id }}">
+            <div class="col l4" style="margin-top: 5px;">
+              <span>Editer</span>
+            </div>
+            <div class="col l1">
+            </div>
+            <div class="col l4">
+              <i class="material-icons">mode_edit</i>
+            </div>
+          </a>
         </div>
       </li>
     </ul>
