@@ -61,6 +61,17 @@ define([
                 }
               })
 
+              Restangular.one('subscription').get({where: {playlist_id: $routeParams.playlist_id}}).then(function(result) {
+                if (result.code == 1) {
+                    console.log("subscription error");
+                    $scope.subscriptions = {length: 0};
+                }
+                console.log(result);
+                $scope.subscriptions = result;
+              })
+
+
+
               $scope.inviteUser = function() {
                   return $location.url('/playlist/' + $scope.playlist.playlist_id + '/invite');
               }
@@ -73,10 +84,27 @@ define([
                   })
                 }
               }
+              $scope.changeStyle = function() {
+                var style =  document.getElementById('newStyleInput').value;
+                if (style != "") {
+                  Restangular.all('playlist').post({playlist_id: $routeParams.playlist_id,  playlist_style: style}).then(function(result) {
+                    $route.reload()
+                  })
+                }
+              }
 
               $scope.displayNameInput = function() {
                 $scope.displayNewName = ($scope.displayNewName == true ? false : true);
               }
+              $scope.displayStyleInput = function() {
+                $scope.displayNewStyle = ($scope.displayNewStyle == true ? false : true);
+              }
+              $scope.showFollowers = function() {
+                if ($scope.subscriptions.length) {
+                  $scope.displayFollowers = ($scope.displayFollowers == true ? false : true);
+                }
+              }
+              console.log($scope);
 
             }
           ])

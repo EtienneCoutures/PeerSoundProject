@@ -1,11 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="/css/playlist.css" rel="stylesheet"/>
+  <link href="/css/playlist.css" rel="stylesheet"/>
 </head>
 <body>
   <div ng-if="playlist">
-  <div class="col-md-10" style="background-color:white; opacity:0.7;">
+    <div class="container">
+
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title center-align">
+            <div class="input-field inline">
+              <h2>{{ playlist.playlist_name }}  <i class="small material-icons" ng-click="displayNameInput()">mode_edit</i></h2>
+              <form ng-if="displayNewName === true">
+                <input id="newNameInput" placeholder="New Playlist Name" type="text" required/>
+                <button type="submit" ng-click='changeName()' class="waves-effect waves-light btn">Ok</button>
+              </form>
+            </div>
+          </span>
+          <div class="divider"/>
+          <div class="row">
+            <span class="col l4 center-align">
+              <h3>Style : {{ playlist.playlist_style }}  <i class="small material-icons" ng-click="displayStyleInput()">mode_edit</i></h3>
+              <form ng-if="displayNewStyle === true">
+                <input id="newStyleInput" placeholder="New Playlist Style" type="text" required/>
+                <button type="submit" ng-click='changeStyle()' class="waves-effect waves-light btn">Ok</button>
+              </form>
+            </span>
+            <span class="col l4 center-align">
+              <h3>Musiques : {{ musics.length }}</h3>
+            </span>
+            <span class="col l4 center-align">
+              <h3 ng-click="showFollowers()">Followers : {{ subscriptions.length }}</h3>
+              <ul ng-if="displayFollowers" class="collection">
+                <li class="collection-item" ng-repeat="x in subscriptions">{{ x.Subscriber.usr_login}}</li>
+              </ul>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <ul class="collection with-header">
+        <li class="collection-header"><h2 class="center-align">Musiques</h2></li>
+        <li ng-if="musics.length === 0" class="collection-header"><h3 class="center-align">Aucune musique dans la Playlist</h3></li>
+        <li ng-if="musics.length > 0" class="collection-header">
+          <div class="row">
+            <h3 class="col l3 center-align">Nom</h3>
+            <h3 class="col l2 center-align">Groupe</h3>
+            <h3 class="col l3 center-align">Description</h3>
+            <h3 class="col l2 center-align">Source</h3>
+            <h3 class="col l2 center-align">Actions</h3>
+          </div>
+        </li>
+        <li ng-if="musics.length > 0" class="collection-item" ng-repeat="x in musics">
+          <div class="row">
+            <h3 class="col l3 center-align">{{ x.music_name }}</h3>
+            <h3 class="col l2 center-align">{{ x.music_group }}</h3>
+            <h3 class="col l3 center-align">{{ x.music_description }}</h3>
+            <h3 class="col l2 center-align">{{ x.music_source }}</h3>
+            <i class="col l2 center-align material-icons" style="margin-top: 20px;">delete</i>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+  <!--div class="col-md-10" style="background-color:white; opacity:0.7;">
     <div class="col-md-5">
       <img src="/img/myPlaylist.png" alt="playlist" style="width:250px; height:200px;">
     </div>
@@ -31,14 +91,14 @@
           <ul style="margin-top: 10%; margin-right: 60%" class="dropdown-menu animated fadeInDown">
             <li class="arrow"></li>
             <li><a ng-click="inviteUser()" translate>Inviter des utilisateurs</a></li>
-            <!--li class="divider"></li>
+            <li class="divider"></li>
             <li><a href="" ng-click="logout()" translate>Log Out</a></li>
             <li><a href="#/follower">Followers ({{nbFollowers}})</a></li>
             <li><a href="#/followed">Followed ({{nbFollowed}})</a></li>
             <li><a href="#/message">Messages ({{myself.messages_unread.length}})</a></li>
             <li><a href="#/playlist/list">Playlist</a></li>
             <li class="divider"></li>
-            <li><a href="#/cgu">CGU</a></li-->
+            <li><a href="#/cgu">CGU</a></li>
           </ul>
         </li>
       </ul>
@@ -72,6 +132,6 @@
   <center><h4 style="margin-top:5%">This playlist don't exist</h4></center>
   <center><img src="/img/broken.png" id="logoBroken" style="max-width:200px;max-heigth:200px;width:auto;height:auto;margin-top:5%"></img></center>
   </div>
-</div>
+</div-->
 </body>
 </html>
