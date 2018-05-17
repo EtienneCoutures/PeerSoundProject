@@ -72,7 +72,7 @@
   <div class="container">
     <div class="row">
       <div class="card">
-        <div class="card-content blue-grey lighten-3" style="margin-top: 30px;">
+        <div class="card-content blue-grey lighten-5" style="margin-top: 30px;">
             <span class="card-title center-align">
                 <h3>Ajouter/Chercher une Playlist</h3>
               </span>
@@ -92,7 +92,7 @@
              </div>
              <div class="col l6">
                <div class=" secondary-content {{__controller == 'playlist' ? 'active' : ''}}">
-                 <button class="waves-effect waves-light btn" ng-click="goTo('playlist/', 'new')">Creer une nouvelle playlist</button>
+                 <button class="waves-effect waves-light btn blue-grey lighten-1" ng-click="goTo('playlist/', 'new')">Creer une nouvelle playlist</button>
              </div>
              </div>
            </div>
@@ -129,27 +129,27 @@
           <img src="/img/playlistTemplate.svg" alt="" class="circle">
         </div>
         <div class="col l2" style="margin-top:30px">
-          <span>{{ x.playlist_name }}</span>
+          <span style="font-size: 15px;">{{ x.playlist_name }}</span>
         </div>
         <div class="col l1" style="margin-top: 30px;">
         </div>
         <div class="col l2" style="margin-top:30px">
-          <span>{{ x.playlist_style }}</span>
+          <span style="font-size: 15px;">{{ x.playlist_style }}</span>
         </div>
         <div class="col l1" style="margin-top: 30px;">
         </div>
         <div class="col l2" style="margin-top:30px">
-          <span>{{ x.playlist_description }}</span>
+          <span style="font-size: 15px;">{{ x.playlist_description }}</span>
         </div>
         <div class="secondary-content" style="margin-top: 15px;">
           <a href="#/playlist/{{ x.playlist_id }}">
             <div class="col l4" style="margin-top: 5px;">
-              <span>Editer</span>
+              <span >Editer</span>
             </div>
             <div class="col l1">
             </div>
             <div class="col l4">
-              <i class="material-icons">mode_edit</i>
+              <i class="material-icons" ng-click="goTo('playlist/', x.playlist_id)">mode_edit</i>
             </div>
           </a>
         </div>
@@ -184,22 +184,22 @@
         <div class="col l1" style="margin-top: 30px;">
         </div>
         <div class="col l2" style="margin-top:30px">
-          <span>{{ x.playlist_id }}</span>
+          <span>{{ x.Playlist.playlist_name }}</span>
         </div>
         <div class="col l1" style="margin-top: 30px;">
         </div>
         <div class="col l2" style="margin-top:30px">
-          <span>{{ x.inviter_usr_id }}</span>
+          <span>{{ x.Inviter.usr_login }}</span>
         </div>
         <div class="secondary-content" style="margin-top: 15px;">
           <div class="col l6">
             <a href="#!">
-              <i class="material-icons">check</i>
+              <i class="material-icons" ng-click="acceptInvite(x)">check</i>
             </a>
           </div>
           <div class="col l6">
             <a href="#!">
-                <i class="material-icons">clear</i>
+                <i class="material-icons ng-click="refuseInvite(x)"">clear</i>
             </a>
           </div>
         </div>
@@ -221,7 +221,7 @@
           <span class="title">Style</span>
         </div>
         <div class="col l3" style="margin-top:30px">
-          <span class="title">Membre de la playlist</span>
+          <span class="title">Role</span>
         </div>
       </li>
       <li class="collection-item avatar waves-effect waves-light col l12" ng-repeat="x in userSubs">
@@ -229,17 +229,17 @@
           <img src="/img/playlistTemplate.svg" alt="" class="circle">
         </div>
         <div class="col l2" style="margin-top:30px">
-          <span>{{ x.playlist_id }}</span>
+          <span>{{ x.Playlist.Creator.usr_login }}</span>
+        </div>
+        <div class="col l1" style="margin-top: 30px;">
+        </div>
+        <div class="col l2" style="margin-top:30px">
+          <span>{{ x.Playlist.playlist_style }}</span>
         </div>
         <div class="col l1" style="margin-top: 30px;">
         </div>
         <div class="col l2" style="margin-top:30px">
           <span>{{ x.usr_role }}</span>
-        </div>
-        <div class="col l1" style="margin-top: 30px;">
-        </div>
-        <div class="col l2" style="margin-top:30px">
-          <span>{{ x.sub_insert }}</span>
         </div>
         <div class="secondary-content" style="margin-top: 15px;">
           <div class="col l6">
