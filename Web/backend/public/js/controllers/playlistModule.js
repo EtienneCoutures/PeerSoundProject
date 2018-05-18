@@ -52,9 +52,11 @@ define([
                 }
                 $scope.playlist = result.Playlist
                 $scope.musics = [];
+                $scope.musiclinks = [];
                 if (result.Playlist.MusicLink) {
                   for (var i = 0; i < result.Playlist.MusicLink.length; ++i) {
                     if (result.Playlist.MusicLink[i].Music) {
+                      $scope.musiclinks.push(result.Playlist.MusicLink[i]);
                       $scope.musics.push(result.Playlist.MusicLink[i].Music);
                     }
                   }
@@ -92,6 +94,15 @@ define([
                   })
                 }
               }
+              $scope.deleteLink = function(link) {
+                console.log(link);
+                Restangular.one('musiclink', link.musiclink_id).remove().then(function() {
+                  console.log("Link Destroyed");
+                  $route.reload();
+                }, function() {
+                  console.log("Error");
+                })
+              }
 
               $scope.displayNameInput = function() {
                 $scope.displayNewName = ($scope.displayNewName == true ? false : true);
@@ -106,6 +117,14 @@ define([
               }
               console.log($scope);
 
+              document.addEventListener('DOMContentLoaded', function() {
+                var elems = document.querySelectorAll('.dropdown-trigger');
+                var instances = M.Dropdown.init(elems, options);
+              });
+
+              /*$(document).ready(function(){
+                $('.collapsible').collapsible();
+              });*/
             }
           ])
         .controller('PlaylistListController', [

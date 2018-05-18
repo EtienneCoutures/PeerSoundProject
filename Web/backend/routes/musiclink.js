@@ -128,4 +128,30 @@ module.exports = function (app) {
             }
         });
 
+        router.delete('/:id',
+            app.requirePermission([
+                ['allow', {
+                    users:['@']
+                }],
+                ['deny', {
+                    users:'*'
+                }]
+            ]),
+            function (req, res) {
+                app.models["MusicLink"].find({
+                    "where":{
+                        "musiclink_id": req.params.id
+                    }
+                }).then(function(record) {
+                    if (record) {
+                        record.destroy();
+                    }
+
+                    res.json({
+                        code: 0,
+                        message: req.translate('system', '__MODEL__ successfully deleted', {__MODEL__: 'MusicLink'})
+                    });
+                });
+            });
+
 };
