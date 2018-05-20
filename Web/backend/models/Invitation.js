@@ -93,11 +93,11 @@
             onDelete: 'CASCADE'
         })
 
-        sequelize.sync({alter: true}).then(function(res) {
+        /*sequelize.sync({alter: true}).then(function(res) {
             console.log("Invitations synched");
         }, function(err) {
             logger.error(err);
-        })
+        })*/
     }
 
  };

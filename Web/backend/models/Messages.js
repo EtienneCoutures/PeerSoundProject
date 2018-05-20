@@ -68,9 +68,9 @@ module.exports = function (app) {
     onDelete: 'CASCADE',
   })
 
-  sequelize.sync({ alter: true }).then(function(res) {
+  /*sequelize.sync({ alter: true }).then(function(res) {
    console.log("c'est synch genre message")
  }).catch(function (err) {
      logger.error(err);
- });
+ });*/
 };

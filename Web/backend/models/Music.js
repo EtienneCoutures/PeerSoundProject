@@ -101,10 +101,10 @@ module.exports = function (app) {
 
         app.models.Music.hasMany(app.models.MusicLink, {as: 'MusicLink', foreignKey: 'music_id', sourceKey: 'music_id'})
 
-        sequelize.sync({ alter: true }).then(function(res) {
+      /*  sequelize.sync({ alter: true }).then(function(res) {
           }).catch(function (err) {
               logger.error(err);
-          });
+          }); */
 
         // List of required models
         // Define relations of this model

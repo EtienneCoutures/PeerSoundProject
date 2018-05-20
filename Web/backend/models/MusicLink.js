@@ -81,9 +81,9 @@
                onDelete: 'CASCADE',
              })
 
-             sequelize.sync({ alter: true }).then(function(res) {
+            /* sequelize.sync({ alter: true }).then(function(res) {
              }).catch(function (err) {
                 logger.error(err);
-             });
+             });*/
         }
     };
