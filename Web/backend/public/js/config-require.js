@@ -24,7 +24,7 @@ define(function() {
             "validator": "/node_modules/validator/validator.min",
             "lodash": "/node_modules/lodash/index",
 
-            // Theme 
+            // Theme
             "jQueryMigrate": "/theme/plugins/jquery/jquery-migrate-1.1.0.min",
             "jQueryUI": "/theme/plugins/jquery-ui/ui/minified/jquery-ui.min",
             "jQuery.slimscroll": "/theme/plugins/slimscroll/jquery.slimscroll.min",
@@ -59,7 +59,7 @@ define(function() {
                 "deps": ["jQuery"]
             },
 
-            // Theme 
+            // Theme
             "jQueryMigrate": {
                 "deps": ["jQuery"]
             },

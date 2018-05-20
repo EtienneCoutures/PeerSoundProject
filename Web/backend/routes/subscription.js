@@ -94,6 +94,11 @@ router.post('/',
                         as: 'Creator',
                         required: false
                       }
+                    },
+                    {
+                      model: app.models.User,
+                      as: 'Subscriber',
+                      required: false
                     }]
                 };
             if (typeof Options.where == "string") Options.where = JSON.parse(Options.where);

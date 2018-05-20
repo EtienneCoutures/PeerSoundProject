@@ -12,6 +12,14 @@
     background-color:white;
 }
 
+ul.collection with-header{
+  width: 100%;
+}
+
+.body{
+  background-color: black;
+}
+
 /*.news{
   width: 455px;
   position: relative;

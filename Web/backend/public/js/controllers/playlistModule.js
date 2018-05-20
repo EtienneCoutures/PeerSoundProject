@@ -52,14 +52,27 @@ define([
                 }
                 $scope.playlist = result.Playlist
                 $scope.musics = [];
+                $scope.musiclinks = [];
                 if (result.Playlist.MusicLink) {
                   for (var i = 0; i < result.Playlist.MusicLink.length; ++i) {
                     if (result.Playlist.MusicLink[i].Music) {
+                      $scope.musiclinks.push(result.Playlist.MusicLink[i]);
                       $scope.musics.push(result.Playlist.MusicLink[i].Music);
                     }
                   }
                 }
               })
+
+              Restangular.one('subscription').get({where: {playlist_id: $routeParams.playlist_id}}).then(function(result) {
+                if (result.code == 1) {
+                    console.log("subscription error");
+                    $scope.subscriptions = {length: 0};
+                }
+                console.log(result);
+                $scope.subscriptions = result;
+              })
+
+
 
               $scope.inviteUser = function() {
                   return $location.url('/playlist/' + $scope.playlist.playlist_id + '/invite');
@@ -73,11 +86,45 @@ define([
                   })
                 }
               }
+              $scope.changeStyle = function() {
+                var style =  document.getElementById('newStyleInput').value;
+                if (style != "") {
+                  Restangular.all('playlist').post({playlist_id: $routeParams.playlist_id,  playlist_style: style}).then(function(result) {
+                    $route.reload()
+                  })
+                }
+              }
+              $scope.deleteLink = function(link) {
+                console.log(link);
+                Restangular.one('musiclink', link.musiclink_id).remove().then(function() {
+                  console.log("Link Destroyed");
+                  $route.reload();
+                }, function() {
+                  console.log("Error");
+                })
+              }
 
               $scope.displayNameInput = function() {
                 $scope.displayNewName = ($scope.displayNewName == true ? false : true);
               }
+              $scope.displayStyleInput = function() {
+                $scope.displayNewStyle = ($scope.displayNewStyle == true ? false : true);
+              }
+              $scope.showFollowers = function() {
+                if ($scope.subscriptions.length) {
+                  $scope.displayFollowers = ($scope.displayFollowers == true ? false : true);
+                }
+              }
+              console.log($scope);
 
+              document.addEventListener('DOMContentLoaded', function() {
+                var elems = document.querySelectorAll('.dropdown-trigger');
+                var instances = M.Dropdown.init(elems, options);
+              });
+
+              /*$(document).ready(function(){
+                $('.collapsible').collapsible();
+              });*/
             }
           ])
         .controller('PlaylistListController', [

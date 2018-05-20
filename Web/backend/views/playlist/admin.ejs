@@ -4,9 +4,100 @@
 <link href="/css/playlist.css" rel="stylesheet"/>
 </head>
 <body>
+
+<div class="container">
+  <div class="row">
+      <div class="col l12">
+        <div class="card white">
+          <div class="card-content">
+            <span class="card-title center-align">Administration Playlist Name</span>
+              <div class="row">
+                <div class="input-field col l6">
+                  <i class="material-icons icon-black prefix">description</i>
+                  <input id="icon_prefix" type="text" class="validate">
+                  <label for="icon_prefix">Changer la Description</label>
+                </div>
+                <div class="input-field col l6">
+                  <i class="material-icons prefix">style</i>
+                  <input id="icon_telephone" type="tel" class="validate">
+                  <label for="icon_telephone">Changer le Style</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col l6">
+                  <i class="material-icons prefix">list</i>
+                  <input id="icon_prefix" type="text" class="validate">
+                  <label for="icon_prefix">Liste des utilisateurs</label>
+                </div>
+                <div class="input-field col l6">
+                  <i class="material-icons prefix">change_history</i>
+                  <input id="icon_telephone" type="tel" class="validate">
+                  <label for="icon_telephone">Modification des droits</label>
+                </div>
+              </div>
+          </div>
+          <div class="card-action col l12">
+            <div class="col l5">
+              <div class="row">
+                <ul class="collection with-header">
+                  <li class = "collection-header grey lighten-5"><h3 class="center-align ">Ajouter un followers</h3></li>
+                  <li class="collection-item avatar waves-effect waves-light col l12" ng-repeat="x in followers">
+                    <div class="col l2" style="margin-top:30px">
+                      <span>{{ x.usr_login }}</span>
+                    </div>
+                    <div class="secondary-content" style="margin-top: 15px;">
+                      <a href="#/playlist/{{ x.playlist_id }}">
+                        <div class="col l4" style="margin-top: 5px;">
+                          <span>Ajouter</span>
+                        </div>
+                        <div class="col l1">
+                        </div>
+                        <div class="col l4">
+                          <i class="material-icons" ng-click="addUserToPlaylist(x)"> person_add</i>
+                        </div>
+                      </a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col l2">
+
+            </div>
+            <div class="col l5">
+              <div class="row">
+                <ul class="collection with-header">
+                  <li class = "collection-header grey lighten-5"><h3 class="center-align ">Followers suivants la playlist</h3></li>
+                  <li class="collection-item avatar waves-effect waves-light col l12" ng-repeat="x in subscribedUser">
+                    <div class="col l2" style="margin-top:30px">
+                      <span>{{ x.usr_login }}</span>
+                    </div>
+                    <div class="secondary-content" style="margin-top: 15px;">
+                      <a href="#/playlist/{{ x.playlist_id }}">
+                        <div class="col l4" style="margin-top: 5px;">
+                          <span>Supprimer</span>
+                        </div>
+                        <div class="col l1">
+                        </div>
+                        <div class="col l4">
+                          <i class="material-icons icongrey" ng-click="removeUserToPlaylist(x)">delete</i>
+                        </div>
+                      </a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
 <div class="col-md-12">
   <center>
-    <h4>Page d'administration de playlis</h4>
+    <h4>Page d'administration de playlist</h4>
     <div style="margin-top:5%;">
       <h5>Ajouter un de vos followers</h5>
     </center>

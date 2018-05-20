@@ -54,14 +54,14 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-lg-12 col-lg-offset-0" style="padding: 0">
+                <div class="form-group col-lg-12 col-lg-offset-0" style="padding:0;">
                     <a class="btn btn-info col-md-5 btn-lg"
-                      href="/signup"> Signup <i class="icon-arrow-left icon-on-left"></i>
+                      href="/signup"> <p style="font-size:13px; margin-top:-3px;">Signup</p> <i class="icon-arrow-left icon-on-left"></i>
                     </a>
-                    <a class="btn btn-info col-md-5 btn-lg pull-right"
+                    <button class="btn btn-info col-md-5 btn-lg pull-right"
                        href="javascript:;"
-                       ng-click="lostpassword()"> Lost password <i class="icon-arrow-right icon-on-right"></i>
-                    </a>
+                       ng-click="lostpassword()"> <p style="font-size:13px; margin-top:-3px;">Lost password</p><i class="icon-arrow-right icon-on-right"></i>
+                    </button>
                 </div>
             </div>
             <div class="row">
@@ -69,7 +69,8 @@
                     <input type="button"
                            ng-click="signin()"
                            class="btn btn-success btn-block btn-lg"
-                           value="{{ 'Connexion' | translate }}"/>
+                           value="{{ 'Connexion' | translate }}"
+                           style= "font-size:13px; margin-top:5px; text-align:5px;"/>
                 </div>
             </div>
             <div class="row">
@@ -80,7 +81,7 @@
 <div class="row" ng-if="$view == 'lostpassword'">
     <div class="login-header">
         <div class="brand">
-            <span class="logo"></span> Lost Password
+            <span class="logo" style="font-size:10px; margin-top:-5px;"></span> Lost Password
             <small>Please type your email</small>
         </div>
         <div class="icon">
