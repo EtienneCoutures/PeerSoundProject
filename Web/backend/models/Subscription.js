@@ -67,5 +67,4 @@ module.exports = function (app) {
     })
 
   }
-  //sequelize.sync().then(function() { console.log(app.models.Subscription.Instance.prototype) })
 };

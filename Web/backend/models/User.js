@@ -131,11 +131,10 @@ module.exports = function (app) {
         app.models.User.hasMany(app.models.Playlist, {as: 'Playlist', foreignKey: 'playlist_creator', sourceKey: 'usr_id'})
         app.models.User.hasMany(app.models.Subscription, {as: 'Subscription', foreignKey: 'usr_id', sourceKey: 'usr_id'})
 
-    /*   sequelize.sync({ alter: true }).then(function(res) {
-        console.log(app.models.User.Instance.prototype)
+     sequelize.sync({ alter: true }).then(function(res) {
       }).catch(function (err) {
           logger.error(err);
-      });*/
+      });
         // List of required models
         // Define relations of this model
     }
