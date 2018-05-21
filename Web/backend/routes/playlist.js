@@ -77,7 +77,11 @@ module.exports = function (app) {
                         as: 'Subscriber',
                         required: false
                       }]
-                    }]
+                    },{
+                    model: app.models.User,
+                    as: 'Creator',
+                    required: false
+                  }]
                 };
                 app.models["Playlist"].findAndCountAll(query).then(function(result) {
                     if (!result) {
