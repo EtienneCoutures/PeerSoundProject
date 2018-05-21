@@ -1,0 +1,764 @@
+/* Styles => Web plugin */
+
+
+html {
+  box-sizing: border-box;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+    height: 800px;
+    width: 330px;
+    background: #9c9c9c;/*#252B33;*/
+    font-family: arial, helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    overflow: hidden !important;
+    margin: 0 !important;
+}
+
+h1 {
+    font-family:  arial, helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 1.6rem;
+    text-align: center;
+    color: #fff;
+    line-height: 1;
+    margin: 0 0 3rem;
+    display: block;
+    width: 100%;
+}
+
+.closer {
+    cursor: pointer;
+    position: absolute;
+    top: 2.5rem;
+    right: 2rem;
+}
+
+#main {
+    padding: 2.5rem 0;
+    height: 505px;
+    width: 330px;
+    position: relative;
+    overflow: hidden;
+}
+
+#mainProfil {
+    padding: 2.5rem 0;
+    height: 505px;
+    width: 330px;
+    position: relative;
+    overflow: hidden;
+}
+
+
+#main {
+    opacity: 0;
+    -webkit-transform: translate3d(100%,0,0);
+    transform: translate3d(100%,0,0);
+    -webkit-transition: transform 300ms ease, opacity 200ms ease;
+    transition: transform 300ms ease, opacity 200ms ease;
+}
+
+
+#main.show {
+    opacity: 1;
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+}
+
+#main:not(.sendMusic) {
+    padding: 2.5rem 2rem;
+}
+
+
+#main.index {
+    padding: 3.5rem 5rem;
+}
+
+#main.takeMusic {
+    padding-bottom: 3.5rem;
+}
+
+
+#main.congrat {
+    background: url(../../images/bg-congrat.png) no-repeat 95px 190px / 165px 117px;
+}
+
+.logo {
+    text-align: center;
+    display: block;
+    margin-bottom: 5rem;
+}
+
+/* input index.html */
+.small {
+    font-family: arial, helvetica, sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: rgba(255,255,255,.5);
+    line-height: 2.3;
+}
+.small a {
+     color: rgba(255,255,255,.5);
+     -webkit-transition: color .2s ease;
+     text-decoration: none;
+}
+.small a:hover, .small a:focus {
+    color: rgba(255,255,255,1);
+}
+.input_t, .input_l {
+    margin-bottom: 2.5rem;
+    width: 100%;
+}
+
+.input_t label {
+    font-size: 1rem;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.input_l input {
+    width: 100%;
+    height: 3.5rem;
+    line-height: 3.5rem;
+    background: rgba(255,255,255,.1);
+    color: #ffffff;
+    border: none;
+    /*border-radius: 4px;
+    padding: 0 1.5rem;*/
+    font-size: 1.5rem;
+    transition: all .2s ease;
+}
+.input_t input {
+    width: 100%;
+    height: 3.5rem;
+    line-height: 3.5rem;
+    background: rgba(255,255,255,.1);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0 1.5rem;
+    font-size: 1.5rem;
+    transition: all .2s ease;
+}
+.input_l input.error,
+.textarea textarea.error,
+.input_t input.error,
+#ChampsAjout.error {
+    background: rgba(217,38,78,.1);
+    border: 1px solid #D9264E;
+}
+
+.input_t input:focus {
+    outline: none;
+}
+
+.input_t input::-webkit-input-placeholder { color: rgba(255,255,255,.4); }
+
+.btn {
+    display: block;
+    text-align: center;
+    width: 100%;
+   /* margin-top: 1rem;*/
+}
+
+.btnClose {
+    display: block;
+    text-align: center;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+#main.index .btn {
+    margin-top: 3.5rem;
+}
+
+#mainProfil.index .btn {
+    margin-top: 3.5rem;
+}
+
+.btn button {
+    display: inline-block;
+    font-size: 1.5rem;
+    color: #fff;
+    background: #b31926;
+    background-image: -webkit-linear-gradient(top, #b31926, #b31926);
+    background-image: -moz-linear-gradient(top, #b31926, #b31926);
+    background-image: -ms-linear-gradient(top, #b31926, #b31926);
+    background-image: -o-linear-gradient(top, #b31926, #b31926);
+    background-image: linear-gradient(to bottom, #b31926, #b31926);
+    text-align: center;
+    line-height: 3.5rem;
+    border: none;
+    border-radius: 49px;
+    width: 150px;
+    -webkit-transition: background .2s ease;
+    transition: background .2s ease;
+    cursor: pointer;
+}
+
+.btn button:hover, .btn button:focus {
+    background: #b31926;
+    outline: none;
+}
+.btnClose button {
+    display: inline-block;
+    font-size: 1.5rem;
+    color: #fff;
+    background: #b31926;
+    text-align: center;
+    line-height: 3.5rem;
+    border: none;
+    border-radius: 100px;
+    width: 150px;
+    -webkit-transition: background .2s ease;
+    transition: background .2s ease;
+    cursor: pointer;
+}
+
+.btnClose button:hover, .btnClose button:focus {
+    background: #b31926;
+    outline: none;
+}
+
+#textarea1, #textarea2, #textarea3, #textarea4 {
+    width: 100%;
+    display: block;
+    margin-bottom: 2rem;
+    transition: all .2s ease .1s;
+}
+
+#textarea1 label, #textarea2 label, #textarea3 label, #textarea4 label{
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 1rem;
+    text-align: left;
+    width: 100%;
+}
+
+#textarea1 textarea, #textarea2 input, #textarea3 textarea, #textarea4 textarea{
+    width: 100%;
+    height: 4rem;
+    overflow: auto;
+    border: none;
+    border-radius: 2px;
+    background: rgba(255,255,255, .1);
+    color: #252B33;
+    font-size: 1.5rem;
+    font-weight: 400;
+    -webkit-transition: background .2s ease;
+    transition: background .2s ease;
+    resize: none;
+    padding: 1rem;
+}
+
+#textarea:focus, #textarea2 input:focus, #textarea3 textarea:focus, #textarea4 textarea:focus, #textarea1 textarea.onfocus, #textarea2 input.onfocus, #textarea3 textarea.onfocus , #textarea4 textarea.onfocus{
+    outline: none;
+    background: rgba(255,255,255, 1);
+}
+
+#textarea1.blur, #textarea2.blur, #textarea3.blur , #textare4.blur {
+    background: #fff;
+    filter: blur(20px);
+}
+
+
+#textarea1 textarea::-webkit-input-placeholder, #textarea2 input::-webkit-input-placeholder, #textarea3 textarea::-webkit-input-placeholder, #textarea4 textarea::-webkit-input-placeholder { color: rgba(255,255,255,.4); }
+
+.input_l input {
+   
+    border: 1px solid rgba(179,25,38,1);
+    color: rgba(255,255,255,.4);
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 3.5rem;
+    padding-left: 1rem;
+    -webkit-transition: border .2s ease;
+}
+
+.input_l input:focus {
+    outline: none;
+    border: 1px solid rgba(179,25,38,1);
+}
+
+.champs {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#close {
+    margin-top: 7%;
+    width: 115px;
+    height: 40px;
+    border-radius: 25px;
+    font-weight: bold;
+    background-color: white;
+    border: solid 0.5px #1c85ff;
+    -webkit-text-fill-color: #1c85ff;
+}
+
+#errorPop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 2.5rem 2rem;
+    height: 505px;
+    width: 330px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: left;
+    background: rgba(37,43,51,.9);
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+    transition: transform .5s cubic-bezier(.31,.8,.18,1.01);
+}
+
+.sendMusic #errorPop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #fff;
+    background: #FF6767;
+    height: auto;
+     -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+    transition: transform .5s cubic-bezier(.31,.8,.18,1.01);
+}
+
+.sendMusic #errorPop p {
+    width: 100%;
+}
+
+#errorPop.show, #errorPop.show.hide {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    transition: transform .1s cubic-bezier(.31,.8,.18,1.01);
+}
+
+#errorPop.hide, #errorPop.hide.show {
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+    transition: transform .1s cubic-bezier(.31,.8,.18,1.01);
+}
+
+#errorPop h2 {
+    color: #fff;
+    font-family: arial, helvetica, sans-serif;
+    font-size: 2rem;
+    font-weight: 400;
+    display: block;
+    width: 100%;
+    text-align: center;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+#errorPop h2 span {
+    font-family: arial, helvetica, sans-serif;
+    font-size: 1.6rem;
+}
+
+#errorPop p {
+    font-family: arial, helvetica, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgba(255,255,255,.8);
+    text-align: center;
+}
+#errorPop .close {
+    position: absolute;
+    top: 2.5rem;
+    right: 2rem;
+}
+
+#errorPop .close a {
+    text-decoration: none;
+    display: block;
+    opacity: 1;
+    transition: opacity .2s ease;
+}
+
+#errorPop .close a:hover, #errorPop .close a:focus {
+    outline: none;
+    opacity: .7;
+}
+#errorPop .logo {
+    text-align: center;
+    display: block;
+    padding-left: 37%;
+    margin-bottom: 3rem;
+    margin-top: 6rem;
+}
+
+#errorPop .btnClose {
+    padding-top: 30%;
+}
+
+
+.goBack {
+    position: absolute;
+    top: 2.5rem;
+    left: 2rem;
+}
+
+#ChampsAjout {
+    background: rgba(255,255,255,.1);
+    height: 4.5rem;
+    line-height: 4.5rem;
+}
+
+#ChampsAjout input, #ChampsAjout button {
+    display: inline-block;
+    vertical-align: middle;
+    height: 4.5rem;
+    line-height: 4.5rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    border: none;
+    background: none;
+}
+
+#ChampsAjout input:focus, #ChampsAjout button:focus {
+    outline: none;
+}
+
+#ChampsAjout input {
+    width: 80%;
+    padding-left: 2rem;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+#ChampsAjout button {
+    width: 18%;
+    float: right;
+    cursor: pointer;
+}
+
+.checkbox {
+    margin: 0 2rem;
+    height: 6.7rem;
+    line-height: 6.7rem;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid #3B4047;
+}
+
+.checkbox .avatar {
+    background: #E7E8E9;
+    border-radius: 100%;
+    width: 4rem;
+    height: 4rem;
+    line-height: 4rem;
+    text-align: center;
+    color: #252B33;
+    font-family: arial, helvetica, sans-serif;
+    font-size: 2rem;
+    text-transform: uppercase;
+    margin-right: 2rem;
+}
+
+.checkbox label {
+    color: #E7E8E9;
+    font-size: 1.5rem;
+    font-weight: 400;
+    word-break: break-all;
+    line-height: 4rem;
+    width: 75%;
+    cursor: pointer;
+}
+
+.checkbox label span {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1.5;
+}
+
+.checkbox input:not(:checked),
+.checkbox input:checked {
+    position: absolute;
+    top: -100%;
+    left: -100%;
+}
+
+.checkbox input:not(:checked) + label:after,
+.checkbox input:checked + label:after {
+    content: '';
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid #E7E8E9;
+    border-radius: 100%;
+    position: absolute;
+    top: 50%;
+    right: 3rem;
+    margin-top: -1.25rem;
+    display: block;
+}
+
+.checkbox .deleteThisOne {
+    background: url(../../images/trash.svg) no-repeat 50% / 15px 15px;
+    color: #E7E8E9;
+    font-size: 18px;
+    font-weight: 300;
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-decoration: none;
+    width: 15px;
+    height: 100%;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease;
+    cursor: pointer;
+}
+
+.checkbox .deleteThisOne:hover {
+    opacity: .7;
+}
+
+
+.checkbox input:checked + label:after {
+    border-color: #1D82F1;
+    background: #1D82F1 url(../../images/icon-check.svg) no-repeat 50% / 12px 9px;
+}
+
+.sendMusic .submit {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 0;
+    background: #252B33;
+}
+
+#showC {
+    clear: both;
+    height: 315px;
+    overflow: hidden;
+}
+
+.copyright {
+    color: #fff;
+    display: block;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    bottom: 3rem;
+    width: 100%;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.copyright a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.congrat h1 {
+    margin-top: 10rem;
+}
+
+.shell {
+    position: relative;
+    line-height: 1; }
+    .shell span {
+      position: absolute;
+      left: 3px;
+      top: 1px;
+      color: #ccc;
+      pointer-events: none;
+      z-index: -1; }
+      .shell span i {
+        font-style: normal;
+        color: transparent;
+        opacity: 0;
+        visibility: hidden; }
+  
+  input.masked,
+  .shell span {
+    font-size: 16px;
+    font-family: monospace;
+    padding-right: 10px;
+    background-color: transparent;
+    text-transform: uppercase;
+}
+
+.popup {
+    position: relative;
+    margin-left: 120px;
+    margin-top: 2px;
+    display: inline-block;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+}
+/* Toggle this class - hide and show the popup */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
+
+#profil {
+    position: relative;
+    margin-left: 10px;    
+}
+.photoProfil {
+    position: absolute;
+   border-radius: 50%;
+    top: -20px;
+    left: -20px;
+}
+
+#name {
+    position: relative;
+    margin-left: 40%;
+}
+
+a {
+    text-decoration: none;
+  /*  display: inline-block;*/
+    padding: 8px 16px;
+}
+
+
+#changePlaylist {
+    position: absolute;
+    top: 210;
+    float: left;
+    left: 5;
+}
+
+#previousbtnP, #previousbtn{
+    margin-right: 5px;
+    background-color: #f1f1f1;
+    color: black;
+    border-radius: 50%;
+    display: inline;
+    justify-content: space-between;
+}
+
+#playlistName{
+    position: absolute;
+    width: 100;
+    float: left;
+    top: 0;
+    left: 100px;
+}
+div.marquee {
+    position: absolute;
+    width: 200px;
+    left: 50px;
+    top:0;
+    white-space:no-wrap;
+    overflow:hidden;
+}
+div.marquee > div #musicName {
+    white-space:nowrap;
+    display:inline;
+}
+#nextbtnP, #nextbtn {
+    margin-left: 5px;
+    background-color: #f1f1f1;
+    color: black;
+    border-radius: 50%;
+    position: absolute;
+    float: left;
+    top: -8;
+    left: 275;
+}
+
+#changeMusic {
+    position: absolute;
+    top: 260;
+    float: left;
+    left: 5;
+}
+
+a:hover{
+    background-color: #ddd;
+    color: black;
+}
+#Pause {
+    position: absolute;
+    top: 420;
+    right: 20;
+}
+
+#Continue {
+    position: absolute;
+    top: 420;
+    right: 280;
+}
+
+#theImg {
+    position: absolute;
+    top : 450px;
+    left : 0px;/*
+    width: 200px;
+  height: 200px;*/
+}
