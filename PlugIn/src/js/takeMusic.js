@@ -123,7 +123,7 @@ function sendMusic() {
                     }
                     });
                     setTimeout(function(){
-                       // document.location.href = "profil.html"
+                    document.location.href = "profil.html"
                     }, 500);
            }
        }
