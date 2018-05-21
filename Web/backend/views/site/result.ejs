@@ -17,14 +17,14 @@
       <div class="col-md-2">
       </div>
       <div class="col-md-8">
-        <h2><b> {{ x.usr_login}} </b></h2>
+        <h2 style="overflow: hidden;"><b> {{ x.usr_login}} </b></h2>
       </div>
       <div class="col-md-2">
         <img src="/img/myAccount.png" alt="logo" id="img">
       </div>
     </div>
     <div class="text">
-      <a ng-href='#' ng-click="redirectToUser(x.usr_login)"><h5 style="color:blue">{{ x.usr_email }}</h5></a>
+      <a ng-href='#' ng-click="redirectToUser(x.usr_login)"><h5 style="color:blue;overflow: hidden;">{{ x.usr_email }}</h5></a>
     </div>
   </div>
 </div>
@@ -35,14 +35,14 @@
       <div class="col-md-2">
       </div>
       <div class="col-md-8">
-        <h2><b>{{ x.playlist_name }}</b></h2>
+        <h2 style="overflow: hidden;" ><b>{{ x.playlist_name }}</b></h2>
       </div>
       <div class="col-md-2">
         <img src="/img/myPlaylist.png" alt="logo" id="img">
       </div>
     </div>
     <div class="text">
-      <h5 style="color:blue">{{ x.playlist_description}} </h5>
+      <h5 style="color:blue;overflow: hidden;">{{ x.playlist_description}} </h5>
     </div>
     <div class="text">
       <button type="button" style="font-size:10px; border-radius:10px; background-color:#6B92A5; color:white; width:100px;" ng-click="redirectTo('playlist', x.playlist_id)" class="btn">Voir la playlist</button>
@@ -56,14 +56,14 @@
       <div class="col-md-2">
       </div>
       <div class="col-md-8">
-        <h2><b>{{ x.music_name}}</b></h2>
+        <h2 style="overflow: hidden;"><b>{{ x.music_name}}</b></h2>
       </div>
     <div class="col-md-2">
       <img src="/img/note.png" alt="logo" id="img">
     </div>
     </div>
     <div class="text">
-      <h5 style="color:blue"> {{ x.music_group }}</h5>
+      <h5 style="color:blue;overflow: hidden;" > {{ x.music_group }}</h5>
     </div>
     <div class="text">
       <button type="button" style="font-size:10px; border-radius:10px; background-color:#6B92A5; color:white; width:100px;" ng-click="redirectTo('music', x.music_id)" class="btn">Voir la music</button>
