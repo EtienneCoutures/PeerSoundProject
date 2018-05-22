@@ -5,6 +5,7 @@ var firstCo = document.getElementById('button1Connexion');
     if (firstCo)
       firstCo.addEventListener("click", function(){
         console.log("first Connection");
+//        document.location.href="https://localhost:8000/signup"
         closer();
       });
 
@@ -85,7 +86,7 @@ function changePage() {
     }
   }
 }
-
+/*
 var musicAdded = 0;
 localStorage.setItem('musicAdded', musicAdded);
-localStorage.setItem('numMusic', 1)
+localStorage.setItem('numMusic', 1)*/
