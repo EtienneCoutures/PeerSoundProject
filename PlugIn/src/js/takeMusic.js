@@ -9,6 +9,18 @@ var artist = document.getElementById("boxArtist"),
     textarea2 = document.getElementById('textarea2'),
     textarea3 = document.getElementById('textarea3'),
     main = document.getElementById('main');
+    close = document.getElementById('cloclo');
+    
+
+
+if (close)
+  close.addEventListener("click", closer);
+
+function closer(){
+    var musicAdded = 0;
+    localStorage.setItem('musicAdded', musicAdded);
+browser.tabs.executeScript(null, {file: "closer.js"});
+}
 
 var browser = browser || chrome;
 var idMusic = 0;
@@ -68,8 +80,9 @@ if (date){
 if(closeError)
     closeError.addEventListener("click", hidePop);
 
-if(btnClose)
+if(btnClose){
     btnClose.addEventListener("click", hidePop);
+}
 
 var url = JSON.parse(localStorage.getItem("musicToAdd"));
 var boxUrl = document.getElementById("boxUrl");
@@ -147,7 +160,7 @@ function sendMusic() {
                         });
                         setTimeout(function(){
                         document.location.href = "profil.html"
-                        }, 500);
+                        }, 1000);
                }
            }
            );
