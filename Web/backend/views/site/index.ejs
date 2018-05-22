@@ -2,7 +2,7 @@
 <div class="col-md-10" style="margin-bottom:20px">
   <center>
    <div style="margin-top:5%;background-color:white;border-radius:10px;">
-     <div >
+     <div>
      <span style="color:black;font-size:40px;">Peer Sound Project</span>
      <img src="/img/logoBlack.png" alt="logo" id="img" style="max-height:70px;max-width:70px;vertical-align:middle;margin-top:-15px">
    </div>
@@ -13,17 +13,19 @@
   <p>Cependant, aimer une musique, c’est avoir la version studio, live, alternative et instrumentale.</p>
   <p>  Aimer un groupe, c’est regarder le live sur Youtube, et écouter l’album sur Deezer.</p>
     PSP permet aux passionnés, chineurs, et collectionneurs, de pouvoir comme à l’époque des compilations CD, appuyer sur «suivant», et de passer d’une musique hébergée par Youtube, à une autre stockée sur SoundCloud, et de partager leurs playlists avec leurs semblables, comme un bon vieux 45 tours.
-    <p>Quels que soient vos goûts, d’autres les partagent</p>
+    <p>Quels que soient vos goûts, d’autres les partagent.</p>
   </div>
   <div>
-    <button type="button" style="font-size:13px;margin-bottom: 15px;background-color:#6B92A5; color:white; width:145px;" ng-click="redirectTo('playlist', 'list')" class="btn">Voir vos playlists</button>
+    <button type="button" style="font-size:13px;margin-bottom: 15px;background-color:#6B92A5; color:white; width:145px;margin-right:15px" ng-click="redirectTo('playlist', 'list')" class="btn">Voir vos playlists</button>
+    <button type="button" style="font-size:13px;margin-bottom: 15px;background-color:#6B92A5; color:white; width:145px;margin-left:15px" ng-click="redirectTo('playlist', 'new')" class="btn">Créer une playlist</button>
   </div>
     <div class="col-md-3" ng-repeat="pl in playlist">
-        <div style="background-color:white;border-radius:10px;height:170px" >
-          <p style="padding-top:15px;color:black">{{$index}} {{pl.playlist_name}}</p>
+        <div style="background-color:white;border-radius:10px;height:190px" >
+          <!--{{$index}}-->
+          <p style="padding-top:15px;color:black;margin-right: 10px;margin-left: 10px;overflow: hidden;"> {{pl.playlist_name}}</p>
           <img src="/img/myPlaylist.png" alt="logo" id="img" style="max-height:70px;max-width:70px">
           <br>
-          <p style="color:black"> Style : {{pl.playlist_style}}</p>
+        <div class="row">  <span> By : </span><a ng-href='#' ng-click="redirectToUser(pl.Creator.usr_login)"><p style="color:blue;overflow: hidden;">{{pl.Creator.usr_login}}</p></a></div>
           <div>
             <button type="button" style="font-size:10px; background-color:#6B92A5; color:white; width:60%;" ng-click="redirectTo('playlist', pl.playlist_id)" class="btn">Voir la playlist</button>
           </div>

@@ -13,7 +13,7 @@
 <link href="/css/user.css" rel="stylesheet"/>
 </head>
 <body>
-  <div class="user" id="user" ng-if="user">
+  <div class="user col-md-10" id="user" ng-if="user">
     <div class="information">
       <div class="col-md-4">
       <div  class="btn" data-ng-init="isFollowed()">
@@ -53,7 +53,8 @@
             <table class="notifTable">
               <tbody ng-repeat="x in playlists">
                 <tr>
-                  <td ng-click="redirectTo('playlist', x.playlist_id)">{{x.playlist_name}}</td>
+                  <td ng-click="redirectTo('playlist', x.playlist_id)">{{x.playlist_name}}<img src="/img/myPlaylist.png" alt="logo" id="img" style="max-height:50px;max-width:50px;float:right;margin-right:30px"></img></td>
+
                 </tr>
               </tbody>
             </table>
@@ -70,7 +71,7 @@
             <table  class="notifTable">
               <tbody ng-repeat="user in user.Followers">
                 <tr>
-                  <td ng-click="redirectTo('user', user.Follower.usr_id)">{{user.Follower.usr_login}}</td>
+                  <td ng-click="redirectTo('user', user.Follower.usr_id)">{{user.Follower.usr_login}} <img src="/img/myAccount.png" alt="logo" id="img" style="max-height:50px;max-width:50px;float:right;margin-right:30px"></img></td>
                 </tr>
               </tbody>
             </table>
@@ -86,7 +87,7 @@
             <table class="notifTable">
               <tbody ng-repeat="user in user.Following">
                 <tr>
-                  <td ng-click="redirectTo('user', user.Followed.usr_id)">{{user.Followed.usr_login}}</td>
+                  <td ng-click="redirectTo('user', user.Followed.usr_id)">{{user.Followed.usr_login}} <img src="/img/myPlaylist.png" alt="logo" id="img" style="max-height:50px;max-width:50px;float:right;margin-right:30px"></img></td>
                 </tr>
               </tbody>
             </table>
@@ -95,7 +96,7 @@
             <h2>{{user.usr_login}} ne suit personne</h2>
           </div>
         </div>
-
+</div>
 
 
         <div id="unknowUser" ng-if="!user">

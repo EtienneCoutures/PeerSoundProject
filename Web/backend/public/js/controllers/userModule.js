@@ -117,19 +117,23 @@ define([
               $scope.following = []
               $scope.toDisplay = 0
 
+
               if ($scope.id == $scope.myself.usr_id) {
                $scope.me = true
               }
 
               Restangular.one('user', $scope.id).get().then(function(result){
+
                   if (result.code == 1) {
                     $scope.user = null
                   }
-                  else
+                  else {
                   $scope.user = result.User
                   $scope.playlists = result.User.Playlist
                   $scope.nbFollowers = result.User.Followers.length
                   $scope.nbFollowing = result.User.Following.length
+                }
+                console.log($scope.user)
                 })
 
                 $scope.editAccount = function() {

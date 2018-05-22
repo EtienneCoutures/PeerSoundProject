@@ -25,7 +25,11 @@ module.exports = function (app) {
             var Options = req.query,
                 query = {
                     where: {},
-                    include: []
+                    include: [{
+                        model: app.models.User,
+                        as: 'Creator',
+                        required: true
+                    }]
                 };
             if (typeof Options.where == "string") Options.where = JSON.parse(Options.where);
             if (typeof Options.limit == "string") Options.limit = parseInt(Options.limit);
@@ -53,6 +57,50 @@ module.exports = function (app) {
             });
         });
 
+//START
+        router.get('/users/:id',
+            app.requirePermission([
+                ['allow', {
+                    users:['@']
+                }],
+                ['deny', {
+                    users:'*'
+                }]
+            ]),
+            function (req, res) {
+                var query = {
+                    where: {
+                        "playlist_id": req.params.id
+                    },
+                    include: [{
+                      model: app.models.Subscription,
+                      as: 'Subscriber',
+                      required: false,
+                      include: [{
+                        model: app.models.User,
+                        as: 'Subscriber',
+                        required: false
+                      }]
+                    },{
+                    model: app.models.User,
+                    as: 'Creator',
+                    required: false
+                  }]
+                };
+                app.models["Playlist"].findAndCountAll(query).then(function(result) {
+                    if (!result) {
+                        return res.json({
+                            code: 1
+                        });
+                    }
+
+                    res.json({
+                        "code": 0,
+                        "Playlist": result
+                    });
+                });
+            });
+//END
     // Render a Playlist
     router.get('/:id(\\d+)',
         app.requirePermission([

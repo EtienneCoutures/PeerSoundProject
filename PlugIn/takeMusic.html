@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>PeerSoundProject | take Music</title>
+    <link rel="stylesheet" type="text/css" href="./../src/css/styles.css" />
+</head>
+
+<body>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" type="text/css" href="src/css/styles.css" />
+    <main id="main" class="takeMusic">
+         <div class="closer">
+        <img src="./images/close.png" alt="PSP" id="cloclo"/>
+        </div>
+        <div class="champs">
+            <h1 id="title"> Register this music </h1>
+            <div class="input_l">
+                <input type="text" id="boxUrl" placeholder="url" />
+            </div>
+            <div id="textarea1">
+                <label for="boxArtist">Artist(s)</label>
+                <textarea id="boxArtist"rows="1" cols="10"  id="boxArtist" placeholder="Express yourself..." ></textarea>
+            </div>
+            <div id="textarea2">
+                <label for="boxDate">Date</label>
+                <input id="boxDate" type="text" placeholder="MM/YYYY" class="masked" pattern="^((0[1-9])|(1[0-2]))\/(\d{4})$" data-valid-example="05/1998"/>
+                <!--<textarea id="boxDate" rows="1" cols="10"  id="boxDate" placeholder="YYYY/MM/DD..."></textarea>-->
+            </div>
+            <div id="textarea3">
+                <label for="boxDescription">Description</label>
+                <textarea id="boxDescription" rows="1" cols="10"  id="boxDescription" placeholder="Express yourself..."></textarea>
+            </div>
+            <div id="textarea4">
+            <label for="boxPlaylist">Playlist</label>
+            <select id="boxPlaylist">
+            </select>
+            </div>
+            <div class="btn">
+                <button id="validButton">Add it</button>
+            </div>
+        </div>
+        <div id="errorPop">
+            <div class="close"><a href="#" id="close_a"><img src="../../images/icon-close.svg" alt="Fermer la fenêtre" width="13" height="13" /></a></div>
+            <div class="logo">
+                <img src="./images/psp.png" alt="Doggy" width="71" height="71" />
+            </div>
+            <h2>Oups !<br />
+            <span>I need a description</span></h2>
+            <p>It's very important  to know informations about this music</p>
+            <div class="btnClose" id="btn1">
+                <button id="close_b">Got it</button>
+            </div>
+        </div>
+        <script src="./../src/js/vendor/jquery.min.js"></script>
+        <script src="./src/js/masking-input.js" data-autoinit="true"></script>
+        <script src="./src/js/takeMusic.js"></script>
+    </main>
+</body>
+</html>

@@ -48,7 +48,6 @@ define([
                 }).then(function(result) {
                   $scope.playlist = result
                 })
-
             }
         ])
         .controller('DownloadController', [
