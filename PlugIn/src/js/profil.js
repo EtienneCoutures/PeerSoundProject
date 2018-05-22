@@ -164,6 +164,8 @@ if (close)
   close.addEventListener("click", closer);
 
 function closer(){
+    var musicAdded = 0;
+    localStorage.setItem('musicAdded', musicAdded);
 browser.tabs.executeScript(null, {file: "closer.js"});
 }
 
@@ -209,6 +211,7 @@ var musicAdded = localStorage.getItem('musicAdded');
 musicAdded = JSON.parse(musicAdded);
 var name = localStorage.getItem('nameProfil');
 ProfilName.innerHTML = name;
+console.log(musicAdded+"!!!!!");
 if (musicAdded == 1){
     $(function(){
         var popup = document.getElementById("myPopup");
