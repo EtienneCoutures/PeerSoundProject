@@ -67,12 +67,14 @@ h1 {
 	max-height:100%;
 }
 #main {
-    border-radius:10px;
     padding: 2.5rem 0;
     height: 505px;
     width: 330px;
     position: relative;
     overflow: hidden;
+    border-style: solid;
+    border-color: #6B92A5;
+    border-width: thin;
 }
 
 #mainProfil {
@@ -173,10 +175,13 @@ h1 {
     background: rgba(255,255,255,.1);
     color: black;
     border: none;
-    border-radius: 4px;
     padding: 0 1.5rem;
     font-size: 1.5rem;
-    transition: all .2s ease;
+    transition: all .2s ease; 
+    border-radius: 4px;
+    border-style: solid;
+    border-color: #6B92A5;
+    border-width: thin;
 }
 .input_l input.error,
 .textarea textarea.error,
@@ -190,7 +195,7 @@ h1 {
     outline: none;
 }
 
-.input_t input::-webkit-input-placeholder { color: rgba(255,255,255,.4); }
+.input_t input::-webkit-input-placeholder { color:#6B92A5; }
 
 .btn {
     display: block;
@@ -235,14 +240,14 @@ h1 {
 }
 
 .btn button:hover, .btn button:focus {
-    background: #1D82F1;
+    background: black;
     outline: none;
 }
 .btnClose button {
     display: inline-block;
     font-size: 1.5rem;
     color: #fff;
-    background: #b31926;
+    background: black;
     text-align: center;
     line-height: 3.5rem;
     border: none;
@@ -290,31 +295,20 @@ h1 {
     transition: background .2s ease;
     resize: none;
     padding: 1rem;
+    border-style: solid;
+    border-color: #6B92A5;
+    border-width: thin;
+    border-radius: 4px;
 }
 
-#textarea:focus, #textarea1 input:focus, #textarea2 input:focus,
-#textarea3 textarea:focus, #textarea4 textarea:focus,
-#textarea1 textarea.onfocus, #textarea2 input.onfocus,
-#textarea3 textarea.onfocus , #textarea4 textarea.onfocus{
-    outline: none;
-    background: rgba(255,255,255, 1);
+#boxDate {
+    text-align: st;
 }
-
-#textarea1.blur, #textarea2.blur, #textarea3.blur , #textare4.blur {
-    background: #fff;
-    filter: blur(20px);
-}
-
-
-#textarea1 textarea::-webkit-input-placeholder,
- #textarea2 input::-webkit-input-placeholder,
- #textarea3 textarea::-webkit-input-placeholder,
- #textarea4 textarea::-webkit-input-placeholder 
- { color: black/*rgba(255,255,255,.4)*/; }
-
 .input_l input {
-   
-    border: 1px solid #1c85ff;
+    border-style: solid;
+    border-color: #6B92A5;
+    border-width: thin;
+    border-radius: 4px;
     color: black;
     width: 100%;
     font-size: 1.5rem;
@@ -729,8 +723,8 @@ a {
 
 #previousbtnP, #previousbtn{
     margin-right: 5px;
-    background-color: #f1f1f1;
-    color: black;
+    background-color: black;
+    color: white;
     border-radius: 50%;
     display: inline;
     justify-content: space-between;
@@ -757,8 +751,8 @@ div.marquee > div #musicName {
 }
 #nextbtnP, #nextbtn {
     margin-left: 5px;
-    background-color: #f1f1f1;
-    color: black;
+    background-color: black;
+    color: white;
     border-radius: 50%;
     position: absolute;
     float: left;
