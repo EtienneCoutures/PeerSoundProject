@@ -8,9 +8,9 @@
       </div>
       <div class="trackItem__play"></div>
     </div>
-    <div class="trackItem__numberWrapper">
+    <!--<div class="trackItem__numberWrapper">
       <span class="trackItem__number sc-font-tabular">{position || id}<span class="sc-type-light">—</span></span>
-    </div>
+    </div>-->
     <div style="display: block; width: 75%;">
         <!--<div style="display: block; width: 100%;">-->
           <label class="trackItem__username sc-link-light">{artist}</label>
@@ -45,11 +45,14 @@
   var self = this;
 
   this.selected = (opts.param.selected || false);
-  this.name = opts.param.name;
-  this.id = opts.param.id;
-  this.artist = (opts.param.artist || 'Alifer™');
-  this.title = (opts.param.title || 'Requiem for a Trip');
-  this.position = opts.param.position;
+  this.name = opts.param.music_name;
+  this.url = opts.param.music_url;
+  this.id = opts.param.music_id;
+  this.picture = opts.param.music_picture_default;
+  this.artist = (opts.param.music_group || 'Alifer™');
+  this.title = (opts.param.music_name || 'Requiem for a Trip');
+  this.position = opts.param.music_id;
+
   this.currMusicPos = 1;
   this.popup = false;
 
@@ -57,7 +60,6 @@
     self.updateSelection();
 
     $('#music_' + self.position).contextmenu(function() {
-      console.log('c qui le patron');
       self.refs.popout.style.visibility = self.popup ? 'hidden' : 'visible';
       self.refs.popout.style.display = self.popup ? 'none' : 'block';
       self.popup = self.popup ? false : true;
@@ -69,6 +71,9 @@
 
 
   updateSelection() {
+    /*if (!self.refs.play || self.refs.pause)
+      return ;*/
+
     if (self.selected) {
       self.refs.play.style.visibility = 'hidden';
       self.refs.play.style.display = 'none';
