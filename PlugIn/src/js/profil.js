@@ -34,10 +34,12 @@ function getMusicFromPlaylist(){
             }
             cptMusic = 0;
                 musicName.innerHTML = MusicFromPlaylist[cptMusic].music_name + " - " + MusicFromPlaylist[cptMusic].music_group;
-            console.log(MusicFromPlaylist[cptMusic].music_url);
+            console.log("3777 !!!!", MusicFromPlaylist[cptMusic].music_url);
             $(".sc-player").empty()
             for (cptMusic = 0; cptMusic < MusicFromPlaylist.length; cptMusic++) {
-              $(".sc-player").append("<a href='" + MusicFromPlaylist[cptMusic].music_url + "'></a>")
+                console.log("40 ::::" + MusicFromPlaylist[cptMusic].music_url +"<)))))");
+               // console.log(cptMusic);
+              $(".sc-player").append("<a href='" + MusicFromPlaylist[cptMusic].music_url + "a'></a>")
             }
             cptMusic = 0;
             $("div.sc-player").scPlayer();
@@ -198,6 +200,22 @@ musicAdded = JSON.parse(musicAdded);
 if (musicAdded == 1){
     $(function(){
         var popup = document.getElementById("myPopup");
+        popup.innerHTML = "Music Added"
+        popup.classList.toggle("show");
+        function show_popup(){
+            $(".popup").slideUp();
+        };
+        window.setTimeout( show_popup, 2000 );
+     });
+     popup.classList.toggle("hidden");
+     musicAdded = 0;
+     localStorage.setItem('musicAdded', musicAdded);
+}
+else if (musicAdded == 2){
+    console.log("MUSIC 22§§§§§§§§§§§§§§§§§");
+    $(function(){
+    var popup = document.getElementById("myPopup");
+        popup.innerHTML = "Wrong Music"
         popup.classList.toggle("show");
         function show_popup(){
             $(".popup").slideUp();
