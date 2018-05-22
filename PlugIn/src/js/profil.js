@@ -8,6 +8,7 @@ var prevP = document.getElementById('previousbtnP');
 var nextM = document.getElementById('nextbtn');
 var nextP = document.getElementById('nextbtnP');
 var close = document.getElementById("cloclo");
+var logout = document.getElementById("outout");
 var ProfilName = document.getElementById("name");
 
 var namePlaylist = [];
@@ -164,6 +165,15 @@ if (close)
 
 function closer(){
 browser.tabs.executeScript(null, {file: "closer.js"});
+}
+
+if (logout)
+  logout.addEventListener("click", Logout);
+
+function Logout(){
+    console.log("YOUHOUUUO");
+    localStorage.removeItem("email");
+    document.location.href="index.html";
 }
 
 var add = document.getElementById('buttonAdd');
