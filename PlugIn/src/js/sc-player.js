@@ -257,15 +257,12 @@
       updates = {},
       currentUrl,
       loadTracksData = function($player, links, key) {
-        console.log("LINKS  :", links);
         var index = 0,
             playerObj = {node: $player, tracks: []},
             loadUrl = function(link) {
               var apiUrl = scApiUrl(link.url, apiKey);
-              console.log("API URL :::" + apiUrl);
               $.getJSON(apiUrl, function(data) {
-               // console.log("data", data);
-                 log('data loaded', link.url, data);
+                // log('data loaded', link.url, data);
                 index += 1;
                 if(data.tracks){
                   // log('data.tracks', data.tracks);
@@ -497,7 +494,6 @@
         $info = $('<div class="sc-info"><h3></h3><h4></h4><p></p><a href="#" class="sc-info-close">X</a></div>').appendTo($player),
         $controls = $('<div class="sc-controls"></div>').appendTo($player),
         $list = $('<ol class="sc-trackslist"></ol>').appendTo($player);
-        console.log("LIST ", $list);
 
         // add the classes of the source node to the player itself
         // the players can be indvidually styled this way

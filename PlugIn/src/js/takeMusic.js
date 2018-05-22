@@ -106,6 +106,60 @@ scApiUrl = function(url, apiKey) {
     }
   };
 function sendMusic() {
+    console.log("URLLLLLL :" + url);
+    if (url.indexOf("youtube") != -1){
+        var title = document.getElementById("boxUrl");
+        if (title.value && artist.value && date.value && description.value) {
+            var infs = {
+                title  : title.value,
+                artist : artist.value,
+                date : date.value
+            }
+            textarea1.className = '';
+            textarea2.className = '';
+            popError.className = '';
+            sessionStorage.setItem("infos", JSON.stringify(infs));
+           var musicAdded = 1;
+           localStorage.setItem('musicAdded', musicAdded);
+           console.log( JSON.parse(localStorage.getItem("id")) + '-' + artist.value + '-' + boxUrl.value + '-' + description.value + '-' + url);
+           jQuery.post('https://localhost:8000/api/music/',{
+                usr_id: JSON.parse(localStorage.getItem("id")),
+                music_source: "youtube",
+                music_group: artist.value,
+                music_name: boxUrl.value,
+                music_description: description.value,
+                music_url: url,
+                music_date: date.value
+           },
+           function (data){
+               if (data){
+                   console.log(data);
+                    idMusic = data.Music.music_id;
+                    jQuery.post('https://localhost:8000/api/musiclink/',{
+                        usr_id: JSON.parse(localStorage.getItem("id")),
+                        music_id: idMusic,
+                        playlist_id: Playlists.options[Playlists.selectedIndex].value
+                        },
+                        function (data){
+                            if (data){
+                               console.log(data);
+                        }
+                        });
+                        setTimeout(function(){
+                        document.location.href = "profil.html"
+                        }, 500);
+               }
+           }
+           );
+        }
+        else {
+            textarea1.className = 'blur';
+            textarea2.className = 'blur';
+            textarea3.className = 'blur';
+            popError.className = 'show';
+        }
+    }
+    else {
     var biscotte = 0;
     var testAPIURL = scApiUrl(url, 'nYw8DGbKym7Ph6LR1EaSxD8Dmj5rkCwa');
     console.log("testAPIURL !!!!!" + testAPIURL);
@@ -122,7 +176,7 @@ function sendMusic() {
             }
         else
             {
-                var title = document.getElementById("boxUrl");
+            var title = document.getElementById("boxUrl");
             if (title.value && artist.value && date.value && description.value) {
                 var infs = {
                     title  : title.value,
@@ -174,6 +228,7 @@ function sendMusic() {
             }
             // callback to be executed when the AJAX request succeeds
         }}, 1000);
+    }
 }
 
 function hidePop() {

@@ -26,7 +26,9 @@ function getMusicFromPlaylist(){
         if (data){
             console.log("api/musiclink" ,data);
             for (var i = 0; i < data.length; i++){
-                if (data[i].usr_id == JSON.parse(localStorage.getItem("id")) && data[i].playlist_id == idPlaylist[cptPlaylist]){
+                if (data[i].usr_id == JSON.parse(localStorage.getItem("id")) &&
+                    data[i].playlist_id == idPlaylist[cptPlaylist] &&
+                    data[i].Music.music_source == "soundcloud"){
                     MusicFromPlaylist[cptMusic] = data[i].Music;
                     console.log("Music ooo ",  MusicFromPlaylist[cptMusic]);
                     cptMusic++;
@@ -34,12 +36,10 @@ function getMusicFromPlaylist(){
             }
             cptMusic = 0;
                 musicName.innerHTML = MusicFromPlaylist[cptMusic].music_name + " - " + MusicFromPlaylist[cptMusic].music_group;
-            console.log("3777 !!!!", MusicFromPlaylist[cptMusic].music_url);
+            console.log(MusicFromPlaylist[cptMusic].music_url);
             $(".sc-player").empty()
             for (cptMusic = 0; cptMusic < MusicFromPlaylist.length; cptMusic++) {
-                console.log("40 ::::" + MusicFromPlaylist[cptMusic].music_url +"<)))))");
-               // console.log(cptMusic);
-              $(".sc-player").append("<a href='" + MusicFromPlaylist[cptMusic].music_url + "a'></a>")
+              $(".sc-player").append("<a href='" + MusicFromPlaylist[cptMusic].music_url + "'></a>")
             }
             cptMusic = 0;
             $("div.sc-player").scPlayer();
@@ -197,6 +197,8 @@ function getLink(fenetre, tab) {
 
 var musicAdded = localStorage.getItem('musicAdded');
 musicAdded = JSON.parse(musicAdded);
+var name = localStorage.getItem('nameProfil');
+ProfilName.innerHTML = name;
 if (musicAdded == 1){
     $(function(){
         var popup = document.getElementById("myPopup");
@@ -212,7 +214,6 @@ if (musicAdded == 1){
      localStorage.setItem('musicAdded', musicAdded);
 }
 else if (musicAdded == 2){
-    console.log("MUSIC 22§§§§§§§§§§§§§§§§§");
     $(function(){
     var popup = document.getElementById("myPopup");
         popup.innerHTML = "Wrong Music"
@@ -232,9 +233,11 @@ function (data){
     if (data){
         console.log("api/user", data);
         ProfilName.innerHTML = data.User.usr_login;
+        localStorage.setItem("nameProfil", data.User.usr_login);
     }
 }
 );
+
 /*
 $(document).ready(function() {
     var marquee = $('div.marquee');
