@@ -17,6 +17,20 @@ body{
     background-color:white;
 }
 
+.msgNews{
+  width: 100%;
+  position: relative;
+    height: 750px;
+    border: 1px solid #6B92A5;
+    clear: both;
+    text-align: center;
+    margin:auto;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color:white;
+}
+
 .text{
   border-bottom: 1px solid grey;
   margin-bottom: 10px;
@@ -58,6 +72,7 @@ body{
   text-align: center;
   padding: 50px 0px;
   margin: 0;
+
 }
 
 .user .title {
@@ -74,6 +89,16 @@ body{
   background-color: white;
 }
 
+.userButton {
+  background-color:white;
+  font-size:30px;
+  color:black;
+}
+
+.userButton:hover{
+  background-color: #f2f2f2;
+}
+
 /* List.ejs*/
 table.notifTable {
   font-family: Arial,Helvetica,sans-serif;
@@ -82,14 +107,28 @@ table.notifTable {
   text-align: center;
   border-collapse: collapse;
 }
+
+table.notifTable thead th {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  border-color: black;
+  color: black;
+}
+
+table.notifTable:hover{
+  background-color: #f2f2f2;
+}
+
 table.notifTable td, table.notifTable th {
-  border: 2px solid #DDDDDD;
+  border: 1px solid #f2f2f2;
   padding: 25px 1px;
   width: 300px;
 }
 table.notifTable tbody td {
   font-size: 17px;
-  background-color:#F7FFFF;
+  background-color:white;
+  color:black;
   border-color: black;
 }
 
