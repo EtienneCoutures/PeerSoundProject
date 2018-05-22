@@ -41,13 +41,6 @@ define([
             '$location',
             function ($scope, Restangular, $location) {
 
-             console.log("on va tester la")
-              Restangular.one("playlist/users/", 1).get().then(function(result) {
-                console.log(result)
-
-              });
-
-
               Restangular.one("follow/followerNb/", $scope.myself.usr_id).get().then(function(result) {
                 $scope.nbFollowers = result.count;
               });
@@ -55,7 +48,6 @@ define([
                 }).then(function(result) {
                   $scope.playlist = result
                 })
-
             }
         ])
         .controller('DownloadController', [

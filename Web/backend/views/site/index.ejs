@@ -25,8 +25,7 @@
           <p style="padding-top:15px;color:black;margin-right: 10px;margin-left: 10px;overflow: hidden;"> {{pl.playlist_name}}</p>
           <img src="/img/myPlaylist.png" alt="logo" id="img" style="max-height:70px;max-width:70px">
           <br>
-          <p ng-if="pl.playlist_style" style="color:black"> Style : {{pl.playlist_style}}</p>
-          <p ng-if="!(pl.playlist_style)" style="color:black">No style selected</p>
+          <p style="color:black"> By : {{pl.Creator.usr_login}}</p>
           <div>
             <button type="button" style="font-size:10px; background-color:#6B92A5; color:white; width:60%;" ng-click="redirectTo('playlist', pl.playlist_id)" class="btn">Voir la playlist</button>
           </div>
