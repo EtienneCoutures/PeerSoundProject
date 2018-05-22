@@ -44,6 +44,9 @@ define([
             '$routeParams',
             '$route',
             function ($scope, $location, Restangular, $routeParams, $route) {
+              $scope.invitation = {inviter_usr_id: $scope.myself.usr_id, playlist_id: $routeParams.playlist_id};
+              $scope.displayAddFollowers = false;
+              $scope.displayFollowers = false;
               $scope.displayNewName = false;
 
               Restangular.one('playlist', $routeParams.playlist_id).get().then(function(result) {
@@ -61,27 +64,50 @@ define([
                     }
                   }
                 }
+                console.log($scope.musiclinks)
               })
 
               Restangular.one('subscription').get({where: {playlist_id: $routeParams.playlist_id}}).then(function(result) {
                 if (result.code == 1) {
-                    console.log("subscription error");
                     $scope.subscriptions = {length: 0};
                 }
-                console.log(result);
                 $scope.subscriptions = result;
+              })
+
+              Restangular.one('user').get().then(function(result) {
+                console.log(result)
+                $scope.usersForSub = [];
+                if (result.length) {
+                  for (var i = 0; i < result.length; ++i) {
+                    if (result[i]) {
+                      if (result[i].usr_id != $scope.myself.usr_id) {
+                        $scope.usersForSub.push(result[i]);
+                      }
+                    }
+                  }
+                }
               })
 
 
 
-              $scope.inviteUser = function() {
-                  return $location.url('/playlist/' + $scope.playlist.playlist_id + '/invite');
+              $scope.inviteSub = function() {
+                if ($scope.invitation.inviter_usr_id != "") {
+                  Restangular.all('invitation').post($scope.invitation).then(function(result) {
+                    $route.reload();
+                  })
+                }
+              }
+
+              $scope.removeSub = function(sub) {
+                Restangular.one('subscription', sub.sub_id).remove().then(function(result) {
+                  $route.reload();
+                })
               }
 
               $scope.changeName = function() {
                 var name =  document.getElementById('newNameInput').value;
                 if (name != "") {
-                  Restangular.all('playlist').post({playlist_id: $routeParams.playlist_id,  playlist_name: name}).then(function(result) {
+                  Restangular.all('playlist').post({playlist_id: $routeParams.playlist_id, playlist_name: name}).then(function(result) {
                     $route.reload()
                   })
                 }
@@ -89,7 +115,7 @@ define([
               $scope.changeStyle = function() {
                 var style =  document.getElementById('newStyleInput').value;
                 if (style != "") {
-                  Restangular.all('playlist').post({playlist_id: $routeParams.playlist_id,  playlist_style: style}).then(function(result) {
+                  Restangular.all('playlist').post({playlist_id: $routeParams.playlist_id, playlist_style: style}).then(function(result) {
                     $route.reload()
                   })
                 }
@@ -115,6 +141,10 @@ define([
                   $scope.displayFollowers = ($scope.displayFollowers == true ? false : true);
                 }
               }
+              $scope.showAddFollowers = function() {
+                $scope.displayAddFollowers = ($scope.displayAddFollowers == true ? false : true);
+              }
+
               console.log($scope);
 
               document.addEventListener('DOMContentLoaded', function() {
@@ -231,98 +261,114 @@ define([
             '$route',
             '$location',
             function ($scope, Restangular, $routeParams, $route, $location) {
-              $scope.playlist_id = $routeParams.playlist_id;
+              console.log($routeParams.playlist_id)
+              $scope.invitation = {inviter_usr_id: $scope.myself.usr_id, playlist_id: $routeParams.playlist_id};
+              $scope.displayAddFollowers = false;
+              $scope.displayFollowers = false;
+              $scope.displayNewName = false;
 
-              Restangular.one('playlist', $scope.playlist_id).get().then(function(result){
+              Restangular.one('playlist', $routeParams.playlist_id).get().then(function(result) {
                 if (result.code == 1) {
-                $location.url('/unknowPlaylist');
+                    $scope.playlist = null
                 }
                 $scope.playlist = result.Playlist
-                console.log($scope.playlist.playlist_creator)
-                if ($scope.playlist.playlist_creator != $scope.myself.usr_id)
-                  console.log("tu n'a pas le droit :/")
+                $scope.musics = [];
+                $scope.musiclinks = [];
+                if (result.Playlist.MusicLink) {
+                  for (var i = 0; i < result.Playlist.MusicLink.length; ++i) {
+                    if (result.Playlist.MusicLink[i].Music) {
+                      $scope.musiclinks.push(result.Playlist.MusicLink[i]);
+                      $scope.musics.push(result.Playlist.MusicLink[i].Music);
+                    }
+                  }
+                }
+                console.log($scope.musiclinks)
+              })
+
+              Restangular.one('subscription').get({where: {playlist_id: $routeParams.playlist_id}}).then(function(result) {
+                if (result.code == 1) {
+                    $scope.subscriptions = {length: 0};
+                }
+                $scope.subscriptions = result;
+              })
+
+              Restangular.one('user').get().then(function(result) {
+                console.log(result)
+                $scope.usersForSub = [];
+                if (result.length) {
+                  for (var i = 0; i < result.length; ++i) {
+                    if (result[i]) {
+                      if (result[i].usr_id != $scope.myself.usr_id) {
+                        $scope.usersForSub.push(result[i]);
+                      }
+                    }
+                  }
+                }
               })
 
 
-              $scope.followersId = [] //Id de tous les followers
-              $scope.followers = [] //id des followers pas inscrit a la playlist (nom a changer)
-              $scope.subscribed = [] //Id de tous les subscribers de la playlist
-              $scope.subscribedId  = [] //Id des followers deja inscrit a la playlist
-              $scope.subscribedUser = [] //Id des Users inscrit a la playlist
 
-              // va falloir refacto
-
-              Restangular.all('subscription').get('', {
-                where : {
-                  playlist_id : $scope.playlist_id
+              $scope.inviteSub = function() {
+                if ($scope.invitation.inviter_usr_id != "") {
+                  Restangular.all('invitation').post($scope.invitation).then(function(result) {
+                    $route.reload();
+                  })
                 }
-              }).then(function(sub) {
-                for (var i = 0 ; i != sub.length ; ++i ){
-                  $scope.subscribed.push(sub[i])
-                }
-                Restangular.all('follow').get('', {
-                  where : {
-                    followed_usr_id: $scope.myself.usr_id //choppe mes followers
-                  }
-                }).then(function(result) {
+              }
 
-                  for (var i = 0 ; i != result.length ; ++ i) {
-                    if ($scope.subscribed.find(x => x.usr_id === result[i].follower_usr_id)) {
-                      console.log(result[i].follower_usr_id + " est deja abonné")
-                      $scope.subscribedId.push(result[i].follower_usr_id)
-                    }//si il suit deja la playlist
-                    else {
-                      $scope.followersId.push(result[i].follower_usr_id)
-                    } //si il la suit pas
-                  }
-                }).then(function() {
-                  for (var i = 0 ; i != $scope.followersId.length ; ++i) {
-                    Restangular.one('user/' + $scope.followersId[i]).get().then(function(act_user){ //recupére lobjet user de mes followers
-                      $scope.followers.push(act_user.User)
-                    })
-                  }
-                  for (var i = 0 ; i != $scope.subscribedId.length ; ++i) {
-                    Restangular.one('user/' + $scope.subscribedId[i]).get().then(function(act_user){ //recupére lobjet user de mes followers
-                      $scope.subscribedUser.push(act_user.User)
-                    })
-                  }
+              $scope.removeSub = function(sub) {
+                Restangular.one('subscription', sub.sub_id).remove().then(function(result) {
+                  $route.reload();
                 })
-              })
-
-              $scope.removeUserToPlaylist = function(usr) {
-                var sub = {}
-                sub.usr_id = usr.usr_id
-                sub.playlist_id = $scope.playlist_id
-
-
-
-                Restangular.all('subscription').remove({
-                    "sender_id" : $scope.myself.usr_id,//useless mais ca pourrait servir plus tard
-                    "usr_id": usr.usr_id,
-                    "pl_id": $scope.playlist_id
-                   }).then(function(result) {
-                  if (result.code == 0)  {
-                    $route.reload()
-                  }
-                    $scope.errors = result.errors;
-                    $scope.querying = false;
-                });
               }
 
-              $scope.addUserToPlaylist = function(usr) {
-                var sub = {}
-                sub.usr_id = usr.usr_id
-                sub.playlist_id = $scope.playlist_id
-
-                Restangular.all('subscription').post(sub).then(function(result) {
-                  if (result.code == 0)  {
+              $scope.changeName = function() {
+                var name =  document.getElementById('newNameInput').value;
+                if (name != "") {
+                  Restangular.all('playlist').post({playlist_id: $routeParams.playlist_id, playlist_name: name}).then(function(result) {
                     $route.reload()
-                  }
-                    $scope.errors = result.errors;
-                    $scope.querying = false;
-                });
+                  })
+                }
               }
-              // C'est sale et honnetement je m'en veux
+              $scope.changeStyle = function() {
+                var style =  document.getElementById('newStyleInput').value;
+                if (style != "") {
+                  Restangular.all('playlist').post({playlist_id: $routeParams.playlist_id, playlist_style: style}).then(function(result) {
+                    $route.reload()
+                  })
+                }
+              }
+              $scope.deleteLink = function(link) {
+                console.log(link);
+                Restangular.one('musiclink', link.musiclink_id).remove().then(function() {
+                  console.log("Link Destroyed");
+                  $route.reload();
+                }, function() {
+                  console.log("Error");
+                })
+              }
+
+              $scope.displayNameInput = function() {
+                $scope.displayNewName = ($scope.displayNewName == true ? false : true);
+              }
+              $scope.displayStyleInput = function() {
+                $scope.displayNewStyle = ($scope.displayNewStyle == true ? false : true);
+              }
+              $scope.showFollowers = function() {
+                if ($scope.subscriptions.length) {
+                  $scope.displayFollowers = ($scope.displayFollowers == true ? false : true);
+                }
+              }
+              $scope.showAddFollowers = function() {
+                $scope.displayAddFollowers = ($scope.displayAddFollowers == true ? false : true);
+              }
+
+              console.log($scope);
+
+              document.addEventListener('DOMContentLoaded', function() {
+                var elems = document.querySelectorAll('.dropdown-trigger');
+                var instances = M.Dropdown.init(elems, options);
+              });
             }
           ])
           .controller('NewPlaylistController', [

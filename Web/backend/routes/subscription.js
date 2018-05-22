@@ -122,8 +122,7 @@ router.post('/',
             });
         });
 
-
-        router.delete('/',
+        router.delete('/:id',
             app.requirePermission([
                 ['allow', {
                     users:['@']
@@ -134,18 +133,17 @@ router.post('/',
             ]),
             function (req, res) {
                 app.models["Subscription"].find({
-                    "where":{
-                        "usr_id": req.query.usr_id,
-                        "playlist_id": req.query.pl_id
+                    "where": {
+                        "sub_id": req.params.id
                     }
                 }).then(function(record) {
                     if (record) {
                         record.destroy();
                     }
-
+                    
                     res.json({
                         code: 0,
-                        message: req.translate('system', '__MODEL__ successfully deleted', {__MODEL__: 'Music'})
+                        message: req.translate('system', '__MODEL__ successfully deleted', {__MODEL__: 'Subscription'})
                     });
                 });
             });

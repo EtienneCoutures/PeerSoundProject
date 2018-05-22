@@ -6,148 +6,83 @@
 <body>
   <div ng-if="playlist">
     <div class="container">
-
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title center-align">
-            <div class="row">
-              <div class="input-field inline col l8 offset-l2">
-                <h3>{{ playlist.playlist_name }}  <i class="small material-icons waves-effect waves-light" ng-click="displayNameInput()">mode_edit</i></h3>
-                <form ng-if="displayNewName === true">
-                  <input id="newNameInput" placeholder="New Playlist Name" type="text" required/>
-                  <button type="submit" ng-click='changeName()' class="waves-effect waves-light btn">Ok</button>
-                </form>
-              </div>
-              <div class="col-l2">
-                <a materialize="dropdown" href="#" class="waves-effect waves-light btn-large dropdown-button" data-target="dropdown1" style="margin-top: 2%;">Invitation</a>
-                <ul id="dropdown1" class="dropdown-content">
-                  <li><p>test</p></li>
-                </ul>
-              </div>
-              <script>
-                $(document).ready(function() {
-                  $('.dropdown-button').dropdown();
-                })
-              </script>
+      <div class="row align-items-center">
+        <div class="col-md-12" style="background-color:white; opacity:0.7;">
+          <div class="row align-items-center">
+            <div class="col-md-5">
+              <img src="/img/myPlaylist.png" alt="playlist" style="width:250px; height:200px;">
             </div>
-          </span>
-          <div class="divider"/>
-          <div class="row">
-            <span class="col l4 center-align">
-              <h4>Style : {{ playlist.playlist_style }}  <i class="small material-icons waves-effect waves-light" ng-click="displayStyleInput()">mode_edit</i></h4>
-              <form ng-if="displayNewStyle === true">
-                <input id="newStyleInput" placeholder="New Playlist Style" type="text" required/>
-                <button type="submit" ng-click='changeStyle()' class="waves-effect waves-light btn">Ok</button>
-              </form>
-            </span>
-            <span class="col l4 center-align">
-              <h4>Musiques : {{ musiclinks.length }}</h4>
-            </span>
-            <span class="col l4 center-align waves-effect waves-light">
-              <h4 ng-click="showFollowers()">Followers : {{ subscriptions.length }}</h4>
+            <div class="col-md-3" style="margin-top:30px">
+              <h1 style="font-family:Arial,Helvetica,sans-serif;">{{ playlist.playlist_name }}</h1>
+              <h4>Créateur de la playlist : {{ myself.usr_login }}</h3>
+              <h4>Description : {{playlist.playlist_description}}</h3>
+            </div>
+            <div class="col-md-4" style="margin-top:60px">
+              <h4>Nombre de musiques sur la playlist : {{ musics.length }}</h3>
+              <h4>
+                <a href="" ng-click="showFollowers()">Nombre de Followers de la playlist : {{ subscriptions.length }}</a>
+              </h4>
               <ul ng-if="displayFollowers" class="collection">
                 <li class="collection-item" ng-repeat="x in subscriptions">
-                  <p class="col l8 offset-l2 center-align">{{ x.Subscriber.usr_login}}</p>
-                  <i class="col l2 material-icons" style="margin-bottom: 10px;">delete</i>
+                  <p>{{ x.Subscriber.usr_login}}</p>
                 </li>
               </ul>
-            </span>
+              <div class="row" ng-if="displayAddFollowers">
+                <select class="form-control default-select" ng-model="invitation.invited_usr_id" style="width:92%">
+                  <option value=""></option>
+                  <option ng-repeat="x in usersForSub" value="{{ x.usr_id }}">
+                    {{ x.usr_login }}
+                  </option>
+                </select>
+                <button type="button" style="margin-left:140px;margin-top:5px;background-color:#6B92A5;color:white;" ng-click="inviteSub()" class="btn">Ok</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
-      <ul class="collection with-header">
-        <li class="collection-header"><h3 class="center-align">Musiques</h3></li>
-        <li ng-if="musiclinks.length === 0" class="collection-header"><h4 class="center-align">Aucune musique dans la Playlist</h4></li>
-        <li ng-if="musiclinks.length > 0" class="collection-header">
-          <div class="row">
-            <h4 class="col l3 center-align">Nom</h4>
-            <h4 class="col l2 center-align">Groupe</h4>
-            <h4 class="col l3 center-align">Description</h4>
-            <h4 class="col l2 center-align">Source</h4>
-            <h4 class="col l2 center-align">Actions</h4>
+    </div>
+    <br>
+    <div ng-if="!musics.length" class="col-md-10">
+      <h3 style="text-align:center"> Cette playlist n'a aucune musique </h3>
+    </div>
+    <div ng-if="musics.length">
+      <div class="container" style="margin-bottom:20px;">
+        <div class="playlist" id="{{x.music_id}}" style="height:80px;margin-top:10px;margin-bottom:0px">
+          <div class="col-md-4">
+            <h4 style="text-align:center">Nom de la musique</h4>
           </div>
-        </li>
-        <li ng-if="musiclinks.length > 0" class="collection-item" ng-repeat="x in musiclinks">
-          <div class="row">
-            <h4 class="col l3 center-align">{{ x.Music.music_name }}</h4>
-            <h4 class="col l2 center-align">{{ x.Music.music_group }}</h4>
-            <h4 class="col l3 center-align">{{ x.Music.music_description }} <!--i class="small material-icons waves-effect waves-light">mode_edit</i--></h4>
-            <h4 class="col l2 center-align">{{ x.Music.music_source }}</h4>
-            <i class="col l2 center-align material-icons waves-effect waves-light" ng-click="deleteLink(x)" style="margin-top: 20px;">delete</i>
+          <div class="col-md-4">
+            <h4 style="text-align:center">Artiste</h4>
           </div>
-        </li>
-      </ul>
-
+          <div class="col-md-4">
+            <h4 style="text-align:center">Actions</h4>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <!--div class="col-md-10" style="background-color:white; opacity:0.7;">
-    <div class="col-md-5">
-      <img src="/img/myPlaylist.png" alt="playlist" style="width:250px; height:200px;">
-    </div>
-    <div class="col-md-4">
-        <h1 style="font-family:Arial,Helvetica,sans-serif;">{{ playlist.playlist_name }}<a href=""><span class="glyphicon glyphicon-pencil" ng-click='displayNameInput()' style="font-size:20px; margin-left:20px;color:black"></span></a></h1>
-      <form ng-if="displayNewName === true">
-        <input id="newNameInput" type="text" required></input>
-        <button type="submit" ng-click='changeName()' class="btn btn-success">Ok</button>
-      </form>
-      <h3>{{ myself.usr_login }}</h3>
-      <dl>
-        <dt>Nombre de musique sur la playlist: {{ musics.length }}</dt>
-        <dt>Description: {{playlist.playlist_description}}</dt>
-        <dd>modifier la playlist<span class="glyphicon glyphicon-pencil" style="font-size:15px; margin-left:20px;"></span></dd>
-      </dl>
-    </div>
-    <div class="col-md-1">
-      <ul class="navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-            <div style="font-size:30px; margin-top: 30%" class="col-md-2 glyphicon glyphicon-option-vertical"></div>
-          </a>
-          <ul style="margin-top: 10%; margin-right: 60%" class="dropdown-menu animated fadeInDown">
-            <li class="arrow"></li>
-            <li><a ng-click="inviteUser()" translate>Inviter des utilisateurs</a></li>
-            <li class="divider"></li>
-            <li><a href="" ng-click="logout()" translate>Log Out</a></li>
-            <li><a href="#/follower">Followers ({{nbFollowers}})</a></li>
-            <li><a href="#/followed">Followed ({{nbFollowed}})</a></li>
-            <li><a href="#/message">Messages ({{myself.messages_unread.length}})</a></li>
-            <li><a href="#/playlist/list">Playlist</a></li>
-            <li class="divider"></li>
-            <li><a href="#/cgu">CGU</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <br>
-  <div ng-if="!musics.length" class="col-md-10">
-  <h3 style="text-align:center"> Cette playlist n'a aucune musique </h3>
   </div>
   <div ng-if="musics.length">
-    <div class="container" ng-repeat="x in musics" style="margin-bottom:20px;">
-      <div class="playlist" id="{{x.music_id}}" style="height:80px;margin-top:10px;margin-bottom:0px">
+    <div class="container" ng-repeat="x in musiclinks" style="margin-bottom:20px;">
+      <div class="playlist" id="{{x.Music.music_id}}" style="height:80px;margin-top:10px;margin-bottom:0px">
         <div>
         <div class="col-md-4">
-          <span class="itemTitle">{{x.music_name}}</span>
+          <h5 style="text-align:center">{{ x.Music.music_name }}</h5>
         </div>
         <div class="col-md-4">
-          <span class="itemTitle">{{x.duration}} 3.56</span>
+          <h5 style="text-align:center">{{ x.Music.music_group }}</h5>
         </div>
-        <div class="col-md-4">
-          <span class="itemTitle">Delete</span>
+        <div class="col-md-4" style="margin-top:10px">
+          <a href="" ng-click="goTo('music/', x.Music.music_id)"><span class="glyphicon glyphicon-pencil" style="margin-left:150px;color:black"></span></a>
         </div>
       </div>
       </div>
     </div>
   </div>
-</div>
-</div>
-<div id="unknowPlaylist" ng-if="!playlist">
-  <div class="col-md-12">
-  <center><h4 style="margin-top:5%">This playlist don't exist</h4></center>
-  <center><img src="/img/broken.png" id="logoBroken" style="max-width:200px;max-heigth:200px;width:auto;height:auto;margin-top:5%"></img></center>
+  <div id="unknowPlaylist" ng-if="!playlist">
+    <div class="col-md-12">
+      <center><h4 style="margin-top:5%">This playlist don't exist</h4></center>
+      <center><img src="/img/broken.png" id="logoBroken" style="max-width:200px;max-heigth:200px;width:auto;height:auto;margin-top:5%"></img></center>
+    </div>
   </div>
-</div-->
 </body>
 </html>
