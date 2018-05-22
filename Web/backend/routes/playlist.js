@@ -25,7 +25,11 @@ module.exports = function (app) {
             var Options = req.query,
                 query = {
                     where: {},
-                    include: []
+                    include: [{
+                        model: app.models.User,
+                        as: 'Creator',
+                        required: true
+                    }]
                 };
             if (typeof Options.where == "string") Options.where = JSON.parse(Options.where);
             if (typeof Options.limit == "string") Options.limit = parseInt(Options.limit);
