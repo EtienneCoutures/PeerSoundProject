@@ -29,7 +29,7 @@
               </h4>
               <ul ng-if="displayFollowers" class="collection">
                 <li class="collection-item" ng-repeat="x in subscriptions">
-                  <p>{{ x.Subscriber.usr_login}}<a href="" ng-click="removeSub(x)"><span class="glyphicon glyphicon-remove" style="margin-left:20px;color:black"></span></a></p>
+                  <p><a href="" ng-click="goTo('user/', x.Subscriber.usr_id)">{{ x.Subscriber.usr_login}}</a><a href="" ng-click="removeSub(x)"><span class="glyphicon glyphicon-remove" style="margin-left:20px;color:black"></span></a></p>
                 </li>
               </ul>
               <div class="row" ng-if="displayAddFollowers">
