@@ -5,8 +5,7 @@ var firstCo = document.getElementById('button1Connexion');
     if (firstCo)
       firstCo.addEventListener("click", function(){
         console.log("first Connection");
-//        document.location.href="https://localhost:8000/signup"
-        closer();
+        top.location = "https://localhost:8000/signup";
       });
 
 

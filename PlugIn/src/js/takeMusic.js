@@ -184,8 +184,8 @@ function sendMusic() {
         if (biscotte == 0)
             {
             var musicAdded = 2;
-            localStorage.setItem('musicAdded', musicAdded);
-            document.location.href = "profil.html";
+            //localStorage.setItem('musicAdded', musicAdded);
+            //document.location.href = "profil.html";
             }
         else
             {
@@ -228,7 +228,7 @@ function sendMusic() {
                             });
                             setTimeout(function(){
                             document.location.href = "profil.html"
-                            }, 500);
+                            }, 1000);
                    }
                }
                );
