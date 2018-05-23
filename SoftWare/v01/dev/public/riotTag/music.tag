@@ -25,14 +25,14 @@
     </div>
   </div>
 
-  <div class="popout popout-bottom" ref="popout" style="z-index: 1000; overflow: hidden; visibility: hidden; display: none; left: 120px; top: 40px; height: 192px; width: 216px; transform: translateY(0%) translateX(-50%) translateZ(0px);position absolute;">
+  <div class="popout popout-bottom" ref="popout" style="z-index: 100 !important; visibility: hidden; display: none; left: 120px; top: 40px; height: 192px; width: 216px; transform: translateY(0%) translateX(-50%) translateZ(0px);position absolute;">
     <div class="menu-3BZuDT">
-      <div class="item-rK1j5B">
+      <div class="item-rK1j5B" onclick={changeMusicName}>
         <div class="icon-3ICDZz" style="background-image: url(&quot;../images/editPlaylistName.svg&quot;);"></div>
-        <div class="label-HtH0tJ" onclick={changePlaylistName}>Changer le nom</div>
+        <div class="label-HtH0tJ">Changer le nom</div>
       </div>
       <div class="separator-1hpa3S"></div>
-      <div class="item-rK1j5B leave-2bjeRM">
+      <div class="item-rK1j5B leave-2bjeRM" onclick={delete}>
         <div class="icon-3ICDZz"><i class="fa fa-times-circle"></i></div>
         <div class="label-HtH0tJ">Supprimer</div>
       </div>
@@ -69,6 +69,12 @@
       myEmitter.emit('initializeMusics', self.position);
   })
 
+  changeMusicName(e) {
+    options.method = "POST";
+    options.path = "/api/music/"
+
+    var data = {music_id : self.id, music_name}
+  }
 
   updateSelection() {
     /*if (!self.refs.play || self.refs.pause)

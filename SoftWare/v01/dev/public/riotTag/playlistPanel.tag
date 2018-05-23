@@ -1,6 +1,6 @@
-<riotPanel>
+<playlistPanel>
 
-  <div id="{ name }_panel" class="panel">
+  <div id="playlists_panel" class="panel">
     <div each={ elements } data-is={ element } param={ param }></div>
   </div>
 
@@ -19,8 +19,6 @@
   this.root.riot = false;
 
   this.on('mount', function() {
-
-    //console.log("elements: ", this.elements);
 
     this.root.style.backgroundColor = this.color;
 
@@ -46,6 +44,33 @@
     }
   })
 
+  myEmitter.on('newPlaylist', function(pl) {
+    console.log('NEW PLAYLIST: ', pl);
+
+    var nPl = {element : "playlist"
+      , param : {playlist : pl/*name : pl.playlist_name
+                , id : pl.playlist_id
+                , style : pl.playlist_style
+                , image : pl.playlist_img || "../images/psp.png"*/}};
+
+                //self.elements.push(nPl);
+                console.log('self.elements.length: ', self.elements.length);
+    self.elements.splice(self.elements.length - 1, 0, nPl);
+
+    self.update();
+  })
+
+  myEmitter.on('invitationAccepted', function(pl_id) {
+    index.requestPlaylistFromID(pl_id, function(pl) {
+      console.log('pl: ', pl);
+      var nPl = {element : "playlist"
+        , param : {playlist : pl.Playlist}};
+
+      self.elements.splice(self.elements.length - 1, 0, nPl);
+      self.update();
+    })
+  })
+
 </script>
 
 <style scoped>
@@ -63,4 +88,4 @@
   }
 </style>
 
-</riotPanel>
+</playlistPanel>

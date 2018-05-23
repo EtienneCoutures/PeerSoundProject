@@ -28,10 +28,12 @@
 <script>
 
 var self = this;
+console.log('opts: ', opts);
 this.researchField = opts.param.researchField;
 this.researchAlgo = opts.param.researchAlgo;
 this.type = opts.param.type;
 this.input = "";
+
 
 this.on('mount', function(e) {
   $(function() {

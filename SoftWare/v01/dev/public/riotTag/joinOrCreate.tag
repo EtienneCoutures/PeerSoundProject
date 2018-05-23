@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <div class="inner-1_1f7b" ref="createPlaylist" style="z-index:4; visibility:hidden; display:none">
+  <div class="inner-1_1f7b" ref="createPlaylist" style="z-index:4; visibility:hidden; display:none;height:700px !important">
     <div class="create-guild-container deprecated">
       <form class="form deprecated create-guild" style="transform: translateX(0%) translateZ(0px);">
         <div class="form-inner">
@@ -32,6 +32,10 @@
               <div class="control-group">
                 <label for="guild-name">Nom de la playlist</label>
                 <input type="text" id="guild-name" placeholder="Entrez le nom de la playlist" value="">
+                <label for="guild-name">Style musical</label>
+                <input type="text" id="style" placeholder="style" value="">
+                <label for="guild-name">Description</label>
+                <input type="text" id="description" placeholder="description" value="">
                 </div>
                 <div class="control-group">
                   <!--<label for="guild-region">Région du serveur</label>
@@ -51,15 +55,15 @@
                 <div class="avatar-uploader-inner">
                   <div class="avatar-uploader-acronym"></div>
                   <div class="avatar-uploader-hint">Changer l'icône</div>
-                  <input type="file" class="file-input" accept=".jpg,.jpeg,.png,.gif" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; opacity: 0; cursor: pointer;"></div>
+                  <input type="file" id="playlist_img" class="file-input" accept=".jpg,.jpeg,.png,.gif" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; opacity: 0; cursor: pointer;"></div>
                   <small class="size-info">Taille minimum : <strong>128x128</strong></small>
+                </div>
+                <div class="form-actions">
+                  <button onclick={retour} type="button" class="btn btn-default">Retour</button>
+                  <button type="button" class="btn btn-primary" onclick={creation}>Créer</button>
                 </div>
               </li>
             </ul>
-          </div>
-          <div class="form-actions">
-            <button onclick={retour} type="button" class="btn btn-default">Retour</button>
-            <button class="btn btn-primary">Créer</button>
           </div>
         </form>
       </div>
@@ -83,9 +87,9 @@
                 <label for="invite">Entrez une invitation </label>
               </div>
             </div>
-            <div class="form-actions">
+            <div >
               <button onclick={retour} type="button" class="btn btn-default">Retour</button>
-              <button class="btn btn-primary">Rejoindre</button>
+              <button type="button" class="btn btn-primary">Rejoindre</button>
             </div>
           </form>
         </div>
@@ -93,9 +97,41 @@
 
   <script>
 
+  var self = this;
+
   this.on('mount', function(e) {
     console.log('mounting joinOrCreate');
   })
+
+  $('#playlist_img').change(function(e) {
+
+  })
+
+  creation(e) {
+    var playlist = {};
+
+    playlist.playlist_creator = account.usr_id;
+    playlist.playlist_style = $('#style').val();
+    playlist.playlist_description = $('#description').val();
+    playlist.playlist_name = $('#guild-name').val();
+    playlist.playlist_img = $('#playlist_img').prop('files')[0]
+                            ? $('#playlist_img').prop('files')[0].path
+                            : "../images/psp.png";
+
+    console.log('playlist :', playlist);
+    options.method = 'POST';
+    options.path = "/api/playlist";
+
+    var data = JSON.stringify(playlist);
+
+    requestManager.request(baseURL, options, data, function (rslt, req, err) {
+      console.log('rslt: ', rslt);
+      //self.close(rslt);
+      self.unmount(true);
+
+      myEmitter.emit('newPlaylist', rslt.rslt.Playlist);
+    });
+  }
 
   close(e) {
     this.unmount(true);

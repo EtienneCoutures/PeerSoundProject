@@ -1,5 +1,4 @@
 const riot = require('riot');
-const optionList = require('./public/views/optionList.tag');
 const jQuery = require('jquery');
 const ElectronSettings = require('electron-settings');
 
