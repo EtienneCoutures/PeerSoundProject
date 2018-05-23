@@ -8,7 +8,8 @@
 			<div class="box-header">
 				<h2>Log In</h2>
 			</div>
-      <span style="color:red; size-font:15px" id="error"></span><br>
+      <span style="color:red; size-font:15px" id="error"></span>
+      <br>
 			<label for="username">Email</label>
 			<br/>
 			<input type="text" id="username">
@@ -80,7 +81,8 @@ console.log('ipcRenderer : ', ipcRenderer);
 
 
         if (rslt.rslt.code != 0) {
-          $('#error').text(rslt.errors[0].message);
+          console.log('erreur : ', rslt.rslt);
+          $('#error').text(rslt.rslt.errors[0].message);
         } else if (rslt.rslt.code == 0) {
 
           //var options =
