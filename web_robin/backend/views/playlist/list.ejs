@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="/css/playlist.css" rel="stylesheet"/>
+</head>
+<header>
+<body>
+
+<!--  playlist/list => liste des playlists créées, des invitations et des playlists suivies !-->
+
+<div class="container">
+  <ul class="collapsible">
+    <li>
+      <div class="collapsible-header"><i class="material-icons">filter_drama</i>Ajouter une Playlist</div>
+      <div class="collapsible-body">
+        <span>
+          Lorem ipsum dolor sit amet.
+          <div class="row">
+         <form class="col l12" name="newPlaylist" ng-submit="savePlaylist()">
+           <div class="row">
+             <div class="input-field col l6">
+               <i class="material-icons prefix">brush</i>
+               <input id="icon_prefix" type="text" class="validate">
+               <label for="icon_prefix">Name</label>
+             </div>
+             <div class="input-field col l6">
+               <i class="material-icons prefix">comment</i>
+               <input id="icon_telephone" type="tel" class="validate">
+               <label for="icon_telephone">Commentaire</label>
+             </div>
+           </div>
+           <div class="row">
+             <div class="input-field col l6">
+               <i class="material-icons prefix">description</i>
+               <input id="icon_prefix" type="text" class="validate">
+               <label for="icon_prefix">Description</label>
+             </div>
+             <div class="input-field col l6">
+               <div class="col l6">
+                 <select>
+                   <option value="" disabled selected>Choose your option</option>
+                   <option value="1">Option 1</option>
+                   <option value="2">Option 2</option>
+                   <option value="3">Option 3</option>
+                 </select>
+                 <label>Style</label>
+               </div>
+               <div class="col l6">
+                 <i class="material-icons">style</i>
+               </div>
+        </div>
+           </div>
+           <div class="row">
+             <div class="col l5">
+             </div>
+             <div class="col l7">
+                 <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                   <i class="material-icons right">send</i>
+                 </button>
+             </div>
+           </div>
+         </form>
+       </div>
+        </span>
+      </div>
+    </li>
+    <li>
+    </ul>
+</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="card">
+        <div class="card-content blue-grey lighten-5" style="margin-top: 30px;">
+            <span class="card-title center-align">
+                <h3>Ajouter/Chercher une Playlist</h3>
+              </span>
+           </div>
+           <div class="card-action col l12">
+             <div class="col l6">
+               <form role="search" name="searchform" method="get">
+                   <div class="input-group" style="margin-top:9px">
+                     <input id="search" type="text" style="width:100%" placeholder="recherche" name="s" class="form-control left-rounded" required>
+                     <div class="input-group-btn">
+                       <form>
+                         <i ng-click="userQuery()" class="material-icons">search</i></button>
+                       </form>
+                     </div>
+                 </div>
+               </form>
+             </div>
+             <div class="col l6">
+               <div class=" secondary-content {{__controller == 'playlist' ? 'active' : ''}}">
+                 <button class="waves-effect waves-light btn blue-grey lighten-1" ng-click="goTo('playlist/', 'new')">Creer une nouvelle playlist</button>
+             </div>
+             </div>
+           </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+  <div class="row" style="margin-top: 50px;">
+    <ul class="collection with-header">
+      <li class = "collection-header blue-grey lighten-5"><h3 class="center-align ">Gestion de mes playlists</h3></li>
+      <li class="collection-item avatar waves-effect waves-light col l12">
+        <div class="col l12">
+          <div class="col l2" style="margin-top: 15px;">
+            <img src="/img/playlistTemplate.svg" alt="" class="circle">
+          </div>
+          <div class="col l2" style="margin-top: 30px;">
+            <span class="title">Playlist : </span>
+          </div>
+          <div class="col l1" style="margin-top: 30px;">
+          </div>
+          <div class="col l2" style="margin-top: 30px;">
+            <span class="title">Style de musique :</span>
+          </div>
+          <div class="col l1" style="margin-top: 30px;">
+          </div>
+          <div class="col l2" style="margin-top: 30px;">
+            <span class="title">Description :</span>
+          </div>
+        </div>
+      </li>
+      <li class="collection-item avatar waves-effect waves-light col l12" ng-repeat="x in userPlaylist">
+        <div class="col l2" style="margin-top:15px">
+          <img src="/img/playlistTemplate.svg" alt="" class="circle">
+        </div>
+        <div class="col l2" style="margin-top:30px">
+          <span style="font-size: 15px;">{{ x.playlist_name }}</span>
+        </div>
+        <div class="col l1" style="margin-top: 30px;">
+        </div>
+        <div class="col l2" style="margin-top:30px">
+          <span style="font-size: 15px;">{{ x.playlist_style }}</span>
+        </div>
+        <div class="col l1" style="margin-top: 30px;">
+        </div>
+        <div class="col l2" style="margin-top:30px">
+          <span style="font-size: 15px;">{{ x.playlist_description }}</span>
+        </div>
+        <div class="secondary-content" style="margin-top: 15px;">
+          <a href="#/playlist/{{ x.playlist_id }}">
+            <div class="col l4" style="margin-top: 5px;">
+              <span >Editer</span>
+            </div>
+            <div class="col l1">
+            </div>
+            <div class="col l4">
+              <i class="material-icons" ng-click="goTo('playlist/', x.playlist_id)">mode_edit</i>
+            </div>
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="row"  style="margin-top: 50px;">
+    <ul class="collection with-header">
+      <li class = "collection-header blue-grey lighten-5"><h3 class="center-align ">Invitation</h3></li>
+      <li class="collection-item avatar waves-effect waves-light col l12">
+        <div class="col l3" style="margin-top: 20px;">
+          <img src="/img/playlistTemplate.svg" alt="" class="circle">
+        </div>
+        <div class="col l3" style="margin-top: 30px;">
+          <span class="title">role proposé</span>
+        </div>
+        <div class="col l3" style="margin-top: 30px;">
+          <span class="title">Playlist</span>
+        </div>
+        <div class="col l3" style="margin-top: 30px;">
+          <span class="title">Invité par</span>
+        </div>
+      </li>
+      <li class="collection-item avatar waves-effect waves-light col l12" ng-repeat="x in userInvites">
+        <div class="col l2" style="margin-top:15px">
+          <img src="/img/playlistTemplate.svg" alt="" class="circle">
+        </div>
+        <div class="col l2" style="margin-top:30px">
+          <span>{{ x.invited_role }}</span>
+        </div>
+        <div class="col l1" style="margin-top: 30px;">
+        </div>
+        <div class="col l2" style="margin-top:30px">
+          <span>{{ x.Playlist.playlist_name }}</span>
+        </div>
+        <div class="col l1" style="margin-top: 30px;">
+        </div>
+        <div class="col l2" style="margin-top:30px">
+          <span>{{ x.Inviter.usr_login }}</span>
+        </div>
+        <div class="secondary-content" style="margin-top: 15px;">
+          <div class="col l6">
+            <a href="#!">
+              <i class="material-icons" ng-click="acceptInvite(x)">check</i>
+            </a>
+          </div>
+          <div class="col l6">
+            <a href="#!">
+                <i class="material-icons ng-click="refuseInvite(x)"">clear</i>
+            </a>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="row" style="margin-top: 50px;">
+    <ul class="collection with-header">
+      <li class = "collection-header blue-grey lighten-5"><h3 class="center-align ">Mes playlists Suivies</h3></li>
+      <li class="collection-item avatar waves-effect waves-light col l12">
+        <div class="col l3" style="margin-top:15px">
+          <img src="/img/playlistTemplate.svg" alt="" class="circle">
+        </div>
+        <div class="col l3" style="margin-top: 30px;">
+          <span class="title">Playlist de</span>
+        </div>
+        <div class="col l3" style="margin-top:30px">
+          <span class="title">Style</span>
+        </div>
+        <div class="col l3" style="margin-top:30px">
+          <span class="title">Role</span>
+        </div>
+      </li>
+      <li class="collection-item avatar waves-effect waves-light col l12" ng-repeat="x in userSubs">
+        <div class="col l2" style="margin-top:15px">
+          <img src="/img/playlistTemplate.svg" alt="" class="circle">
+        </div>
+        <div class="col l2" style="margin-top:30px">
+          <span>{{ x.Playlist.Creator.usr_login }}</span>
+        </div>
+        <div class="col l1" style="margin-top: 30px;">
+        </div>
+        <div class="col l2" style="margin-top:30px">
+          <span>{{ x.Playlist.playlist_style }}</span>
+        </div>
+        <div class="col l1" style="margin-top: 30px;">
+        </div>
+        <div class="col l2" style="margin-top:30px">
+          <span>{{ x.usr_role }}</span>
+        </div>
+        <div class="secondary-content" style="margin-top: 15px;">
+          <div class="col l6">
+            <a href="#!">
+              <i class="material-icons">directions</i>
+            </a>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<!--  <div ng-if="!!myself">
+    <div class="row header">
+      <div class=col-md-2>
+        <img src="/img/myPlaylist.png" alt="playlist" style="width:250px; height:200px;">
+      </div>
+      <div class="col-md-7">
+      </div>
+      <div class="col-md-3">
+        <<li class="{{__controller == 'playlist' ? 'active' : ''}}">
+        <button ng-click="goTo('playlist/', 'new')" type="button" class="btn" style="background-color:white;border-color:black; margin-top:70px;"><div href="#" class="bnt glyphicon glyphicon-plus" style="font-size:15px;"></div>  Creer une nouvelle playlist</button>
+      </li>
+      </div>
+    </div>
+    <h2 ng-if="userInvites.length" style="font-family:Arial,Helvetica,sans-serif;"><center>Vos invitation en attente</center></h2>
+    <h2 ng-if="!userInvites.length" style="font-family:Arial,Helvetica,sans-serif;"><center>Aucune invitation en attente</center></h2>
+
+
+
+    <div class="row">
+      <table ng-if="userInvites.length" class="notifTable" style="background-color:white">
+        <thead>
+          <tr>
+            <th>Invité par</th>
+            <th>Playlist</th>
+            <th>validation</th>
+          </tr>
+        </thead>
+        <tbody ng-repeat="x in userInvites">
+          <tr>
+            <td> {{ x.Inviter.usr_login }} </td>
+            <td> {{ x.Playlist.playlist_name }}</td>
+            <td>
+              <div class="col-md-6">
+                <span ng-click="acceptInvite(x)" class="glyphicon glyphicon-ok" style="font-size:20px; margin-top:15px;"></span>
+              </div>
+              <div class="col-md-6">
+                <span ng-click="refuseInvite(x)" class="glyphicon glyphicon-remove" style="font-size:20px; margin-top:15px;"></span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <!-tbody>
+          <tr>
+          <td>ITIZ</td>
+          <td>Rap Fr</td>
+          <td>
+            <div class="col-md-6">
+            <span class="glyphicon glyphicon-ok" style="font-size:20px; margin-top:15px;"></span>
+          </div>
+          <div class="col-md-6">
+            <span class="glyphicon glyphicon-remove" style="font-size:20px; margin-top:15px;"></span>
+          </div>
+          </td>
+        </tr>
+      </tbody-->
+      <!--
+      </table>
+      </div>
+      <h2 ng-if="userPlaylist.length" style="font-family:Arial,Helvetica,sans-serif;"><center>Vos Playlists</center></h2>
+      <h2 ng-if="!userPlaylist.length" style="font-family:Arial,Helvetica,sans-serif;"><center>Vous n'avez pas de Playlist</center></h2>
+      <div class="row">
+        <table ng-if="userPlaylist.length" class="notifTable" style="margin-bottom:60px;background-color:white">
+          <thead>
+            <tr>
+              <th>Gestion Playlist</th>
+              <th>Derniere Musique</th>
+              <th>Playlist</th>
+            </tr>
+          </thead>
+          <tbody ng-repeat="x in userPlaylist">
+            <tr>
+              <td>
+                <a href="" class="glyphicon glyphicon-eye-open" ng-click="goTo('playlist/', x.playlist_id)"></a>
+                <a href="" class="glyphicon glyphicon-wrench" ng-if="x.playlist_creator == myself.usr_id" ng-click="goTo('playlist/', x.playlist_id + '/admin')"></a>
+              </td>
+              <td>Coming soon</td>
+              <td> {{ x.playlist_name }} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h2 ng-if="userSubs.length" style="font-family:Arial,Helvetica,sans-serif;"><center>Playlists Suivies</center></h2>
+      <h2 ng-if="!userSubs.length" style="font-family:Arial,Helvetica,sans-serif;"><center>Aucune Playlist suivie</center></h2>
+      <div class="row">
+        <table ng-if="userSubs.length" class="notifTable" style="margin-bottom:60px;background-color:white">
+          <thead>
+            <tr>
+              <th>Nom de la Playlist</th>
+              <th>Créateur de la Playlist</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody ng-repeat="x in userSubs">
+            <tr>
+              <td> {{ x.Playlist.playlist_name }} </td>
+              <td> {{ x.Playlist.Creator.usr_login }} </td>
+              <td> {{ x.usr_role }} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+-->
+</body>
+
+</html>
