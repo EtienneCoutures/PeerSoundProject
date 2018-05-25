@@ -13,10 +13,10 @@
 
   <div class="popout popout-bottom" ref="popout" style="z-index: 1000; overflow: hidden; visibility: hidden; left: 120px; top: 40px; height: 192px; width: 216px; transform: translateY(0%) translateX(-50%) translateZ(0px);">
     <div class="menu-3BZuDT">
-      <div class="item-rK1j5B">
+      <div onclick={invitePeople} class="item-rK1j5B">
         <div class="icon-3ICDZz" style="background-image: url(&quot;../images/invitePeople.svg&quot;);">
         </div>
-        <div class="label-HtH0tJ" onclick={invitePeople}>Inviter des gens</div>
+        <div class="label-HtH0tJ" >Inviter des gens</div>
       </div>
       <div class="separator-1hpa3S"></div>
       <div class="item-rK1j5B">
@@ -29,9 +29,9 @@
         <div class="label-HtH0tJ">Confidentialité</div>
       </div>
       <div class="separator-1hpa3S"></div>
-      <div class="item-rK1j5B">
+      <div onclick={changePlaylistName} class="item-rK1j5B">
         <div class="icon-3ICDZz" style="background-image: url(&quot;../images/editPlaylistName.svg&quot;);"></div>
-        <div class="label-HtH0tJ" onclick={changePlaylistName}>Changer le nom</div>
+        <div class="label-HtH0tJ" >Changer le nom</div>
       </div>
       <div class="separator-1hpa3S"></div>
       <div class="item-rK1j5B leave-2bjeRM">
@@ -43,11 +43,26 @@
 
   <script>
 
-  this.playlistName = opts.param.currentPlaylist.name;
+  console.log('requestManager: ', requestManager);
+  var self = this;
 
-  this.on('mount', function(e) {
-    console.log('this.menubar: ', this);
-  });
+  this.playlistName = opts.param.currentPlaylist.playlist_name;
+  this.id = opts.param.currentPlaylist.playlist_id;
+
+  this.on('mount', function(e) {});
+
+  myEmitter.on('switchingPlaylist', function(pl) {
+    self.playlistName = pl.playlist_name;
+    self.id = pl.playlist_id;
+
+    self.update();
+  })
+
+  myEmitter.on('plNameChange', function(pl) {
+      console.log('menubar plNameChange: ', pl);
+      self.playlistName = pl.name;
+      self.update();
+  })
 
   showPlaylistOptions(e) {
     this.refs.popout.style.visibility = this.refs.popout.style.visibility
@@ -57,12 +72,15 @@
   invitePeople(e) {
     this.refs.popout.style.visibility = "hidden";
     //this.unmount(true);
-    riot.mount('invitePeople');
+    riot.mount('invitePeople', {playlistName : this.playlistName
+                             , playlistID : this.id});
   }
 
   changePlaylistName(e) {
+    console.log('changePlaylistName');
     this.refs.popout.style.visibility = "hidden";
-    riot.mount('changePlaylistName');
+    riot.mount('changePlaylistName', {playlistName : this.playlistName
+                                      , id : this.id});
   }
 
   </script>

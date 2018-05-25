@@ -1,6 +1,5 @@
 /* Styles => Web plugin */
 
-
 html {
   box-sizing: border-box;
 }
@@ -223,7 +222,7 @@ h1 {
     display: inline-block;
     font-size: 1.5rem;
     color: #fff;
-    background: #1D82F1;
+    background: black;
     background-image: -webkit-linear-gradient(top, #6B92A5, #6B92A5);/*(top, #b31926, #b31926);*/
     background-image: -moz-linear-gradient(top, #6B92A5, #6B92A5);/*(top, #b31926, #b31926);*/
     background-image: -ms-linear-gradient(top, #6B92A5, #6B92A5);/*(top, #b31926, #b31926);*/

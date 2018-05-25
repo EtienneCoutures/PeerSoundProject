@@ -3,14 +3,29 @@
   <div id="backgound" onclick={close} class="backdrop-2ohBEd" style="z-index:4; opacity: 1; background-color: transparent; transform: translateZ(0px);pointer-events:none"></div>
 <div class="displayVertical" >
 
-  <div  onclick={ userOptions } ref="userpic" id={ id } class="crop" style="background-image: url('{ image }');margin-right: 10px;">
+<div onclick={ userOptions } >
+  <div ref="userpic" id={ id } class="crop" style="background-image: url('{ image }');margin-right: 10px;">
     <div class={ status } style="visibility: { status == 'offline' ? hidden : visible}"></div>
   </div>
 
   <div><label class="userName">{ name }</label></div>
+</div>
 
   <div id="user_{id}" class="popout popout-bottom" ref="popout" style="z-index: 1000; visibility: hidden; overflow: visible; position: absolute; top:0; margin-left:150px;transform: translateY(0%) translateX(-50%) translateZ(0px);">
     <div class="menu-3BZuDT">
+      <!--<div onclick={invitePeople} class="item-rK1j5B">
+        <div class="icon-3ICDZz" style="background-image: url(&quot;../images/invitePeople.svg&quot;);">
+        </div>
+        <div class="label-HtH0tJ" >Inviter des gens</div>
+      </div>
+      <div class="separator-1hpa3S"></div>
+      <div class="separator-1hpa3S"></div>-->
+      <div class="item-rK1j5B leave-2bjeRM">
+        <div class="icon-3ICDZz" style="background-image: url(&quot;../images/leavePlaylist.svg&quot;);"></div>
+        <div class="label-HtH0tJ">Renvoyer</div>
+      </div>
+    </div>
+    <!--<div class="menu-3BZuDT">
       <div class="item-rK1j5B">
         <input type="checkbox" class="icon-3ICDZz" checked="checked"/>
         <div class="label-HtH0tJ">Ajout</div>
@@ -30,7 +45,7 @@
         <div class="icon-3ICDZz" style="background-image: url(&quot;../images/leavePlaylist.svg&quot;);"></div>
         <div class="label-HtH0tJ">Renvoyer</div>
       </div>
-    </div>
+    </div>-->
   </div>
 
   <div style="visibility: {admin ? 'visible' : 'hidden'}">
@@ -54,6 +69,7 @@
   this.admin = (opts.param.admin || false);
   this.options = false;
 
+  console.log('opts user : ', opts);
   console.log('user mount: ', this.id, ' refs: ', this.refs);
 
   this.on('mount', function(e) {
@@ -63,15 +79,18 @@
     }
   })
 
+
+
   userOptions(e) {
-    self.refs.popout.style.visibility = self.options ? 'hidden' : 'visible';
+    console.log('USER OPTIONS');
+    /*self.refs.popout.style.visibility = self.options ? 'hidden' : 'visible';
     self.options = self.options ? false : true;
     console.log('show this shit: ', self.refs.popout.style.visibility);
-    console.log('self.options: ', self.options);
+    console.log('self.options: ', self.options);*/
+    index.userOnClick(e, this);
   }
 
   close(e) {
-    console.log('toto1');
     self.refs.popout.style.visibility = 'hidden';
     self.options = false;
   }

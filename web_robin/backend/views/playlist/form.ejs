@@ -1,0 +1,96 @@
+<br>
+<!-- end row -->
+<div class="row">
+    <!-- begin col-12 -->
+    <div class="col-md-12">
+        <!-- begin panel -->
+        <div id="music-panel" class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                </div>
+                <h4 class="panel-title"><%= translate('playlist', 'title') %></h4>
+            </div>
+            <div class="panel-body">
+                <form enctype="multipart/form-data"
+                      style="position:relative"
+                      class="form-horizontal form-bordered"
+                      id="music-form">
+                    <div ng-class="{hidden: !errors}">
+                        <div class="alert alert-danger">
+                            <ul>
+                                <li ng-repeat="error in errors">{{ error.message | translate }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label col-md-4 col-sm-4"
+                                       for="Playlist_playlist_name">
+                                    {{ 'playlist_name' | translate }}
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control"
+                                           id="Playlist_playlist_name"
+                                           name="Playlist[playlist_name]"
+                                           ng-model="Playlist.playlist_name"
+                                           type="text"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4 col-sm-4"
+                                       for="Playlist_playlist_style">
+                                    {{ 'playlist_style' | translate }}
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control"
+                                         id="Playlist_playlist_style"
+                                         name="Playlist[playlist_style]"
+                                         ng-model="Playlist.playlist_style"
+                                         type="text"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4 col-sm-4"
+                                       for="Playlist_playlist_description">
+                                    {{ 'playlist_description' | translate }}
+                                </label>
+                                <div class="col-xs-12">
+                                    <textarea class="form-control ckeditor"
+                                            id="Playlist_playlist_description"
+                                            name="Playlist[playlist_description]"
+                                            ng-model="Playlist.playlist_description"
+                                            rows="20">
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="!Playlist.isNew">
+                                <label class="control-label col-md-4 col-sm-4"
+                                       for="Playlist_playlist_comment">
+                                    {{ 'playlist_comment' | translate }}
+                                </label>
+                                <div class="col-xs-12">
+                                    <textarea class="form-control ckeditor"
+                                              id="Playlist_playlist_comment"
+                                              name="Playlist[playlist_comment]"
+                                              ng-model="Playlist.playlist_comment"
+                                              rows="20">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 col-md-2 col-sm-offset-4 col-md-offset-5">
+                            <button class="btn btn-primary" ng-click="save()" type="button" style="width: 100%">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end panel -->
+    </div>
+    <!-- end col-12 -->
+</div>
+<!-- end row -->

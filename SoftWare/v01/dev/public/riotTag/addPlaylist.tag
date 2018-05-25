@@ -8,6 +8,8 @@
 
   <script>
 
+  console.log('hello');
+
   this.on('mount', function(e) {
     console.log('addPlaylist mounted');
   })

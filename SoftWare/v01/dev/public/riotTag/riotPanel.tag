@@ -20,7 +20,8 @@
 
   this.on('mount', function() {
 
-    //console.log('this.elements: ', this.elements);
+    //console.log("elements: ", this.elements);
+
     this.root.style.backgroundColor = this.color;
 
     if (this.borders) {

@@ -8,9 +8,9 @@
       </div>
       <div class="trackItem__play"></div>
     </div>
-    <div class="trackItem__numberWrapper">
+    <!--<div class="trackItem__numberWrapper">
       <span class="trackItem__number sc-font-tabular">{position || id}<span class="sc-type-light">—</span></span>
-    </div>
+    </div>-->
     <div style="display: block; width: 75%;">
         <!--<div style="display: block; width: 100%;">-->
           <label class="trackItem__username sc-link-light">{artist}</label>
@@ -25,14 +25,14 @@
     </div>
   </div>
 
-  <div class="popout popout-bottom" ref="popout" style="z-index: 1000; overflow: hidden; visibility: hidden; display: none; left: 120px; top: 40px; height: 192px; width: 216px; transform: translateY(0%) translateX(-50%) translateZ(0px);position absolute;">
+  <div class="popout popout-bottom" ref="popout" style="z-index: 100 !important; visibility: hidden; display: none; left: 120px; top: 40px; height: 192px; width: 216px; transform: translateY(0%) translateX(-50%) translateZ(0px);position absolute;">
     <div class="menu-3BZuDT">
-      <div class="item-rK1j5B">
+      <div class="item-rK1j5B" onclick={changeMusicName}>
         <div class="icon-3ICDZz" style="background-image: url(&quot;../images/editPlaylistName.svg&quot;);"></div>
-        <div class="label-HtH0tJ" onclick={changePlaylistName}>Changer le nom</div>
+        <div class="label-HtH0tJ">Changer le nom</div>
       </div>
       <div class="separator-1hpa3S"></div>
-      <div class="item-rK1j5B leave-2bjeRM">
+      <div class="item-rK1j5B leave-2bjeRM" onclick={delete}>
         <div class="icon-3ICDZz"><i class="fa fa-times-circle"></i></div>
         <div class="label-HtH0tJ">Supprimer</div>
       </div>
@@ -45,11 +45,14 @@
   var self = this;
 
   this.selected = (opts.param.selected || false);
-  this.name = opts.param.name;
-  this.id = opts.param.id;
-  this.artist = (opts.param.artist || 'Alifer™');
-  this.title = (opts.param.title || 'Requiem for a Trip');
-  this.position = opts.param.position;
+  this.name = opts.param.music_name;
+  this.url = opts.param.music_url;
+  this.id = opts.param.music_id;
+  this.picture = opts.param.music_picture_default;
+  this.artist = (opts.param.music_group || 'Alifer™');
+  this.title = (opts.param.music_name || 'Requiem for a Trip');
+  this.position = opts.param.music_id;
+
   this.currMusicPos = 1;
   this.popup = false;
 
@@ -57,7 +60,6 @@
     self.updateSelection();
 
     $('#music_' + self.position).contextmenu(function() {
-      console.log('c qui le patron');
       self.refs.popout.style.visibility = self.popup ? 'hidden' : 'visible';
       self.refs.popout.style.display = self.popup ? 'none' : 'block';
       self.popup = self.popup ? false : true;
@@ -67,8 +69,17 @@
       myEmitter.emit('initializeMusics', self.position);
   })
 
+  changeMusicName(e) {
+    options.method = "POST";
+    options.path = "/api/music/"
+
+    var data = {music_id : self.id, music_name}
+  }
 
   updateSelection() {
+    /*if (!self.refs.play || self.refs.pause)
+      return ;*/
+
     if (self.selected) {
       self.refs.play.style.visibility = 'hidden';
       self.refs.play.style.display = 'none';
