@@ -92,13 +92,13 @@ router.get('/',
                 function reply(err, record) {
                     if (err) {
                         res.json({
-                            code: 1,
+                            code: 405,
                             errors: (err.errors && err.errors.length > 0) ? err.errors : [{message: err.message || err}]
                         });
                     } else {
                       //console.log(app.models.Follow.Instance.prototype)
                         res.json({
-                            "code": 0,
+                            "code": 201,
                         });
                     }
                 }
@@ -123,12 +123,16 @@ router.get('/',
                     }).then(function(record) {
                         if (record) {
                             record.destroy();
+                            res.json({
+                                code: 204,
+                            });
                         }
-
-                        res.json({
-                            code: 0,
-                            message: req.translate('system', '__MODEL__ successfully deleted', {__MODEL__: 'Follow'})
-                        });
+                        else {
+                          res.json({
+                              code: 500,
+                              message: "Ressource not found"
+                          });
+                        }
                     });
                 });
 
@@ -139,9 +143,9 @@ router.get('/',
             "follower_usr_id": req.params.id
           }
         }).then(function (result, err) {
-          if (err) {return res.json({code: 1})}
+          if (err) {return res.json({code: 400})}
           res.json({
-            "code": 0,
+            "code": 200,
             "count": result.count
           });
         });
@@ -158,9 +162,9 @@ router.get('/',
           as:'Follower'
         }]
       }).then(function (result, err) {
-        if (err) {return res.json({code: 1})}
+        if (err) {return res.json({code: 400})}
         res.json({
-          "code": 0,
+          "code": 200,
           "count": result.count,
           "rows": result.rows
         });
@@ -178,9 +182,9 @@ router.get('/',
           as:'Followed'
         }]
       }).then(function (result, err) {
-        if (err) {return res.json({code: 1})}
+        if (err) {return res.json({code: 400})}
         res.json({
-          "code": 0,
+          "code": 200,
           "count": result.count,
           "rows": result.rows
         });
@@ -193,9 +197,9 @@ router.get('/',
             "followed_usr_id": req.params.id
           }
         }).then(function (result, err) {
-          if (err) {return res.json({code: 1})}
+          if (err) {return res.json({code: 400})}
           res.json({
-            "code": 0,
+            "code": 200,
             "count": result.count
           });
         });
