@@ -29,6 +29,16 @@ module.exports = function (app) {
                         model: app.models.User,
                         as: 'Creator',
                         required: true
+                    }],
+                    include: [{
+                      model: app.models.MusicLink,
+                      as: 'MusicLink',
+                      required: false,
+                      include: [{
+                        model: app.models.Music,
+                        as: 'Music',
+                        required: false
+                      }]
                     }]
                 };
             if (typeof Options.where == "string") Options.where = JSON.parse(Options.where);
