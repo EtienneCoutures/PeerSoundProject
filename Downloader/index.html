@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Main page</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+  <script src="jquery/jquery-3.2.1.min.js"></script>
+  <script src="./tether-1.3.3/tether.js"></script>
+  <script>if (window.module) module = window.module;</script>
+  <script src="riotJS/riot.js"></script>
+  <script src="riotJS/riot+compiler.js"></script>
+  <script type="riot/tag" src="./tag/list.tag"></script>
+  <script>
+  window.onload = function() {
+    const {ipcRenderer} = require('electron');
+    var user = require('electron').remote.getGlobal('user');
+    document.getElementById("user").innerHTML = "Page de " + user.usr_login;
+    var baseURL = "localhost";
+    var requestManager = require('./requestManager.js')
+    var options = {
+      'method': 'GET',
+      'hostname': baseURL,
+      'port': 8000,
+      'rejectUnauthorized':false,
+      'headers': {
+        'Content-Type': 'application/json',
+        'authorization': user.authorization
+      }
+    };
+    options.path = "/api/playlist?where=%7B%22playlist_creator%22:" + user.usr_id + "%7D"
+    requestManager.request(baseURL, options, null, function(rslt, req, err) {
+      var playlist = rslt.rslt
+      ipcRenderer.send('playlist', playlist);
+      riot.mount("list", {elements : playlist, name : "playlists"})
+    })
+  }
+  </script>
+</head>
+<body>
+  <h1 id="user"></h1>
+  <div class="col-md-2">
+    <list></list>
+  </div>
+  <div class="col-md-6">Deuxieme</div>
+</body>
+</html>

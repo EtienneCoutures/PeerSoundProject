@@ -1,0 +1,10 @@
+.plList {
+  background-color: grey;
+}
+.selected {
+  background-color: red;
+}
+
+.noDecoration {
+  text-decoration: none;
+}
