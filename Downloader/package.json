@@ -12,5 +12,8 @@
   "devDependencies": {
     "electron": "^2.0.2",
     "riot": "^3.3.1"
+  },
+  "dependencies": {
+    "fluent-ffmpeg": "^2.1.2"
   }
 }

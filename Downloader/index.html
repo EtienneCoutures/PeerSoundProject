@@ -20,7 +20,7 @@
   window.onload = function() {
     const {ipcRenderer} = require('electron');
     var user = require('electron').remote.getGlobal('user');
-    document.getElementById("user").innerHTML = "Page de " + user.usr_login;
+    document.getElementById("user").innerHTML =  user.usr_login;
     var baseURL = "localhost";
     var requestManager = require('./requestManager.js')
     var options = {
@@ -40,13 +40,18 @@
       riot.mount("list", {elements : playlist, name : "playlists"})
     })
   }
+
   </script>
 </head>
 <body style="background-color:#23272a">
-  <div class="col-md-12">
-  <h1 class="main-title" id="user"></h1>
-</div>
+  <div class="col-md-10">
+    <h1 class="main-title" id="user" style="margin-left:15%;font-family:verdana;"></h1>
+  </div>
+  <div class="col-md-2">
+    <img src="./img/logo_white.png" style="max-height:80px;max-width:80px;margin-top:8%"></img>
+  </div>
   <div class="col-md-4">
+    <h3 class="main-title">Your Playlists</h3>
     <list></list>
   </div>
   <div class="col-md-8">
@@ -55,14 +60,15 @@
   </div>
   <br>
   <div class="col-md-12">
-    <button onclick="download()">
+    <button class="downloadButton" onclick="download()">
       Telecharger la PL
     </button>
   </div>
 </body>
 <script>
+
 download = function() {
-      console.log(actual.selected)
-    }
-  </script>
+  console.log(actual.selected)
+}
+</script>
 </html>

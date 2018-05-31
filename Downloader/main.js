@@ -1,13 +1,14 @@
 const electron = require('electron')
 const {ipcMain} = require('electron');
 const riot = require('riot');
+const ffmpeg = require('fluent-ffmpeg');
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
   // Keep a global reference of the window object, if you don't, the window will
   // be closed automatically when the JavaScript object is garbage collected.
   let win
 
-  
+
   ipcMain.on('user', (event, account) => {
     account.name = account.usr_email.slice(0, account.usr_email.indexOf('.')
     || account.usr_email.indexOf('@'));
