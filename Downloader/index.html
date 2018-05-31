@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,10 @@
   <script src="riotJS/riot.js"></script>
   <script src="riotJS/riot+compiler.js"></script>
   <script type="riot/tag" src="./tag/list.tag"></script>
+  <script type="riot/tag" src="./tag/musics.tag"></script>
   <script>
+  var actual = this;
+  actual.selected = 0
   window.onload = function() {
     const {ipcRenderer} = require('electron');
     var user = require('electron').remote.getGlobal('user');
@@ -38,11 +42,27 @@
   }
   </script>
 </head>
-<body>
-  <h1 id="user"></h1>
-  <div class="col-md-2">
+<body style="background-color:#23272a">
+  <div class="col-md-12">
+  <h1 class="main-title" id="user"></h1>
+</div>
+  <div class="col-md-4">
     <list></list>
   </div>
-  <div class="col-md-6">Deuxieme</div>
+  <div class="col-md-8">
+    <musics>
+    </musics>
+  </div>
+  <br>
+  <div class="col-md-12">
+    <button onclick="download()">
+      Telecharger la PL
+    </button>
+  </div>
 </body>
+<script>
+download = function() {
+      console.log(actual.selected)
+    }
+  </script>
 </html>
