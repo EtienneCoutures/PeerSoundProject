@@ -10,72 +10,51 @@
 
   var self = this;
 
-  this.name = opts.param.name;
-  this.image = opts.param.image;
-  this.id = opts.param.id;
+  this.name = opts.param.playlist.playlist_name;
+  this.image = (opts.param.playlist.playlist_img || "../images/psp.png");
+  this.id = opts.param.playlist.playlist_id;
   this.selected = opts.param.selected || false;
   this.position = opts.param.position;
   this.currPlaylistPos = 0;
   this.nbPlaylist = opts.param.nbPlaylist;
-
-  var musics = [{element : "music", param : {name : "music1", id : '1'}}
-                , {element : "music", param : {name : "music2", id : '2'}}
-                , {element : "music", param : {name : "music3", id : '3'}}
-                , {element : "music", param : {name : "music4", id : '4'}}
-                , {element : "music", param : {name : "music5", id : '5'}}
-                , {element : "music", param : {name : "music6", id : '6'}}
-                , {element : "music", param : {name : "music7", id : '7'}}
-                , {element : "music", param : {name : "music8", id : '8'}}
-              ];
-
-  var users = [{element : "usergroup", param : {name : "En ligne", nbUser : 6
-, users : [{element : "user", param : {name : "KETAMAX"
-      , image : "../images/ketamax.jpg", status : "online"
-      , admin : true}}
-    , {element : "user", param : {name : "ITIZ"
-      , image : "../images/itiz.png", status : "afk"}}
-    , {element : "user", param : {name : "TuturLaVoiture"
-      , image : "../images/psp.png", status : "afk"}}
-    , {element : "user", param : {name : "Angry_Capitalist"
-      , image : "../images/psp.png", status : "online"}}
-    , {element : "user", param : {name : "TuturLaVoiture"
-      , image : "../images/psp.png", status : "afk"}}
-    , {element : "user", param : {name : "Angry_Capitalist"
-      , image : "../images/psp.png", status : "online"}}
-    ]}}
-  , {element : "usergroup", param : {name : "Hors ligne", nbUser : 9
-, users : [{element : "user", param : {name : "MrBiscotte"
-      , image : "../images/hugo.png", status : "offline"}}
-    , {element : "user", param : {name : "Khedira"
-      , image : "../images/psp.png", status : "offline"}}
-    , {element : "user", param : {name : "gabo34"
-      , image : "../images/psp.png", status : "offline"}}
-    , {element : "user", param : {name : "henryTeteDeBois"
-      , image : "../images/psp.png", status : "offline"}}
-    , {element : "user", param : {name : "MomoLaFrite"
-      , image : "../images/psp.png", status : "offline"}}
-    , {element : "user", param : {name : "Khedira"
-      , image : "../images/psp.png", status : "offline"}}
-    , {element : "user", param : {name : "gabo34"
-      , image : "../images/psp.png", status : "offline"}}
-    , {element : "user", param : {name : "henryTeteDeBois"
-      , image : "../images/psp.png", status : "offline"}}
-    , {element : "user", param : {name : "MomoLaFrite"
-      , image : "../images/psp.png", status : "offline"}}
-    ]}}];
-
+  this.musics = {};
+  this.playlist = opts.param.playlist;
 
   this.on('mount', function() {
-    console.log('refs: ', this.refs);
-    if (self.selected)
-      myEmitter.emit('initialize', self.position);
+    if (self.selected) {
+      console.log('MOUNTING FIRST PL')
+
+        /*this.getMusicOfPlaylist(this.setMusicOfPlaylist, function(musics) {
+          console.log('retrieving musics from the first pl: ', musics);
+          myEmitter.emit('readMusic', {music : musics[0].param, auto_play : false});
+          myEmitter.emit('initialize', self.position);
+
+          self.getUsers(function() {
+            console.log('retrieving users from first playlist ok');
+            self.showPlaylistInfo();
+          })
+        });*/
+
+        //self.handler('e');
+
+        this.getMusicOfPlaylist(function(musics) {
+          console.log('MUSIC OF PLAYLIST: ', musics);
+          self.getUsers(function(users) {
+            console.log('SETTING USERS')
+            self.formatUsers(users);
+            self.setMusicOfPlaylist(musics);
+            self.showPlaylistInfo();
+          });
+        });
+    }
+
   })
 
   myEmitter.on('initialize', function(currPos) {
     self.currPlaylistPos = currPos;
   })
 
-  myEmitter.on('ffLeftPL', function () {
+  /*myEmitter.on('ffLeftPL', function () {
     if (self.currPlaylistPos == 1) {
       return;
     }
@@ -88,10 +67,10 @@
       self.update();
     }
     --self.currPlaylistPos;
-  })
+  })*/
 
 
-  myEmitter.on('ffRightPL', function() {
+  /*myEmitter.on('ffRightPL', function() {
     if (self.currPlaylistPos >= self.nbPlaylist) {
       return;
     }
@@ -104,7 +83,7 @@
       self.update();
     }
     ++self.currPlaylistPos;
-  });
+  });*/
 
   myEmitter.on('deselect', function(position) {
     if (self.selected) {
@@ -119,20 +98,114 @@
     self.selected = true;
     self.update();
 
+    myEmitter.emit('switchingPlaylist', opts.param.playlist);
+    self.showPlaylistInfo();
+
     var menubar = [{element : "menubar", param : { currentPlaylist :
       {name : self.name, id : self.id, image : self.image}}}];
 
-    riot.mount('#musicPanel', {elements : musics, name : "musics"
-      , borders : ["", "", "", ""], alignItems : "left", scrollBar : true
-    , color: '#363636'});
-
-    riot.mount('#users', {elements : users, name : "users"
-      , borders : ["", "", "", ""], scrollBar : true, color: '#363636'});
-
-    riot.mount('#menubar', {elements : menubar, name : "menubar", color : '#363636'
-      , borders : ["", "", "", ""]});
-
+      this.getMusicOfPlaylist(function(musics) {
+        console.log('MUSIC OF PLAYLIST: ', musics);
+        self.getUsers(function(users) {
+          console.log('SETTING USERS')
+          self.formatUsers(users);
+          self.setMusicOfPlaylist(musics);
+        });
+      });
   }
+
+      setMusicOfPlaylist(musicLink) {
+        var musics = new Array();
+
+        for (var i = 0; i < musicLink.length; ++i) {
+          if (musicLink[i].Music) {
+            var music = {};
+
+            music.element = "music";
+            music.param = musicLink[i].Music;
+
+            musics.push(music);
+          }
+        }
+
+        console.log('Music: ', musics);
+        console.log('riot: ', riot);
+
+        //self.musics = musics;
+        riot.mount('#musicPanel', {elements : musics, name : "musics"
+          , borders : ["", "", "", ""], alignItems : "left", scrollBar : true
+          , color: '#363636'});
+      }
+
+      getMusicOfPlaylist(next) {
+        console.log('INDEX: ', index);
+        index.requestMusics(next, self.id);
+        /*options.path = "/api/playlist/" + this.id;
+        options.method = "GET";
+
+        console.log('getMusicOfPlaylist: ', options);
+        requestManager.request(baseURL, options, null, function(rslt, req, err) {
+          console.log('music rslt : ', rslt);
+          next(rslt.rslt.Playlist.MusicLink, next2);
+        })*/
+      }
+
+      myEmitter.on('plNameChange', function(pl) {
+        if (this.id == pl.id) {
+          console.log('playlist plNameChange');
+          this.name = pl.name;
+          self.update();
+        }
+      })
+
+      getUsers(next) {
+        /*options.method = 'GET';
+        options.path = '/api/playlist/users/' + self.id;
+
+        console.log('getUSers: ', options);
+        requestManager.request(baseURL, options, null
+          , function(rslt, req, err) {
+
+            console.log('USERS : ', rslt.rslt);
+            self.formatUsers(rslt.rslt.Playlist.rows[0]);
+            //next();
+        })*/
+        index.requestUsers(next, self.id);
+      }
+
+      formatUsers(users) {
+        console.log('format users: ', users);
+        var creator = users.Creator;
+        var subscriber = users.Subscriber;
+
+        var groupUser = [{element : "usergroup", param : {name : "Users"
+            , nbUser : 1 + subscriber.length, users : [{element : "user"
+            , param : {name : creator.usr_login
+                    , image : "../images/psp.png", status : 'online'
+                    , admin : true
+                    , id : creator.usr_id}}]}}];
+
+        for (var i = 0; i < subscriber.length; ++i) {
+          var sub = subscriber[i].Subscriber;
+          var elm = {element : "user", param : {name : sub.usr_login
+                      , image : "../images/psp.png", status : 'online'
+                      , admin : subscriber[i].usr_role == "admin" ? true : false
+                      , id : sub.usr_id}};
+
+          groupUser[0].param.users.push(elm);
+        }
+
+        riot.mount('#users', {elements : groupUser
+                            , name : "usersGroup"
+                            , borders : ["", "", "", ""], scrollBar : true
+                            , color: '#363636'});
+      }
+
+      showPlaylistInfo() {
+        myEmitter.emit('showPlaylistInfo', self.playlist);
+
+        riot.mount('playlistInfo', self.playlist);
+      }
 
   </script>
 

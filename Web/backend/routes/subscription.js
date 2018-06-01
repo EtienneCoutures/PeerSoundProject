@@ -93,7 +93,17 @@ router.post('/',
                         model: app.models.User,
                         as: 'Creator',
                         required: false
-                      }
+                      },
+                      include: [{
+                        model: app.models.MusicLink,
+                        as: 'MusicLink',
+                        required: false,
+                        include: [{
+                          model: app.models.Music,
+                          as: 'Music',
+                          required: false
+                        }]
+                      }]
                     },
                     {
                       model: app.models.User,
@@ -140,7 +150,7 @@ router.post('/',
                     if (record) {
                         record.destroy();
                     }
-                    
+
                     res.json({
                         code: 0,
                         message: req.translate('system', '__MODEL__ successfully deleted', {__MODEL__: 'Subscription'})

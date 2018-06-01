@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Login</title>
+      <link rel="stylesheet" href="./css/style.css">
+      <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+      <script src="jquery/jquery-3.2.1.min.js"></script>
+      <script src="./tether-1.3.3/tether.js"></script>
+      <script src="./bootstrap/bootstrap.js"></script>
+      <script>if (window.module) module = window.module;</script>
+      <script src="riotJS/riot.js"></script>
+      <script src="riotJS/riot+compiler.js"></script>
+    </head>
+    <body>
+      <h1>Login</h1>
+    <input id="email" type="text" placeholder="Email"></input>
+    <br>
+    <input id="password" type="password" placeholder="Password"></input>
+    <br>
+    <button type="submit" value="Login" onclick="login()" autofocus>Login</button>
+    </body>
+    <script>
+    const {ipcRenderer} = require('electron');
+    var baseURL = "localhost";
+    var requestManager = require('./requestManager.js')
+    function login() {
+      email = document.getElementById('email').value
+      password = document.getElementById('password').value
+      var dataJSON = JSON.stringify({login : email, password : password});
+      var request = {
+        method: 'POST',
+        hostname: 'localhost',
+        port: 8000,
+        path: "/api/auth/login",
+        rejectUnauthorized:false,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }
+      requestManager.request(baseURL, request, dataJSON
+        , function (rslt, req, err) {
+
+          if (rslt.rslt.code != 0) {
+            console.log('erreur : ', rslt.rslt);
+            $('#error').text(rslt.rslt.errors[0].message);
+          } else if (rslt.rslt.code == 0) {
+            rslt.rslt.account.authorization = rslt.res.headers.authorization
+            ipcRenderer.send('user', rslt.rslt.account);
+           window.location = "./index.html";
+          }
+        })
+    }
+    </script>
+  </html>

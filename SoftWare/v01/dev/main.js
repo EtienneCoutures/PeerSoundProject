@@ -3,9 +3,18 @@ const electron = require('electron')
 const app = electron.app
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
-
+const {ipcMain} = require('electron');
+const {session} = require('electron');
 const path = require('path')
 const url = require('url')
+
+global.isConnected = false;
+
+ipcMain.on('connection', (event, account) => {
+    account.name = account.usr_email.slice(0, account.usr_email.indexOf('.')
+                                          || account.usr_email.indexOf('@'));
+    global.account = account;
+})
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -14,13 +23,16 @@ let mainWindow
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 900, height: 700})
+  global.requestManager = require('./public/js/utils/requestManager.js');
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, '/public/views/index.html'),
+    pathname: path.join(__dirname, '/public/views/login.html'),
     protocol: 'file:',
     slashes: true
   }))
+
+  global.mainWindow = mainWindow;
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools()

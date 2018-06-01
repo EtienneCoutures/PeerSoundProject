@@ -1,0 +1,22 @@
+#PSPFrame {
+	position:fixed;
+	top:2%;
+	right: 2%;
+	display: block;
+	width: 330px;
+	height: 505px;
+	z-index: 999999999;
+	border: none;
+	opacity: 0;
+	-webkit-transform: translate3d(30%,0,0);
+	transform: translate3d(30%,0,0);
+	-webkit-transition: transform 300ms ease 500ms, opacity 300ms ease 500ms;
+	transition: transform 300ms ease 500ms, opacity 300ms ease 500ms;
+	background: #252B33;
+}
+
+#PSPFrame.showPSP {
+	opacity: 1;
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}

@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Main page</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+  <script src="jquery/jquery-3.2.1.min.js"></script>
+  <script src="./tether-1.3.3/tether.js"></script>
+  <script>if (window.module) module = window.module;</script>
+  <script src="riotJS/riot.js"></script>
+  <script src="riotJS/riot+compiler.js"></script>
+  <script type="riot/tag" src="./tag/list.tag"></script>
+  <script type="riot/tag" src="./tag/musics.tag"></script>
+  <script>
+  var actual = this;
+  actual.selected = 0
+  window.onload = function() {
+    const {ipcRenderer} = require('electron');
+    var user = require('electron').remote.getGlobal('user');
+    document.getElementById("user").innerHTML =  user.usr_login;
+    var baseURL = "localhost";
+    var requestManager = require('./requestManager.js')
+    var options = {
+      'method': 'GET',
+      'hostname': baseURL,
+      'port': 8000,
+      'rejectUnauthorized':false,
+      'headers': {
+        'Content-Type': 'application/json',
+        'authorization': user.authorization
+      }
+    };
+    options.path = "/api/playlist?where=%7B%22playlist_creator%22:" + user.usr_id + "%7D"
+    requestManager.request(baseURL, options, null, function(rslt, req, err) {
+      var playlist = rslt.rslt
+      ipcRenderer.send('playlist', playlist);
+      riot.mount("list", {elements : playlist, name : "playlists"})
+    })
+  }
+
+  </script>
+</head>
+<body style="background-color:#23272a">
+  <div class="col-md-10">
+    <h1 class="main-title" id="user" style="margin-left:15%;font-family:verdana;"></h1>
+  </div>
+  <div class="col-md-2">
+    <img src="./img/logo_white.png" style="max-height:80px;max-width:80px;margin-top:8%"></img>
+  </div>
+  <div class="col-md-4">
+    <h3 class="main-title">Your Playlists</h3>
+    <list></list>
+  </div>
+  <div class="col-md-8">
+    <musics>
+    </musics>
+  </div>
+  <br>
+  <div class="col-md-12">
+    <button class="downloadButton" onclick="download()">
+      Telecharger la PL
+    </button>
+  </div>
+</body>
+<footer>
+  <span style="color:white;font-size:8px;float:right;margin-top:25px;margin-right:2%">PeerSoundProject</span>
+</footer>
+<script>
+download = function() {
+  const ytdl = require('ytdl-core');
+  const fs = require('fs');
+  var pl = actual.selected.MusicLink
+  var dir = "C:\\Users\\%USERNAME%\\Music\\Download"
+  for (var i = 0 ; i != pl.length ; ++i) {
+    var title = pl[i].Music.music_name + ".mp3"
+    var url = pl[i].Music.music_url
+    ytdl(url, {filter : 'audioonly'}).pipe(fs.createWriteStream(title));
+  }
+}
+</script>
+</html>

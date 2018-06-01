@@ -27,9 +27,9 @@
           <br>
         <div class="row">  <span> By : </span><a ng-href='#' ng-click="redirectToUser(pl.Creator.usr_login)"><p style="color:blue;overflow: hidden;">{{pl.Creator.usr_login}}</p></a></div>
           <div>
-            <button type="button" style="font-size:10px; background-color:#6B92A5; color:white; width:60%;" ng-if="myself.usr_id !== pl.playlist_creator" ng-click="redirectTo('playlist', pl.playlist_id)" class="btn">Voir la playlist</button>
-            <button type="button" style="font-size:10px; background-color:#6B92A5; color:white; width:40%;" ng-if="myself.usr_id === pl.playlist_creator" ng-click="redirectTo('playlist', pl.playlist_id)" class="btn">Voir la playlist</button>
-            <button type="button" style="font-size:10px; background-color:#6B92A5; color:white; width:40%;" ng-if="myself.usr_id === pl.playlist_creator" ng-click="redirectTo('playlist', pl.playlist_id + '/admin')" class="btn">Gestion de la playlist</button>
+            <button type="button" style="font-size:10px; background-color:#6B92A5; color:white; width:60%;" ng-if="myself.usr_id !== pl.playlist_creator" ng-click="redirectTo('playlist', pl.playlist_id)" class="btn">Voir</button>
+            <button type="button" style="font-size:10px; background-color:#6B92A5; color:white; width:40%;" ng-if="myself.usr_id === pl.playlist_creator" ng-click="redirectTo('playlist', pl.playlist_id)" class="btn">Voir</button>
+            <button type="button" style="font-size:10px; background-color:#6B92A5; color:white; width:40%;" ng-if="myself.usr_id === pl.playlist_creator" ng-click="redirectTo('playlist', pl.playlist_id + '/admin')" class="btn">Gestion</button>
           </div>
         </div>
       <br>

@@ -1,0 +1,20 @@
+{
+  "name": "musicloop",
+  "version": "1.0.0",
+  "description": "get mp3 music from youtube with a txt file or with playlist obj from oso",
+  "main": "main.js",
+  "scripts": {
+    "test": "test",
+    "start": "electron ."
+  },
+  "author": "EtienneCoutures",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^2.0.2",
+    "riot": "^3.3.1"
+  },
+  "dependencies": {
+    "fluent-ffmpeg": "^2.1.2",
+    "ytdl-core": "^0.20.4"
+  }
+}

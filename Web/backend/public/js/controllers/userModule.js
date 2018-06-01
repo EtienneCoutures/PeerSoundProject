@@ -123,7 +123,6 @@ define([
               }
 
               Restangular.one('user', $scope.id).get().then(function(result){
-
                   if (result.code == 1) {
                     $scope.user = null
                   }
@@ -133,7 +132,6 @@ define([
                   $scope.nbFollowers = result.User.Followers.length
                   $scope.nbFollowing = result.User.Following.length
                 }
-                console.log($scope.user)
                 })
 
                 $scope.editAccount = function() {
@@ -186,7 +184,7 @@ define([
                       follower_usr_id : $scope.myself.usr_id,
                       followed_usr_id : $scope.id
                   }).then(function(result) {
-                      if (result.code == 0) {
+                      if (result.code == 201) {
                         $scope.followed = true
                         $route.reload()
                       }
@@ -198,7 +196,7 @@ define([
                       "followed_usr_id": $scope.id,
                       "follower_usr_id": $scope.myself.usr_id
                      }).then(function(result) {
-                    if (result.code == 0)  {
+                    if (result.code == 204)  {
                       $scope.followed = false
                       $route.reload()
                     }

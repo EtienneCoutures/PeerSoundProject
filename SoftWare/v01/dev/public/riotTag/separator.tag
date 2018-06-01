@@ -1,10 +1,14 @@
 <separator>
 
 <div class="row align">
-  <div class="guild-separator"></div>
+  <div class="guild-separator" style="width: {width}"></div>
 </div>
 
-  <script></script>
+  <script>
+
+  this.width = (opts.param.width || '100px');
+
+  </script>
 
   <style>
 

@@ -8,7 +8,6 @@
 
   <script>
 
-  console.log('userGroup opts: ', opts);
 
     var self = this;
     this.name = opts.param.name;
@@ -16,8 +15,9 @@
     this.users = opts.param.users;
     this.length = this.users.length;
 
-    this.on('mount', function(e) {
-      console.log('this.users: ', this.users);
+    this.on('before-mount', function(e) {
+      console.log('userGroup opts: ', opts);
+      console.log('MOUNTING USERS: ', this.users);
       /*if (this.users.length == 0) {
         console.log('Unmounting usergroup ', this.name);
         self.unmount(true);

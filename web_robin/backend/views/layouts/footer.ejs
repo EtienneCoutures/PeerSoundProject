@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<html>
+<head>
+<meta charset=utf-8 />
+
+<link href="/css/footer.css" rel="stylesheet"/>
+
+</head>
+
+<body>
+</div>
+  <div class="footer" style="border-style:none">
+    <div style="margin:left;margin-left:10px">
+      <button class="waves-effect waves-light btn grey" style="background-color:#2d353c;"><a href="#/download"><font color="white">Download Plugin / Software</font></a></button>
+    </div>
+    <div style="margin:left">
+      <a target="_blank"><img id=""src="/img/logoBlack.png" style="width:45px;">
+      </div>
+<a href="javascript:;" style="background-color:#2d353c;"class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top">Up</a>
+</div>
+</body>
+  <!-- begin scroll to top btn -->
+
+  <!-- end scroll to top btn -->
+
+<!-- ================== BEGIN BASE JS ================== -->
+<script src="/node_modules/requirejs/require.js"></script>
+
+<!--inline scripts related to this page-->
+<script>
+    // obtain requirejs config
+    require(['require', './js/config-require'], function (require, config) {
+        // update global require config
+        window.require.config(config);
+        // load app
+        require(['./js/main.js']);
+    });
+</script>
+</body>
+</html>

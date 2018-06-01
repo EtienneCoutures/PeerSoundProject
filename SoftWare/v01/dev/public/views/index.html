@@ -10,22 +10,40 @@
     <script src="../js/jquery/jquery-3.2.1.min.js"></script>
     <script src="../js/tether-1.3.3/tether.js"></script>
     <script src="../js/bootstrap/bootstrap.js"></script>
+    <script src="../js/sc-player/api.js"></script>
+    <!--<script src="../js/utils/volume_slider.js"></script>
+    <script src="../js/sc-player/profil.js"></script>
+    <script type="text/javascript" src="../js/sc-player/sdk.js"></script>
+    <script type="text/javascript" src="../js/sc-player/sc-player.js"></script>
+    <script type="text/javascript" src="../js/sc-player/soundcloud.player.api.js"></script>-->
     <script src="../js/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
     <script>if (window.module) module = window.module;</script>
 
     <link rel="stylesheet" type="text/css" href="../css/PSP/PSP.css">
     <link rel="stylesheet" type="text/css" href="../css/PSP/disc.css">
+    <link rel="stylesheet" type="text/css" href="../css/volume_slider.css">
     <link rel="stylesheet" type="text/css" href="../css/PSP/soundcloud.css">
     <link rel="stylesheet" type="text/css" href="../css/tether-1.3.3/tether.css">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap/bootstrap.css">
     <link rel="stylesheet" href="../css/mCustomScrollbar/jquery.mCustomScrollbar.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="../css/animate.css">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="../css/style.css">
+
     <script src="../js/riotJS/riot.js"></script>
     <script src="../js/riotJS/riot+compiler.js"></script>
 
+    <script type="riot/tag" src="../riotTag/app.tag"></script>
+    <script type="riot/tag" src="../riotTag/info.tag"></script>
     <script type="riot/tag" src="../riotTag/user.tag"></script>
     <script type="riot/tag" src="../riotTag/music.tag"></script>
+    <script type="riot/tag" src="../riotTag/index.tag"></script>
+    <script type="riot/tag" src="../riotTag/login.tag"></script>
     <script type="riot/tag" src="../riotTag/message.tag"></script>
     <script type="riot/tag" src="../riotTag/menubar.tag"></script>
     <script type="riot/tag" src="../riotTag/research.tag"></script>
@@ -35,20 +53,24 @@
     <script type="riot/tag" src="../riotTag/separator.tag"></script>
     <script type="riot/tag" src="../riotTag/inputChat.tag"></script>
     <script type="riot/tag" src="../riotTag/userGroup.tag"></script>
+    <script type="riot/tag" src="../riotTag/invitation.tag"></script>
     <script type="riot/tag" src="../riotTag/mediaplayer.tag"></script>
     <script type="riot/tag" src="../riotTag/addPlaylist.tag"></script>
     <script type="riot/tag" src="../riotTag/userSettings.tag"></script>
     <script type="riot/tag" src="../riotTag/invitePeople.tag"></script>
     <script type="riot/tag" src="../riotTag/joinOrCreate.tag"></script>
+    <script type="riot/tag" src="../riotTag/playlistPanel.tag"></script>
     <script type="riot/tag" src="../riotTag/notifications.tag"></script>
     <script type="riot/tag" src="../riotTag/hideShowUsers.tag"></script>
+    <script type="riot/tag" src="../riotTag/playlistInfo.tag"></script>
     <script type="riot/tag" src="../riotTag/createPlaylist.tag"></script>
+    <script type="riot/tag" src="../riotTag/invitationPanel.tag"></script>
     <script type="riot/tag" src="../riotTag/changePlaylistName.tag"></script>
 
     <title>PSP Software</title>
   </head>
 
-  <body style="margin: 0px;padding-left: 0px;padding-right: 0px;overflow: hidden">
+  <body style="overflow:hidden !important;">
 
     <div class="container-fluid p-0">
 
@@ -60,7 +82,7 @@
             <riotPanel id="socialBtn"></riotPanel>
           </div>
           <div style="height:90%">
-            <riotPanel id="playlistPanel"></riotPanel>
+            <playlistPanel></playlistPanel>
           </div>
         </div>
 
@@ -94,16 +116,30 @@
             <div style="height:95%; background-color:#484a4c;">
 
               <!-- social -->
-              <div style="height:70%">
+              <div style="height:80%">
                 <joinOrCreate></joinOrCreate>
                 <invitePeople></invitePeople>
                 <changePlaylistName></changePlaylistName>
-                <riotPanel id="messages"></riotPanel>
+                <invitationPanel id="events"></invitationPanel>
+                <playlistinfo></playlistinfo>
               </div>
 
               <!-- lecteur media -->
-              <div style="height:30%">
-                <riotPanel id="mediaplayer"></riotPanel>
+              <div style="height:20%">
+                <!--<riotPanel id="mediaplayer"></riotPanel>-->
+
+                <div class="navi">
+                  <iframe id="sc-player" width="100%" height="100%" scrolling="no" frameborder="no"
+                    src="https://w.soundcloud.com/player/?url=https://soundcloud.com/the-outside-agency/the-outside-agency-the-sunrise">
+                  </iframe>
+                </div>
+
+                <div id="player" class="infoi">
+		             <i class="fa fa-volume-down"></i>
+		              <div id="volume"></div>
+		            <i class="fa fa-volume-up"></i>
+              </div>
+
               </div>
 
            </div>
@@ -126,22 +162,250 @@
 
       </div>
 
-  <script>
+</body>
 
-  const EventEmitter = require('events');
-  class MyEmitter extends EventEmitter {}
-  const myEmitter = new MyEmitter();
 
-  var addPlaylist = [{element : "addPlaylist", param : {name : "addPlaylist"}}];
+<script>
 
-  var menubar = [{element : "menubar", param : { currentPlaylist : {name : "playlist1", id : '1'
-  , image : "../images/hardcore2.jpg"}}}];
+    var self = this;
+    var index = this;
+    var fMusic = null;
 
-  var socialBtn = [{element : "socialbtn", param : {}}
-                  , {element : "separator", param : {}}
-                ];
+    var playlists = new Array();
 
-  var playlists = [{element : "playlist", param : {name : "playlist1", id : '1'
+    async = require('async');
+
+    const EventEmitter = require('events');
+    class MyEmitter extends EventEmitter {};
+    const myEmitter = new MyEmitter();
+
+    var baseURL = "localhost";
+    const requestManager = require(__dirname + "/../js/utils/requestManager.js");
+
+    var fs = require('fs');
+    var account = require('electron').remote.getGlobal('account');
+
+    var socialBtn = [{element : "socialbtn", param : {}}
+                  , {element : "separator", param : {}}];
+
+    console.log('account : ', account);
+
+    $( document ).ready(function() {
+
+      self.getPlaylist(function(playlists) {
+
+        console.log('playlists: ',playlists);
+
+        playlists.push({element : "addplaylist"
+          , param : {name : "addPlaylist"}});
+
+        riot.mount('playlistPanel', {elements : playlists, name : "playlists"
+        , color : '#212326', borders : ["", "", "", ""], scrollBar : true});
+
+         riot.mount('#socialBtn', {elements : socialBtn, name : "socialBtn"
+         , color : '#212326', borders : ["", "", "", ""]});
+
+         self.setMenubar(playlists[0]);
+
+         //console.log('self.widget: ', self.widget1);
+         console.log( "ready!" );
+         document.getElementById('sc-player').onload = function() {
+          self.iframeElement   = document.querySelector('iframe');
+          self.widget1         = SC.Widget(iframeElement);
+         }
+      });
+  });
+
+    myEmitter.on('readMusic', function(music, auto_play) {
+      console.log('emitter readMusic : ', music);
+      //console.log('widget1: ', self.widget1);
+      self.widget1.load(music.music_url, {auto_play : auto_play || true});
+    })
+
+    var options = {
+      'method': 'GET',
+      'hostname': baseURL,
+      'port': 8000,
+      'path': "/api/playlist/?where=%7B%22playlist_creator%22:" + account.usr_id
+                                                               + "%7D",
+      'ca': fs.readFileSync(process.cwd() + '/hacksparrow-cert.pem'),
+      'rejectUnauthorized':false,
+      'headers': {
+         'Content-Type': 'application/json',
+         'authorization': account.authorization
+       }
+    };
+
+    function requestMusics(next, playlist_id) {
+      options.path = "/api/playlist/" + playlist_id;
+      options.method = "GET";
+
+      console.log('getMusicOfPlaylist: ', options);
+      requestManager.request(baseURL, options, null, function(rslt, req, err) {
+        console.log('music rslt : ', rslt);
+        next(rslt.rslt.Playlist.MusicLink);
+      })
+    }
+
+    function requestUsers(next, playlist_id) {
+      options.method = 'GET';
+      options.path = '/api/playlist/users/' + playlist_id;
+
+      console.log('getUSers: ', options);
+      requestManager.request(baseURL, options, null
+        , function(rslt, req, err) {
+
+          console.log('USERS : ', rslt.rslt);
+          next(rslt.rslt.Playlist.rows[0]);
+      })
+    }
+
+    function requestPlaylists(next) {
+      options.method = 'GET';
+      options.path = "/api/playlist/?where=%7B%22playlist_creator%22:"
+                   + account.usr_id + "%7D";
+
+      requestManager.request(baseURL, options, null, function(rslt, req, err) {
+        next(rslt.rslt);
+      })
+    }
+
+    function requestSubscription(next) {
+      options.method = 'GET';
+      options.path = "/api/subscription/?where=%7B%22usr_id%22:"
+                    + account.usr_id
+                    + "%7D";
+
+      requestManager.request(baseURL, options, null, function(rslt, req, err) {
+        next(rslt.rslt);
+      })
+    }
+
+    function requestPlaylistFromID(pl_id, next) {
+      options.method = 'GET';
+      options.path = '/api/playlist/' + pl_id;
+
+      requestManager.request(baseURL, options, null, function(rslt, req, err) {
+        next(rslt.rslt);
+      })
+    }
+
+    function getPlaylist(next) {
+      var playlists = new Array();
+
+      console.log('request playlist');
+      self.requestPlaylists(function(data) {
+
+        for (var i = 0; i < data.length; ++i) {
+          var playlist = {element : "playlist"
+            , param : {/*name : data[i].playlist_name
+                      , id : data[i].playlist_id
+                      , style : data[i].playlist_style
+                      , image : data[i].playlist_img || "../images/psp.png"
+                      ,*/ playlist : data[i]}};
+
+          if (i == 0)
+            playlist.param.selected = true;
+
+          playlists.push(playlist);
+        }
+
+        //next(playlists);
+
+        self.requestSubscription(function(data) {
+
+          console.log('SUBSCRIPTION DATA: ', data);
+          for (var i = 0; i < data.length; ++i) {
+            var subscription = {element : "playlist"
+                        , param : {playlist : data[i].Playlist/*name : data[i].playlist_name
+                        , id : data[i].playlist_id
+                        , style : data[i].playlist_style
+                        , image : data[i].playlist_img || "../images/psp.png"}*/}};
+
+            playlists.push(subscription);
+          }
+
+          next(playlists);
+        })
+      })
+
+      /*requestManager.request(baseURL, options, null
+        , function (rslt, req, err) {
+          console.log('rslt:', rslt);
+          var data = rslt.rslt;
+
+          for (var i = 0; i < data.length; ++i) {
+            var playlist = {element : "playlist"
+              , param : {name : data[i].playlist_name
+                        , id : data[i].playlist_id
+                        , style : data[i].playlist_style
+                        , image : data[i].playlist_img || "../images/psp.png"
+                        , playlist : data[i]}};
+
+                if (i == 0) {
+                  playlist.param.selected = true;
+                  setMenubar(playlist);
+                }
+
+            playlists.push(playlist);
+          }
+
+          self.getSubscriptions(playlists, function (all) {
+            all.push({element : "addplaylist"
+              , param : {name : "addPlaylist"}});
+
+            console.log("playlists :" , all);
+            riot.mount('playlistPanel', {elements : all, name : "playlists"
+            , color : '#212326', borders : ["", "", "", ""], scrollBar : true});
+            next();
+          })
+        })*/
+    }
+
+    function setMenubar(playlist) {
+      console.log('menubar playlist : ', playlist);
+
+      var menubar = [{element : "menubar", param : { currentPlaylist
+                    : playlist.param.playlist}}];
+
+                      console.log('menubar: ', menubar);
+      riot.mount('#menubar', {elements : menubar, name : "menubar"
+                              , color : '#363636'
+                              , borders : ["", "", "", ""]});
+    }
+
+    function getSubscriptions(playlists, next) {
+      console.log('getting subs:', playlists);
+      options.method = 'GET';
+      options.path = "/api/subscription/?where=%7B%22usr_id%22:"
+                    + account.usr_id
+                    + "%7D";
+
+      console.log('options: ', options);
+      requestManager.request(baseURL, options, null, function(rslt, req, err) {
+        var data = rslt.rslt;
+        console.log('sub result: ', data);
+
+        for (var i = 0; i < data.length; ++i) {
+          var subscription = {element : "playlist"
+                      , param : {name : data[i].playlist_name
+                      , id : data[i].playlist_id
+                      , style : data[i].playlist_style
+                      , image : data[i].playlist_img || "../images/psp.png"}};
+
+          playlists.push(subscription);
+        }
+
+        console.log('after subscription: ', playlists);
+        next(playlists);
+      })
+    }
+
+  /*  var addPlaylist = [{element : "addPlaylist", param : {name : "addPlaylist"}}];*/
+
+
+
+    /*var playlists = [{element : "playlist", param : {name : "playlist1", id : '1'
                   , image : "../images/hardcore2.jpg", selected : true
                   , position : '1', nbPlaylist : 12}}
                 , {element : "playlist", param : {name : "playlist2", id : '2'
@@ -180,7 +444,7 @@
                 , {element : "addplaylist", param : {name : "addPlaylist"}}
                 ];
 
-  var musics = [{element : "music", param : {title : "music1"
+    var musics = [{element : "music", param : {title : "music1"
                   , artist:'Jean-Jacques Goldman', id : '1'
                   , url : "../musics/watch.mp3"
                   , playlistName : "playlist1", selected : true, position : 1}}
@@ -311,21 +575,23 @@
                   , artist: 'EncoreUnArtiste', id : '8', position : 44
                   , url : "../musics/watch.mp3", playlistName : "playlist1"}}
                 ];
+*/
+    var mediaplayer = [{element : "mediaplayer", param : {}}];
 
-  var messages = [
-  , {element : "message", param : {user : "toto", content : "hello", id : '1'}}
-  , {element : "message", param : {user : "titi", content : "hey :)", id : '2'}}
-  ]
+    var userOnClick = function (e, self) {
+    self.refs.popout.style.visibility = self.options ? 'hidden' : 'visible';
+    self.options = self.options ? false : true;
+    console.log('show this shit: ', self.refs.popout.style.visibility);
+    console.log('self.options: ', self.options);
+    }
 
-  var mediaplayer = [{element : "mediaplayer", param : {}}];
-
-  var users = [{element : "usergroup", param : {name : "Administrateur"
+    var users = [{element : "usergroup", param : {name : "Administrateur"
         , nbUser : 1, users : [{element : "user", param : {name : "PSPAdmin"
           , image : "../images/PSPAdmin.jpeg", status : "afk", id : 1}}]}}
           , {element : "usergroup", param : {name : "En ligne", nbUser : 6
-  , users : [{element : "user", param : {name : "KETAMAX"
+    , users : [{element : "user", param : {name : "KETAMAX"
               , image : "../images/ketamax.jpg", status : "online"
-              , admin : true, id : 2}}
+              , admin : true, id : 2, userOnClick : userOnClick}}
             , {element : "user", param : {name : "ITIZ"
               , image : "../images/itiz.png", status : "afk", id : 3}}
             , {element : "user", param : {name : "TuturLaVoiture"
@@ -336,9 +602,9 @@
               , image : "../images/psp.png", status : "afk", id : 6}}
             , {element : "user", param : {name : "Angry_Capitalist"
               , image : "../images/psp.png", status : "online", id : 7}}
-            ]}}
-          , {element : "usergroup", param : {name : "Hors ligne", nbUser : 9
-  , users : [{element : "user", param : {name : "MrBiscotte"
+            ]}}]
+          /*, {element : "usergroup", param : {name : "Hors ligne", nbUser : 9
+    , users : [{element : "user", param : {name : "MrBiscotte"
               , image : "../images/hugo.png", status : "offline", id : 10}}
             , {element : "user", param : {name : "Khedira"
               , image : "../images/psp.png", status : "offline", id : 11}}
@@ -357,54 +623,58 @@
             , {element : "user", param : {name : "MomoLaFrite"
               , image : "../images/psp.png", status : "offline", id : 18}}
             ]}}];
+*/
+    var userSettings = [{element : "usersettings", param : {name : account.usr_login
+              , image : "../images/psp.png", status : "online"}}]
 
-  var userSettings = [{element : "usersettings", param : {name : "KETAMAX"
-              , image : "../images/ketamax.jpg", status : "online"}}]
+    var playlistOptions = [{element : "hideshowusers"
+    , param : {name : "hideshowusers"}}, {element : "notifications"
+    , param : {name : "notifications", on : true}}];
 
-  var playlistOptions = [{element : "hideshowusers"
-  , param : {name : "hideshowusers"}}, {element : "notifications"
-  , param : {name : "notifications", on : true}}];
+    /*  riot.mount('#playlistPanel', {elements : playlists, name : "playlists"
+    , color : '#212326', borders : ["", "", "", ""], scrollBar : true});*/
 
-  riot.mount('#socialBtn', {elements : socialBtn, name : "socialBtn"
-    , color : '#212326', borders : ["", "", "", ""]});
-  riot.mount('#playlistPanel', {elements : playlists, name : "playlists"
-    , color : '#212326', borders : ["", "", "", ""], scrollBar : true});
-
-  riot.mount('#playlistOptions', {elements: playlistOptions, color : '#2C2C2C'
+    riot.mount('#playlistOptions', {elements: playlistOptions, color : '#2C2C2C'
     , flexDirection : 'row', borders : ["", "", "", ""]
     , alignItems: 'flex-end'});
 
 
-  var musicPanel = {elements : musics, name : "musics"
+   var musicPanel = {elements : {}, name : "musics"
     , borders : ["", "", "", ""], alignItems : "left", scrollBar : true
-  , color: '#363636'};
-  riot.mount('#musicPanel', musicPanel);
+    , color: '#363636'};
+    riot.mount('#musicPanel', musicPanel);
 
-  //riot.mount('#messages', {elements : messages, name : "message panel"});
-  var MP = riot.mount('#mediaplayer', {elements : mediaplayer, name : "mediaplayer"
-  , borders : ["","","",""]});
 
-  console.log('MP: ', MP);
+  /*  var messages = [
+    , {element : "message", param : {user : "toto", content : "hello", id : '1'}}
+    , {element : "message", param : {user : "titi", content : "hey :)", id : '2'}}
+    ]
 
-  var userGroup = {elements : users, name : "users"
+    //riot.mount('#messages', {elements : messages, name : "message panel"});
+*/
+    var MP = riot.mount('#mediaplayer', {elements : mediaplayer, name : "mediaplayer"
+    , borders : ["","","",""]});
+
+    //console.log('MP: ', MP);
+
+    var userGroup = {elements : users, name : "users"
     , borders : ["", "", "", ""], scrollBar : true, color: '#363636'};
 
-  riot.mount('#users', userGroup);
-  riot.mount('#menubar', {elements : menubar, name : "menubar", color : '#363636'
-    , borders : ["", "", "", ""]});
-  riot.mount('#userSettings', {elements : userSettings, color: '#2C2C2C'
+
+/*    riot.mount('#users', userGroup); */
+
+    riot.mount('#userSettings', {elements : userSettings, color: '#2C2C2C'
     , borders : ["", "", "", ""], alignItems : "left", flexDirection : "row"});
 
-
-  riot.mount('#researchMusic', {param : {researchField : musicPanel
-    , researchAlgo : musicResearch, type : 'musics'}});
-  riot.mount('#researchUser', {param : {researchField : userGroup
-    , researchAlgo : userResearch, type : 'users'}});
+/*
+    console.log('musicPanel : ', musicPanel);*/
+    //console.log('userGroup index : ', userGroup);
 
     function musicResearch(input, researchField) {
       console.log('music input:', input);
       var regex = new RegExp('^' + input + '.*$', 'i');
       var nResearchField = JSON.parse(JSON.stringify(researchField));
+      console.log('nResearchField: ', nResearchField);
       var musics = nResearchField.elements;
       var results = new Array();
 
@@ -458,6 +728,42 @@
       riot.mount('#users', nResearchField);
     }
 
-  </script>
-</body>
+    var opts = {param : {researchField : musicPanel
+      , researchAlgo : musicResearch, type : 'musics'}}
+
+    riot.mount('#researchMusic', opts);
+    riot.mount('#researchUser', {param : {researchField : userGroup
+      , researchAlgo : userResearch, type : 'users'}});
+
+      /*function getMyInvitations(events, next) {
+        console.log('getMyInvitations');
+        options.method = 'GET';
+        options.path = '/api/invitation/';
+
+        var data = JSON.stringify({where : {invited_usr_id : account.usr_id}});
+
+        console.log('request myInvitations: ', data);
+        requestManager.request(baseURL, options, data
+          , function (rslt, req, err) {
+            console.log('ended getting invitations');
+            console.log('rslt getMyInvitation: ', rslt);
+        })
+      }*/
+
+      /*function getMyEvents() {
+        console.log('getMyEvent');
+        var events = new Array();
+
+        this.getMyInvitations(events, function() {});
+      }*/
+
+      //getMyEvents();
+
+//var isConnected = false;
+
+//riot.mount('index');
+//riot.mount('app', {param : {isConnected : false}});
+//style="margin: 0px;padding-left: 0px;padding-right: 0px;overflow: hidden"
+</script>
+
 </html>
