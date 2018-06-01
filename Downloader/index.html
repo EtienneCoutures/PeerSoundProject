@@ -69,9 +69,13 @@
   <span style="color:white;font-size:8px;float:right;margin-top:25px;margin-right:2%">PeerSoundProject</span>
 </footer>
 <script>
-
 download = function() {
-  console.log(actual.selected)
+  const ytdl = require('ytdl-core');
+  const fs = require('fs');
+  var url = actual.selected.MusicLink[4].Music.music_url
+  var title = actual.selected.MusicLink[4].Music.music_name + ".mp3"
+  ytdl(url, {filter : 'audioonly'})
+  .pipe(fs.createWriteStream(title));
 }
 </script>
 </html>

@@ -2,6 +2,8 @@ const electron = require('electron')
 const {ipcMain} = require('electron');
 const riot = require('riot');
 const ffmpeg = require('fluent-ffmpeg');
+const fs = require('fs');
+const ytdl = require('ytdl-core');
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
   // Keep a global reference of the window object, if you don't, the window will
