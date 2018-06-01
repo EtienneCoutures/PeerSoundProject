@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `music`;
 CREATE TABLE IF NOT EXISTS `music` (
   `music_id` int NOT NULL AUTO_INCREMENT,
   `music_name` varchar(255) NOT NULL,
-  `music_description` text NOT NULL,
+  `music_description` text,
   `music_comment` text,
   `music_picture_default` varchar(255) NOT NULL,
   `music_insert` datetime NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `music` (
   `music_source` enum('youtube','spotify', 'soundcloud', 'deezer','else') NOT NULL,
   `music_group` text NOT NULL,
   `music_url` text NOT NULL,
-  `music_date` text NOT NULL,
+  `music_date` text,
   `usr_id` int NOT NULL,
   `duration` varchar(255) DEFAULT "0.0",
   foreign key (`usr_id`) references user(`usr_id`),

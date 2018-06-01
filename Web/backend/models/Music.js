@@ -25,6 +25,7 @@ module.exports = function (app) {
             },
             music_description: {
                 type: Sequelize.TEXT,
+                allowNull: true,
                 validate: {
                 }
             },
@@ -71,6 +72,7 @@ module.exports = function (app) {
             },
             music_date: {
               type: Sequelize.TEXT,
+              allowNull: true,
               validate: {
               }
             },
