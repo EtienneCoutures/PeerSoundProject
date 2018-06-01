@@ -72,10 +72,13 @@
 download = function() {
   const ytdl = require('ytdl-core');
   const fs = require('fs');
-  var url = actual.selected.MusicLink[4].Music.music_url
-  var title = actual.selected.MusicLink[4].Music.music_name + ".mp3"
-  ytdl(url, {filter : 'audioonly'})
-  .pipe(fs.createWriteStream(title));
+  var pl = actual.selected.MusicLink
+  var dir = "C:\\Users\\%USERNAME%\\Music\\Download"
+  for (var i = 0 ; i != pl.length ; ++i) {
+    var title = pl[i].Music.music_name + ".mp3"
+    var url = pl[i].Music.music_url
+    ytdl(url, {filter : 'audioonly'}).pipe(fs.createWriteStream(title));
+  }
 }
 </script>
 </html>

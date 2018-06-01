@@ -19,7 +19,4 @@
       </div>
     </div>
   </div>
-  <script>
-  console.log(actual.selected)
-  </script>
 </musics>
