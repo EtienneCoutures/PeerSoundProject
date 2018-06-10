@@ -21,7 +21,7 @@ module.exports = function (app) {
             'usr_id': {
                 type: Sequelize.INTEGER,
                 references : {
-                  model: 'User',
+                  model: 'user',
                   key: 'usr_id'
                 }
             },
@@ -56,10 +56,5 @@ module.exports = function (app) {
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE'
         });
-
-      /*  app.models.AccessToken.sync().then(function () {
-        }).catch(function (err) {
-            logger.error(err);
-        });*/
     }
   };

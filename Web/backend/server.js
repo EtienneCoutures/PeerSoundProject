@@ -19,7 +19,6 @@ var express        = require('express'),
     locale         = require('locale'),
 
     passport       = require('passport'),
-    sequelize      = require('sequelize'),
     async          = require('async'),
     _              = require('underscore'),
     Promise        = require('bluebird'),
@@ -202,6 +201,9 @@ function initModels(callback) {
                 require(file)(app);
                 callback();
             }, callback);
+
+            sequelize.sync({alter : true
+              , /*force : true,*/ logging : console.log});
         }
     });
 }
