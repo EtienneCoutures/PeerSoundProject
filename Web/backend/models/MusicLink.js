@@ -39,13 +39,13 @@
                  },
                  musiclink_insert: {
                      type: Sequelize.DATE,
-                     defaultValue: 0,
+                     defaultValue: null,
                      validate: {
                      }
                  },
                  musiclink_update: {
                      type: Sequelize.DATE,
-                     defaultValue: 0,
+                     defaultValue: null,
                      validate: {
                      }
                  },
@@ -80,10 +80,5 @@
                onUpdate: 'CASCADE',
                onDelete: 'CASCADE',
              })
-
-            /* sequelize.sync({ alter: true }).then(function(res) {
-             }).catch(function (err) {
-                logger.error(err);
-             });*/
         }
     };

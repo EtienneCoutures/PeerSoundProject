@@ -14,7 +14,7 @@ module.exports = function (app) {
       },
       sub_insert: {
           type: Sequelize.DATE,
-          defaultValue: 0,
+          defaultValue: null,
           validate: {
           }
       },
