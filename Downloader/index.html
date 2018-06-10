@@ -65,20 +65,42 @@
     </button>
   </div>
 </body>
-<footer>
-  <span style="color:white;font-size:8px;float:right;margin-top:25px;margin-right:2%">PeerSoundProject</span>
+<footer style="position : absolute;bottom : 0;margin-bottom:2%;margin-left:10px">
+  <span style="color:white;font-size:8px;margin-top:25px;margin-right:2%">PeerSoundProject</span>
 </footer>
 <script>
 download = function() {
   const ytdl = require('ytdl-core');
   const fs = require('fs');
   var pl = actual.selected.MusicLink
-  var dir = "C:\\Users\\%USERNAME%\\Music\\Download"
+  var dir = "C:\\Users\\ITIZ\\Music\\Download\\" //Faire un get des variables d'env pour concat le nom de l'user, demander le path voulu a l'user
   for (var i = 0 ; i != pl.length ; ++i) {
-    var title = pl[i].Music.music_name + ".mp3"
+    var title = dir + pl[i].Music.music_name + ".mp3"
     var url = pl[i].Music.music_url
     ytdl(url, {filter : 'audioonly'}).pipe(fs.createWriteStream(title));
-  }
+    /**id3({ file: title, type: id3.OPEN_LOCAL }, function(err, tags) {
+    console.log(err)
+    console.log(tags)
+  }); */
 }
+
+}
+/*test_callback = function() {
+  const NodeID3 = require('node-id3')
+  var file = "C:\\Users\\ITIZ\\Music\\Download\\48 heures.mp3";
+  let tags = {
+    title: "Bamboleo",
+    artist: "Gipsy King",
+    album: "on test",
+    TRCK: "27"
+  }
+  let ID3FrameBuffer = NodeID3.create(tags)
+  let success = NodeID3.write(tags, file)
+  NodeID3.read(file, function(err, news) {
+    console.log(err)
+    console.log("--")
+    console.log(news)
+  });
+}*/
 </script>
 </html>

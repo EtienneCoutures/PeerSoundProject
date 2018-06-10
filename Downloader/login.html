@@ -12,14 +12,20 @@
       <script src="riotJS/riot.js"></script>
       <script src="riotJS/riot+compiler.js"></script>
     </head>
-    <body>
-      <h1>Login</h1>
-    <input id="email" type="text" placeholder="Email"></input>
-    <br>
-    <input id="password" type="password" placeholder="Password"></input>
-    <br>
-    <button type="submit" value="Login" onclick="login()" autofocus>Login</button>
+    <body style="background-color:#23272a">
+      <img src="./img/logo_white.png" style="max-height:80px;max-width:80px;display: table;margin: 0 auto;margin-top:5%"></img>
+      <h1 class="main-title" style="font-family:verdana;">Login</h1>
+      <div style="display: table;margin: 0 auto;">
+        <input id="email" type="text" placeholder="Email"></input>
+        <br>
+        <input id="password" type="password" placeholder="Password"></input>
+        <br>
+        <button type="submit" value="Login" onclick="login()" autofocus>Login</button>
+      </div>
     </body>
+    <footer style="position : absolute;bottom : 0;margin-bottom:2%;margin-left:10px">
+      <span style="color:white;font-size:8px;margin-top:25px;margin-right:2%">PeerSoundProject</span>
+    </footer>
     <script>
     const {ipcRenderer} = require('electron');
     var baseURL = "localhost";
