@@ -68,19 +68,19 @@ module.exports = function (app) {
             },
             usr_birthday: {
                 type: Sequelize.DATE,
-                defaultValue: 0,
+                defaultValue: null,
                 validate: {
                 }
             },
             usr_insert: {
                 type: Sequelize.DATE,
-                defaultValue: 0,
+                defaultValue: null,
                 validate: {
                 }
             },
             usr_update: {
                 type: Sequelize.DATE,
-                defaultValue: 0,
+                defaultValue: null,
                 validate: {
                 }
             },
