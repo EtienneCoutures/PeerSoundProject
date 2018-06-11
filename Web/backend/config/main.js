@@ -5,10 +5,10 @@ var Sequelize = require('sequelize'),
 
 var config  = {
         db: {
-            dbname: "peersounrzroot",
-            host: "peersounrzroot.mysql.db",
-            user: "peersounrzroot",
-            pw: "Peersoundproject1000",
+            dbname: "peersoundproject",
+            host: "localhost",
+            user: "itiz",
+            pw: "judelapoire",
             port: "3306"
         },
         mailer: {

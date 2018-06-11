@@ -203,7 +203,7 @@ function initModels(callback) {
             }, callback);
 
             sequelize.sync({alter : true
-              , /*force : true,*/ logging : console.log});
+            , /*force : true,*/ logging : console.log});
         }
     });
 }

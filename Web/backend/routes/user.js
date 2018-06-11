@@ -156,6 +156,7 @@ module.exports = function (app) {
             }]
         ]),
         function (req, res) {
+          console.log("on passe ici")
             var Record = req.body;
 
             if (!Record["usr_id"])
