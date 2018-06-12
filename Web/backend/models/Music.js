@@ -43,13 +43,13 @@ module.exports = function (app) {
             },
             music_insert: {
                 type: Sequelize.DATE,
-                defaultValue: null,
+                defaultValue: Sequelize.NOW,
                 validate: {
                 }
             },
             music_update: {
                 type: Sequelize.DATE,
-                defaultValue: null,
+                defaultValue: Sequelize.NOW,
                 validate: {
                 }
             },
@@ -103,7 +103,10 @@ module.exports = function (app) {
 
         app.models.Music.hasMany(app.models.MusicLink, {as: 'MusicLink', foreignKey: 'music_id', sourceKey: 'music_id'})
 
-        // List of required models
-        // Define relations of this model
+        sequelize.sync().then(function(res) {
+          //console.log("Music ok"/*app.models.User.Instance.prototype*/)
+        }).catch(function (err) {
+          logger.error("Music: " + err);
+        });
     }
 };

@@ -149,14 +149,14 @@ function initExpress(callback) {
     });
 
     app.use(function(req, res, next) {
-        if (req.originalUrl == '/signup' || app.requireSignUp === false) return next();
+        if (req.originalUrl == '/' || app.requireSignUp === false) return next();
 
-        app.models['User'].count().then(function (count) {
+        /*app.models['User'].count().then(function (count) {
             if (count == 0) return res.redirect('/signup');
 
             app.requireSignUp = false;
             next();
-        }).catch(next);
+        }).catch(next);*/
     });
     app.all('*', function (req, res, next) {
         var render = res.render;
@@ -203,7 +203,11 @@ function initModels(callback) {
             }, callback);
 
             sequelize.sync({alter : true
-            , /*force : true,*/ logging : console.log});
+            , /*force : true, logging : console.log*/}).then(function(res) {
+              console.log(sequelize.modelManager.models)
+            }).catch(function (err) {
+              logger.error(err);
+            });
         }
     });
 }

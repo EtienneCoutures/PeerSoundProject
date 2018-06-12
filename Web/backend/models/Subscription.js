@@ -14,7 +14,7 @@ module.exports = function (app) {
       },
       sub_insert: {
           type: Sequelize.DATE,
-          defaultValue: null,
+          defaultValue: Sequelize.NOW,
           validate: {
           }
       },
@@ -65,6 +65,12 @@ module.exports = function (app) {
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
     })
+
+    sequelize.sync().then(function(res) {
+      //console.log("Subscription ok"/*app.models.User.Instance.prototype*/)
+    }).catch(function (err) {
+      logger.error("Subscription: " + err);
+    });
 
   }
 };

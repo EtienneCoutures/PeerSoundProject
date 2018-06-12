@@ -18,13 +18,13 @@
             },
             invitation_insert: {
                 type: Sequelize.DATE,
-                defaultValue: null,
+                defaultValue: Sequelize.NOW,
                 validate: {
                 }
             },
             invitation_update: {
                 type: Sequelize.DATE,
-                defaultValue: null,
+                defaultValue: Sequelize.NOW,
                 validate: {
                 }
             },
@@ -93,5 +93,11 @@
             onDelete: 'CASCADE'
         })
     }
+    sequelize.sync().then(function(res) {
+      //console.log("Invitation ok"/*app.models.User.Instance.prototype*/)
+
+    }).catch(function (err) {
+      logger.error("Invitation: " + err);
+    });
 
  };

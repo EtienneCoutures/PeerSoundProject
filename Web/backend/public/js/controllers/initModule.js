@@ -37,7 +37,7 @@ define([
                   $scope.playlist = result
                 })
 */
-                $scope.getMessage = function() {
+              /*  $scope.getMessage = function() {
                   Restangular.one('message').get({where: {
                     dest_id: $scope.myself.usr_id,
                   }}).then(function(result) {
@@ -48,10 +48,11 @@ define([
                     }
                   })
                 }
-
+*/
 
                 Restangular.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
                     if (data.code == -2) {
+                      console.log("refresh")
                         $location.url('/login');
                     }
                     return data;
@@ -70,7 +71,7 @@ define([
                 }
 
                 $scope.$on('$routeChangeStart', function() {
-                    if (!$scope.myself && $location.path() != '/login') {
+                    /*if (!$scope.myself && $location.path() != '/login') {
                         Restangular.one('auth', 'me').get().then(function(result) {
                             $scope.myself = result.account;
                             $scope.loaded = true;
@@ -81,26 +82,24 @@ define([
                         });
                     } else if ($location.path() == '/login') {
                         $scope.loaded = true;
-                    }
+                    }*/
                 });
 
-                $scope.login = function(user) {
+              /*  $scope.login = function(user) {
                   $scope.myself = user;
                     $scope.follow()
                     $scope.getMessage()
                   };
 
                   $scope.userQuery = function() {
-                    /*if (document.getElementById("selectQuery").value) {
-                      var type = document.getElementById("selectQuery").value }*/
-                      var type = 'all'
+                        var type = 'all'
                       var query = document.getElementById("search").value
                       if (query) {
                         if (['all', 'playlist', 'user', 'music'].indexOf(type) >= 0) {
                           $location.url('/result/' + type + '/' + query)
                         }
                       }
-                  }
+                  }*/
 
                 /* searching fnct */
 
