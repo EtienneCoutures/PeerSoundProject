@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="/css/playlist.css" rel="stylesheet"/>
+</head>
+<body>
+  <div ng-if="!!myself">
+    <div class="row header">
+      <div class="col-md-12">
+        <div class="form-group">
+            </br>
+            </br>
+            <label class="control-label col-md-8 col-sm-8"
+                   for="Music_music_source">
+                {{ 'music_source' | translate }}
+            </label>
+            </br>
+            </br>
+            </br>
+            <div class="col-md-22">
+                <select class="form-control default-select2"
+                        id="Music_music_source"
+                        name="Music[music_source]"
+                        ng-model="Music.music_source">
+                    <option value=""></option>
+                    <option value="youtube" translate>
+                        youtube
+                    </option>
+                    <option value="spotify" translate>
+                        spotify
+                    </option>
+                    <option value="deezer" translate>
+                        deezer
+                    </option>
+                    <option value="else" translate>
+                        else
+                    </option>
+                </select>
+            </div>
+        </div>
+      </div>
+    </div>
+    <span>page des invitations</span>
+  </div>
+</div>
+</body>
+</html>

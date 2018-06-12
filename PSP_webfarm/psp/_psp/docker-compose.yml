@@ -1,0 +1,91 @@
+version: "2"
+
+services:
+
+
+################################################
+##### La Base de Données de la webFarm psp  ####
+################################################
+    mysql:
+      build:
+        context: ..
+        dockerfile: ./_build/mysql_psp/Dockerfile
+      container_name: pspMysql
+      #image: mariadb:latest
+  #    restart: always
+      ports:
+        - 3306:3306
+      volumes:
+        - ../lxc/var/lib/mysql:/var/lib/mysql
+      environment:
+        MYSQL_ROOT_PASSWORD: 2016WPdbR00t
+        MYSQL_DATABASE: AppSessions
+        MYSQL_USER: nodeMysqlUser
+        MYSQL_PASSWORD: 2016NodeDB!
+
+
+#############################################
+##### Le loadBalancer de la webFarm psp ####
+#############################################
+    nginx:
+        restart: always
+        image: nginx
+        container_name: wfNginx
+
+        ports:
+          - 80:80
+          #- 81:81
+          - 443:443
+          #- 3200:3200
+          #- 3500:3500
+          #- 3501:3501
+          #- 3502:3502
+          #- 3503:3503
+
+        volumes:
+          - ../lxc/var/log/nginx:/var/log/nginx
+          - ../lxc/etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+          - ../lxc/etc/nginx/ssl:/etc/nginx/ssl:ro
+          # Sites/Services web static routés
+          - ../lxc/var/www/sitewebstatic1:/var/www/sitewebstatic1
+          # Sites web utilisant php
+          - ../lxc/var/php/sitewebphp1:/var/php/sitewebphp1
+          # WebApp
+          #- ../lxc/var/apps/testnodejs:/usr/src/apps/testnodejs
+          - ../lxc/var/apps/blobs:/usr/src/apps/blobs
+          - ../lxc/var/apps/psp:/usr/src/apps/psp
+
+
+        volumes_from:
+          # - testnodejsApp
+          - pspApp
+
+        links:
+          # - testnodejsApp:testnodejsApp
+          - pspApp:pspApp
+
+
+###########################################
+#####        La webApp psp             ####
+###########################################
+
+    pspApp:
+      build:
+        context: ..
+        dockerfile: ./_build/node_psp/Dockerfile
+      image: pspapp:dev
+      container_name: pspApp
+      restart: always
+      ports:
+        - 3000:3000
+        - 3001:3001
+  #      - 443:443
+  #      - 80:80
+      depends_on:
+        - mysql
+      links:
+        - mysql
+      volumes:
+        - ../lxc/var/apps/psp:/usr/src/apps/psp
+        - ../lxc/var/apps/blobs:/usr/src/apps/blobs
+      command: /bin/bash /usr/src/apps/psp/npm_install_and_start.sh
