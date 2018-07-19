@@ -17,10 +17,8 @@
         "js" : ["index.html", "src/js/vendor/jquery.min.js"]
     }],
 
-    "content_security_policy": "script-src 'self' https://api.soundcloud.com ; object-src 'self'",
-
     "web_accessible_resources": [
-        "index.html", "https://code.jquery.com/jquery-3.3.1.min.js", "https://connect.soundcloud.com/sdk/sdk-3.3.0.js", "src/js/index.js", "profil.html", "takeMusic.html", "SendMusic.html", "content.js"
+        "background.html", "background.js", "index.html", "src/js/index.js", "profil.html", "takeMusic.html", "SendMusic.html", "content.js"
     ],
     "browser_action": {
         "default_icon" : "images/psp.png"

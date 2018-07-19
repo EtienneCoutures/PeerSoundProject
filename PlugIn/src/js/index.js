@@ -14,7 +14,7 @@ if (t)
     t.addEventListener("click", changePage);
 
 if (localStorage.getItem("email")){
-   document.location.href = "profil.html";
+   document.location.href = "takeMusic.html";
 }
 
 var close = document.getElementById("cloclo");
@@ -30,7 +30,7 @@ function changePage() {
  if (localStorage.getItem("email")){
     main.classList.remove('show');
     setTimeout(function(){
-      document.location.href = "profil.html";
+      document.location.href = "takeMusic.html";
     }, 500);
  }
  else {
@@ -68,7 +68,7 @@ function changePage() {
                   localStorage.setItem("name", data.account.usr_firstame);
                   main.classList.remove('show');
                   setTimeout(function(){
-                  document.location.href = "./profil.html";
+                  document.location.href = "./takeMusic.html";
                   }, 500);
                 }
               });
@@ -88,4 +88,5 @@ function changePage() {
 /*
 var musicAdded = 0;
 localStorage.setItem('musicAdded', musicAdded);
-localStorage.setItem('numMusic', 1)*/
+localStorage.setItem('numMusic', 1)
+*/
