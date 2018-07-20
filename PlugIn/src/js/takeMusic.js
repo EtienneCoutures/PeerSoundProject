@@ -10,7 +10,7 @@ var artist = document.getElementById("boxArtist"),
     textarea3 = document.getElementById('textarea3'),
     main = document.getElementById('main');
     close = document.getElementById('cloclo');
-    
+
 
 
 if (close)
@@ -88,9 +88,15 @@ var url = JSON.parse(localStorage.getItem("musicToAdd"));
 var boxUrl = document.getElementById("boxUrl");
     $.getJSON('https://noembed.com/embed', //avoir le titre de la musique
     {   format: 'json', url: url}, function (data) {
-        boxUrl.value = data.title;
+        boxUrl.value = data.title.slice(0, data.title.indexOf("-")).trim();
     });
-   
+
+var boxArtist = document.getElementById("boxArtist");
+    $.getJSON('https://noembed.com/embed', //avoir le titre de la musique
+    {   format: 'json', url: url}, function (data) {
+        boxArtist.value = data.title.slice(data.title.indexOf("-") + 1, data.title.length).trim();
+    });
+
 
 function sleep(miliseconds) {
     var currentTime = new Date().getTime();
@@ -121,18 +127,26 @@ scApiUrl = function(url, apiKey) {
 function sendMusic() {
     console.log("URLLLLLL :" + url);
     if (url.indexOf("youtube") != -1){
+        var artist = document.getElementById("boxArtist");
         var title = document.getElementById("boxUrl");
-        if (title.value && artist.value && date.value && description.value) {
+        if (title.value && artist.value) {
             var infs = {
                 title  : title.value,
-                artist : artist.value,
-                date : date.value
+                artist : artist.value
             }
-            textarea1.className = '';
-            textarea2.className = '';
             popError.className = '';
             sessionStorage.setItem("infos", JSON.stringify(infs));
            var musicAdded = 1;
+           console.log(url);
+           var source = ""
+           if (url.includes("youtube")) {
+             source = "youtube"
+           }
+           if (url.includes("soundcloud")) {
+             source = "soundcloud"
+           }
+           console.log(source);
+           return;
            localStorage.setItem('musicAdded', musicAdded);
            console.log( JSON.parse(localStorage.getItem("id")) + '-' + artist.value + '-' + boxUrl.value + '-' + description.value + '-' + url);
            jQuery.post('https://localhost:8000/api/music/',{
@@ -140,9 +154,7 @@ function sendMusic() {
                 music_source: "youtube",
                 music_group: artist.value,
                 music_name: boxUrl.value,
-                music_description: description.value,
-                music_url: url,
-                music_date: date.value
+                music_url: url
            },
            function (data){
                if (data){
@@ -251,7 +263,7 @@ function hidePop() {
     textarea1.className = 'stop';
     textarea2.className = 'stop';
     textarea3.className = 'stop';
-    
+
 }
 
 function focusInput() {

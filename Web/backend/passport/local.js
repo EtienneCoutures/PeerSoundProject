@@ -153,6 +153,7 @@ module.exports = function (app, passport) {
         ]),
         function (req, res, next) {
             passport.authenticate('signup', function (err, user, info, status) {
+                console.log(user);
                 if (!user) {
                   return res.redirect('/signup');
                 }
