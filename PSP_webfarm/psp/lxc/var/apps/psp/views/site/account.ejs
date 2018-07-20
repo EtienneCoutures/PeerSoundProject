@@ -1,0 +1,34 @@
+<link href="/css/home.css" rel="stylesheet"/>
+
+<%
+var new_item = [{
+    user_name: "MrBiscotte",
+    album: "Ecole du micro d'argent",
+    artiste: "IAM",
+    playlist: "RapFr",
+    titre: "elle donne sont corps avant son nom"
+}];
+%>
+
+<div class="notif">
+    <div>
+        <div class="col-md-4">
+            <div id="logo" >
+              <div id="interogation"><img  src="/img/point.jpg" style="width:35px;height:35px;"></div>
+            </div>
+        </div>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-6">
+            <div id="image" >
+                <img src="/img/logo2.png" style="width:59px;height:47px;"><img>
+            </div>
+        </div>
+    </div>
+    <div id="txt">
+        <p><li> Title : <%= new_item.titre %> </li></p>
+        <p><li> Artiste : <%= new_item.artist %> </li></p>
+        <p><li> Playlist : <%= new_item.playlist %></li></p>
+        <p><li> UserName : <%= new_item.user_name %></li></p>
+    </div>
+</div>

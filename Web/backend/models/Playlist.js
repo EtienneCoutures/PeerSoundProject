@@ -42,13 +42,13 @@
              },
              playlist_insert: {
                  type: Sequelize.DATE,
-                 defaultValue: 0,
+                 defaultValue: Sequelize.NOW,
                  validate: {
                  }
              },
              playlist_update: {
                  type: Sequelize.DATE,
-                 defaultValue: 0,
+                 defaultValue: Sequelize.NOW,
                  validate: {
                  }
              },
@@ -85,10 +85,11 @@
          })
          app.models.Playlist.hasMany(app.models.MusicLink, {as: 'MusicLink', foreignKey: 'playlist_id', sourceKey: 'playlist_id'})
 
-
-//       sequelize.sync().then(function() { console.log(app.models.Playlist.Instance.prototype) })
-         // List of required models
-
          // Define relations of this model
+         sequelize.sync().then(function(res) {
+          // console.log("Playlist ok"/*app.models.User.Instance.prototype*/)
+         }).catch(function (err) {
+           logger.error("Playlist: " + err);
+         });
      }
  };

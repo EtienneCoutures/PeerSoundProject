@@ -7,7 +7,7 @@ define([
         .config(['$routeProvider', function ($routeProvider) {
             $routeProvider
                 .when('/', {
-                    templateUrl: '/partials/site/index',
+                    templateUrl: '/partials/site/homePage',
                     controller: 'SiteController'
                 })
                 .when('/login', {
@@ -40,14 +40,14 @@ define([
             'Restangular',
             '$location',
             function ($scope, Restangular, $location) {
-
-              Restangular.one("follow/followerNb/", $scope.myself.usr_id).get().then(function(result) {
+              console.log("ketamine")
+            /**  Restangular.one("follow/followerNb/", $scope.myself.usr_id).get().then(function(result) {
                 $scope.nbFollowers = result.count;
               });
               Restangular.one('playlist').get({
                 }).then(function(result) {
                   $scope.playlist = result
-                })
+                })*/
             }
         ])
         .controller('DownloadController', [

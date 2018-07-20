@@ -19,7 +19,10 @@ var express        = require('express'),
     locale         = require('locale'),
 
     passport       = require('passport'),
+<<<<<<< HEAD
     //sequelize      = require('sequelize'),
+=======
+>>>>>>> ec263166e7ec4cb1a853355d5e8c42869f892b85
     async          = require('async'),
     _              = require('underscore'),
     Promise        = require('bluebird'),
@@ -150,14 +153,14 @@ function initExpress(callback) {
     });
 
     app.use(function(req, res, next) {
-        if (req.originalUrl == '/signup' || app.requireSignUp === false) return next();
+        if (req.originalUrl == '/' || app.requireSignUp === false) return next();
 
-        app.models['User'].count().then(function (count) {
+        /*app.models['User'].count().then(function (count) {
             if (count == 0) return res.redirect('/signup');
 
             app.requireSignUp = false;
             next();
-        }).catch(next);
+        }).catch(next);*/
     });
     app.all('*', function (req, res, next) {
         var render = res.render;
@@ -203,7 +206,12 @@ function initModels(callback) {
                 callback();
             }, callback);
 
-            sequelize.sync({logging: console.log})
+            sequelize.sync({alter : true
+            , /*force : true, logging : console.log*/}).then(function(res) {
+              console.log(sequelize.modelManager.models)
+            }).catch(function (err) {
+              logger.error(err);
+            });
         }
     });
 }

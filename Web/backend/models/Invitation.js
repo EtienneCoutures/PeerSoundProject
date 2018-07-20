@@ -18,13 +18,13 @@
             },
             invitation_insert: {
                 type: Sequelize.DATE,
-                defaultValue: 0,
+                defaultValue: Sequelize.NOW,
                 validate: {
                 }
             },
             invitation_update: {
                 type: Sequelize.DATE,
-                defaultValue: 0,
+                defaultValue: Sequelize.NOW,
                 validate: {
                 }
             },
@@ -92,12 +92,12 @@
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE'
         })
-
-        /*sequelize.sync({alter: true}).then(function(res) {
-            console.log("Invitations synched");
-        }, function(err) {
-            logger.error(err);
-        })*/
     }
+    sequelize.sync().then(function(res) {
+      //console.log("Invitation ok"/*app.models.User.Instance.prototype*/)
+
+    }).catch(function (err) {
+      logger.error("Invitation: " + err);
+    });
 
  };

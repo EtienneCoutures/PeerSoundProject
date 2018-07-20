@@ -68,19 +68,19 @@ module.exports = function (app) {
             },
             usr_birthday: {
                 type: Sequelize.DATE,
-                defaultValue: 0,
+                defaultValue: Sequelize.NOW,
                 validate: {
                 }
             },
             usr_insert: {
                 type: Sequelize.DATE,
-                defaultValue: 0,
+                defaultValue: Sequelize.NOW,
                 validate: {
                 }
             },
             usr_update: {
                 type: Sequelize.DATE,
-                defaultValue: 0,
+                defaultValue: Sequelize.NOW,
                 validate: {
                 }
             },
@@ -96,18 +96,6 @@ module.exports = function (app) {
               validate:{
               },
             }
-            /*nb_followers: {
-                type: Sequelize.INTEGER,
-                defaultValue: 0,
-                validate: {
-                }
-              },
-              nb_following: {
-                type: Sequelize.INTEGER,
-                defaultValue: 0,
-                validate: {
-                }
-              }*/
         };
 
         app.models.User = sequelize.define('User', schema, {
@@ -131,11 +119,12 @@ module.exports = function (app) {
         app.models.User.hasMany(app.models.Playlist, {as: 'Playlist', foreignKey: 'playlist_creator', sourceKey: 'usr_id'})
         app.models.User.hasMany(app.models.Subscription, {as: 'Subscription', foreignKey: 'usr_id', sourceKey: 'usr_id'})
 
-     sequelize.sync({ alter: true }).then(function(res) {
-      }).catch(function (err) {
-          logger.error(err);
-      });
-        // List of required models
-        // Define relations of this model
+        sequelize.sync().then(function(res) {
+          //console.log("Users ok"/*app.models.User.Instance.prototype*/)
+        }).catch(function (err) {
+          logger.error("user: " + err);
+        });
+
+
     }
 };

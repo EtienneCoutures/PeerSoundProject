@@ -14,7 +14,7 @@ module.exports = function (app) {
       },
       follow_insert: {
           type: Sequelize.DATE,
-          defaultValue: 0,
+          defaultValue: Sequelize.NOW,
           validate: {
           }
       },
@@ -77,10 +77,9 @@ module.exports = function (app) {
       allowNull: false
     }
   })*/
-  //sequelize.sync();
-  /*sequelize.sync({ alter: true }).then(function(res) {
-   console.log("c'est synch genre")
- }).catch(function (err) {
-     logger.error(err);
- });*/
+  sequelize.sync().then(function(res) {
+    //console.log("Follow ok"/*app.models.User.Instance.prototype*/)
+  }).catch(function (err) {
+    logger.error("Follow: " + err);
+  });
 };

@@ -25,22 +25,42 @@
                 <label for="boxArtist">Artist(s)</label>
                 <input type="text" id="boxArtist" placeholder="Express yourself..." />
             </div>
-            <!--div id="textarea2">
+            <div id="textarea2">
                 <label for="boxDate">Date</label>
                 <input id="boxDate" type="text" placeholder="MM/YYYY" class="masked" pattern="^((0[1-9])|(1[0-2]))\/(\d{4})$" data-valid-example="05/1998"/>
-                <<textarea id="boxDate" rows="1" cols="10"  id="boxDate" placeholder="YYYY/MM/DD..."></textarea>>
-            </div-->
-            <!--div id="textarea3">
+            </div>
+            <div id="textarea3">
                 <label for="boxDescription">Description</label>
-                <textarea id="boxDescription" rows="1" cols="10"  id="boxDescription" placeholder="Express yourself..."></textarea>
-            </div-->
+                <textarea id="boxDescription" rows="1" cols="10" placeholder="Express yourself..."></textarea>
+            </div>
             <div id="textarea4">
             <label for="boxPlaylist">Playlist</label>
             <select id="boxPlaylist">
+                    <option disabled selected value>select a playlsit</option>
+                    <option label="Create Playlist"></option>
             </select>
             </div>
             <div class="btn">
                 <button id="validButton">Add it</button>
+            </div>
+        </div>
+        <div id="createPlaylist">
+            <div class="close"><a href="#" id="close_p"><img src="../../images/icon-close.svg" alt="Fermer la fenêtre" width="13" height="13" /></a></div>
+            <h1 id="titleP"> Add a new playlist </h1>
+            <div id="textarea5">
+                <label for="boxName">Name</label>
+                <textarea id="boxName"rows="1" cols="10" placeholder="Express yourself..." ></textarea>
+            </div>
+            <div id="textarea6">
+                    <label for="boxKind">Kind</label>
+                    <textarea id="boxKind"rows="1" cols="10" placeholder="Express yourself..." ></textarea>
+                </div>
+            <div id="textarea7">
+                    <label for="boxDescriptionP">Description</label>
+                    <textarea id="boxDescriptionP" rows="1" cols="10" placeholder="Express yourself..."></textarea>
+            </div>
+            <div class="btnClose" id="addP">
+                <button>Add Playlist</button>
             </div>
         </div>
         <div id="errorPop">

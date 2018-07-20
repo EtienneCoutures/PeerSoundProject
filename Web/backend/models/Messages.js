@@ -14,7 +14,7 @@ module.exports = function (app) {
       },
       message_insert: {
           type: Sequelize.DATE,
-          defaultValue: 0,
+          defaultValue: Sequelize.NOW,
           validate: {
           }
       },
@@ -67,10 +67,9 @@ module.exports = function (app) {
     onUpdate: 'CASCADE',
     onDelete: 'CASCADE',
   })
-
-  /*sequelize.sync({ alter: true }).then(function(res) {
-   console.log("c'est synch genre message")
- }).catch(function (err) {
-     logger.error(err);
- });*/
+  sequelize.sync().then(function(res) {
+    //console.log("Message ok"/*app.models.User.Instance.prototype*/)
+  }).catch(function (err) {
+    logger.error("Message: " + err);
+  });
 };
