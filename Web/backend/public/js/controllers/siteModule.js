@@ -40,7 +40,7 @@ define([
             'Restangular',
             '$location',
             function ($scope, Restangular, $location) {
-              console.log("ketamine")
+              console.log("ketamine", $location)
             /**  Restangular.one("follow/followerNb/", $scope.myself.usr_id).get().then(function(result) {
                 $scope.nbFollowers = result.count;
               });
@@ -155,6 +155,7 @@ define([
             'Restangular',
             '$location',
             function ($scope, Restangular, $location) {
+              console.log("Login Controller")
                 if ($scope.myself && $scope.myself.usr_id) $location.url('/')
                 $scope.$view = 'login';
                 $scope.User = {};
@@ -171,7 +172,7 @@ define([
                     }).then(function(result) {
                         $scope.querying = false;
                         if (result.code != 0) return $scope.errors = result.errors;
-                        $scope.login(result.account);
+                        //scope.User.login(result.account);
                         $location.url('/');
                     });
                 };
