@@ -68,32 +68,37 @@
   id="header">
   <!-- begin container-fluid -->
   <!-- begin navbar -->
-  <div class="container-fluid">
-    <div class="navbar-header col-md-12">
       <!-- begin mobile sidebar expand / collapse button -->
-      <div class="col-md-2">
-        <a href="#/" class="navbar-brand">
-          <img src="/img/logo2.png" id="logoPSP"></img>
-        </a>
-      </div>
-      <div style="float:right">
         <!-- begin header navigation right -->
-        <div class="container">
-          <div class="col-md-6">
-            <div class="col-md-4 navbar-brand">
-              <img id="notif" src="/img/music.png">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            <div class="col-md-2">
+              <a href="#/" class="navbar-brand">
+                <img src="/img/logo2.png" id="logoPSP"></img>
+              </a>
+            </div>
+            <div class="col-md-8">
+              <div class="col-md-4 navbar-brand">
+                <img id="notif" src="/img/music.png">
+              </div>
+              <div class="col-md-4">
+                <img id="france" src="/img/france.png" style="margin-top:3%;">
+              </div>
             </div>
             <div class="col-md-2">
-              <img id="france" src="/img/france.png" style="margin-top:20%; ">
+              <button type="button" class="btn btn-light btn-block" style="margin-top:3%; background-color:#BBBBBB; color:#FFFFFF" ng-click="Login()">Login</button>
             </div>
           </div>
-
         </div> <!-- container navbar -->
-        <!-- end header navigation right -->
-      </div>
 
-    </div>
+        <!-- end header navigation right -->
+
+  <!--div style="float:right">
   </div>
+  <div class="navbar-header col-md-12">
+  </div>
+  <div class="container-fluid">
+  </div-->
   <!-- end container-fluid -->
 </div>
 <!--<div ng-if="!!myself" id="sidebar" class="sidebar">

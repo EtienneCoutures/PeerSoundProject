@@ -32,6 +32,11 @@ define([
 
                 $scope.display = 'all'
 
+                $scope.Login = function() {
+                  console.log("login");
+                  $location.url('/login');
+                };
+
               /*  Restangular.one('playlist').get({
                 }).then(function(result) {
                   $scope.playlist = result
