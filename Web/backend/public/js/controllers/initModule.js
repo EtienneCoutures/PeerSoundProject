@@ -44,7 +44,7 @@ define([
 
       $scope.$on('$routeChangeStart', function() {
         console.log("ca fait quoi ca?")
-        if (!$scope.myself && $location.path() != '/login') {
+        /*if (!$scope.myself && $location.path() != '/login') {
         console.log("if")
           Restangular.one('auth', 'me').get().then(function(result) {
             $scope.myself = result.account;
@@ -57,7 +57,7 @@ define([
           });
         } else if ($location.path() == '/login') {
           $scope.loaded = true;
-        }
+        }*/
       });
 
 $scope.login = function(user) {
