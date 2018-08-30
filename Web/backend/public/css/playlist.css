@@ -55,8 +55,8 @@ table.notifTable thead th {
 }
 
 .label-txt{
-  color: #001D2B;
-  font-size: 25px;
+  color: #004D2B;
+  font-size: 15px;
 }
 
 .newPlaylist{
@@ -76,8 +76,8 @@ table.notifTable thead th {
 
 .panel-txt{
   font-family: Arial,Helvetica,sans-serif;
-  font-size: 40px;
-  margin-top: 60px;
+  font-size: 100px;
+  margin-top: 20px;
 }
 
 .panel{
