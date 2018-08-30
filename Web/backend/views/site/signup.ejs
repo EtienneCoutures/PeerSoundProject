@@ -1,15 +1,51 @@
-THIS IS THE SIGNUP
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<p id="FormTest" value="lolool">gg</p>
-<button ng-click="signUp()" type="button" class=" btn" style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:350px;">Valider l'inscription</button>
+    <div class="row">
+      <div class="panel-body">
+        <div class="form-group" style="margin-bottom:5%">
+          <form class="form-group" name="newPlaylist" ng-submit="savePlaylist()">
+            <div class="form">
+              <div class="col-md-3">
+                <label class="label-txt" for="name">adresse email</label>
+              </div>
+              <div class="col-md-8">
+                <input type="text" style="width:800px;"ng-model="playlist.playlist_name" class="form-control"  required>
+              </div>
+              <div class="col-md-1 glyphicon glyphicon-envelope" style="font-size:35px; margin-top:4px;"></div>
+            </div>
+            <div class="form">
+              <div class="col-md-3">
+                <label class="label-txt" for="style">Pseudo</label>
+              </div>
+              <div class="col-md-8">
+                <input type="text" style="width:800px;"ng-model="playlist.playlist_name" class="form-control"  required>
+              </div>
+              <div class="col-md-1 glyphicon glyphicon-user"style="font-size:35px; margin-top:4px;"></div>
+            </div>
+            <div class="form">
+              <div class="col-md-3">
+                <label class="label-txt" for="description">Mot De Passe</label>
+              </div>
+              <div class="col-md-8">
+                <input type="text" ng-model="playlist.playlist_description" style="width:800px;" class="form-control" required>
+              </div>
+                <div class="col-md-1 glyphicon glyphicon-lock" style="font-size:35px; margin-top:4px;"></div>
+            </div>
+            <div class="form">
+              <div class="col-md-3">
+                <label class="label-txt" for="comment">Confirmation de mot de passe</label>
+              </div>
+              <div class="col-md-8">
+                <input type="text"style="width:800px;" ng-model="playlist.playlist_comment" class="form-control" required>
+              </div>
+              <div class="col-md-1 glyphicon glyphicon-lock" style="font-size:35px; margin-top:4px;"></div>
+            </div>
+            <div class="row" style="margin-top:100px; margin-bottom:5px;">
+                <div class="col-md-6">
+              </div>
+              <div class="col-md-2">
+                <button type="submit"  class="btn" style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:150px;">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
