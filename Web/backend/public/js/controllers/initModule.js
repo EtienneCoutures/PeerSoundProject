@@ -37,24 +37,6 @@ define([
                   $location.url('/login');
                 };
 
-              /*  Restangular.one('playlist').get({
-                }).then(function(result) {
-                  $scope.playlist = result
-                })
-*/
-              /*  $scope.getMessage = function() {
-                  Restangular.one('message').get({where: {
-                    dest_id: $scope.myself.usr_id,
-                  }}).then(function(result) {
-                    $scope.myself.messages_read = []
-                    $scope.myself.messages_unread = []
-                    for (var i = 0 ; i != result.length ; ++i) {
-                      result[i].is_read == true ? $scope.myself.messages_read.push(result[i]) :   $scope.myself.messages_unread.push(result[i])
-                    }
-                  })
-                }
-*/
-
                 Restangular.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
                     if (data.code == -2) {
                       console.log("refresh")
@@ -72,6 +54,7 @@ define([
                 }
 
                 $scope.redirectTo = function(type, id) {
+                  console.log("hello")
                   return $location.url('/' + type +'/' + id)
                 }
 
@@ -109,6 +92,7 @@ define([
                 /* searching fnct */
 
           $scope.goTo = function(path, id) {
+            console.log("path")
             return $location.url((path + id).toString());
           }
 

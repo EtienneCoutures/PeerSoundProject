@@ -10,6 +10,10 @@ define([
                     templateUrl: '/partials/site/homePage',
                     controller: 'SiteController'
                 })
+                .when('/signup',{
+                    templateUrl: '/partials/site/signup',
+                    controller: 'SignupController'
+                })
                 .when('/login', {
                     templateUrl: '/partials/site/login',
                     controller: 'LoginController'
@@ -41,6 +45,7 @@ define([
             '$location',
             function ($scope, Restangular, $location) {
               console.log("ketamine", $location)
+
             /**  Restangular.one("follow/followerNb/", $scope.myself.usr_id).get().then(function(result) {
                 $scope.nbFollowers = result.count;
               });
@@ -49,7 +54,34 @@ define([
                   $scope.playlist = result
                 })*/
             }
-        ])
+          ])
+          .controller('SignupController', [
+            '$scope',
+            '$http',
+            '$document',
+            function ($scope, $http, $document) {
+              $scope.signUp = function() {
+                var url = "https://localhost:8000/api/signup"
+                var data = document.getElementById("FormTest")
+                var config = {
+                  headers : {
+                    'Content-Type': '/application/json;charset=utf-8;'
+                  }
+                }
+              /*  $http.post(url, data, config)
+                .success(function (data, status, headers, config) {
+                  console.log("success")
+                })
+                .error(function (data, status, header, config) {
+                  console.log("fail")
+                });
+              /*  if (document.getElementById('password').value != document.getElementById('confirm').value) {
+                  return alert('Passwords do not match');
+                }
+                document.forms["signup-form"].submit();*/
+              }
+            }
+          ])
         .controller('DownloadController', [
             '$scope',
             function ($scope) {
