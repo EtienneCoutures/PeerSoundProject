@@ -60,7 +60,15 @@ define([
             '$http',
             '$document',
             function ($scope, $http, $document) {
+              $scope.passwordConfirmation = ""
+              $scope.newUser = {
+                email:"",
+                password: "",
+                login:""
+              };
               $scope.signUp = function() {
+                console.log($scope.newUser)
+                console.log($scope.passwordConfirmation)
                 var url = "https://localhost:8000/api/signup"
                 var data = document.getElementById("FormTest")
                 var config = {
