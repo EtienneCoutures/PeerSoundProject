@@ -64,7 +64,8 @@ define([
                 .then(
                   function(response){
                     console.log("la")
-                    console.log(response)
+                    $scope.myself = response;
+                    $location.url("/")
                     //$scope.login()
                     // success callback
                   },
