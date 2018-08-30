@@ -1,13 +1,13 @@
     <div class="row">
       <div class="panel-body">
         <div class="form-group" style="margin-bottom:5%">
-          <form class="form-group" name="signup-form" ng-submit="signup()">
+          <form class="form-group" method="POST" action="/signup" id="signup-form" name="signup-form" ng-submit="signUp()">
             <div class="form">
               <div class="col-md-3">
                 <label class="label-txt" for="email">Adresse Email</label>
               </div>
               <div class="col-md-8">
-                <input type="email" style="width:800px;"ng-model="newUser.email" class="form-control"  required>
+                <input type="email" style="width:800px;" class="form-control" id="login" name="login" required>
               </div>
               <div class="col-md-1 glyphicon glyphicon-envelope" style="font-size:35px; margin-top:4px;color:#6B92A5;"></div>
             </div>
@@ -25,7 +25,7 @@
                 <label class="label-txt" for="description">Mot De Passe</label>
               </div>
               <div class="col-md-8">
-                <input type="password" ng-model="newUser.password" style="width:800px;" class="form-control" required>
+                <input type="password" ng-model="newUser.password" name="password" id="password" style="width:800px;" class="form-control" required>
               </div>
                 <div class="col-md-1 glyphicon glyphicon-lock" style="font-size:35px; margin-top:4px;color:#6B92A5;"></div>
             </div>

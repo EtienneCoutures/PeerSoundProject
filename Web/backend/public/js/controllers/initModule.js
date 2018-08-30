@@ -20,7 +20,7 @@ define([
                 $translatePartialLoader.addPart('system');
                 $translatePartialLoader.addPart('site');
 
-                $scope.myself = false;
+                $scope.myself = "i do exist"; // a set a false dés que ca remarche
                 $scope.sender_usr = []
 
 
@@ -73,13 +73,11 @@ define([
                     }*/
                 });
 
-              /*  $scope.login = function(user) {
+               $scope.login = function(user) {
                   $scope.myself = user;
-                    $scope.follow()
-                    $scope.getMessage()
                   };
 
-                  $scope.userQuery = function() {
+              /*    $scope.userQuery = function() {
                         var type = 'all'
                       var query = document.getElementById("search").value
                       if (query) {

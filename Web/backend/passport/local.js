@@ -154,18 +154,13 @@ module.exports = function (app, passport) {
             }]
         ]),
         function (req, res, next) {
-          console.log("post/signup")
             passport.authenticate('signup', function (err, user, info, status) {
-                console.log(user);
                 if (!user) {
-                  console.log(req)
-                  console.log(res)
-                  console.log(err)
-                  console.log("!user")
                   return res.redirect('/signup');
                 }
                 req.login(user, function () {
                     res.redirect('/');
+
                 });
             })(req, res, next);
         });
