@@ -55,8 +55,8 @@ table.notifTable thead th {
 }
 
 .label-txt{
-  color: #004D2B;
-  font-size: 15px;
+  color:#6B92A5;
+  font-size: 20px;
 }
 
 .newPlaylist{
@@ -72,6 +72,7 @@ table.notifTable thead th {
   height:40px;
   width: 50%;
   color: black;
+  border-color: #6B92A5;
 }
 
 .panel-txt{
@@ -84,10 +85,13 @@ table.notifTable thead th {
   height: 150px;
   margin-top: 20px;
   background-color: #E9E9E9;
-  border: 2px;
+  border: 1%;
   margin-top: 10px;
 }
 
+.panel-body{
+  margin-top: 8%;
+}
 
 .playlist {
   transition:All 1s ease;
