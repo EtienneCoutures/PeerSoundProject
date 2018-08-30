@@ -59,7 +59,6 @@ module.exports = function (app, passport) {
             passReqToCallback: true
         },
         function (req, username, password, done) {
-          console.log("local.js")
             var form = req.body;
             app.models['User'].find({
                 where: {
@@ -122,7 +121,6 @@ module.exports = function (app, passport) {
 
     router.post('/api/auth/login',
         function (req, res, next) {
-          console.log("auth/login")
             passport.authenticate('login', function (err, user, info, status) {
                 if (!user) {
                     return res.json({
@@ -154,7 +152,6 @@ module.exports = function (app, passport) {
             }]
         ]),
         function (req, res, next) {
-          console.log(req)
             passport.authenticate('signup', function (err, user, info, status) {
                 if (!user) {
                   return res.redirect('/signup');

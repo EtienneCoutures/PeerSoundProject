@@ -39,17 +39,15 @@ define([
             '$scope',
             '$http',
             '$document',
-            function ($scope, $http, $document) {
+            '$location',
+            function ($scope, $http, $document, $location) {
               $scope.passwordConfirmation = ""
               $scope.newUser = {
                 email:"",
                 password: "",
                 login:""
               };
-              console.log($scope.myself)
               $scope.signUp = function() {
-
-
                   var url = "https://localhost:8000/signup"
                   var data = {login: $scope.newUser.login, password: $scope.newUser.password}
                   console.log(data)
@@ -58,20 +56,16 @@ define([
                       'Content-Type': 'application/json;charset=utf-8;'
                     }
                   }
-
-
                 $http.post(url, data, config).then(
                   function(response){
                     console.log(response)
                     $scope.myself = response;
-                    //$scope.login()
-                    // success callback
+                    return $location.url("/")
                   },
                   function(response){
                     console.log("la ici")
                     console.log(response)
                     return;
-                    // failure callback
                   }
                 );
               /*  if (document.getElementById('password').value != document.getElementById('confirm').value) {
@@ -104,7 +98,7 @@ define([
                     Restangular.all('auth/login').post({
                         login: $scope.User.login,
                         password: $scope.User.password,
-                        remember: $scope.User.remember
+                        remember: true
                     }).then(function(result) {
                         $scope.querying = false;
                         if (result.code != 0) return $scope.errors = result.errors;
