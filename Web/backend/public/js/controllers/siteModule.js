@@ -51,7 +51,7 @@ define([
 
 
                   var url = "https://localhost:8000/signup"
-                  var data = document.getElementById("signup-form")
+                  var data = {login: $scope.newUser.login, password: $scope.newUser.password}
                   console.log(data)
                   var config = {
                     headers : {
@@ -62,15 +62,15 @@ define([
 
                 $http.post(url, data, config).then(
                   function(response){
-                    console.log("la")
+                    console.log(response)
                     $scope.myself = response;
                     //$scope.login()
                     // success callback
                   },
-
                   function(response){
                     console.log("la ici")
                     console.log(response)
+                    return;
                     // failure callback
                   }
                 );

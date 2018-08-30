@@ -38,7 +38,6 @@ define([
       });
 
       $scope.redirectTo = function(type, id) {
-        console.log("hello")
         return $location.url('/' + type +'/' + id)
       }
 
