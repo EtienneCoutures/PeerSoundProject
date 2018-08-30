@@ -60,17 +60,17 @@ define([
                   }
 
 
-                $http.post(url, data, config)
-                .then(
+                $http.post(url, data, config).then(
                   function(response){
                     console.log("la")
                     $scope.myself = response;
-                    $location.url("/")
                     //$scope.login()
                     // success callback
                   },
+
                   function(response){
                     console.log("la ici")
+                    console.log(response)
                     // failure callback
                   }
                 );

@@ -160,9 +160,8 @@ module.exports = function (app, passport) {
                   return res.redirect('/signup');
                 }
                 req.login(user, function () {
-                    return res.json({
-                      code: 0,
-                      user: user})
+                  return res.redirect('/');
+//                    return res.status(404).send({ user: user });
                 });
             })(req, res, next);
         });
