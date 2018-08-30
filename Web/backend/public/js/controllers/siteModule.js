@@ -65,10 +65,10 @@ define([
                 var data = document.getElementById("FormTest")
                 var config = {
                   headers : {
-                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+                    'Content-Type': '/application/json;charset=utf-8;'
                   }
                 }
-                $http.post(url, data, config)
+              /*  $http.post(url, data, config)
                 .success(function (data, status, headers, config) {
                   console.log("success")
                 })
