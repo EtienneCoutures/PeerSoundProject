@@ -160,7 +160,6 @@ module.exports = function (app, passport) {
                 }
                 req.login(user, function () {
                     res.redirect('/');
-
                 });
             })(req, res, next);
         });

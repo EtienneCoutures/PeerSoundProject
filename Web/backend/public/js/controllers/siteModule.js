@@ -28,6 +28,10 @@ define([
             'Restangular',
             '$location',
             function ($scope, Restangular, $location) {
+              console.log("log de tout le scope = >")
+              console.log($scope)
+
+              console.log("log de scope myself = >")
               console.log($scope.myself)
             }
           ])
@@ -61,10 +65,11 @@ define([
                   function(response){
                     console.log("la")
                     console.log(response)
-                    $scope.myself = response
+                    //$scope.login()
                     // success callback
                   },
                   function(response){
+                    console.log("la ici")
                     // failure callback
                   }
                 );
