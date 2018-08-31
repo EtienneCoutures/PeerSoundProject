@@ -76,14 +76,37 @@
                 <img src="/img/logo2.png" id="logoPSP"></img>
               </a>
             </div>
-            <div class="col-md-8">
-              <div class="col-md-4 navbar-brand">
-                <img id="notif" src="/img/music.png">
-              </div>
-
+            <div class="col-md-7">
+            </div>
+            <div class="col-md-1">
+              <div class="m-5"><img id="notif" src="/img/music.png"></div>
             </div>
             <div class="col-md-2">
-              <button type="button" class="btn btn-light btn-block" style="margin-top:3%; background-color:#BBBBBB; color:#FFFFFF" ng-click="Login()">Login</button>
+              <div class="btn-group btn-block p-0">
+                <button type="button" class="btn btn-light btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-top:3%; background-color:#BBBBBB; color:#FFFFFF">Login</button>
+                <div class="dropdown-menu btn-block dropdown-menu-right p-5 mt-2">
+                  <form class="p-5">
+                    <li><div class="form-group">
+                      <label for="exampleDropdownFormEmail1">Email address</label>
+                      <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+                    </div></li>
+                    <li><div class="form-group">
+                      <label for="exampleDropdownFormPassword1">Password</label>
+                      <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+                    </div></li>
+                    <li><div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                      <label class="form-check-label" for="dropdownCheck">
+                        Remember me
+                      </label>
+                    </div></li>
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                  </form>
+                  <div class="divider"></div>
+                  <li><a class="dropdown-item" href="/#/signup">New around here? Sign up</a></li>
+                  <li><a class="dropdown-item" href="#">Forgot password?</a></li>
+                </div>
+              </div>
             </div>
                 <!-- Dropdown menu links -->
               </div>
