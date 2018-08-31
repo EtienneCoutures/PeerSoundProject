@@ -27,10 +27,11 @@ define([
             '$scope',
             'Restangular',
             '$location',
-            function ($scope, Restangular, $location) {
+            '$rootScope',
+            function ($scope, Restangular, $location, $rootScope) {
               console.log("log de tout le scope = >")
               console.log($scope)
-
+              console.log($rootScope.name)
               console.log("log de scope myself = >")
               console.log($scope.myself)
             }

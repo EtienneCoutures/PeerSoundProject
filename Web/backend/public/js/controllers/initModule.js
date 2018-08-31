@@ -16,11 +16,12 @@ define([
     '$cookies',
     'Restangular',
     '$route',
-    function($scope, $translatePartialLoader, $location, $translate, $cookies, Restangular, $route)   {
+    '$rootScope',
+    function($scope, $translatePartialLoader, $location, $translate, $cookies, Restangular, $route, $rootScope  )   {
       $translatePartialLoader.addPart('system');
       $translatePartialLoader.addPart('site');
       $scope.$id = 1
-
+      $rootScope.name = 'anonymous'
       $scope.myself = false; // a set a false dés que ca remarche
       $scope.sender_usr = []
       $scope.User = {};
@@ -53,6 +54,7 @@ define([
           console.log($scope.myself)
         }).catch(function(err) {
           $scope.myself = false;
+          console.log("erreur")
         });
         /*(!$scope.myself) {
         console.log("if")
