@@ -60,7 +60,8 @@ define([
                   function(response){
                     console.log(response)
                     $scope.myself = response;
-                    return $location.url("/")
+                    console.log("la bas")
+                    $location.url("/")
                   },
                   function(response){
                     console.log("la ici")
