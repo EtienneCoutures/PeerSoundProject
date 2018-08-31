@@ -33,9 +33,10 @@ define([
       };
 
       Restangular.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+        console.log(data)
         if (data.code == -2) {
           console.log("refresh")
-          $location.url('/login');
+          $location.url('/');
         }
         return data;
       });
