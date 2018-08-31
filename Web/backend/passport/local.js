@@ -122,6 +122,7 @@ module.exports = function (app, passport) {
     router.post('/api/auth/login',
         function (req, res, next) {
             passport.authenticate('login', function (err, user, info, status) {
+                console.log(user);
                 if (!user) {
                     return res.json({
                         code: -1,

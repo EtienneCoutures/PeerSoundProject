@@ -16,12 +16,15 @@ define([
     '$cookies',
     'Restangular',
     '$route',
-    function($scope, $translatePartialLoader, $location, $translate, $cookies, Restangular, $route) {
+    '$rootScope',
+    function($scope, $translatePartialLoader, $location, $translate, $cookies, Restangular, $route, $rootScope  )   {
       $translatePartialLoader.addPart('system');
       $translatePartialLoader.addPart('site');
-
+      $scope.$id = 1
+      $rootScope.name = 'anonymous'
       $scope.myself = false; // a set a false dés que ca remarche
       $scope.sender_usr = []
+      $scope.User = {};
       console.log("on passe bien dans le init")
 
       $scope.Login = function() {
@@ -42,25 +45,35 @@ define([
       }
 
       $scope.$on('$routeChangeStart', function() {
-        console.log("ca fait quoi ca?")
-        /*if (!$scope.myself && $location.path() != '/login') {
-        console.log("if")
-          Restangular.one('auth', 'me').get().then(function(result) {
-            $scope.myself = result.account;
-            $scope.loaded = true;
-            console.log("auth")
-            console.log($scope.myself)
-          }).catch(function(err) {
-            $location.url('/login');
-            $scope.loaded = true;
-          });
-        } else if ($location.path() == '/login') {
+        console.log($scope)
+        Restangular.one('auth', 'me').get().then(function(result) {
+          $scope.myself = result.account;
           $scope.loaded = true;
+          console.log("auth")
+          console.log($scope.myself)
+        }).catch(function(err) {
+          $scope.myself = false;
+          console.log("erreur")
+        });
+        /*(!$scope.myself) {
+        console.log("if")
         }*/
       });
 
-$scope.login = function(user) {
-  $scope.myself = user;
+$scope.signin = function() {
+  $scope.errors = null;
+  console.log($scope.User);
+  $scope.querying = true;
+  Restangular.all('auth/login').post({
+      login: $scope.User.email,
+      password: $scope.User.password,
+      remember: true
+  }).then(function(result) {
+      console.log(result);
+      $scope.querying = false;
+      if (result.code != 0) return $scope.errors = result.errors;
+      $scope.myself = result.account;
+  })
 };
 
 $scope.goTo = function(path, id) {
