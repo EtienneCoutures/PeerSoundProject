@@ -1,0 +1,8 @@
+{
+  "name": "apidoc_Psp",
+    "version": "1.0.0",
+    "description": "api PeerSoundproject all backend description",
+    "title": "Backend PSP API",
+    "url" : "https://api.psp.com/v1",
+    "sampleUrl": "https://api.psp.com/v1"
+}

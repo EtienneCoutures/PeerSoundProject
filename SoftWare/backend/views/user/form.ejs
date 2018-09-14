@@ -1,0 +1,208 @@
+<br>
+<!-- end row -->
+<div class="row">
+    <!-- begin col-12 -->
+    <div class="col-md-10">
+        <!-- begin panel -->
+        <div class="panel panel-inverse" style="margin-bottom:50px">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                </div>
+                <h4 class="panel-title"><%= translate('user', 'title') %></h4>
+            </div>
+            <div class="panel-body">
+                <form enctype="multipart/form-data"
+                      style="position:relative"
+                      class="form-horizontal form-bordered"
+                      id="user-form">
+                    <div ng-class="{hidden: !errors}">
+                        <div class="alert alert-danger">
+                            <ul>
+                                <li ng-repeat="error in errors">{{ error.message | translate }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label col-md-4 col-sm-4"
+                                       for="User_usr_login">
+                                    {{ 'usr_login' | translate }}
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control"
+                                           id="User_usr_login"
+                                           name="User[usr_login]"
+                                           ng-model="User.usr_login"
+                                           type="text"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4 col-sm-4"
+                                       for="User_usr_password">
+                                    {{ 'usr_password' | translate }}
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control"
+                                           id="User_usr_password"
+                                           name="User[usr_password]"
+                                           ng-model="User.usr_password"
+                                           type="password"
+                                           ng-required="!!User.isNew"/>
+                                    <div id="passwordStrengthDiv"
+                                         class="is0 m-t-5">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4 col-sm-4"
+                                       for="User_usr_email">
+                                    {{ 'usr_email' | translate }}
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control"
+                                           id="User_usr_email"
+                                           name="User[usr_email]"
+                                           ng-model="User.usr_email"
+                                           type="text"
+                                           required="required"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4 col-sm-4"
+                                       for="User_usr_gender">
+                                    {{ 'usr_gender' | translate }}
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <select class="form-control default-select2"
+                                            id="User_usr_gender"
+                                            name="User[usr_gender]"
+                                            ng-model="User.usr_gender">
+                                        <option value=""></option>
+                                        <option value="man" translate>
+                                            man
+                                        </option>
+                                        <option value="woman" translate>
+                                            woman
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4 col-sm-4"
+                                       for="User_usr_firstname">
+                                    {{ 'usr_firstname' | translate }}
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control"
+                                           id="User_usr_firstname"
+                                           name="User[usr_firstname]"
+                                           ng-model="User.usr_firstname"
+                                           type="text"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4 col-sm-4"
+                                       for="User_usr_lastname">
+                                    {{ 'usr_lastname' | translate }}
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control"
+                                           id="User_usr_lastname"
+                                           name="User[usr_lastname]"
+                                           ng-model="User.usr_lastname"
+                                           type="text"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4 col-sm-4"
+                                       for="User_usr_phone">
+                                    {{ 'usr_phone' | translate }}
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control"
+                                           id="User_usr_phone"
+                                           name="User[usr_phone]"
+                                           ng-model="User.usr_phone"
+                                           type="text"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4 col-sm-4"
+                                       for="User_usr_birthday">
+                                    {{ 'usr_birthday' | translate }}
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input class="form-control"
+                                           id="User_usr_birthday"
+                                           name="User[usr_birthday]"
+                                           ng-model="User.usr_birthday"
+                                           type="text"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4 col-sm-4"
+                                       for="User_usr_role">
+                                    {{ 'usr_role' | translate }}
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <select class="form-control default-select2"
+                                            id="User_usr_role"
+                                            name="User[usr_role]"
+                                            ng-model="User.usr_role"
+                                            required="required">
+                                        <option value=""></option>
+                                        <option value="super-admin" translate>
+                                            super-admin
+                                        </option>
+                                        <option value="admin" translate>
+                                            admin
+                                        </option>
+                                        <option value="member" translate>
+                                            member
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4 col-sm-4"
+                                       for="User_usr_status">
+                                    {{ 'usr_status' | translate }}
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <select class="form-control default-select2"
+                                            id="User_usr_status"
+                                            name="User[usr_status]"
+                                            ng-model="User.usr_status">
+                                        <option value=""></option>
+                                        <option value="waiting" translate>
+                                            waiting
+                                        </option>
+                                        <option value="active" translate>
+                                            active
+                                        </option>
+                                        <option value="lock" translate>
+                                            lock
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 col-md-2 col-sm-offset-4 col-md-offset-5">
+                            <button class="btn btn-primary" ng-click="save()" type="button" style="width: 100%">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end panel -->
+    </div>
+    <!-- end col-12 -->
+</div>
+<!-- end row -->

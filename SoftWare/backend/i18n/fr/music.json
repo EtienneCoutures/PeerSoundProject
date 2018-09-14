@@ -1,0 +1,18 @@
+{
+  "title": "Musique",
+  "music_id": "Musique",
+  "music_name": "Nom de la Musique",
+  "music_group": "Artiste de la Musique",
+  "music_url": "URL de la Musique",
+  "music_date": "Date de publication de la Musique",
+  "music_description": "Description de la Musique",
+  "music_comment": "Commentaire",
+  "music_picture_default": "Image par Défaut",
+  "music_insert": "Music Insert",
+  "music_update": "Music Update",
+  "music_source": "Music Source",
+  "youtube": "Youtube",
+  "spotify": "Spotify",
+  "deezer": "Deezer",
+  "else": "Else"
+}

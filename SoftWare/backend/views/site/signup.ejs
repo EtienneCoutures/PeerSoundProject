@@ -1,0 +1,49 @@
+    <div class="row">
+      <div class="panel-body">
+        <div class="form-group" style="margin-bottom:5%">
+          <form class="form-group"  id="signup-form" name="signup-form">
+            <div class="form">
+              <div class="col-md-3">
+                <label class="label-txt" for="email">Adresse Email</label>
+              </div>
+              <div class="col-md-8">
+                <input type="email" style="width:800px;" ng-model="newUser.login" class="form-control" id="login" name="login" required>
+              </div>
+              <div class="col-md-1 glyphicon glyphicon-envelope" style="font-size:35px; margin-top:4px;color:#6B92A5;"></div>
+            </div>
+            <div class="form">
+              <div class="col-md-3">
+                <label class="label-txt" for="style">Pseudo</label>
+              </div>
+              <div class="col-md-8">
+                <input type="text" style="width:800px;" class="form-control"  required>
+              </div>
+              <div class="col-md-1 glyphicon glyphicon-user"style="font-size:35px; margin-top:4px;color:#6B92A5;"></div>
+            </div>
+            <div class="form">
+              <div class="col-md-3">
+                <label class="label-txt" for="description">Mot De Passe</label>
+              </div>
+              <div class="col-md-8">
+                <input type="password" ng-model="newUser.password" name="password" id="password" style="width:800px;" class="form-control" required>
+              </div>
+                <div class="col-md-1 glyphicon glyphicon-lock" style="font-size:35px; margin-top:4px;color:#6B92A5;"></div>
+            </div>
+            <div class="form">
+              <div class="col-md-3">
+                <label class="label-txt" for="comment">Confirmation De Mot De Passe</label>
+              </div>
+              <div class="col-md-8">
+                <input type="password"style="width:800px;" ng-model="passwordConfirmation" class="form-control" required>
+              </div>
+              <div class="col-md-1 glyphicon glyphicon-lock" style="font-size:35px; margin-top:4px; color:#6B92A5;"></div>
+            </div>
+            <div class="row" style="margin-top:100px; margin-bottom:5px;">
+              <div class="col-md-6">
+                <button ng-click="signUp()"  class="btn" style="font-size:20px; border-radius:10px; background-color:#6B92A5; color:white; width:150px;">Inscription</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
