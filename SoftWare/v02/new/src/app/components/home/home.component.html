@@ -1,0 +1,29 @@
+<!--<div class="container">
+  <h1 class="title">
+    {{ 'PAGES.HOME.TITLE' | translate }}
+  </h1>
+</div>-->
+<div style="width: 100%; height: 100%">
+
+  <div class="row">
+    <div class="col-md-1" style="background-color:green">
+      <app-playlist-list (playlistChanged)="playlistChangedHandler($event)"></app-playlist-list>
+    </div>
+
+    <div class="col-md-2" style="background-color:red">
+      <app-options-pl [playlist]="selectedPl"></app-options-pl>
+    </div>
+
+    <div class="col-md-7" style="background-color:blue">
+      <div class="row" style="height:70%;background-color:cyan;margin:0;width:100%">
+        <router-outlet name="homeOutlet"></router-outlet>
+      </div>
+      <div class="row" style="background-color:purple;margin:0;width:100%"></div>
+    </div>
+
+    <div class="col-md-2" style="background-color:yellow">
+    </div>
+
+  </div>
+
+</div>
