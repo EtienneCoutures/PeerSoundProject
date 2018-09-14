@@ -62,7 +62,6 @@ export class DialogOverviewExampleDialog {
 
   onNoClick(): void {
     this.dialogRef.close(null);
-
   }
 
   create() {

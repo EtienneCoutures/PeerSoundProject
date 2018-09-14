@@ -1,0 +1,26 @@
+<form class="form-deprecated instantInviteModal-5L33Qh">
+  <div class="form-header">
+    <header>Inviter des gens sur la playlist "{{data.pl.playlist_name}}"</header>
+    <div class="blurb-ArHxCz">Email de la personne à inviter : </div>
+  </div>
+  <div class="form-inner">
+    <div class="clipboardInputInner-dxVheg clipboardInput-b0B55c">
+      <div class="clipboardInputInner-oj8y-S">
+        <input id="email" [ngModelOptions]="{standalone: true}" [(ngModel)]="inviteEmail" placeholder="Email">
+
+        </div>
+      </div>
+      <div class="expireText-NeAc7v">Les invitations doivent être acceptées.</div>
+      <span id="error" style="color:red"></span>
+    </div>
+    <!--<div class="form-actions">
+        <div class="checkbox">
+          <div class="checkbox-inner">
+            <input type="checkbox">
+              <span></span>
+            </div>
+            <span>Admin</span>
+          </div>-->
+          <button mat-raised-button type="button" (click)="invite()">Inviter</button>
+        <!--<button class="advanced-PZvMk0">Inviter !</button>-->
+  </form>

@@ -1,3 +1,8 @@
-<p>
-  music-list works!
-</p>
+
+  <mat-list>
+
+    <mat-list-item *ngFor="let music of musics">
+      <app-music [music]="music" (click)="playMusic(music)"></app-music>
+    </mat-list-item>
+
+  </mat-list>

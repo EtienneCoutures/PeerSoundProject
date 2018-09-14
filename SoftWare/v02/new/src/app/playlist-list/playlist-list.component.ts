@@ -18,35 +18,28 @@ export interface Section {
 export class PlaylistListComponent implements OnInit {
 
   @Output() playlistChanged: EventEmitter<Playlist> = new EventEmitter();
-  playlists: Playlist[];
-  selected: Playlist;
+  @Input() playlists: Playlist[];
 
   constructor(
     private userService: UserService
   ) {
-      this.selected = null;
-    //this.playlists = [{name : "penis"}];
-    //this.playlists.push(new PlaylistComponent());//;
-    //this.playlists[1] = ;
-    //this.playlists[2] =
-    this.playlists = [{playlist_name : "sperme"}, {playlist_name : "sperme2"}];
-  }
+      this.playlists = [{playlist_name : "sperme"}, {playlist_name : "sperme2"}];
+    }
 
   ngOnInit() {
-    this.userService.getUserPlaylists()
+    /*this.userService.getUserPlaylists()
     .subscribe(playlists => {
       this.playlists = playlists;
       this.selectPlaylist(this.playlists[0]);
     }, error => {
       console.log('error while retrieving playlist: ', error);
       this.playlists = [{playlist_name : "sperme"}, {playlist_name : "sperme2"}];
-    });
+    });*/
   }
 
   ngOnDestroy() {}
 
   selectPlaylist(pl: Playlist) {
-    this.selected = pl;
     this.playlistChanged.emit(pl);
     console.log('selected pl: ', pl);
   }

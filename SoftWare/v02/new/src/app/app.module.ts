@@ -28,6 +28,7 @@ import { MusicComponent } from './music/music.component';
 import { CreatePlaylistComponent } from './create-playlist/create-playlist.component';
 import { NewPlaylistComponent } from './new-playlist/new-playlist.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { DialogInvitePeople } from './options-pl/options-pl.component';
 
 import { MatDialogModule,
          MatDialogRef,
@@ -47,6 +48,8 @@ import {MatIconRegistry} from '@angular/material';
 import { DialogOverviewExampleDialog } from './create-playlist/create-playlist.component';
 import { SocialBoutonComponent } from './social-bouton/social-bouton.component';
 import { OptionsPlComponent } from './options-pl/options-pl.component';
+import { UserComponent } from './user/user.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -67,8 +70,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     CreatePlaylistComponent,
     NewPlaylistComponent,
     DialogOverviewExampleDialog,
+    DialogInvitePeople,
     SocialBoutonComponent,
-    OptionsPlComponent
+    OptionsPlComponent,
+    UserComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
@@ -95,7 +101,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     })
   ],
   entryComponents: [
-    DialogOverviewExampleDialog
+    DialogOverviewExampleDialog,
+    DialogInvitePeople
   ],
   providers: [ElectronService],
   bootstrap: [AppComponent]

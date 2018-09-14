@@ -1,5 +1,7 @@
+import { Music } from '../music/music';
+
 export class Playlist {
-  MusicLink?: any;
+  MusicLink?: Music[];
   playlist_comment?: string;
   playlist_creator?: number;
   playlist_description?: string;

@@ -3,6 +3,7 @@ import { LoginService } from '../../login/login.service';
 import { Account } from '../../account';
 import { UserService } from '../../user.service';
 import { Playlist } from '../../playlist/playlist';
+import { Music } from '../../music/music';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   private account: Account;
   private subs: any[];
   private selectedPl: Playlist;
-
+  private playlists: Playlist[];
+  private musics: Music[];
 
   constructor(
     private loginService: LoginService,
@@ -27,6 +29,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     console.log('account: ', this.account.authorization);
     this.userService.setAuthorizationToken(this.account);
+
+    this.userService.getUserPlaylists()
+    .subscribe(playlists => {
+      this.playlists = playlists;
+      this.selectedPl = this.playlists[0];
+      this.musics = this.playlists[0].MusicLink;
+    }, error => {
+      console.log('error while retrieving playlist: ', error);
+    });
 
     /*let sub = this.userService.getUserPlaylists(this.account.usr_id)
       .subscribe(playlists => {
@@ -42,7 +53,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   playlistChangedHandler(pl: Playlist) {
-    console.log('win');
     console.log('pl change: ', pl);
     this.selectedPl = pl;
   }

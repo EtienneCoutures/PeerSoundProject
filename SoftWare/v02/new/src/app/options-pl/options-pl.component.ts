@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Playlist } from '../playlist/playlist';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatButton } from '@angular/material';
+import { PlaylistService, Invitation } from '../playlist/playlist.service';
 
 @Component({
   selector: 'app-options-pl',
@@ -9,15 +11,62 @@ import { Playlist } from '../playlist/playlist';
 export class OptionsPlComponent implements OnInit {
 
   @Input() playlist: Playlist;
+  inviteEmail: string;
 
-  constructor() { }
+  constructor(
+    public dialog: MatDialog,
+    public plService: PlaylistService
+  ) { }
+
+  openInviteDialog(): void {}
 
   ngOnInit() {
     console.log('opt pl : ', this.playlist);
   }
 
-  setCurrentPl(pl: Playlist) {
-    console.log('opt pl : ', this.playlist);
-    this.playlist = pl;
+  invitePeople() {
+    const dialogRef = this.dialog.open(DialogInvitePeople, {
+      data: {pl : this.playlist, service: this.plService},
+    });
+
+    dialogRef.afterClosed().subscribe(results => {
+      this.inviteEmail = results;
+    });
   }
+}
+
+@Component({
+  selector: 'app-invite-people-dialog',
+  templateUrl: 'invite-people-dialog.html',
+})
+
+export class DialogInvitePeople {
+
+  inviteEmail: string;
+  invitation: Invitation = new Invitation();
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogInvitePeople>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close(null);
+  }
+
+  invite() {
+    console.log('invite: ', this.data);
+
+    this.invitation.inviter_usr_id = this.data.service.account.usr_id;
+
+    console.log('inviteEmail: ', this.inviteEmail);
+    this.data.service.getUserIdFromMail(this.inviteEmail).subscribe(
+      res =>
+      {
+        //this.invitation.invited_usr_id = invited_id;
+        console.log('res: ', res);
+      }, error => console.log('error getting user id from mail: ', error));
+    //this.dialogRef.close(this.inviteEmail);
+  }
+
 }

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Playlist } from '../playlist/playlist';
+import { Music } from '../music/music';
 
 @Component({
   selector: 'app-music-list',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MusicListComponent implements OnInit {
 
+
+  @Input() musics: Music[];
+
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }
