@@ -1,14 +1,16 @@
 
-  <mat-list>
-    <mat-list-item><app-social-bouton></app-social-bouton></mat-list-item>
-
+  <mat-list class="options">
+    <div class="Pnotif">
+    <mat-list-item ><app-social-bouton ></app-social-bouton></mat-list-item>
+      </div>
     <mat-divider></mat-divider>
-
-    <mat-list-item *ngFor="let pl of playlists">
+    <div class="listPlaylist">
+    <mat-list-item class="playlist_albatar" *ngFor="let pl of playlists">
       <app-playlist [playlist]="pl" (click)="selectPlaylist(pl)"></app-playlist>
     </mat-list-item>
-
+    </div>
     <mat-divider></mat-divider>
-
+<div class="addPlaylist">
     <mat-list-item><app-create-playlist (newPlaylist)="newPlaylistHandler($event)"></app-create-playlist></mat-list-item>
-  </mat-list>
+  </div>
+</mat-list>
