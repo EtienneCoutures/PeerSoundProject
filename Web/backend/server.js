@@ -220,7 +220,7 @@ function initRoutes(callback) {
             callback(err);
         } else {
             async.each(files, function (file, callback) {
-                require(file)(app);
+                require(file)(app)
                 callback();
             }, function () {
                 app.all('*', function (req, res, next) {
