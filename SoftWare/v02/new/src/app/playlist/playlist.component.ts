@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, EventEmitter } from '@angular/core';
 import { Playlist } from './playlist';
 import { PlaylistService } from './playlist.service';
 
@@ -34,7 +34,6 @@ export class PlaylistComponent {
   ngOnDestroy() {}
 
   selectPlaylist() {
-
   }
 
 

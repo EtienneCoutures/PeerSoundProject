@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, EventEmitter, Output, Input } from '@angular/core';
 import { PlaylistComponent } from '../playlist/playlist.component';
 import { UserService } from '../user.service';
 import { Playlist } from '../playlist/playlist';
@@ -17,7 +17,7 @@ export interface Section {
 
 export class PlaylistListComponent implements OnInit {
 
-  playlistChanged: EventEmitter<Playlist> = new EventEmitter();
+  @Output() playlistChanged: EventEmitter<Playlist> = new EventEmitter();
   playlists: Playlist[];
   selected: Playlist;
 
@@ -36,7 +36,7 @@ export class PlaylistListComponent implements OnInit {
     this.userService.getUserPlaylists()
     .subscribe(playlists => {
       this.playlists = playlists;
-      this.selected = this.playlists[0];
+      this.selectPlaylist(this.playlists[0]);
     }, error => {
       console.log('error while retrieving playlist: ', error);
       this.playlists = [{playlist_name : "sperme"}, {playlist_name : "sperme2"}];

@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private subs: any[];
   private selectedPl: Playlist;
 
+
   constructor(
     private loginService: LoginService,
     private userService: UserService) {
@@ -40,8 +41,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subs.map(sub => sub.unsubscribe());
   }
 
-  playlistChanged(pl: Playlist) {
-    console.log('pl change: ', this.selectedPl);
+  playlistChangedHandler(pl: Playlist) {
+    console.log('win');
+    console.log('pl change: ', pl);
     this.selectedPl = pl;
   }
 
