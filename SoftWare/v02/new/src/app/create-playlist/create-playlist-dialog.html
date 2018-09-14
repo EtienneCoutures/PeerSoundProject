@@ -1,0 +1,48 @@
+<div class="inner-1_1f7b">
+  <div class="create-guild-container deprecated">
+  <form class="form deprecated create-guild" style="transform: translateX(0%) translateZ(0px);">
+    <div class="form-inner">
+
+      <h5>Créer votre playlist</h5>
+      <p>En créant une playlist, vous aurez accès <strong>gratuitement</strong> aux salons musicaux à partager avec vos amis.</p>
+
+      <ul class="guild-form">
+
+          <li>
+            <div class="control-group">
+            <mat-form-field>
+              <input matInput name="name" [(ngModel)]="data.playlist_name" placeholder="Nom">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="data.playlist_style" placeholder="Style musical">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="data.playlist_description" placeholder="Rapide description">
+            </mat-form-field>
+          </div>
+          </li>
+
+        <li>
+          <div class="avatar-uploader">
+            <div class="avatar-uploader-inner">
+              <div class="avatar-uploader-acronym"></div>
+              <div class="avatar-uploader-hint">Changer l'icône</div>
+              <input type="file" id="playlist_img" class="file-input" accept=".jpg,.jpeg,.png,.gif" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; opacity: 0; cursor: pointer;"></div>
+              <small class="size-info">Taille minimum : <strong>128x128</strong></small>
+            </div>
+            <div class="control-group">
+              <div class="help-text">En créant une playlist, vous acceptez la <strong><a href="//discordapp.com/guidelines" target="_blank" rel="noreferrer">Charte d’Utilisation de la Communauté PSP</a></strong>.
+            </div>
+          </div>
+
+            <div class="form-actions">
+              <button mat-raised-button (click)="onNoClick()">Retour</button>
+              <button mat-raised-button (click)="create()">Créer !</button>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </form>
+  </div>
+</div>
