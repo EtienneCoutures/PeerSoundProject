@@ -1,11 +1,13 @@
 .login {
-  background: url("../../assets/musicBackground.jpg") no-repeat center center fixed;
+  background: url("../../assets/background3.jpg") no-repeat center center fixed;
   background-size: cover;
   font-size: 16px;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
   margin: 0;
   color: #666;
+  height: 100%;
+  text-align: center;
 }
 
 /* Typography */
@@ -16,8 +18,7 @@ h1#title {
 	color: white;
 	text-shadow: 0 0 10px rgba(0,0,0,0.8);
 	margin: 0 auto;
-	padding-top: 180px;
-	max-width: 300px;
+	padding-top: 10%;
 	text-align: center;
 	position: relative;
 	top: 0px;
