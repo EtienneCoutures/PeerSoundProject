@@ -26,7 +26,7 @@ export class NewAccountComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+//    this.sub.unsubscribe();
   }
 
   createAccount() {
@@ -47,4 +47,8 @@ export class NewAccountComponent implements OnInit {
     }
   }
 
+  retour(){
+    //console.log("mamamama!!!!!!!");
+    this.router.navigate(['']);
+  }
 }
