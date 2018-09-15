@@ -25,6 +25,7 @@ var artist = document.getElementById("boxArtist"),
 var browser = browser || chrome;
 var idMusic = 0;
 var url = "";
+console.log(browser);
 
 if (Playlists)
 Playlists.addEventListener("click", checkPlaylist);
@@ -33,41 +34,34 @@ function checkPlaylist(){
  //       console.log(Playlists.options[Playlists.selectedIndex].label);
         if(Playlists.options[Playlists.selectedIndex].label == "Create Playlist"){
             $("#boxPlaylist option[label='Create Playlist']").remove();
-            textarea1.className = 'blur';
+            //textarea1.className = 'blur';
             textarea2.className = 'blur';
             textarea3.className = 'blur';
             createPlaylist.className = 'show';
         }
 }
-/*  close le plugin */
-if (close)
-  close.addEventListener("click", closer);
 
-function closer(){
-    var musicAdded = 0;
-    localStorage.setItem('musicAdded', musicAdded);
-    browser.tabs.executeScript(null, {file: "closer.js"});
-}
+console.log(boxUrl);
 
-/* récupération du lien de la musique et l'add dans la box */
-function getLink(fenetre, tab) {
-    if (!fenetre) {
-         browser.windows.getLastFocused(function(fenetre) { getLink(fenetre); });
-     } else {
-         if (!tab) {
-             browser.tabs.getSelected(fenetre.id, function(tab) { getLink(fenetre, tab); });
-         } else {
-             if (tab.url.indexOf("www.youtube.com/watch?v=") > 0 || tab.url.indexOf("soundcloud.com/") > 0){
-                $.getJSON('https://noembed.com/embed', {   format: 'json', url: tab.url}, function (data) {
-                    boxUrl.value = data.title;
-                    url = tab.url;
-                });
-            }
-        }
-    }
-}
 function getMusic() {
-    getLink();
+  console.log("test");
+  function getContent() {
+      callEventPageMethod('getContent', 'some parameter', function (response) {
+          console.log(response);
+          boxUrl.value = response.title;
+          url = response.url;
+          doSomethingWith(response);
+      });
+
+  }
+  //generic method
+  function callEventPageMethod(method, data, callback) {
+      chrome.runtime.sendMessage({ method: method, data: data }, function (response) {
+          if(typeof callback === "function") callback(response);
+      });
+  }
+  getContent();
+  //getLink();
 }
 getMusic();
 
@@ -80,12 +74,30 @@ if (valid)
     valid.addEventListener("click", sendMusic);
 
 var close = document.getElementById("cloclo");
-  if (close)
-    close.addEventListener("click", closer)
+if (close) {
+  close.addEventListener("click", closer)
+  console.log(close);
+}
+
 
 function closer(){
   sessionStorage.removeItem('infos');
-  browser.tabs.executeScript(null, {file: "closer.js"});
+  function closePlugin() {
+      callEventPageMethod('closePlugin', 'some parameter', function (response) {
+          doSomethingWith(response);
+      });
+
+  }
+  //generic method
+  function callEventPageMethod(method, data, callback) {
+      console.log(method);
+      chrome.runtime.sendMessage({ method: method, data: data }, function (response) {
+          if(typeof callback === "function") callback(response);
+      });
+  //browser.tabs.executeScript(null, {file: "closer.js"});
+  }
+  console.log("close");
+  closePlugin();
 }
  /* récupération des playlists du compte */
 jQuery.get('https://localhost:8000/api/playlist/',
@@ -192,60 +204,63 @@ function sleep(miliseconds) {
 }
 
 function sendMusic() {
-            var title = document.getElementById("boxUrl");
-            if (title.value && artist.value && date.value && description.value && Playlists.options[Playlists.selectedIndex].label != "Create Playlist") {
-                var infs = {
-                    title  : title.value,
-                    artist : artist.value,
-                    date : date.value
-                }
-                textarea1.className = '';
-                textarea2.className = '';
-                popError.className = '';
-                sessionStorage.setItem("infos", JSON.stringify(infs));
-               var musicAdded = 1;
-               localStorage.setItem('musicAdded', musicAdded);
-               if (url.indexOf("soundcloud") != -1)
-                    var source = "soundcloud";
-                else
-                    var source = "youtube";
-               console.log( JSON.parse(localStorage.getItem("id")) + '-' + artist.value + '-' + boxUrl.value + '-' + description.value + '-' + url + '-' + source);
-               jQuery.post('https://localhost:8000/api/music/',{
-                    usr_id: JSON.parse(localStorage.getItem("id")),
-                    music_source: source,
-                    music_group: artist.value,
-                    music_name: boxUrl.value,
-                    music_description: description.value,
-                    music_url: url,
-                    music_date: date.value
-               },
-               function (data){
-                   if (data){
-                       console.log(data);
-                        idMusic = data.Music.music_id;
-                        jQuery.post('https://localhost:8000/api/musiclink/',{
-                            usr_id: JSON.parse(localStorage.getItem("id")),
-                            music_id: idMusic,
-                            playlist_id: Playlists.options[Playlists.selectedIndex].value
-                            },
-                            function (data){
-                                if (data){
-                                   console.log(data);
-                            }
-                            });
-                            setTimeout(function(){
-                                closer();
-                            }, 1000);
-                   }
-               }
-               );
-            }
-            else {
-                textarea1.className = 'blur';
-                textarea2.className = 'blur';
-                textarea3.className = 'blur';
-                popError.className = 'show';
-            }
+    var title = document.getElementById("boxUrl");
+    if (title.value && artist.value && date.value && description.value && Playlists.options[Playlists.selectedIndex].label != "Create Playlist") {
+      if (url.indexOf("soundcloud") != -1)
+           var source = "soundcloud";
+      else
+           var source = "youtube";
+      var infs = {
+          title  : title.value,
+          artist : artist.value,
+          date : date.value,
+          source : source,
+          url: url,
+          description: description.value
+      }
+      //textarea1.className = '';
+      textarea2.className = '';
+      popError.className = '';
+      sessionStorage.setItem("infos", JSON.stringify(infs));
+      var musicAdded = 1;
+      localStorage.setItem('musicAdded', musicAdded);
+      console.log( JSON.parse(localStorage.getItem("id")) + '-' + artist.value + '-' + boxUrl.value + '-' + description.value + '-' + url + '-' + source);
+      jQuery.post('https://localhost:8000/api/music/', {
+          usr_id: JSON.parse(localStorage.getItem("id")),
+          music_source: source,
+          music_group: artist.value,
+          music_name: boxUrl.value,
+          music_description: description.value,
+          music_url: url,
+          music_date: date.value
+      },
+      function (data) {
+         if (data) {
+           console.log(data);
+            idMusic = data.Music.music_id;
+            jQuery.post('https://localhost:8000/api/musiclink/', {
+                  usr_id: JSON.parse(localStorage.getItem("id")),
+                  music_id: idMusic,
+                  playlist_id: Playlists.options[Playlists.selectedIndex].value
+                  },
+                  function (data){
+                      if (data){
+                         console.log(data);
+                  }
+                });
+                setTimeout(function(){
+                     closer();
+                }, 1000);
+         }
+       }
+      );
+    }
+    else {
+        //textarea1.className = 'blur';
+        textarea2.className = 'blur';
+        textarea3.className = 'blur';
+        popError.className = 'show';
+    }
 }
 
 function hidePop() {
@@ -253,7 +268,7 @@ function hidePop() {
     setTimeout(function(){
        popError.className = '';
     },200);
-    textarea1.className = 'stop';
+    //textarea1.className = 'stop';
     textarea2.className = 'stop';
     textarea3.className = 'stop';
 }
@@ -265,13 +280,13 @@ function hidePlaylist() {
     setTimeout(function(){
         createPlaylist.className = '';
     },200);
-    textarea1.className = 'stop';
+    //textarea1.className = 'stop';
     textarea2.className = 'stop';
     textarea3.className = 'stop';
 }
 
 function focusInput() {
-    textarea1.className = 'onfocus';
+    //textarea1.className = 'onfocus';
     textarea2.className = 'onfocus';
     textarea3.className = 'onfocus';
 }

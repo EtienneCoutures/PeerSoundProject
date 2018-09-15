@@ -22,8 +22,22 @@ var close = document.getElementById("cloclo");
     close.addEventListener("click", closer);
 
 function closer(){
-  var browser = browser || chrome;  
-  browser.tabs.executeScript(null, {file: "closer.js"});
+    sessionStorage.removeItem('infos');
+    function closePlugin() {
+        callEventPageMethod('closePlugin', 'some parameter', function (response) {
+            console.log(response)
+        });
+    }
+    //generic method
+    function callEventPageMethod(method, data, callback) {
+        console.log(method);
+        chrome.runtime.sendMessage({ method: method, data: data }, function (response) {
+            if(typeof callback === "function") callback(response);
+        });
+    //browser.tabs.executeScript(null, {file: "closer.js"});
+    }
+    console.log("close");
+    closePlugin();
 }
 
 function changePage() {
@@ -39,26 +53,26 @@ function changePage() {
     if ( (email.value) && (pass.value) ) {
       email.className = '';
         pass.className = '';
-        console.log(email.value + pass.value + ']'); 
+        console.log(email.value + pass.value + ']');
            var script = document.createElement('script');
            script.type = "text/javascript";
            script.src = "https://code.jquery.com/jquery-3.3.1.min.js";
            document.getElementsByTagName('head')[0].appendChild(script);
-           if (window.jQuery) {  
-            // jQuery is loaded  
+           if (window.jQuery) {
+            // jQuery is loaded
             console.log("Yeah!");
         } else {
             // jQuery is not loaded
             console.log("Doesn't Work");
         }
-      //  setTimeout(function(){          
+      //  setTimeout(function(){
             jQuery.post('https://localhost:8000/api/auth/login',
             {
               login: email.value,
               password: pass.value
             },
              function (data) {
-              console.log(email.value + pass.value + ']');  
+              console.log(email.value + pass.value + ']');
                if (data.error != - 1) {
                   console.log(data);
                   localStorage.setItem("email", email.value);
