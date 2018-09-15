@@ -10,23 +10,11 @@ import { PlaylistService } from '../playlist/playlist.service';
 })
 export class InfoPlaylistComponent implements OnChanges {
 
-  playlist: Playlist;
-
   constructor(
     private route: ActivatedRoute,
     private plService: PlaylistService
-  ) {
-    this.route.queryParams.subscribe(params => {
-      console.log('query params: ', params);
-    })
+  ) {}
 
-    console.log('info pl selected pl :', JSON.stringify(this.plService.selectedPl));
-    this.playlist = this.plService.selectedPl;
-  }
-
-  ngOnChanges() {
-    console.log('this.playlist: ', this.plService.selectedPl);
-    this.playlist = this.plService.selectedPl;
-  }
+  ngOnChanges() {}
 
 }
