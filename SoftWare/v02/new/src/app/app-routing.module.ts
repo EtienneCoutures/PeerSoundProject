@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NewAccountComponent } from './new-account/new-account.component';
 import { NewPlaylistComponent } from './new-playlist/new-playlist.component';
 import { EventsComponent } from './events/events.component';
+import { InfoPlaylistComponent } from './info-playlist/info-playlist.component'
 
 const routes: Routes = [
     {
@@ -13,6 +14,11 @@ const routes: Routes = [
         children : [    {
                   path : 'events',
                   component: EventsComponent,
+                  outlet: "homeOutlet"
+                },
+                {
+                  path : 'infoPlaylist',
+                  component: InfoPlaylistComponent,
                   outlet: "homeOutlet"
                 }
 ]
@@ -28,7 +34,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes, {useHash: true, enableTracing: false})],
+    imports: [RouterModule.forRoot(routes, {useHash: true, enableTracing: true})],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }

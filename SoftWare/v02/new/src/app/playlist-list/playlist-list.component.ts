@@ -27,16 +27,7 @@ export class PlaylistListComponent implements OnInit {
 
     }
 
-  ngOnInit() {
-    /*this.userService.getUserPlaylists()
-    .subscribe(playlists => {
-      this.playlists = playlists;
-      this.selectPlaylist(this.playlists[0]);
-    }, error => {
-      console.log('error while retrieving playlist: ', error);
-      this.playlists = [{playlist_name : "sperme"}, {playlist_name : "sperme2"}];
-    });*/
-  }
+  ngOnInit() {}
 
   ngOnDestroy() {}
 

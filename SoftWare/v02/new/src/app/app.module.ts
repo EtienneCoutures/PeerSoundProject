@@ -52,6 +52,11 @@ import { OptionsPlComponent } from './options-pl/options-pl.component';
 import { UserComponent } from './user/user.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { EventsComponent } from './events/events.component';
+import { InfoPlaylistComponent } from './info-playlist/info-playlist.component';
+import { UserInfoComponent } from './user-info/user-info.component';
+import { UserOptionsComponent } from './user-options/user-options.component';
+import { PopupModule } from '@progress/kendo-angular-popup';
+
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -77,7 +82,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     OptionsPlComponent,
     UserComponent,
     UserListComponent,
-    EventsComponent
+    EventsComponent,
+    InfoPlaylistComponent,
+    UserInfoComponent,
+    UserOptionsComponent
   ],
   imports: [
     BrowserModule,
@@ -102,7 +110,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: (HttpLoaderFactory),
         deps: [HttpClient]
       }
-    })
+    }),
+    PopupModule
   ],
   entryComponents: [
     DialogOverviewExampleDialog,

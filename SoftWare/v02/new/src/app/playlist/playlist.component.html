@@ -1,5 +1,4 @@
 
-
-<button class="playlist_avatar" mat-fab color="primary" (click)="selectPlaylist()">
+<button class="playlist_avatar" [routerLink]="[{ outlets: { homeOutlet: ['infoPlaylist'] } }]" mat-fab color="primary" (click)="selectPlaylist()">
     <img ng-src="../../assets/psp.png"/>
 </button>

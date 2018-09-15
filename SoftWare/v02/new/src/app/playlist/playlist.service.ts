@@ -20,6 +20,7 @@ export class PlaylistService {
   headers: HttpHeaders;
   params: HttpParams;
   account: Account;
+  selectedPl: Playlist;
 
   constructor(
     private httpClient: HttpClient,

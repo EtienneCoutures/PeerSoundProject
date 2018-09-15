@@ -8,6 +8,7 @@ import { Account } from '../account'
 })
 export class UserComponent implements OnInit {
 
+  private show: boolean = false;
   @Input() user: Account;
 
   constructor() { }
@@ -16,4 +17,11 @@ export class UserComponent implements OnInit {
     console.log('User initiated: ', this.user);
   }
 
+  userOptions() {
+    
+  }
+
+   public onToggle(): void {
+     this.show = !this.show;
+   }
 }

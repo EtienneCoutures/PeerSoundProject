@@ -17,10 +17,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private account: Account;
   private subs: any[];
-  private selectedPl: Playlist;
   private playlists: Playlist[];
   private musics: Music[];
   private users: Array<any> = new Array();
+  private selectedPl: Playlist;
   //private events: Array<Event> = new Array<Event>();
 
   constructor(
@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private plService: PlaylistService) {
     this.account = loginService.account;
     this.subs = new Array();
+    this.plService.selectedPl = this.selectedPl;
   }
 
   ngOnInit() {
@@ -38,6 +39,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.userService.getUserPlaylists().subscribe(playlists => {
       this.playlists = playlists;
       this.selectedPl = this.playlists[0];
+      this.plService.selectedPl = this.selectedPl;
       this.musics = this.playlists[0].MusicLink;
       this.getInvitations();
       /*this.plService.getUserFromPlaylist(playlists[0].playlist_id).subscribe(
@@ -68,6 +70,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   playlistChangedHandler(pl: Playlist) {
     console.log('pl change: ', pl);
     this.selectedPl = pl;
+    this.plService.selectedPl = pl;
   }
 
   getInvitations() {
