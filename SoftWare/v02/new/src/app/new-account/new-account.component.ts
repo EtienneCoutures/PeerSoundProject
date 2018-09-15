@@ -25,13 +25,7 @@ export class NewAccountComponent implements OnInit {
     this.userCred = new userCredentials();
   }
 
-  ngOnDestroy() {
-    //this.sub.unsubscribe();
-  }
-
-  return() {
-    this.router.navigate(['']);
-  }
+  ngOnDestroy() {}
 
   createAccount() {
 
@@ -49,4 +43,8 @@ export class NewAccountComponent implements OnInit {
     }
   }
 
+  retour(){
+    //console.log("mamamama!!!!!!!");
+    this.router.navigate(['']);
+  }
 }

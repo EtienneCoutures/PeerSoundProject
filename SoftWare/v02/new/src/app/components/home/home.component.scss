@@ -13,5 +13,19 @@
     margin:0;
     padding:50px 20px;
   }
+}
 
+.menuH {
+  position: absolute;
+  width: 76.1%;
+  height: 10%;
+  z-index: 200;
+  left: 24.9%;
+}
+
+.appUserList {
+  z-index: 1000;
+  position: absolute;
+  top: 10%;
+  
 }
