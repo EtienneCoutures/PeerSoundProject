@@ -1,5 +1,9 @@
+
 <mat-list>
+  <h4 mat-subheader>Utilisateurs - {{users.length}}</h4>
+  <mat-divider></mat-divider>
+    <mat-list-item *ngFor="let user of users">
+      <app-user [user]="user" ></app-user>
+    </mat-list-item>
 
-    <app-user [user]="user" *ngFor="let user of users"></app-user>
-
-</mat-list>
+<mat-list>

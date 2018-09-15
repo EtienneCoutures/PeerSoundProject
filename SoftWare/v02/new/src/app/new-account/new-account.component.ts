@@ -26,18 +26,20 @@ export class NewAccountComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    //this.sub.unsubscribe();
+  }
+
+  return() {
+    this.router.navigate(['']);
   }
 
   createAccount() {
+
     if (this.verifyPassword === this.userCred.password) {
       this.sub = this.loginService.signup(this.userCred)
       .subscribe(res => {
-        console.log('signup res: ', res)
         if (res.body.code == 0) {
           this.loginService.account = res.body.account;
-          //this.loginService.account.authorization = res.headers.get('authorization');
-          console.log('this.loginService.account: ', this.loginService.account);
           this.router.navigate(['home']);
         }
       }, error => console.log('error: ', error));

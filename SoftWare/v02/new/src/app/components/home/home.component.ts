@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private account: Account;
   private subs: any[];
-  private playlists: Playlist[];
+  private playlists: Playlist[] = new Array();
   private musics: Music[];
   private users: Array<any> = new Array();
   private selectedPl: Playlist;
@@ -37,11 +37,20 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.userService.setAuthorizationToken(this.account);
 
     this.userService.getUserPlaylists().subscribe(playlists => {
-      this.playlists = playlists;
-      this.selectedPl = this.playlists[0];
-      this.plService.selectedPl = this.selectedPl;
-      this.musics = this.playlists[0].MusicLink;
-      this.getInvitations();
+      this.userService.getSubscription().subscribe(subscription => {
+        console.log('subscription: ', subscription);
+
+        for (let i = 0; i < subscription.length; ++i) {
+          this.playlists.push(subscription[i].Playlist);
+        }
+
+        this.playlists = this.playlists.concat(playlists);
+        console.log('playlist: ', this.playlists);
+        this.selectedPl = this.playlists[0];
+        this.plService.selectedPl = this.selectedPl;
+        this.musics = this.playlists[0].MusicLink;
+        this.getInvitations();
+      })
       /*this.plService.getUserFromPlaylist(playlists[0].playlist_id).subscribe(
         res => {
           this.users.push(res.Playlist.rows[0].Creator);

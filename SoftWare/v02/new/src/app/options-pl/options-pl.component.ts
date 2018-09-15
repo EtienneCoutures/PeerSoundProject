@@ -59,7 +59,7 @@ export class DialogInvitePeople {
     console.log('invite: ', this.data);
 
     this.invitation.inviter_usr_id = this.data.service.account.usr_id;
-    this.invitation.invited_usr_id = 2;
+    this.invitation.invited_usr_id = 1;
     this.invitation.playlist_id = this.data.pl.playlist_id;
     this.invitation.invited_role = "member";
 

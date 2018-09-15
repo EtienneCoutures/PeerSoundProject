@@ -62,4 +62,12 @@ export class UserService {
                                 , {usr_id: usr_id, playlist_id: pl_id}
                                 , {headers: this.headers});
   }
+
+  getSubscription(): any {
+    this.params = new HttpParams().set('where'
+                  , `{"usr_id":${this.account.usr_id.toString()}}`);
+
+    return this.httpClient.get<any>('http://localhost:8000/api/subscription'
+    , {params: this.params, headers: this.headers});
+  }
 }
