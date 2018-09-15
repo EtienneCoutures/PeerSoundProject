@@ -13,7 +13,7 @@ export class UserComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
+    console.log('User initiated: ', this.user);
   }
 
 }

@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {MatDividerModule} from '@angular/material/divider';
+import { Router } from '@angular/router';
+import { UserService } from '../user.service';
+import { Event } from '../events/events.component';
 
 @Component({
   selector: 'app-social-bouton',
@@ -8,13 +11,15 @@ import {MatDividerModule} from '@angular/material/divider';
 })
 export class SocialBoutonComponent implements OnInit {
 
-  nbNotif: number;
+  @Input() nbNotif: number;
 
-  constructor() {
+  constructor(
+    private router: Router,
+    private userService: UserService
+  ) {
 
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

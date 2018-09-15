@@ -3,29 +3,46 @@
     {{ 'PAGES.HOME.TITLE' | translate }}
   </h1>
 </div>-->
-<div style="width: 100%; height: 100%">
+<div style="width: 100%; height: 100%; background-color: green">
+
+
+
+<!--<mat-toolbar color="primary" style="height:10%">
+    <mat-toolbar-row>
+   <span>Third Line</span>
+   <span class="example-spacer"></span>
+   <mat-icon class="example-icon">favorite</mat-icon>
+   <mat-icon class="example-icon">delete</mat-icon>
+ </mat-toolbar-row>
+</mat-toolbar>-->
 
   <div class="row">
+
     <div class="col-md-1" style="background-color:green">
-      <app-playlist-list [playlists]="playlists" (playlistChanged)="playlistChangedHandler($event)"></app-playlist-list>
+      <app-playlist-list [playlists]="playlists" [nbNotif]="userService.events.length" (playlistChanged)="playlistChangedHandler($event)"></app-playlist-list>
     </div>
 
     <div class="col-md-2" style="background-color:red">
-      <app-options-pl style="height: 10%" [playlist]="selectedPl"></app-options-pl>
+      <app-options-pl style="height: 10%; margin:0" [playlist]="selectedPl"></app-options-pl>
       <app-music-list [musics]="musics"></app-music-list>
     </div>
 
     <div class="col-md-7" style="background-color:blue">
-      <div class="row" style="height:70%;background-color:cyan;margin:0;width:100%">
-        <router-outlet name="homeOutlet"></router-outlet>
-      </div>
-      <div class="row" style="background-color:purple;margin:0;width:100%"></div>
-    </div>
+      <div>
+        <div class="row" style="height:70%;background-color:cyan;margin:0;width:100%">
+          <router-outlet name="homeOutlet"></router-outlet>
+        </div>
 
-    <div class="col-md-2" style="background-color:yellow">
-      <app-user-list [playlist]="selectedPl"></app-user-list>
-    </div>
+        <div class="row" style="background-color:purple;margin:0;width:100%">
+        </div>
+      </div>
 
   </div>
 
+  <div class="col-md-2" style="background-color:yellow">
+    <app-user-list [playlist]="selectedPl"></app-user-list>
+  </div>
+
+
+</div>
 </div>

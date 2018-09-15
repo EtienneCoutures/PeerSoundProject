@@ -1,2 +1,6 @@
-<button matBadge="" matBadgePosition="above after" mat-fab class="user_avatar"></button>
-<div>{{user.user_firstname}}</div>
+<mat-list-item >
+
+<button matBadge="3" matBadgePosition="above after" mat-fab class="user_avatar"></button>
+<h4>{{user.usr_login || user.Subscriber.usr_login}}</h4>
+<i class="material-icons">stars</i>
+</mat-list-item>

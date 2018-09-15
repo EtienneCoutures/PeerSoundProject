@@ -44,6 +44,7 @@ export class DialogInvitePeople {
 
   inviteEmail: string;
   invitation: Invitation = new Invitation();
+  error: string;
 
   constructor(
     public dialogRef: MatDialogRef<DialogInvitePeople>,
@@ -58,14 +59,27 @@ export class DialogInvitePeople {
     console.log('invite: ', this.data);
 
     this.invitation.inviter_usr_id = this.data.service.account.usr_id;
+    this.invitation.invited_usr_id = 2;
+    this.invitation.playlist_id = this.data.pl.playlist_id;
+    this.invitation.invited_role = "member";
 
     console.log('inviteEmail: ', this.inviteEmail);
-    this.data.service.getUserIdFromMail(this.inviteEmail).subscribe(
+
+    this.data.service.inviteUser(this.invitation).subscribe(res => {
+      console.log('invite user: ', res);
+      if (res.code == 0) {
+        this.dialogRef.close();
+      } else {
+        this.error = "Veuillez vérifier l'adresse mail."
+      }
+    }, error => console.log('error trying invitation: ', error));
+
+    /*this.data.service.getUserIdFromMail(this.inviteEmail).subscribe(
       res =>
       {
         //this.invitation.invited_usr_id = invited_id;
         console.log('res: ', res);
-      }, error => console.log('error getting user id from mail: ', error));
+      }, error => console.log('error getting user id from mail: ', error));*/
     //this.dialogRef.close(this.inviteEmail);
   }
 

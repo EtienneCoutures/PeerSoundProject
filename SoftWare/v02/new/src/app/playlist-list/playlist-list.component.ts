@@ -19,11 +19,12 @@ export class PlaylistListComponent implements OnInit {
 
   @Output() playlistChanged: EventEmitter<Playlist> = new EventEmitter();
   @Input() playlists: Playlist[];
+  @Input() nbNotif: number;
 
   constructor(
     private userService: UserService
   ) {
-      this.playlists = [{playlist_name : "sperme"}, {playlist_name : "sperme2"}];
+
     }
 
   ngOnInit() {

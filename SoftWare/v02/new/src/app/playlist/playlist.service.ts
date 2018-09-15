@@ -26,6 +26,7 @@ export class PlaylistService {
     private loginService: LoginService
   ) {
     this.account = this.loginService.account;
+
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'authorization': this.account.authorization
@@ -49,12 +50,12 @@ export class PlaylistService {
   }
 
   getUserIdFromMail(mail: string) {
-    return this.httpClient.get(`http://localhost:8000/api/user/${mail}`
-                              , {headers : this.headers})
+
+    return this.httpClient.get(`http://localhost:8000/api/user/${mail}`)
   }
 
   getUserFromPlaylist(plId: number) {
-    return this.httpClient.get(`http://localhost:8000/api/playlist/users/${plId}`
+    return this.httpClient.get<any>(`http://localhost:8000/api/playlist/users/${plId}`
                               , {headers: this.headers});
   }
 

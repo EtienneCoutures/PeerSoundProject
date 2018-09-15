@@ -1,1 +1,28 @@
+.listPlaylist {
+    display: block;
+    height: 87%;
+    overflow: auto;
+    position: absolute;
+    top: 60px;
+}
 
+.options {
+    height: 100%;
+}
+
+.playlist_albatar {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .Pnotif {
+    position: absolute;
+    top: 10px;
+    left: 1px;
+    padding-bottom: 20px;
+  }
+
+  .addPlaylist {
+    position: absolute;
+    bottom: 10px;
+  }

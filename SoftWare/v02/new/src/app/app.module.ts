@@ -39,7 +39,8 @@ import { MatDialogModule,
          MatDividerModule,
          MatBadgeModule,
          MatListModule,
-         MatExpansionModule
+         MatExpansionModule,
+         MatToolbarModule
        } from '@angular/material';
 
 import { MatIconModule } from '@angular/material/icon';
@@ -50,6 +51,7 @@ import { SocialBoutonComponent } from './social-bouton/social-bouton.component';
 import { OptionsPlComponent } from './options-pl/options-pl.component';
 import { UserComponent } from './user/user.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { EventsComponent } from './events/events.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -74,7 +76,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     SocialBoutonComponent,
     OptionsPlComponent,
     UserComponent,
-    UserListComponent
+    UserListComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,
@@ -92,6 +95,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatBadgeModule,
     MatListModule,
     MatExpansionModule,
+    MatToolbarModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
