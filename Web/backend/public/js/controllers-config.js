@@ -1,11 +1,9 @@
 define([
     './controllers/initModule',
-    './controllers/siteModule',
-    './controllers/userModule',
+    './controllers/siteModule'
 ], function(){
     return [
         'initModule',
-        'siteModule',
-        'userModule',
+        'siteModule'
     ];
 });
