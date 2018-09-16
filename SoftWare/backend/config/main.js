@@ -7,8 +7,8 @@ var config  = {
         db: {
             dbname: "peersoundproject",
             host: "localhost",
-            user: "root",
-            pw: "Pyromaster9",
+            user: "itiz",
+            pw: "judelapoire",
             port: "3306"
         },
         mailer: {

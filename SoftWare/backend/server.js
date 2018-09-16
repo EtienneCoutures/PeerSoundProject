@@ -10,7 +10,7 @@ var express        = require('express'),
       key: hskey,
       cert: hscert
     },
-    server         = require('http').createServer(https_options, app),
+    server         = require('http').createServer(app),
 
     session        = require('express-session'),
     flash          = require('express-flash'),
