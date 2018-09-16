@@ -47,7 +47,7 @@ export class UserService {
 
   getInvitations(userId?: number) {
     this.params = new HttpParams().set('where'
-                  , `{"invited_usr_id":${this.account.usr_id.toString()}}`);
+                  , `{"invited_usr_id":${this.loginService.account.usr_id.toString()}}`);
 
     return this.httpClient.get<any>('http://localhost:8000/api/invitation', {
       params: this.params,

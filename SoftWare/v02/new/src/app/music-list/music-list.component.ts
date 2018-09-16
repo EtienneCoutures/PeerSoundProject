@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, OnChanges, EventEmitter } from '@angular/core';
 import { Playlist } from '../playlist/playlist';
 import { Music } from '../music/music';
 
@@ -9,7 +9,7 @@ import { Music } from '../music/music';
 })
 export class MusicListComponent implements OnInit, OnChanges {
 
-
+  @Output() playMusic: EventEmitter<Music> = new EventEmitter();
   @Input() musics: Music[];
 
   constructor() {}
@@ -20,6 +20,10 @@ export class MusicListComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     console.log("musics music list: ", this.musics);
+  }
+
+  playMusic(music) {
+    console.log('play music: ', music);
   }
 
 }
