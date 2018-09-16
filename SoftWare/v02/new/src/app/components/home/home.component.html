@@ -2,7 +2,7 @@
   <div class="menuH">
     <mat-toolbar color="secondary">
       <mat-toolbar-row>
-        <span>Third Line</span>
+        <span>Peer Sound Project</span>
         <span class="example-spacer" style="padding-right: 81%;"></span>
         <mat-icon class="example-icon" style="padding-right: 7%;">favorite</mat-icon>
         <mat-icon class="example-icon">delete</mat-icon>
@@ -28,7 +28,7 @@
 
         <div style="width: 100%;height: auto;position: relative;">
         <div class="row" style="height:30%;background-color:purple;margin:0;width:100%">
-          <iframe id="sc-player" width="100%" height="100%" scrolling="no" frameborder="no"
+          <iframe #scPlayer id="sc-player" width="100%" height="100%" scrolling="no" frameborder="no"
           src="https://w.soundcloud.com/player/?url=https://soundcloud.com/the-outside-agency/the-outside-agency-the-sunrise">
           </iframe>
         </div>
@@ -45,3 +45,10 @@
 
 </div>
 </div>
+
+<script>
+document.getElementById('sc-player').onload = function() {
+        self.iframeElement   = document.querySelector('iframe');
+        self.widget1         = SC.Widget(iframeElement);
+      }
+</script>

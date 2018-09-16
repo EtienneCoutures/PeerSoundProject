@@ -10,7 +10,7 @@
   <mat-list color="primary" style="margin: 0">
       <!--<ng-scrollbar>-->
       <perfect-scrollbar style="max-width: 600px; max-height: 1000px;" [config]="config">
-        <mat-list-item *ngFor="let music of musics">
+        <mat-list-item (click)="playMusic(music.Music)" *ngFor="let music of musics">
           <mat-icon mat-list-icon>play_arrow</mat-icon>
           <h5 mat-line>{{music.Music.music_name}}</h5>
           <p mat-line> {{music.Music.music_group}} </p>

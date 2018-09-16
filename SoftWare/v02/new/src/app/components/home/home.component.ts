@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy,AfterViewInit } from '@angular/core';
 import { LoginService } from '../../login/login.service';
 import { Account } from '../../account';
 import { UserService } from '../../user.service';
@@ -6,6 +6,8 @@ import { PlaylistService } from '../../playlist/playlist.service';
 import { Playlist } from '../../playlist/playlist';
 import { Music } from '../../music/music';
 import { EventsComponent, Event } from '../../events/events.component';
+import {ElementRef,Renderer2} from '@angular/core';
+@ViewChild('scPlayer') el:ElementRef;
 
 @Component({
   selector: 'app-home',
@@ -13,7 +15,7 @@ import { EventsComponent, Event } from '../../events/events.component';
   styleUrls: ['./home.component.scss']
 })
 
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private account: Account;
   private subs: any[];
@@ -26,15 +28,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(
     private loginService: LoginService,
     private userService: UserService,
-    private plService: PlaylistService) {
+    private plService: PlaylistService,
+    private rd: Renderer2
+  ) {
     this.account = this.loginService.account;
     this.subs = new Array();
     this.plService.selectedPl = this.selectedPl;
   }
 
   ngOnInit() {
-    console.log('account: ', this.account.authorization);
-    //this.userService.setAuthorizationToken(this.account);
+    console.log('account bearer: ', this.account.authorization);
 
     this.userService.getUserPlaylists().subscribe(playlists => {
       this.userService.getSubscription().subscribe(subscription => {
@@ -48,29 +51,17 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.playlists = playlists.concat(this.playlists);
         this.selectedPl = this.playlists[0];
         this.plService.selectedPl = this.playlists[0];
-        console.log('this.plService.selectedPl: ', this.plService.selectedPl);
         this.musics = this.playlists[0].MusicLink;
+
         this.getInvitations();
+
       }, error => console.log('error while retrieving subs: ', error));
-      /*this.plService.getUserFromPlaylist(playlists[0].playlist_id).subscribe(
-        res => {
-          this.users.push(res.Playlist.rows[0].Creator);
-          this.users = this.users.concat(res.Playlist.rows[0].Subscriber);
-          console.log('users: ', this.users);
-        }, error => console.log('Error while retrieving users: ', error));
-*/
+    }, error => console.log('error while retrieving playlist: ', error));
+  }
 
-    }, error => {
-      console.log('error while retrieving playlist: ', error);
-    });
-
-    /*let sub = this.userService.getUserPlaylists(this.account.usr_id)
-      .subscribe(playlists => {
-        console.log('playlists: ', playlists);
-      }, error => console.log('Error while retrieving playlists : ', error));
-
-    if (sub)
-      this.subs.push(sub);*/
+  ngAfterViewInit() {
+    console.log('renderer:', this.rd);
+    this.el.nativeElement.focus();
   }
 
   ngOnDestroy() {
