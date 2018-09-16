@@ -33,7 +33,6 @@ export class PlaylistListComponent implements OnInit {
 
   selectPlaylist(pl: Playlist) {
     this.playlistChanged.emit(pl);
-    console.log('selected pl: ', pl);
   }
 
   newPlaylistHandler(pl: Playlist) {

@@ -1,10 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
+@import '~@angular/material/theming';
+//@import '~theme.scss';
 
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~font-awesome/css/font-awesome.css";
 @import '~bootstrap/scss/bootstrap-reboot';
 @import '~bootstrap/scss/bootstrap-grid';
+
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
 
 html, body {
   margin: 0px !important;
@@ -19,6 +23,23 @@ html, body {
 }
 md-icon{
   font-family: 'Material Icons' !important;
+}
+
+.content-container {
+  position: relative;
+
+  overflow: auto;
+  height: 300px;
+  min-height: 0;
+  margin: 8px 16px;
+  border-radius: 4px;
+
+  background-color: #fff;
+}
+
+.scrollable-content {
+  padding: 16px;
+  margin: 0;
 }
 
 .list {

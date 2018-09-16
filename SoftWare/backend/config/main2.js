@@ -76,7 +76,7 @@ module.exports = function (options) {
     config.env = options.env;
     global.logger = logger(config.logger);
 
-    global.sequelize = new Sequelize("peersoundproject", config.db.user, config.db.pw, {
+    global.sequelize = new Sequelize(config.db.dbname, config.db.user, config.db.pw, {
         host: config.db.host,
         port: config.db.port,
         logging: false

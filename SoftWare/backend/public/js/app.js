@@ -3,7 +3,6 @@ define([
     'ngRoute',
     './controllers-config',
     'underscore',
-
     'restangular',
     'ui.bootstrap-tpls',
     'angular-filter',
@@ -37,7 +36,6 @@ define([
     angular.module('MyApp', appDependencies)
         .config(['RestangularProvider', function(RestangularProvider) {
             RestangularProvider.setBaseUrl('/api');
-
         }])
         .config(['$locationProvider', function($locationProvider) {
             $locationProvider.hashPrefix("");
