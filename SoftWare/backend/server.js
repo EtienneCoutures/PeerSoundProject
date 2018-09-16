@@ -114,6 +114,8 @@ function initExpress(callback) {
       res.header("Access-Control-Allow-Origin", "http://localhost:4200");
       res.header('Access-Control-Allow-Credentials', true);
       res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Origin, Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+      res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, UPDATE, SET");
+
       next();
     });
 
@@ -227,7 +229,7 @@ function initRoutes(callback) {
             callback(err);
         } else {
             async.each(files, function (file, callback) {
-                require(file)(app);
+                require(file)(app)
                 callback();
             }, function () {
                 app.all('*', function (req, res, next) {

@@ -40,6 +40,7 @@ module.exports = function (app, passport) {
 
                     account = account.toJSON();
                     account.accessTokenID = accessToken.atok_id;
+                    account.authorization = 'Bearer ' + accessToken.atok_token;
                     return done(null, account);
                 });
             }).catch(function (err) {
