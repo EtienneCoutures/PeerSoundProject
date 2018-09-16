@@ -21,7 +21,8 @@ var artist = document.getElementById("boxArtist"),
     textarea6 = document.getElementById('textarea6'),
     main = document.getElementById('main'),
     close = document.getElementById('cloclo'),
-    closeP = document.getElementById('clocloP');
+    closeP = document.getElementById('clocloP'),
+    logout = document.getElementById('logout');
 var browser = browser || chrome;
 var idMusic = 0;
 var url = "";
@@ -98,6 +99,33 @@ function closer(){
   }
   console.log("close");
   closePlugin();
+}
+
+var logut = document.getElementById("lolo");
+if (logut){
+    logut.addEventListener("click", logOut);
+    console.log("MES COUILLES COUILLES COUILLES");
+}
+function logOut () {
+    console.log("CHATTE");
+    sessionStorage.removeItem('infos');
+    localStorage.removeItem("email");
+    function outout() {
+        console.log("cul cul cul");
+        callEventPageMethod('outout', 'some parameter', function (response) {
+            doSomethingWith(response);
+        });
+    }
+     //generic method
+  function callEventPageMethod(method, data, callback) {
+    console.log(method);
+    chrome.runtime.sendMessage({ method: method, data: data }, function (response) {
+        if(typeof callback === "function") callback(response);
+    });
+//browser.tabs.executeScript(null, {file: "closer.js"});
+    }
+console.log("close");
+outout();  
 }
  /* récupération des playlists du compte */
 jQuery.get('https://localhost:8000/api/playlist/',

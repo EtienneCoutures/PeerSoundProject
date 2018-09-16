@@ -2,7 +2,7 @@ sessionStorage.removeItem('infos');
 
 var docActive = document.activeElement;
 document.activeElement.blur();
-
+console.log("closeeeeeeeeeeeeeeeer");
 var iframe = document.getElementById('PSPFrame');
 iframe.classList.remove('showPSP');
 setTimeout(function(){
