@@ -16,6 +16,7 @@
         "all_frames": true,
         "js" : ["index.html", "src/js/vendor/jquery.min.js"]
     }],
+    "content_security_policy" : "script-src 'self'; object-src 'self'",
 
     "web_accessible_resources": [
         "background.html", "background.js", "index.html", "src/js/index.js", "takeMusic.html", "SendMusic.html", "content.js"
