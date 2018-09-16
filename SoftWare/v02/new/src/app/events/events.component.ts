@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { UserService } from '../user.service';
 import { Playlist } from '../playlist/playlist';
 
@@ -53,6 +53,9 @@ export class EventsComponent implements OnInit {
           if (res.code == 0) {
             let idx = this.events.indexOf(event);
             this.events.splice(idx, 1);
+            if (event.type == "Invitation") {
+              
+            }
           } else {
 
           }

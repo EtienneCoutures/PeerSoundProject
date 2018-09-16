@@ -21,6 +21,7 @@ export class PlaylistService {
   params: HttpParams;
   account: Account;
   selectedPl: Playlist;
+  playlists: Playlist[];
 
   constructor(
     private httpClient: HttpClient,

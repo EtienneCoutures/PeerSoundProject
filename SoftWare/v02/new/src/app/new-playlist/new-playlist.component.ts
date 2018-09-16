@@ -9,8 +9,6 @@ export class NewPlaylistComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    console.log('INIT NEW PLAYLIST');
-  }
+  ngOnInit() {}
 
 }

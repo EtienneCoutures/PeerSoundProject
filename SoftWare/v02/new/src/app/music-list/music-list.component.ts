@@ -22,7 +22,8 @@ export class MusicListComponent implements OnInit, OnChanges {
     console.log("musics music list: ", this.musics);
   }
 
-  playMusic(music) {
+  playMusicEvent(music) {
+    this.playMusic.emit(music);
     console.log('play music: ', music);
   }
 

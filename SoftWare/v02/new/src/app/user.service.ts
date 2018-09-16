@@ -23,8 +23,6 @@ export class UserService {
     private httpClient: HttpClient
     , private loginService: LoginService
   ) {
-    this.params = new HttpParams().set('where'
-                  , `{"playlist_creator":${this.loginService.account.usr_id.toString()}}`);
 
     console.log('this.loginService.account: ', this.loginService.account.authorization);
 
@@ -35,6 +33,9 @@ export class UserService {
   }
 
   getUserPlaylists(userId?: number): Observable<Playlist[]> {
+    this.params = new HttpParams().set('where'
+                  , `{"playlist_creator":${this.loginService.account.usr_id.toString()}}`);
+
     console.log('HEADERS: ', this.headers);
     return this.httpClient.get<Playlist[]>(`http://localhost:8000/api/playlist/`
                                 , {params: this.params, headers: this.headers});
@@ -46,6 +47,7 @@ export class UserService {
   }
 
   getInvitations(userId?: number) {
+    console.log('this.loginService.account: ', this.loginService.account.usr_id);
     this.params = new HttpParams().set('where'
                   , `{"invited_usr_id":${this.loginService.account.usr_id.toString()}}`);
 
