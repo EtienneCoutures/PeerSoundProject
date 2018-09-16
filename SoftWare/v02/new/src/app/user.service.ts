@@ -6,6 +6,7 @@ import { PlaylistComponent } from './playlist/playlist.component';
 import { Playlist } from './playlist/playlist';
 import { APIResponse } from './APIResponse';
 import { Event } from './events/events.component';
+import { LoginService } from './login/login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,20 +19,23 @@ export class UserService {
   account: Account;
   events: Array<Event> = new Array<Event>();
 
-  constructor(private httpClient: HttpClient) {}
-
-  setAuthorizationToken(account: Account) {
-    this.account = account;
+  constructor(
+    private httpClient: HttpClient
+    , private loginService: LoginService
+  ) {
     this.params = new HttpParams().set('where'
-                  , `{"playlist_creator":${this.account.usr_id.toString()}}`);
+                  , `{"playlist_creator":${this.loginService.account.usr_id.toString()}}`);
+
+    console.log('this.loginService.account: ', this.loginService.account.authorization);
 
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'authorization': account.authorization
+      'authorization': this.loginService.account.authorization
     })
   }
 
   getUserPlaylists(userId?: number): Observable<Playlist[]> {
+    console.log('HEADERS: ', this.headers);
     return this.httpClient.get<Playlist[]>(`http://localhost:8000/api/playlist/`
                                 , {params: this.params, headers: this.headers});
   }
@@ -65,7 +69,7 @@ export class UserService {
 
   getSubscription(): any {
     this.params = new HttpParams().set('where'
-                  , `{"usr_id":${this.account.usr_id.toString()}}`);
+                  , `{"usr_id":${this.loginService.account.usr_id.toString()}}`);
 
     return this.httpClient.get<any>('http://localhost:8000/api/subscription'
     , {params: this.params, headers: this.headers});

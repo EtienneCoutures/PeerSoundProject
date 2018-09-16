@@ -43,6 +43,11 @@ import { MatDialogModule,
          MatToolbarModule
        } from '@angular/material';
 
+import { PerfectScrollbarModule
+        , PERFECT_SCROLLBAR_CONFIG
+        , PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+
+import { ScrollbarModule } from 'ngx-scrollbar';
 import { MatIconModule } from '@angular/material/icon';
 import {DomSanitizer} from '@angular/platform-browser';
 import {MatIconRegistry} from '@angular/material';
@@ -55,13 +60,16 @@ import { EventsComponent } from './events/events.component';
 import { InfoPlaylistComponent } from './info-playlist/info-playlist.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { UserOptionsComponent } from './user-options/user-options.component';
-import { PopupModule } from '@progress/kendo-angular-popup';
 
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
 
 @NgModule({
   declarations: [
@@ -104,6 +112,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatListModule,
     MatExpansionModule,
     MatToolbarModule,
+    PerfectScrollbarModule,
+    ScrollbarModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -111,13 +121,13 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    PopupModule
   ],
   entryComponents: [
     DialogOverviewExampleDialog,
     DialogInvitePeople
   ],
-  providers: [ElectronService],
+  providers: [ElectronService, {provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

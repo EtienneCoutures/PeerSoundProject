@@ -18,6 +18,8 @@ export class MusicListComponent implements OnInit, OnChanges {
 
   }
 
-  ngOnChanges() {}
+  ngOnChanges() {
+    console.log("musics music list: ", this.musics);
+  }
 
 }

@@ -1,6 +1,6 @@
-<div style="width: 100%; height: 100%; background-color: green">
+<div style="width: 100%; height: 100%;">
   <div class="menuH">
-    <mat-toolbar color="primary">
+    <mat-toolbar color="secondary">
       <mat-toolbar-row>
         <span>Third Line</span>
         <span class="example-spacer" style="padding-right: 81%;"></span>
@@ -11,7 +11,7 @@
   </div>
   <div class="row">
 
-    <div class="col-md-1" style="background-color:green; z-index:10;">
+    <div class="col-md-1" style="background-color:green">
       <app-playlist-list [playlists]="playlists" [nbNotif]="userService.events.length" (playlistChanged)="playlistChangedHandler($event)"></app-playlist-list>
     </div>
 

@@ -27,30 +27,31 @@ export class HomeComponent implements OnInit, OnDestroy {
     private loginService: LoginService,
     private userService: UserService,
     private plService: PlaylistService) {
-    this.account = loginService.account;
+    this.account = this.loginService.account;
     this.subs = new Array();
     this.plService.selectedPl = this.selectedPl;
   }
 
   ngOnInit() {
     console.log('account: ', this.account.authorization);
-    this.userService.setAuthorizationToken(this.account);
+    //this.userService.setAuthorizationToken(this.account);
 
     this.userService.getUserPlaylists().subscribe(playlists => {
       this.userService.getSubscription().subscribe(subscription => {
-        console.log('subscription: ', subscription);
 
-        for (let i = 0; i < subscription.length; ++i) {
-          this.playlists.push(subscription[i].Playlist);
+        if (subscription) {
+          for (let i = 0; i < subscription.length; ++i) {
+            this.playlists.push(subscription[i].Playlist);
+          }
         }
 
-        this.playlists = this.playlists.concat(playlists);
-        console.log('playlist: ', this.playlists);
+        this.playlists = playlists.concat(this.playlists);
         this.selectedPl = this.playlists[0];
-        this.plService.selectedPl = this.selectedPl;
+        this.plService.selectedPl = this.playlists[0];
+        console.log('this.plService.selectedPl: ', this.plService.selectedPl);
         this.musics = this.playlists[0].MusicLink;
         this.getInvitations();
-      })
+      }, error => console.log('error while retrieving subs: ', error));
       /*this.plService.getUserFromPlaylist(playlists[0].playlist_id).subscribe(
         res => {
           this.users.push(res.Playlist.rows[0].Creator);
