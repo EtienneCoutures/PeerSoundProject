@@ -76,6 +76,10 @@ console.log("ackgtrounf");
                 console.log("close");
                 closer();
                 closePlugin(sendResponse);
+            } else if (obj.method == 'outout') {
+                console.log("outout");
+                closer();
+                outout(sendResponse);
             } else if (obj.method == 'sendMusic') {
                 postMusic(obj.data);
                 sendMusic(sendResponse);
@@ -94,7 +98,15 @@ console.log("ackgtrounf");
         sendResponse(mydata);
       });*/
     }
-    //some async method
+    function outout(sendResponse) {
+        console.log("outout");
+        browser.tabs.executeScript(null, {file: "closer.js"});
+        /*chrome.storage.local.get(["mydata"], function (obj) {
+          var mydata = $.trim(obj["mydata"]);
+          sendResponse(mydata);
+        });*/
+      }
+    //some async method 
     function sendMusic(sendResponse) {
       chrome.storage.local.get(["mydata"], function (obj) {
         var mydata = $.trim(obj["mydata"]);
