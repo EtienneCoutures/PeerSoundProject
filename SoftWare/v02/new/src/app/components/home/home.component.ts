@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy,AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, OnDestroy,AfterViewInit } from '@angular/core';
 import { LoginService } from '../../login/login.service';
 import { Account } from '../../account';
 import { UserService } from '../../user.service';
@@ -7,7 +7,6 @@ import { Playlist } from '../../playlist/playlist';
 import { Music } from '../../music/music';
 import { EventsComponent, Event } from '../../events/events.component';
 import {ElementRef,Renderer2} from '@angular/core';
-@ViewChild('scPlayer') el:ElementRef;
 
 @Component({
   selector: 'app-home',
@@ -23,6 +22,9 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   private musics: Music[];
   private users: Array<any> = new Array();
   private selectedPl: Playlist;
+  private scWidget: any;
+  @ViewChild('scPlayer') scPlayer:ElementRef;
+
   //private events: Array<Event> = new Array<Event>();
 
   constructor(
@@ -61,7 +63,10 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit() {
     console.log('renderer:', this.rd);
-    this.el.nativeElement.focus();
+    //this.scPlayer = this.scPlayer.nativeElement;
+    console.log('this.el: ', this.scPlayer);
+    //this.el.nativeElement.focus();
+    console.log('this.scWidget: ', this.scWidget);
   }
 
   ngOnDestroy() {
@@ -72,6 +77,11 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log('pl change: ', pl);
     this.selectedPl = pl;
     this.plService.selectedPl = pl;
+  }
+
+  playMusicHandler(music: Music) {
+    console.log('playMusicHandler music: ', music);
+    this.scWidget.load(music.music_url, {auto_play : true});
   }
 
   getInvitations() {

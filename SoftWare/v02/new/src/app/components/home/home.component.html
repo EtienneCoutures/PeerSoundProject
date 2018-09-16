@@ -17,7 +17,7 @@
 
     <div class="col-md-2" style="background-color:red">
       <app-options-pl style="height: 10%; margin:0" [playlist]="selectedPl"></app-options-pl>
-      <app-music-list [musics]="musics"></app-music-list>
+      <app-music-list [musics]="musics" (playMusic)="playMusicHandler($event)"></app-music-list>
     </div>
 
     <div class="col-md-7" style="background-color:blue">
