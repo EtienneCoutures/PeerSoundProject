@@ -7,6 +7,7 @@ import { Playlist } from '../../playlist/playlist';
 import { Music } from '../../music/music';
 import { EventsComponent, Event } from '../../events/events.component';
 import {ElementRef,Renderer2} from '@angular/core';
+import { Router } from '@angular/router';
 
 //declare var SC: any;
 
@@ -35,7 +36,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     private loginService: LoginService,
     private userService: UserService,
     private plService: PlaylistService,
-    private rd: Renderer2
+    private rd: Renderer2,
+    private router: Router
   ) {
     this.account = this.loginService.account;
     this.subs = new Array();
@@ -60,6 +62,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         this.plService.selectedMusic = this.playlists[0].MusicLink[0];
         this.plService.selectedPl = this.playlists[0];
         this.musics = this.playlists[0].MusicLink;
+        this.router.navigate([{ outlets: { homeOutlet: ['home/infoPlaylist'] } }]);
 
         this.getInvitations();
 
@@ -80,7 +83,11 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log('pl change: ', pl);
     this.selectedPl = pl;
     this.plService.selectedPl = pl;
-    this.musics = pl.MusicLink; 
+    this.musics = pl.MusicLink;
+  }
+
+  deco() {
+    this.router.navigate(['']);
   }
 
   playMusicHandler(music: Music) {
