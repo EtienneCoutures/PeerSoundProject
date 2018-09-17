@@ -51,7 +51,7 @@
   border-color: #DCDCDC;   /* Couleur de la bordure  */
   padding: 5px 10px 5px 10px;   /* Espace entre les bords et le contenu : haut droite bas gauche  */
   box-sizing: border-box;   /* Important */
-  font-family: PT sans;   /* Police du texte */
+  font-family: "forgotten";   /* Police du texte */
   font-size: 12px;   /* Taille de la police du texte */
   font-weight: normal;   /* Graisse du texte : normal = normal ; bold = gras */
   letter-spacing: 2px;   /* Espacement des caractères */

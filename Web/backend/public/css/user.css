@@ -1,6 +1,6 @@
 body{
   background-color: white;
-  font-family: Arial,Helvetica,sans-serif;
+  font-family: "forgotten";
 }
 /* Message.ejs*/
 .news{
@@ -62,7 +62,7 @@ body{
   margin: 0;
   margin-bottom: 5px;
   font-size: 30px;
-  font-family: Arial,Helvetica,sans-serif;
+  font-family: "forgotten";
 }
 
 .user .information {
@@ -101,7 +101,7 @@ body{
 
 /* List.ejs*/
 table.notifTable {
-  font-family: Arial,Helvetica,sans-serif;
+  font-family: "forgotten";
   width: 100%;
   margin-top: 40px;
   text-align: center;
