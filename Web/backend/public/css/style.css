@@ -7,7 +7,7 @@
 }
 
 * {
-    font-family: "Segoe UI",Arial,sans-serif;
+    font-family: "forgotten";
 
   } /* ici on set tout */
 
@@ -351,6 +351,24 @@ ul.toolbar .dropdown > .dropdown-toggle > .label {
         position: relative;
         margin: 0 auto;
     }
+
+    @font-face {
+      font-family: "forgotten";
+      src: local("/font-family/forgotten-futurist-bd-it.ttf");
+      }
+
+.imgDowload{
+  color: black;
+  background-color: blue;
+}
+
+.imgDowload:hover{
+  margin-top: 200px;
+
+}
+.btnDowload{
+margin-top: 10%;
+}
 
     footer {
         background:#333;
