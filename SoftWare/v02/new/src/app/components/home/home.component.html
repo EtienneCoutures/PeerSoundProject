@@ -9,18 +9,18 @@
       </mat-toolbar-row>
     </mat-toolbar>
   </div>
-  <div class="row">
+  <div class="row" style="top:10%">
 
-    <div class="col-md-1" style="background-color:green">
+    <div class="col-md-1" style="background-color:#23272a">
       <app-playlist-list [playlists]="playlists" [nbNotif]="userService.events.length" (playlistChanged)="playlistChangedHandler($event)"></app-playlist-list>
     </div>
 
-    <div class="col-md-2" style="background-color:red">
+    <div class="col-md-2" style="background-color:#2c2f33">
       <app-options-pl style="height: 10%; margin:0" [playlist]="selectedPl"></app-options-pl>
       <app-music-list [musics]="musics" (playMusic)="playMusicHandler($event)"></app-music-list>
     </div>
 
-    <div class="col-md-7" style="background-color:blue">
+    <div class="col-md-7" style="background-color:#23272a;">
       <div>
         <div class="row" style="min-height:70%;background-color:cyan;margin:0;width:100%">
           <router-outlet name="homeOutlet"></router-outlet>
@@ -39,7 +39,7 @@
 
   </div>
 
-  <div class="col-md-2" style="background-color:yellow">
+  <div class="col-md-2" style="background-color:#23272a">
     <app-user-list style="z-index: 1000;position: absolute;top: 10%;"[playlist]="selectedPl"></app-user-list>
   </div>
 

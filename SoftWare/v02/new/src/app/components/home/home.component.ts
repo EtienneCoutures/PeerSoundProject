@@ -68,15 +68,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    console.log('renderer:', this.rd);
-    //this.scPlayer = this.scPlayer.nativeElement;
-    console.log('this.el: ', this.scPlayer);
-    //this.el.nativeElement.focus();
-    //let iframeElement = document.querySelector('iframe');
     this.iframeElement = this.scPlayer.nativeElement;
-    console.log('this.iframeElement: ', this.iframeElement);
     this.scWidget = window['SC'].Widget(this.iframeElement);
-    console.log('this.scWidget: ', this.scWidget);
   }
 
   ngOnDestroy() {
@@ -87,6 +80,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log('pl change: ', pl);
     this.selectedPl = pl;
     this.plService.selectedPl = pl;
+    this.musics = pl.MusicLink; 
   }
 
   playMusicHandler(music: Music) {
