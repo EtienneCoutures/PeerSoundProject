@@ -10,10 +10,11 @@
   <mat-list color="primary" style="margin: 0">
       <!--<ng-scrollbar>-->
       <perfect-scrollbar style="max-width: 600px; max-height: 1000px;" [config]="config">
-        <mat-list-item (click)="playMusicEvent(music.Music)" *ngFor="let music of musics">
-          <mat-icon mat-list-icon>play_arrow</mat-icon>
+        <mat-list-item (click)="playMusicEvent(music.Music, i)" *ngFor="let music of musics; let i = index; trackBy: trackElement">
+          <mat-icon mat-list-icon>{{((plService.selectedMusic.music_id == music.Music.music_id) && plService.isPlaying) ? 'pause' : 'play_arrow'}}</mat-icon>
           <h5 mat-line>{{music.Music.music_name}}</h5>
           <p mat-line> {{music.Music.music_group}} </p>
+          <!--<app-music [music]="music.Music"></app-music>-->
         </mat-list-item>
 </perfect-scrollbar>
       <!--</ng-scrollbar>-->

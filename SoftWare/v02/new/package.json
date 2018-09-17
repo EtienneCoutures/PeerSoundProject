@@ -49,6 +49,7 @@
     "material-design-icons": "^3.0.1",
     "ngx-perfect-scrollbar": "^6.3.1",
     "ngx-scrollbar": "^2.2.0",
+    "plangular-3": "^3.1.2",
     "popper.js": "^1.14.4",
     "rxjs-compat": "^6.3.2"
   },

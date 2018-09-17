@@ -1,4 +1,5 @@
-
-  <mat-icon mat-list-icon>play_arrow</mat-icon>
-  <h4 mat-line>Toto</h4>
-  <p mat-line> Toto </p>
+<div (click)='clickMusic()'>
+  <mat-icon mat-list-icon>{{isPlaying ? 'pause' : 'play_arrow'}}</mat-icon>
+  <h5 mat-line>{{music.music_name}}</h5>
+  <p mat-line> {{music.music_group}} </p>
+</div>

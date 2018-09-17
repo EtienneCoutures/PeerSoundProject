@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { LoginService } from '../login/login.service';
 import { Account } from '../account';
 import { Playlist } from './playlist';
+import { Music } from '../music/music';
 
 export class Invitation {
   invited_usr_id: number;
@@ -22,6 +23,8 @@ export class PlaylistService {
   account: Account;
   selectedPl: Playlist;
   playlists: Playlist[];
+  selectedMusic: Music;
+  isPlaying: boolean = false;
 
   constructor(
     private httpClient: HttpClient,

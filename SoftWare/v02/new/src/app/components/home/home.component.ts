@@ -8,6 +8,8 @@ import { Music } from '../../music/music';
 import { EventsComponent, Event } from '../../events/events.component';
 import {ElementRef,Renderer2} from '@angular/core';
 
+//declare var SC: any;
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -23,7 +25,9 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   private users: Array<any> = new Array();
   private selectedPl: Playlist;
   private scWidget: any;
+  private iframeElement: any;
   @ViewChild('scPlayer') scPlayer:ElementRef;
+  //@ViewChild('iframe') iframe:ElementRef;
 
   //private events: Array<Event> = new Array<Event>();
 
@@ -36,6 +40,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.account = this.loginService.account;
     this.subs = new Array();
     this.plService.selectedPl = this.selectedPl;
+    console.log('SCWidget: ', window['SC']);
   }
 
   ngOnInit() {
@@ -52,6 +57,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
         this.playlists = playlists.concat(this.playlists);
         this.selectedPl = this.playlists[0];
+        this.plService.selectedMusic = this.playlists[0].MusicLink[0];
         this.plService.selectedPl = this.playlists[0];
         this.musics = this.playlists[0].MusicLink;
 
@@ -66,6 +72,10 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     //this.scPlayer = this.scPlayer.nativeElement;
     console.log('this.el: ', this.scPlayer);
     //this.el.nativeElement.focus();
+    //let iframeElement = document.querySelector('iframe');
+    this.iframeElement = this.scPlayer.nativeElement;
+    console.log('this.iframeElement: ', this.iframeElement);
+    this.scWidget = window['SC'].Widget(this.iframeElement);
     console.log('this.scWidget: ', this.scWidget);
   }
 
@@ -81,7 +91,14 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   playMusicHandler(music: Music) {
     console.log('playMusicHandler music: ', music);
-    this.scWidget.load(music.music_url, {auto_play : true});
+    if (this.plService.selectedMusic !== music) {
+      this.scWidget.load(music.music_url, {auto_play : true});
+    } else if (this.plService.selectedMusic === music) {
+      if (this.plService.isPlaying)
+        this.scWidget.play();
+      else
+        this.scWidget.pause();
+    }
   }
 
   getInvitations() {
