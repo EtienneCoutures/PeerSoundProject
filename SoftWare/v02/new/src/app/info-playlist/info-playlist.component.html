@@ -1,13 +1,33 @@
-<h3 mat-subheader>
-  {{plService.selectedPl.playlist_name}}
-</h3>
+<mat-list style="align: center">
+  <h1 mat-subheader>
+    {{plService.selectedPl.playlist_name}}
+  </h1>
 
-<mat-divider></mat-divider>
+  <mat-divider></mat-divider>
 
-Style
+  <mat-list-item>
+  <h4 mat-subheader>Style</h4>
 
-<h4>{{plService.selectedPl.playlist_style}}</h4>
+  <p mat-line>{{plService.selectedPl.playlist_style}}</p>
+</mat-list-item>
 
-Description
+<mat-list-item>
+  <h4 mat-subheader>Description</h4>
 
-<h4>{{plService.selectedPl.playlist_description}}</h4>
+  <p mat-line>{{plService.selectedPl.playlist_description}}</p>
+</mat-list-item>
+
+<mat-list-item>
+  <h4 mat-subheader>Musiques</h4>
+
+  <p mat-line>{{plService.selectedPl.MusicLink.length}}</p>
+</mat-list-item>
+
+<mat-list-item>
+  <h4 mat-subheader>Création</h4>
+
+  <p mat-line>{{plService.selectedPl.playlist_insert | date}}</p>
+</mat-list-item>
+
+
+</mat-list>

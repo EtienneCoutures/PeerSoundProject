@@ -28,6 +28,16 @@
 .appUserList {
   z-index: 1000;
   position: absolute;
-  top: 10%;
+  margin-left: 80%;
 
+}
+
+.example-icon {
+  padding: 0 14px;
+  right: 10%;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+  padding-right: 81%;
 }

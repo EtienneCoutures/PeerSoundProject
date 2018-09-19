@@ -29,6 +29,8 @@ import { CreatePlaylistComponent } from './create-playlist/create-playlist.compo
 import { NewPlaylistComponent } from './new-playlist/new-playlist.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { DialogInvitePeople } from './options-pl/options-pl.component';
+import { WebSocketService } from './web-socket.service';
+import { EventService } from './event.service';
 
 import { MatDialogModule,
          MatDialogRef,
@@ -40,7 +42,8 @@ import { MatDialogModule,
          MatBadgeModule,
          MatListModule,
          MatExpansionModule,
-         MatToolbarModule
+         MatToolbarModule,
+         MatSnackBarModule
        } from '@angular/material';
 
 import { PerfectScrollbarModule
@@ -114,6 +117,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatToolbarModule,
     PerfectScrollbarModule,
     ScrollbarModule,
+    MatSnackBarModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { UserService } from '../user.service';
 import { Playlist } from '../playlist/playlist';
+import { PlaylistService } from '../playlist/playlist.service';
 
 export class Event {
   type: string;
@@ -9,15 +10,16 @@ export class Event {
 }
 
 export class Invitation {
-  Inviter: any;
-  Playlist: Playlist;
-  invitation_id: number;
-  invitation_insert: string;
-  invitation_update: string;
-  invited_role: string;
-  invited_usr_id: number;
-  inviter_usr_id: number;
-  playlist_id: number;
+  Inviter?: any;
+  Playlist?: Playlist;
+  invitation_id?: number;
+  invitation_insert?: string;
+  invitation_update?: string;
+  invited_role?: string;
+  invited_usr_id?: number;
+  inviter_usr_id?: number;
+  playlist_id?: number;
+  playlist_name?: string;
 }
 
 @Component({
@@ -31,11 +33,10 @@ export class EventsComponent implements OnInit {
   events: Array<Event> = new Array<Event>();
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private plService: PlaylistService
   ) { }
   ngOnInit() {
-    console.log('Event component initiated');
-
     this.events = this.userService.events;
     console.log('events list : ', this.events);
     //this.getInvitations();
@@ -43,19 +44,24 @@ export class EventsComponent implements OnInit {
 
   accept(event: Event) {
 
+    console.log('accept event: ', event);
     this.userService.deleteInvitation(event.invitation.invitation_id)
     .subscribe(res => {
       if (res.code == 0) {
         this.userService.acceptInvitation(event.invitation.invited_usr_id
                                           , event.invitation.playlist_id)
         .subscribe(res => {
-          console.log('accept invitation:', res);
           if (res.code == 0) {
+            if (event.type == "Invitation") {
+              this.plService.getPlaylistMusics(event.invitation.playlist_id)
+                .subscribe(pl => {
+                  console.log('new playlist:', pl);
+                  this.plService.playlists.push(pl.Playlist);
+                  this.plService.selectedPl = pl.Playlist;
+                })
+            }
             let idx = this.events.indexOf(event);
             this.events.splice(idx, 1);
-            if (event.type == "Invitation") {
-              
-            }
           } else {
 
           }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Account } from '../account'
+import { PlaylistService } from '../playlist/playlist.service';
 
 @Component({
   selector: 'app-user',
@@ -11,14 +12,14 @@ export class UserComponent implements OnInit {
   private show: boolean = false;
   @Input() user: Account;
 
-  constructor() { }
+  constructor(
+    private plService: PlaylistService
+  ) { }
 
-  ngOnInit() {
-    console.log('User initiated: ', this.user);
-  }
+  ngOnInit() { }
 
   userOptions() {
-    
+
   }
 
    public onToggle(): void {
