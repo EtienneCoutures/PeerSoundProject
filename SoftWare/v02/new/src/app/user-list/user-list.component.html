@@ -1,6 +1,10 @@
 
-<mat-list>
+<div>
+<mat-list color="primary">
   <h4 mat-subheader>Utilisateurs - {{users.length}}</h4>
   <mat-divider></mat-divider>
-    <app-user [user]="user" *ngFor="let user of users" class="userList"></app-user>
+    <mat-list-item class="userList" color="secondary" *ngFor="let user of users"  style="padding-top: 15%">
+      <app-user [user]="user" ></app-user>
+    </mat-list-item>
 </mat-list>
+</div>

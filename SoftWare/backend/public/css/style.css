@@ -7,9 +7,31 @@
 }
 
 * {
-    font-family: "Segoe UI",Arial,sans-serif;
+    font-family: "forgotten";
 
   } /* ici on set tout */
+
+  .history{
+    color:black;
+    font-size:18px;
+    margin-top:4%;
+    font-family:"forgotten";
+  }
+ul {
+  
+}
+  .news{
+    width: 455px;
+    position: relative;
+    height: 150px;
+    border: 1px solid #c0c0c0;
+    clear: both;
+    text-align: center;
+    margin:auto;
+    margin-top: 10px;
+    border-radius: 5px;
+    background-color: blue;
+  }
 
   html {
     overflow-y: hidden;
@@ -31,19 +53,7 @@
     margin-right: 0;
 }*/
 
-.news{
-  width: 455px;
-  position: relative;
-  height: 150px;
-  border: 1px solid #c0c0c0;
-  clear: both;
-  text-align: center;
-  margin:auto;
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  background-color: white;
-}
+
 
 span.select2 {
     width: 100% !important;
@@ -351,6 +361,15 @@ ul.toolbar .dropdown > .dropdown-toggle > .label {
         position: relative;
         margin: 0 auto;
     }
+
+    @font-face {
+      font-family: "forgotten";
+      src: local("/font-family/forgotten-futurist-bd-it.ttf");
+      }
+
+
+
+
 
     footer {
         background:#333;

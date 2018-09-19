@@ -217,7 +217,7 @@ function initModels(callback) {
             }, callback);
 
             sequelize.sync({alter : true
-            /*, force : true, logging : console.log*/}).then(function(res) {
+            /*, force :false, logging : console.log*/}).then(function(res) {
               console.log(sequelize.modelManager.models)
             }).catch(function (err) {
               logger.error(err);
