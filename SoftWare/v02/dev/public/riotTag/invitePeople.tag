@@ -62,7 +62,7 @@ sendInvitation(rslt) {
   console.log('options invitation: ', options);
   requestManager.request(baseURL, options, data, function (rslt, req, err) {
     if (rslt.rslt.code == 0) {
-      console.log('invitation successfuly send !');
+      console.log('invitation successfuly sent !');
       self.unmount(true);
     } else {
       console.log('there was a problem sending invitation :/');

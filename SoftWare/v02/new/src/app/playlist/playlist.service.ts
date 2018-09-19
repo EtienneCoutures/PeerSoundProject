@@ -10,6 +10,9 @@ export class Invitation {
   inviter_usr_id: number;
   playlist_id: number;
   invited_role: string;
+  playlist_name?: string;
+  usr_login?: string;
+  invitation_id?:string;
 }
 
 @Injectable({
@@ -20,11 +23,13 @@ export class PlaylistService {
 
   headers: HttpHeaders;
   params: HttpParams;
+
   account: Account;
   selectedPl: Playlist;
   playlists: Playlist[];
+  isPlaying: boolean;
+  musics: Music[];
   selectedMusic: Music;
-  isPlaying: boolean = false;
 
   constructor(
     private httpClient: HttpClient,
@@ -39,7 +44,7 @@ export class PlaylistService {
   }
 
   getPlaylistMusics(playlistId: number) {
-    return this.httpClient.get(`http://localhost:8000/api/playlist/${playlistId}`
+    return this.httpClient.get<any>(`http://localhost:8000/api/playlist/${playlistId}`
                                 , {headers : this.headers});
   }
 

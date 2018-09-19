@@ -10,8 +10,7 @@ var express        = require('express'),
       key: hskey,
       cert: hscert
     },
-    server         = require('http').createServer(app),
-    io             = require('socket.io')(server),
+    server         = require('http').createServer(https_options, app),
 
     session        = require('express-session'),
     flash          = require('express-flash'),
@@ -28,9 +27,6 @@ var express        = require('express'),
     S              = require('string'),
     nodemailer     = require('nodemailer'),
     path           = require('path'),
-
-    self           = this,
-    connectedUsers = {},
 
     translate      = require('./translate')(path.resolve('./i18n'), 'en'),
     logger;
@@ -217,7 +213,7 @@ function initModels(callback) {
             }, callback);
 
             sequelize.sync({alter : true
-            /*, force : true, logging : console.log*/}).then(function(res) {
+            , /*force : true,*/ logging : console.log}).then(function(res) {
               console.log(sequelize.modelManager.models)
             }).catch(function (err) {
               logger.error(err);
@@ -285,66 +281,7 @@ function loadServices(callback) {
     });
 }
 
-
-
 function startServeur(callback) {
-
-  io.on('connection', function(socket){
-
-    console.log('user connected: ', socket.handshake.address);
-
-    // Log whenever a client disconnects from our websocket server
-    socket.on('disconnect', function(){
-      if (self.account)
-        delete connectedUsers[self.account.usr_id];
-   });
-
-   socket.on('connection', (usr_id) => {
-     let id = JSON.parse(usr_id);
-
-     console.log('connection received: ', id);
-     self.account = id;
-     self.connectedUsers[id] = socket;
-     socket.emit('connection', {data: 'OK'});
-   })
-
-   socket.on('invitSent', (invit) => {
-     console.log('invit sent: ', invit);
-     if (self.connectedUsers[invit.invited_usr_id]) {
-       console.log('emit sent invit response: ');
-       self.connectedUsers[invit.invited_usr_id].emit('messages'
-                                                , {type: 'invitReceived'
-                                                , data: invit
-                                              });
-      console.log('DONE');
-     }
-      socket.emit('message', {data: 'OK'});
-   })
-
-   socket.on('message', (mes) => {
-     var message = JSON.parse(mes);
-
-     if (message.type == "connection") {
-       console.log('connection id: ', message.data.usr_id);
-
-       self.account = message.data.usr_id;
-       connectedUsers[self.account] = socket;
-       socket.emit('message', {type:'connection', data: 'OK'});
-     } else if (message.type == "invitSent") {
-       let invit = message.data;
-       console.log('invite sent received:' , invit);
-
-       if (connectedUsers[invit.invited_usr_id]) {
-         connectedUsers[invit.invited_usr_id].emit('message'
-                                                  , {type: 'invitReceived'
-                                                  , data: invit
-                                                });
-       }
-       socket.emit('message', {type:'response', data: 'OK'});
-     }
-    });
-  });
-
     server.listen(options.port);
     /*sequelize.sync().then(function() {
       console.log('sequelize is sync')

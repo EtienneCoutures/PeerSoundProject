@@ -61,6 +61,7 @@ module.exports = function (app, passport) {
         },
         function (req, username, password, done) {
             var form = req.body;
+            console.log('form: ', form);
             app.models['User'].find({
                 where: {
                     'usr_email': username
@@ -124,7 +125,7 @@ module.exports = function (app, passport) {
     router.post('/api/auth/login',
         function (req, res, next) {
             passport.authenticate('login', function (err, user, info, status) {
-                console.log(user);
+                //console.log(user);
                 if (!user) {
                     return res.json({
                         code: -1,
@@ -155,9 +156,10 @@ module.exports = function (app, passport) {
             }]
         ]),
         function (req, res, next) {
+          console.log('ééééééééééééééééééééééééééééééééééééééé');
             passport.authenticate('signup', function (err, user, info, status) {
                 if (!user) {
-                  return res.redirect('/signup');
+                  return ;//res.redirect('/signup');
                 }
                 req.login(user, function () {
                   return res.json({user:user})
@@ -197,8 +199,8 @@ module.exports = function (app, passport) {
                     'usr_id': account['usr_id'],
                     'atok_type': 'recovery'
                 }).then(function (recoveryToken) {
-                    console.log(email);
-                    console.log(app.mailer);
+                    //console.log(email);
+                    //console.log(app.mailer);
                     app.mailer.sendMail({
                         to: email,
                         subject: req.translate('system', '[ peersoundproject ] - lost password request'),

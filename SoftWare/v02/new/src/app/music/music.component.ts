@@ -12,10 +12,15 @@ export class MusicComponent implements OnInit {
 
   @Input() music: Music;
   isPlaying: boolean = false;
+  isSelected: boolean = false;
+  selectedMusic: Music;
 
   constructor(
     private plService: PlaylistService
-  ) { }
+  ) {
+    //this.isPlaying = this.plService.isPlaying;
+    //this.selectedMusic = this.plService.selectedMusic;
+  }
 
   ngOnInit() {
     console.log('i construct a music:', this.music);
@@ -24,8 +29,8 @@ export class MusicComponent implements OnInit {
 
   clickMusic() {
     console.log('click music');
-    this.isPlaying = !this.isPlaying;
-    //this.plService.selectedMusic = this.music;
+//    this.selectedMusic = this.music;
+    //this.isPlaying = !this.isPlaying;
   }
 
 }

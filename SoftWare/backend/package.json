@@ -52,6 +52,7 @@
     "restangular": "^1.5.1",
     "screener": "0.0.7",
     "sequelize": "^3.33.0",
+    "socket.io": "^2.1.1",
     "string": "*",
     "underscore": "^1.9.1",
     "validator": "^3.39.0",

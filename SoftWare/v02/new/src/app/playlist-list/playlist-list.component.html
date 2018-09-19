@@ -11,14 +11,10 @@
             </mat-list-item>
           </div>-->
 
-          <div class="listPlaylist" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
-
+          <div fxLayout="column" fxLayoutAlign="stretch" class="listPlaylist">
             <ng-scrollbar>
-              <mat-list-item class="playlist_albatar" *ngFor="let pl of playlists">
-                <app-playlist [playlist]="pl" (click)="selectPlaylist(pl)"></app-playlist>
-              </mat-list-item>
-            </ng-scrollbar>
-
+            <app-playlist [playlist]="pl" *ngFor="let pl of playlists" (click)="selectPlaylist(pl)"></app-playlist>
+          </ng-scrollbar>
           </div>
 
 

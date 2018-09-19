@@ -92,6 +92,7 @@ module.exports = function (app) {
         ]),
         function (req, res) {
             var Record = req.body;
+            console.log('self: ', self);
 
             if (!Record["music_id"])
                 return createRecord();

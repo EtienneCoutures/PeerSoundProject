@@ -55,6 +55,7 @@ module.exports = function (app) {
             if (!S(Options.where.usr_lastname).isEmpty()) query.where.usr_lastname = {like:Options.where.usr_lastname + '%'};
             if (!S(Options.where.usr_role).isEmpty()) query.where.usr_role = Options.where.usr_role;
             if (!S(Options.where.usr_status).isEmpty()) query.where.usr_status = Options.where.usr_status;
+            if (!S(Options.where.usr_email).isEmpty()) query.where.usr_email = {like:Options.where.usr_email + '%'};
 
             query.limit = Options.limit || null;
             query.offset = Options.limit ? Options.limit * ((Options.page || 1) - 1) : null;
