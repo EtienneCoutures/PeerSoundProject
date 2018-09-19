@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ElectronService } from './providers/electron.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../environments/environment';
@@ -8,8 +8,11 @@ import { AppConfig } from '../environments/environment';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  constructor(public electronService: ElectronService,
+export class AppComponent implements OnInit {
+  themeClass: string;
+
+  constructor(
+    public electronService: ElectronService,
     private translate: TranslateService) {
 
     translate.setDefaultLang('en');
@@ -23,5 +26,16 @@ export class AppComponent {
     } else {
       console.log('Mode web');
     }
+  }
+
+  ngOnInit() {
+
+    /*const overlayContainerClasses = this.overlayContainer.getContainerElement().classList;
+    const themeClassesToRemove = Array.from("app-dark-theme").filter((item: string) => item.includes('-theme'));
+    if (themeClassesToRemove.length) {
+      overlayContainerClasses.remove(...themeClassesToRemove);
+    }
+    overlayContainerClasses.add(themeClass);*/
+
   }
 }

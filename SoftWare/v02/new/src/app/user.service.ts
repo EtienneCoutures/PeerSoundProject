@@ -81,7 +81,7 @@ export class UserService {
     this.params = new HttpParams().set('where'
                   , `{"usr_email":${this.loginService.account.usr_email.toString()}}`);
 
-    return this.httpClient.get(`http://localhost:8000/api/user/`, {
+    return this.httpClient.get(`http://localhost:8000/api/user`, {
       params: this.params,
       headers: this.headers
     });

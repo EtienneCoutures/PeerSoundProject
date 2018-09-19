@@ -65,7 +65,6 @@ export class DialogInvitePeople {
     console.log('invite: ', this.data);
 
     this.invitation.inviter_usr_id = this.data.service.account.usr_id;
-    this.invitation.invited_usr_id = 57;
     this.invitation.playlist_id = this.data.pl.playlist_id;
     this.invitation.invited_role = "member";
 
@@ -75,6 +74,7 @@ export class DialogInvitePeople {
       res =>
       {
         console.log('res user id from mail: ', res);
+        this.invitation.invited_usr_id = res[0].usr_id;
         //this.invitation.invited_usr_id = invited_id;
         this.data.service.inviteUser(this.invitation).subscribe(res => {
           console.log('invite user: ', res);

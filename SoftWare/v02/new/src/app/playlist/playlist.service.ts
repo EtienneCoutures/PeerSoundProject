@@ -60,8 +60,14 @@ export class PlaylistService {
   }
 
   getUserIdFromMail(mail: string) {
+    /*this.params = new HttpParams().set('where'
+                  , `{"usr_email":${mail.toString()}}`);*/
 
-    return this.httpClient.get(`http://localhost:8000/api/user/${mail}`)
+    return this.httpClient.get(`http://localhost:8000/api/user`
+      + `?where=%7B%22usr_email%22:%22${mail.toString()}%22%7D`, {
+      params: this.params,
+      headers: this.headers
+    });
   }
 
   getUserFromPlaylist(plId: number) {
