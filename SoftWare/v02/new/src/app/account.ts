@@ -14,4 +14,5 @@ export class Account {
   usr_phone: string;
   usr_status: string;
   usr_update: string;
+  playlist?: any;
 }

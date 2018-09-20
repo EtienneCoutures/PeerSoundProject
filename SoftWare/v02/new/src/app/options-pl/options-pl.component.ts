@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Playlist } from '../playlist/playlist';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatButton } from '@angular/material';
 import { PlaylistService, Invitation } from '../playlist/playlist.service';
+import { EventService } from '../event.service';
 
 @Component({
   selector: 'app-options-pl',
@@ -15,7 +16,8 @@ export class OptionsPlComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    public plService: PlaylistService
+    public plService: PlaylistService,
+    private eService: EventService
   ) { }
 
   openInviteDialog(): void {}
@@ -31,6 +33,9 @@ export class OptionsPlComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(results => {
       this.inviteEmail = results;
+      if (results) {
+        this.eService.sendMsg({type: 'invitSent', data : results});
+      }
     });
   }
 }
@@ -49,6 +54,7 @@ export class DialogInvitePeople {
   constructor(
     public dialogRef: MatDialogRef<DialogInvitePeople>,
     @Inject(MAT_DIALOG_DATA) public data: any,
+
   ) {}
 
   onNoClick(): void {
@@ -59,27 +65,31 @@ export class DialogInvitePeople {
     console.log('invite: ', this.data);
 
     this.invitation.inviter_usr_id = this.data.service.account.usr_id;
-    this.invitation.invited_usr_id = 1;
     this.invitation.playlist_id = this.data.pl.playlist_id;
     this.invitation.invited_role = "member";
 
     console.log('inviteEmail: ', this.inviteEmail);
 
-    this.data.service.inviteUser(this.invitation).subscribe(res => {
-      console.log('invite user: ', res);
-      if (res.code == 0) {
-        this.dialogRef.close();
-      } else {
-        this.error = "Veuillez vérifier l'adresse mail."
-      }
-    }, error => console.log('error trying invitation: ', error));
-
-    /*this.data.service.getUserIdFromMail(this.inviteEmail).subscribe(
+    this.data.service.getUserIdFromMail(this.inviteEmail).subscribe(
       res =>
       {
+        console.log('res user id from mail: ', res);
+        this.invitation.invited_usr_id = res[0].usr_id;
         //this.invitation.invited_usr_id = invited_id;
+        this.data.service.inviteUser(this.invitation).subscribe(res => {
+          console.log('invite user: ', res);
+          if (res.code == 0) {
+            this.invitation.playlist_name = this.data.pl.playlist_name;
+            this.invitation.usr_login = this.data.service.account.usr_login;
+            this.invitation.invitation_id = res.Invitation.invitation_id;
+            this.dialogRef.close(this.invitation);
+          } else {
+            this.error = "Veuillez vérifier l'adresse mail."
+          }
+        }, error => console.log('error trying invitation: ', error));
+
         console.log('res: ', res);
-      }, error => console.log('error getting user id from mail: ', error));*/
+      }, error => console.log('error getting user id from mail: ', error));
     //this.dialogRef.close(this.inviteEmail);
   }
 

@@ -76,4 +76,14 @@ export class UserService {
     return this.httpClient.get<any>('http://localhost:8000/api/subscription'
     , {params: this.params, headers: this.headers});
   }
+
+  getUserIdFromMail(mail: string) {
+    this.params = new HttpParams().set('where'
+                  , `{"usr_email":${this.loginService.account.usr_email.toString()}}`);
+
+    return this.httpClient.get(`http://localhost:8000/api/user`, {
+      params: this.params,
+      headers: this.headers
+    });
+  }
 }

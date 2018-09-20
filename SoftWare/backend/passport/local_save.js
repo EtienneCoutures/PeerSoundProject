@@ -41,6 +41,7 @@ module.exports = function (app, passport) {
                     account = account.toJSON();
                     account.accessTokenID = accessToken.atok_id;
                     account.authorization = 'Bearer ' + accessToken.atok_token;
+                    console.log('done bitch');
                     return done(null, account);
                 });
             }).catch(function (err) {
@@ -68,10 +69,12 @@ module.exports = function (app, passport) {
                 }
             }).then(function (account) {
                 if (account) {
+                  console.log('Account with same username already exist.');
                     return done(null, false, req.flash('message', req.translate('system', 'Account with same username already exist.')));
                 }
                 if (!validator.isEmail(username)) {
-                    return done(null, false, req.flash('message', 'Email input is not valid email adress.'));
+                  console.log('Email input is not valid email adress.');
+                  return done(null, false, req.flash('message', 'Email input is not valid email adress.'));
                 }
 
                 //set le login par default a mail - @
@@ -105,6 +108,7 @@ module.exports = function (app, passport) {
                         account = account.toJSON();
                         account.accessTokenID = accessToken.atok_id;
                         account.authorization = 'Bearer ' + accessToken.atok_token;
+                        account.playlist = playlist;
                         return done(null, account);
                     });
 
@@ -160,11 +164,14 @@ module.exports = function (app, passport) {
             passport.authenticate('signup', function (err, user, info, status) {
                 console.log(user);
                 if (!user) {
-                  console.log(req)
-                  console.log(res)
-                  console.log(err)
+                  /*console.log(req)*/
+                  console.log(status)
+                  console.log(info)
                   console.log("!user")
-                  return res.redirect('/signup');
+                  return res.json({
+                    code: 1,
+                    error: info
+                  });//res.redirect('/signup');
                 }
                 req.login(user, function () {
                     //res.redirect('/');

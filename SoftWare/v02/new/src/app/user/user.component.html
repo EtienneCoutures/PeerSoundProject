@@ -2,10 +2,5 @@
 
 <button matBadge="3" (click)="onToggle()" matBadgePosition="above after" mat-fab class="user_avatar"></button>
 <h4 class="nom">{{user.usr_login || user.Subscriber.usr_login}}</h4>
-<i class="material-icons">stars</i>
-<!--<kendo-popup [anchor]="anchor" *ngIf="show">
-       <div class="content">
-         Popup content.
-       </div>
-     </kendo-popup>-->
+<i class="material-icons" [hidden]="user.usr_id != plService.selectedPl.playlist_creator">stars</i>
 </mat-list-item>

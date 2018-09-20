@@ -16,4 +16,18 @@
 
   <p mat-line>{{plService.selectedPl.playlist_description}}</p>
 </mat-list-item>
+
+<mat-list-item>
+  <h4 mat-subheader>Musiques</h4>
+
+  <p mat-line>{{plService.selectedPl.MusicLink.length}}</p>
+</mat-list-item>
+
+<mat-list-item>
+  <h4 mat-subheader>Création</h4>
+
+  <p mat-line>{{plService.selectedPl.playlist_insert | date}}</p>
+</mat-list-item>
+
+
 </mat-list>

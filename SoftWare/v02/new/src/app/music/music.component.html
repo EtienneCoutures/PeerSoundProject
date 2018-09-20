@@ -1,5 +1,6 @@
-<div (click)='clickMusic()'>
-  <mat-icon mat-list-icon>{{isPlaying ? 'pause' : 'play_arrow'}}</mat-icon>
+<mat-list-item (click)='clickMusic()'>
+  <mat-icon mat-list-icon>{{plService.isPlaying ? 'pause' : 'play_arrow'}}</mat-icon>
   <h5 mat-line>{{music.music_name}}</h5>
   <p mat-line> {{music.music_group}} </p>
-</div>
+  <mat-divider></mat-divider>
+</mat-list-item>

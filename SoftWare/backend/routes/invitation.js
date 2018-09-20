@@ -47,14 +47,19 @@ module.exports = function(app) {
             if (!S(Options.where.playlist_id).isEmpty()) query.where.playlist_id = {like:Options.where.playlist_id};
             if (!S(Options.where.invited_role).isEmpty()) query.where.invited_role = {like:Options.where.invited_role};
 
+            console.log('Options: ', Options);
             query.limit = Options.limit || null;
             query.offset = Options.limit ? Options.limit * ((Options.page || 1) - 1) : null;
             query.order = (Options.sort && Options.sort.field) ? (Options.sort.field + (Options.sort.asc ? ' ASC' : ' DESC')) : 'invitation_id';
+            console.log('query: ', query);
             app.models["Invitation"].findAndCountAll(query).then(function(result) {
+              console.log('result: ', result);
               if (!result.count)
                 return res.json({
                     code: 1
                 });
+
+
               if (!Options.limit) return res.json(result.rows);
                 res.json(result);
             });

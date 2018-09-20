@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LoginService } from '../login/login.service';
 import { userCredentials } from '../login/userCredentials';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PlaylistService } from '../playlist/playlist.service'
 
 @Component({
   selector: 'app-new-account',
@@ -18,7 +19,8 @@ export class NewAccountComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    //private plService: PlaylistService
   ) { }
 
   ngOnInit() {
