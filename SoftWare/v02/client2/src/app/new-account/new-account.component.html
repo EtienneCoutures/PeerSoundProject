@@ -1,0 +1,29 @@
+<div class="login">
+  <div class="top">
+    <h1 id="title" class="hidden"><span id="logo"> PeerSoundProject<span></span></span></h1>
+  </div>
+  <div class="login-box animated fadeInUp">
+    <div class="box-header">
+      <h2>Create an account</h2>
+    </div>
+    <div style="color:red; size-font:15px" id="error">{{error}}</div>
+    <br>
+    <label for="username">Email</label>
+    <br/>
+    <input type="text" id="username" [(ngModel)]="userCred.login">
+    <br/>
+    <label for="password">Password</label>
+    <br/>
+    <input type="password" id="password" [(ngModel)]="userCred.password">
+    <br/>
+    <label for="verify_password">Verify password</label>
+    <br/>
+    <input type="password" id="verify_password" [(ngModel)]="verifyPassword">
+    <br/>
+    <button id="submit" (click)="createAccount()">Create account</button>
+    <br/>
+    <br/>
+    <button  (click)="retour()">RETOUR</button>
+    <br/>
+    </div>
+</div>

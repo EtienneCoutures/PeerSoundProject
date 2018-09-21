@@ -1,0 +1,18 @@
+<mat-list color="primary">
+  <h2 mat-subheader>Mes évènements - {{events.length}}</h2>
+
+  <mat-list-item *ngFor="let event of events">
+    <mat-icon mat-list-icon>person_add</mat-icon>
+    <h4 mat-line>{{event.type}}</h4>
+    <p mat-line> {{event.message}} </p>
+
+    <button (click)="accept(event)" mat-icon-button>
+      <mat-icon >done</mat-icon>
+    </button>
+
+    <button color="red" (click)="refuse(event)" mat-icon-button>
+      <mat-icon >cancel</mat-icon>
+    </button>
+
+  </mat-list-item>
+</mat-list>
