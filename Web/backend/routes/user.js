@@ -26,9 +26,9 @@ module.exports = function (app) {
     router.get('/',
         app.requirePermission([
             ['allow', {
-                users:['@']
+                users:['*']
             }],
-            ['deny', {
+           ['deny', {
                 users:'*'
             }]
         ]),
@@ -38,7 +38,7 @@ module.exports = function (app) {
                     where: {},
                     include: []
                 };
-
+                console.log(req.query)
             if (typeof Options.where == "string") Options.where = JSON.parse(Options.where);
             if (typeof Options.limit == "string") Options.limit = parseInt(Options.limit);
             if (typeof Options.page == "string") Options.page = parseInt(Options.page);
@@ -54,6 +54,7 @@ module.exports = function (app) {
             if (!S(Options.where.usr_firstname).isEmpty()) query.where.usr_firstname = {like:Options.where.usr_firstname + '%'};
             if (!S(Options.where.usr_lastname).isEmpty()) query.where.usr_lastname = {like:Options.where.usr_lastname + '%'};
             if (!S(Options.where.usr_role).isEmpty()) query.where.usr_role = Options.where.usr_role;
+            if (!S(Options.where.usr_email).isEmpty()) query.where.usr_email = Options.where.usr_email;
             if (!S(Options.where.usr_status).isEmpty()) query.where.usr_status = Options.where.usr_status;
 
             query.limit = Options.limit || null;

@@ -24,6 +24,25 @@ define([
                 $scope.goToDownload = function() {
                   $location.url("/download")
                 }
+                Restangular.one('user').get({
+                  where: {
+                    usr_email: 'etienne.coutures@epitech.eu'
+                  }
+                }).then(function(result) {
+                    console.log(result)
+                }).catch(function(err) {
+                  console.log(err)
+                })
+
+              /*  Restangular.all('user').get({'where': {'usr_email': 'etienne.coutures@epitech.eu'}}).then(function(result) {
+                  if (result.code == 1) {
+                    console.log("error");
+                  }
+                  console.log('success')
+                  console.log(result);
+                })
+*/
+
             }
           ])
         .controller('DownloadController', [

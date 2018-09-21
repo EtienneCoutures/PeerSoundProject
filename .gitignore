@@ -3,3 +3,4 @@ logs/
 server.log
 Web/backend/npm-debug.log
 OldWeb/
+Web/backend/package-json.lock
