@@ -29,10 +29,10 @@ var express        = require('express'),
     nodemailer     = require('nodemailer'),
     path           = require('path'),
 
-    self           = this,
-    connectedUsers = {},
+    self           = this;
+    self.connectedUsers = {};
 
-    translate      = require('./translate')(path.resolve('./i18n'), 'en'),
+    var translate      = require('./translate')(path.resolve('./i18n'), 'en'),
     logger;
 
 app.requirePermission = require('./permissionRules')({
@@ -328,7 +328,9 @@ function startServeur(callback) {
        console.log('connection id: ', message.data.usr_id);
 
        self.account = message.data.usr_id;
-       connectedUsers[self.account] = socket;
+       self.connectedUsers[message.data.usr_id] = socket;
+       global.connectedUsers = self.connectedUsers;
+       console.log('connectedUsers: ', connectedUsers);
        socket.emit('message', {type:'connection', data: 'OK'});
      } else if (message.type == "invitSent") {
        let invit = message.data;
@@ -354,3 +356,5 @@ function startServeur(callback) {
     logger.info('Magic happens on port ' + options.port);
     callback();
 }
+
+exports.connectedUsers = self.connectedUsers;

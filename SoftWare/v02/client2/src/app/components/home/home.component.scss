@@ -1,0 +1,43 @@
+//@import "~_variables.scss";
+
+.container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+/*  background: url(../../../assets/background.jpg) no-repeat center fixed;
+  -webkit-background-size: cover;
+  background-size: cover; */
+
+  .title {
+    color: white;
+    margin:0;
+    padding:50px 20px;
+  }
+}
+
+.menuH {
+  position: absolute;
+  width: 76.1%;
+  height: 10%;
+  z-index: 200;
+  left: 24.9%;
+}
+
+.appUserList {
+  z-index: 1000;
+  position: absolute;
+  margin-left: 80%;
+
+}
+
+.example-icon {
+  padding: 0 14px;
+  right: 10%;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+  padding-right: 81%;
+}

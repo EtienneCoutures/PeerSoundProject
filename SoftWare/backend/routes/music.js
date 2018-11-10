@@ -6,6 +6,7 @@ var express = require('express'),
     Cookies = require('cookies'),
     S = require('string'),
     logger = global.logger;
+    connectedUsers = require('../server.js');
 
 module.exports = function (app) {
     var router = express.Router();
@@ -92,7 +93,7 @@ module.exports = function (app) {
         ]),
         function (req, res) {
             var Record = req.body;
-            console.log('self: ', self);
+            console.log('self: ', connectedUsers);
 
             if (!Record["music_id"])
                 return createRecord();
@@ -115,6 +116,13 @@ module.exports = function (app) {
 
 
                 record.save().then(function (record) {
+                  console.log('srecord: ', record);
+                  console.log('record.Instance: ', record["dataValues"]);
+                  let id = record["dataValues"].usr_id;
+                  //console.log('connectedUsers[record.usr_id]: ', global.connectedUsers);
+                    global.connectedUsers[id].emit('message'
+                    , {type: "newMusic"
+                      , data : record["dataValues"]});
                     reply(null, record);
                 }).catch(function (err) {
                     reply(err);
