@@ -56,28 +56,17 @@ h6 {
 }
 
 section {
-  padding: 8rem 0;
+  padding: 5rem 0;
 }
 
 .section-heading {
   margin-top: 0;
 }
 
-::-moz-selection {
-  color: #fff;
-  background: #212529;
-  text-shadow: none;
-}
-
 ::selection {
   color: #fff;
   background: #212529;
   text-shadow: none;
-}
-
-img::-moz-selection {
-  color: #fff;
-  background: transparent;
 }
 
 img::selection {

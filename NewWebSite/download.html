@@ -53,7 +53,7 @@
 
 
     <section class="bg-primary" id="about">
-      <div class="container">
+      <div class="container" id="solution">
         <div class="row">
           <div class="col-lg-8 mx-auto text-center">
             <h2 class="section-heading text-white">Notre solution</h2>
@@ -66,7 +66,7 @@
     </section>
 
     <section id="services">
-      <div class="container">
+      <div class="container" id="extension">
         <div class="row">
           <div class="col-lg-12 text-center">
             <h2 class="section-heading">Extension</h2>
@@ -75,19 +75,20 @@
         </div>
       </div>
       <div class="container">
-        <div class="row" style="justify-content: space-around;">
+        <div class="row" style="justify-content:center; margin-top: 0 !important;">
           <div class="col-lg-3 col-md-6 text-center">
-            <div class="service-box mt-5 mx-auto">
+            <div class="service-box mt-5 mx-auto" style=" margin-top: 0 !important;">
               <i class="fa-5x fab fa-chrome text-primary mb-3 sr-icon-1"></i>
               <h3 class="mb-3"></h3>
-              <a class="btn btn-light btn-xl sr-button" href="download.html">TO CHROME  </a>
+              <a class="btn btn-light btn-xl sr-button" href="download.html">POUR CHROME  </a>
             </div>
           </div>
+
           <div class="col-lg-3 col-md-6 text-center">
-            <div class="service-box mt-5 mx-auto">
+            <div class="service-box mt-5 mx-auto" style=" margin-top: 0 !important;">
               <i class="fa-5x fab fa-firefox text-primary mb-3 sr-icon-2"></i>
               <h3 class="mb-3"></h3>
-              <a class="mb-3 btn btn-light btn-xl sr-button" href="download.html">To FireFox</a>
+              <a class="mb-3 btn btn-light btn-xl sr-button" href="download.html">POUR FireFox</a>
             </div>
           </div>
         </div>
@@ -98,7 +99,7 @@
           <div class="col-lg-4 col-md-6 text-center">
             <div class="service-box mt-5 mx-auto">
                 <div>
-                <i class="compatible fa-3x fab fa-youtube text-primary mb-3 sr-icon-2"></i>
+                <i class="compatible fa-3x fab fa-youtube text-primary mb-3 sr-icon-2" style="margin-right: 10%;"></i>
                 <i class=" fa-3x fab fa-soundcloud text-primary mb-3 sr-icon-2"></i>
               </div>
               <h3 class="mb-3">Compatible</h3>
@@ -110,17 +111,31 @@
     </section>
 
     <section id="services" class="bg-dark text-white">
-        <div class="container">
+        <div class="container" id="logiciel">
           <div class="row">
             <div class="col-lg-12 text-center">
-              <h2 class="section-heading">Software</h2>
+              <h2 class="section-heading">Logiciel</h2>
               <hr class="my-4">
             </div>
           </div>
         </div>
         <div class="container text-center">
-            <h2 class="mb-4">Free Download at Start Bootstrap!</h2>
-            <a class="btn btn-light btn-xl sr-button" href="download.html">Download Now!</a>
+          <h2 class="mb-4">Redécouvrez la musique</h2>
+          <a class="btn btn-light btn-xl sr-button" href="download.html">Téléchargez !</a>
+        </div>
+        <div class="container">
+            <div class="row" style="justify-content: center;">
+              <div class="col-lg-4 col-md-6 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <div>
+                    <i class="compatible fa-3x fab fa-linux text-primary mb-3 sr-icon-2" style="margin-right: 10%; "></i>
+                    <i class=" fa-3x fab fa-windows text-primary mb-3 sr-icon-2" style="margin-right: 10%; "></i>
+                    <i class=" fa-3x fab fa-apple text-primary mb-3 sr-icon-2" ></i>
+                  </div>
+                  <h3 class="mb-3">Compatible</h3>
+                </div>
+              </div>
+            </div>
           </div>
       </section>
 <!--
@@ -135,20 +150,23 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 mx-auto text-center">
-            <h2 class="section-heading">Let's Get In Touch!</h2>
+            <h2 class="section-heading">Devenez un beta testeur !</h2>
             <hr class="my-4">
-            <p class="mb-5">Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+            <p class="mb-5">Nous avons besoin de vous, pour nous aider à améliorer PSP et faire évoluer ce projet vers l'avenir de la musique.</p>
           </div>
         </div>
-        <div class="row">
-          <div class="col-lg-4 ml-auto text-center">
-            <i class="fas fa-phone fa-3x mb-3 sr-contact-1"></i>
-            <p>123-456-6789</p>
+        
+        <div class="row" style="justify-content: center;">
+          <div class="col-lg-4 ml-auto text-center" >
+            <a  style="color: black;" href="download.html" target="_blank">
+             <i class=" fab fa-discord fa-5x mb-3 sr-contact-1" ></i>
+             <p>Channel de beta-testeurs</p>
+            </a>
           </div>
           <div class="col-lg-4 mr-auto text-center">
-            <i class="fas fa-envelope fa-3x mb-3 sr-contact-2"></i>
+            <i class="fas fa-envelope fa-5x mb-3 sr-contact-2"></i>
             <p>
-              <a href="mailto:your-email@your-domain.com">feedback@startbootstrap.com</a>
+              <a style="color: black;" href="mailto:your-email@your-domain.com" style>PeerSoundProject@epitech.eu</a>
             </p>
           </div>
         </div>
