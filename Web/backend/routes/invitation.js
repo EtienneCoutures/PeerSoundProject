@@ -85,12 +85,28 @@ module.exports = function(app) {
                 if (!S(Record.playlist_id).isEmpty()) record.playlist_id = Record.playlist_id;
                 if (!S(Record.invited_role).isEmpty()) record.invited_role = Record.invited_role;
 
-                record.save().then(function(record) {
-                    reply(null, record);
-                }).catch(function(err) {
-                    reply(err);
-                });
+                var query = {
+                    where: {
+                      inviter_usr_id: Record.inviter_usr_id,
+                      invited_usr_id: Record.invited_usr_id
+                    }
+                };
+                app.models["Invitation"].findAll(query).then(function(result) {
+                  if (result[0]) {
+                    return res.json({
+                        code: 2,
+                        message: "Invitation already pending"
+                    });
+                  }
+                    record.save().then(function(record) {
+                      console.log("saving")
+                        reply(null, record);
+                    }).catch(function(err) {
+                        reply(err);
+                    });
 
+                }).catch(function(err) {console.log(err)});
+                console.log("local")
             }
             function reply(err, record) {
                 if (err) {

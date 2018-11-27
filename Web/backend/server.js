@@ -10,7 +10,7 @@ var express        = require('express'),
       key: hskey,
       cert: hscert
     },
-    server         = require('https').createServer(https_options, app),
+    server         = require('http').createServer(app),
 
     session        = require('express-session'),
     flash          = require('express-flash'),
@@ -190,6 +190,16 @@ function initExpress(callback) {
         }
     });
 }
+
+
+    app.use(function(req, res, next) {
+      res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+      res.header('Access-Control-Allow-Credentials', true);
+      res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Origin, Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+      res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, UPDATE, SET");
+
+      next();
+});
 
 function initModels(callback) {
     app.models = {};
