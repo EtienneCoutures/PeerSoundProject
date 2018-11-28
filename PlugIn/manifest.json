@@ -1,12 +1,12 @@
 {
     "name": "PeerSoundProject",
-    "version": "0.1",
+    "version": "0.1.5",
     "description": "réseau de partage et de streaming de musique",
     "manifest_version": 2,
     "icons": {
-        "16": "images/psp.png",
-        "48": "images/psp.png",
-        "128": "images/psp.png"
+        "16": "images/16.png",
+        "48": "images/48.png",
+        "128": "images/128.png"
     },
 
     "permissions": ["unlimitedStorage", "tabs", "<all_urls>", "activeTab", "cookies", "webRequest", "webNavigation", "*://developer.mozilla.org/*", "browsingData", "privacy"],
@@ -26,5 +26,12 @@
     },
     "background": {
          "scripts": ["background.js"]
-    }
+    },
+    "applications": {
+        "gecko": {
+          "id": "gabriel.miro@epitech.eu",
+          "strict_min_version": "42.0"
+        }
+      }
+    
 }

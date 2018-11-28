@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+  <Description about="urn:mozilla:install-manifest">
+    <!-- properties -->
+    <em:type>4</em:type>
+    <em:id>{0d339fb1-9918-4ac4-b655-05dc8d6c6549}</em:id>
+  <em:version>0.1.5</em:version>
+  <em:name>PeerSoundProject</em:name>
+  <em:skinnable>true</em:skinnable>
+  <em:unpack>false</em:unpack>
+
+  <em:targetApplication>
+      <Description>
+        <em:id>{0d339fb1-9918-4ac4-b655-05dc8d6c6549}</em:id>
+        <em:minVersion>51.0a1</em:minVersion>
+        <em:maxVersion>*</em:maxVersion>
+      </Description>
+</em:targetApplication>
+  </Description>
+</RDF>
