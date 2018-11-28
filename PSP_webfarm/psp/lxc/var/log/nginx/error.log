@@ -462,3 +462,49 @@
 2018/06/08 13:49:31 [emerg] 1#1: host not found in upstream "pspApp" in /etc/nginx/nginx.conf:34
 2018/06/08 14:13:03 [error] 7#7: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.21.0.1, server: localhost, request: "GET / HTTP/1.1", upstream: "http://172.21.0.3:3000/", host: "localhost"
 2018/06/08 14:13:04 [error] 7#7: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.21.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "http://172.21.0.3:3000/favicon.ico", host: "localhost", referrer: "http://localhost/"
+2018/11/28 12:19:22 [warn] 1#1: the "ssl" directive is deprecated, use the "listen ... ssl" directive instead in /etc/nginx/nginx.conf:51
+2018/11/28 12:39:15 [warn] 1#1: the "ssl" directive is deprecated, use the "listen ... ssl" directive instead in /etc/nginx/nginx.conf:51
+2018/11/28 12:39:15 [emerg] 1#1: PEM_read_bio_X509_AUX("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:0906D06C:PEM routines:PEM_read_bio:no start line:Expecting: TRUSTED CERTIFICATE)
+2018/11/28 12:39:17 [warn] 1#1: the "ssl" directive is deprecated, use the "listen ... ssl" directive instead in /etc/nginx/nginx.conf:51
+2018/11/28 12:39:17 [emerg] 1#1: PEM_read_bio_X509_AUX("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:0906D06C:PEM routines:PEM_read_bio:no start line:Expecting: TRUSTED CERTIFICATE)
+2018/11/28 12:39:19 [warn] 1#1: the "ssl" directive is deprecated, use the "listen ... ssl" directive instead in /etc/nginx/nginx.conf:51
+2018/11/28 12:39:19 [emerg] 1#1: PEM_read_bio_X509_AUX("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:0906D06C:PEM routines:PEM_read_bio:no start line:Expecting: TRUSTED CERTIFICATE)
+2018/11/28 12:39:20 [warn] 1#1: the "ssl" directive is deprecated, use the "listen ... ssl" directive instead in /etc/nginx/nginx.conf:51
+2018/11/28 12:39:20 [emerg] 1#1: PEM_read_bio_X509_AUX("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:0906D06C:PEM routines:PEM_read_bio:no start line:Expecting: TRUSTED CERTIFICATE)
+2018/11/28 12:39:22 [warn] 1#1: the "ssl" directive is deprecated, use the "listen ... ssl" directive instead in /etc/nginx/nginx.conf:51
+2018/11/28 12:39:22 [emerg] 1#1: PEM_read_bio_X509_AUX("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:0906D06C:PEM routines:PEM_read_bio:no start line:Expecting: TRUSTED CERTIFICATE)
+2018/11/28 12:39:25 [warn] 1#1: the "ssl" directive is deprecated, use the "listen ... ssl" directive instead in /etc/nginx/nginx.conf:51
+2018/11/28 12:39:25 [emerg] 1#1: PEM_read_bio_X509_AUX("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:0906D06C:PEM routines:PEM_read_bio:no start line:Expecting: TRUSTED CERTIFICATE)
+2018/11/28 12:39:31 [warn] 1#1: the "ssl" directive is deprecated, use the "listen ... ssl" directive instead in /etc/nginx/nginx.conf:51
+2018/11/28 12:39:31 [emerg] 1#1: PEM_read_bio_X509_AUX("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:0906D06C:PEM routines:PEM_read_bio:no start line:Expecting: TRUSTED CERTIFICATE)
+2018/11/28 12:39:38 [warn] 1#1: the "ssl" directive is deprecated, use the "listen ... ssl" directive instead in /etc/nginx/nginx.conf:51
+2018/11/28 12:39:38 [emerg] 1#1: PEM_read_bio_X509_AUX("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:0906D06C:PEM routines:PEM_read_bio:no start line:Expecting: TRUSTED CERTIFICATE)
+2018/11/28 12:39:53 [warn] 1#1: the "ssl" directive is deprecated, use the "listen ... ssl" directive instead in /etc/nginx/nginx.conf:51
+2018/11/28 12:39:53 [emerg] 1#1: PEM_read_bio_X509_AUX("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:0906D06C:PEM routines:PEM_read_bio:no start line:Expecting: TRUSTED CERTIFICATE)
+2018/11/28 12:40:19 [warn] 1#1: the "ssl" directive is deprecated, use the "listen ... ssl" directive instead in /etc/nginx/nginx.conf:51
+2018/11/28 12:40:19 [emerg] 1#1: PEM_read_bio_X509_AUX("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:0906D06C:PEM routines:PEM_read_bio:no start line:Expecting: TRUSTED CERTIFICATE)
+2018/11/28 12:41:11 [warn] 1#1: the "ssl" directive is deprecated, use the "listen ... ssl" directive instead in /etc/nginx/nginx.conf:51
+2018/11/28 12:41:11 [emerg] 1#1: PEM_read_bio_X509_AUX("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:0906D06C:PEM routines:PEM_read_bio:no start line:Expecting: TRUSTED CERTIFICATE)
+2018/11/28 12:42:12 [emerg] 1#1: host not found in "ssl" of the "listen" directive in /etc/nginx/nginx.conf:51
+2018/11/28 12:45:24 [emerg] 1#1: host not found in "ssl" of the "listen" directive in /etc/nginx/nginx.conf:51
+2018/11/28 12:45:26 [emerg] 1#1: host not found in "ssl" of the "listen" directive in /etc/nginx/nginx.conf:51
+2018/11/28 12:45:27 [emerg] 1#1: host not found in "ssl" of the "listen" directive in /etc/nginx/nginx.conf:51
+2018/11/28 12:45:29 [emerg] 1#1: host not found in "ssl" of the "listen" directive in /etc/nginx/nginx.conf:51
+2018/11/28 12:45:31 [emerg] 1#1: host not found in "ssl" of the "listen" directive in /etc/nginx/nginx.conf:51
+2018/11/28 12:45:35 [emerg] 1#1: host not found in "ssl" of the "listen" directive in /etc/nginx/nginx.conf:51
+2018/11/28 12:45:39 [emerg] 1#1: host not found in "ssl" of the "listen" directive in /etc/nginx/nginx.conf:51
+2018/11/28 12:47:50 [emerg] 1#1: PEM_read_bio_X509_AUX("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:0906D06C:PEM routines:PEM_read_bio:no start line:Expecting: TRUSTED CERTIFICATE)
+2018/11/28 12:47:52 [emerg] 1#1: PEM_read_bio_X509_AUX("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:0906D06C:PEM routines:PEM_read_bio:no start line:Expecting: TRUSTED CERTIFICATE)
+2018/11/28 12:47:54 [emerg] 1#1: PEM_read_bio_X509_AUX("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:0906D06C:PEM routines:PEM_read_bio:no start line:Expecting: TRUSTED CERTIFICATE)
+2018/11/28 12:47:55 [emerg] 1#1: PEM_read_bio_X509_AUX("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:0906D06C:PEM routines:PEM_read_bio:no start line:Expecting: TRUSTED CERTIFICATE)
+2018/11/28 12:47:57 [emerg] 1#1: PEM_read_bio_X509_AUX("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:0906D06C:PEM routines:PEM_read_bio:no start line:Expecting: TRUSTED CERTIFICATE)
+2018/11/28 12:48:00 [emerg] 1#1: PEM_read_bio_X509_AUX("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:0906D06C:PEM routines:PEM_read_bio:no start line:Expecting: TRUSTED CERTIFICATE)
+2018/11/28 12:48:05 [emerg] 1#1: PEM_read_bio_X509_AUX("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:0906D06C:PEM routines:PEM_read_bio:no start line:Expecting: TRUSTED CERTIFICATE)
+2018/11/28 14:57:47 [emerg] 1#1: BIO_new_file("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/nginx/ssl/localhost/cert.pem','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2018/11/28 14:57:49 [emerg] 1#1: BIO_new_file("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/nginx/ssl/localhost/cert.pem','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2018/11/28 14:57:50 [emerg] 1#1: BIO_new_file("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/nginx/ssl/localhost/cert.pem','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2018/11/28 14:57:53 [emerg] 1#1: BIO_new_file("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/nginx/ssl/localhost/cert.pem','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2018/11/28 14:57:54 [emerg] 1#1: BIO_new_file("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/nginx/ssl/localhost/cert.pem','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2018/11/28 14:57:58 [emerg] 1#1: BIO_new_file("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/nginx/ssl/localhost/cert.pem','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2018/11/28 14:58:02 [emerg] 1#1: BIO_new_file("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/nginx/ssl/localhost/cert.pem','r') error:2006D080:BIO routines:BIO_new_file:no such file)
+2018/11/28 14:58:10 [emerg] 1#1: BIO_new_file("/etc/nginx/ssl/localhost/cert.pem") failed (SSL: error:02001002:system library:fopen:No such file or directory:fopen('/etc/nginx/ssl/localhost/cert.pem','r') error:2006D080:BIO routines:BIO_new_file:no such file)

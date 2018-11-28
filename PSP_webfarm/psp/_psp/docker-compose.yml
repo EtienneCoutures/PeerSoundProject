@@ -11,7 +11,7 @@ services:
         context: ..
         dockerfile: ./_build/mysql_psp/Dockerfile
       container_name: pspMysql
-      #image: mariadb:latest
+      image: mariadb:latest
   #    restart: always
       ports:
         - 3306:3306
