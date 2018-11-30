@@ -1,0 +1,15 @@
+
+  <!--<mat-list color="primary">
+
+    <mat-list-item *ngFor="let music of musics">
+      <app-music [music]="music.Music" (click)="playMusic(music)"></app-music>
+    </mat-list-item>
+
+  </mat-list>-->
+
+  <mat-list style="margin: 0">
+      <perfect-scrollbar style="max-width: 600px; max-height: 1000px;" [config]="config">
+        <app-music [music]="music.Music" (click)="playMusicEvent(music.Music, i)" *ngFor="let music of musics; let i = index; trackBy: trackElement">
+        </app-music>
+      </perfect-scrollbar>
+</mat-list>

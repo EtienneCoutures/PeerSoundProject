@@ -1,0 +1,27 @@
+
+  <mat-list class="options">
+    <div class="Pnotif">
+    <mat-list-item ><app-social-bouton [nbNotif]="nbNotif"></app-social-bouton></mat-list-item>
+    <mat-divider></mat-divider>
+      </div>
+
+        <!--<div class="listPlaylist">
+            <mat-list-item class="playlist_albatar" *ngFor="let pl of playlists">
+              <app-playlist [playlist]="pl" (click)="selectPlaylist(pl)"></app-playlist>
+            </mat-list-item>
+          </div>-->
+
+          <div fxLayout="column" fxLayoutAlign="stretch" class="listPlaylist">
+            <ng-scrollbar>
+            <app-playlist [playlist]="pl" *ngFor="let pl of playlists" (click)="selectPlaylist(pl)"></app-playlist>
+          </ng-scrollbar>
+          </div>
+
+
+      <!---->
+
+<div class="addPlaylist">
+    <mat-list-item>
+      <app-create-playlist (newPlaylist)="newPlaylistHandler($event)"></app-create-playlist></mat-list-item>
+  </div>
+</mat-list>

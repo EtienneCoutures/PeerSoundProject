@@ -1,0 +1,93 @@
+import { OfflinePlaylist } from './offline-playlist'
+import { OfflinePlaylistHeader } from './offline-playlist-header'
+import { MusicEntry } from './music-entry'
+import { app, BrowserWindow, ipcMain} from 'electron'
+import { Playlist } from '../app/playlist/playlist'
+import { Music } from '../app/music/music'
+import * as fs from 'fs'
+import * as EventEmitter from 'events'
+
+export class OfflineFeaturesHandler {
+
+  private _curPspFile: OfflinePlaylist = null
+  private _curPspHeader: OfflinePlaylistHeader = null
+  private _pspFilesOpened: any = {}
+  // private _isOpeningFile: boolean = false
+  // private _
+
+  constructor(private _win: any) {
+
+  }
+
+  private changeCurPspFile(name: string): void {
+    var file = null
+
+    if (this._curPspFile && name == this._curPspFile.name)
+      return
+
+    if (!this._pspFilesOpened.hasOwnProperty(name))
+      file = this._pspFilesOpened[name] = new OfflinePlaylist()
+    else
+      file = this._pspFilesOpened[name]
+
+    this._curPspFile = file
+    this._curPspHeader = file.header
+  }
+
+  private getPspFile(name: string): void {
+    var file = null
+
+    if (!this._pspFilesOpened.hasOwnProperty(name))
+      file = this._pspFilesOpened[name] = new OfflinePlaylist()
+    else
+      file = this._pspFilesOpened[name]
+
+    return file
+  }
+
+
+  playlistOpened(pl: any): void {
+    var self = this
+
+    self.changeCurPspFile(pl.playlist_name)
+
+    self._curPspFile.open('./', pl.playlist_name, true).then((da) => {
+      pl.MusicLink.forEach((m, i) => {
+        self._curPspHeader.addMusic('', m.music_id - 1, m.Music.music_name, false)
+      })
+      self._curPspFile.save().then(() => {
+        this._win.webContents.send('playlist-opened-ok')
+      }, (err) => {
+        console.log(err)
+        this._win.webContents.send('playlist-opened-ko', err)
+      })
+    }, (err) => {
+      console.log(err)
+      this._win.webContents.send('playlist-opened-ko', err)
+    })
+  }
+
+  playlistOfflineModeOn(plName: string): void {
+    var self = this
+    var index = 0
+
+    self.changeCurPspFile(plName)
+    var musics = this._curPspFile.getMusicsMetadata()
+    console.log('-> ', this._curPspFile.name, musics)
+
+    var loop = setInterval(() => {
+      var music = musics[index]
+
+      if (music)
+        this._win.webContents.send('offline-music-metadata', {music: music})
+      index += 1
+      // console.log('i ->', index)
+      if (index >= musics.length ) {
+        this._win.webContents.send('playlist-offline-mode-on-ok')
+        clearInterval(loop)
+      }
+    }, 500)
+
+
+  }
+}

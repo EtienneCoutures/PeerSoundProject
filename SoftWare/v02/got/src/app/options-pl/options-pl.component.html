@@ -1,0 +1,26 @@
+<mat-expansion-panel color="primary" style="margin:0">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{plService.selectedPl.playlist_name}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <button mat-button (click)="invitePeople()">
+      <mat-icon class="material-icons">face</mat-icon>
+      Inviter des gens
+    </button>
+
+    <mat-divider></mat-divider>
+
+    <button mat-button (click)="leavePlaylist()">
+      <i class="material-icons">exit_to_app</i>
+      Quitter la playlist
+    </button>
+
+    <mat-divider></mat-divider>
+
+    <button mat-button (click)="switchConnectivityMode()">
+      <i class="material-icons">cloud_off</i>
+      Mode hors-ligne
+    </button>
+  </mat-expansion-panel>

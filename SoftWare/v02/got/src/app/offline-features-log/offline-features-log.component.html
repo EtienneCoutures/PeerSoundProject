@@ -1,0 +1,7 @@
+<div class="logs" *ngIf="logService.messages.length">
+
+  <h2>Console</h2>
+  <div>{{comment}}</div>
+  <div *ngFor='let message of logService.messages'> {{message}} </div>
+
+</div>
