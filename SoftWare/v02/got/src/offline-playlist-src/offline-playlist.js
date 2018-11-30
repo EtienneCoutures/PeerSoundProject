@@ -1,8 +1,11 @@
 "use strict";
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -69,20 +72,20 @@ var OfflinePlaylist = /** @class */ (function (_super) {
             var basename = path.basename(filename, ext);
             if (basename == '')
                 reject('Name given is empty');
-            if (ext == '')
+            if (ext == '') // if no file extention given -> add default one
                 ext = '.' + Const.FILEXT;
             filepath = dest + basename + ext;
-            if (filepath === self._filepath) {
+            if (filepath === self._filepath) { // if file already open -> resolve
                 resolve('file already opened');
             }
-            if (!self.isFileExtOk(ext))
+            if (!self.isFileExtOk(ext)) // check file extention
                 reject('Can\'t open file : File extention must be .' + Const.FILEXT + ' !');
-            if (!fs.existsSync(filepath)) {
-                if (autocreate) {
+            if (!fs.existsSync(filepath)) { // if file doesn't exist
+                if (autocreate) { // if param given -> auto-create new file & resolve
                     self.create(filepath, basename);
                     resolve();
                 }
-                else {
+                else { // file not found
                     reject('No such file, open \'' + filepath + '\'');
                 }
             }
@@ -187,7 +190,7 @@ var OfflinePlaylist = /** @class */ (function (_super) {
         if (outputName === void 0) { outputName = null; }
         var metadata = this._header.getMusicByPos(pos), self = this;
         return new Promise(function (resolve, reject) {
-            if (outputName && path.extname(outputName) === '')
+            if (outputName && path.extname(outputName) === '') // if no extention on given output name -> add default one
                 outputName = outputName + path.extname(metadata.filename);
             outputName = outputName || metadata.filename;
             self._zip.folder(_this._musicFolderName).file(metadata.filename).async('nodebuffer').then(function (data) {
