@@ -26,32 +26,26 @@ var artist = document.getElementById("boxArtist"),
 var browser = browser || chrome;
 var idMusic = 0;
 var url = "";
-console.log(browser);
 
 if (Playlists)
 Playlists.addEventListener("click", checkPlaylist);
 
 function checkPlaylist(){
- //       console.log(Playlists.options[Playlists.selectedIndex].label);
         if(Playlists.options[Playlists.selectedIndex].label == "Create Playlist"){
             $("#boxPlaylist option[label='Create Playlist']").remove();
-            //textarea1.className = 'blur';
             textarea2.className = 'blur';
             textarea3.className = 'blur';
             createPlaylist.className = 'show';
         }
 }
 
-console.log(boxUrl);
 
 function getMusic() {
-  console.log("test");
   function getContent() {
       callEventPageMethod('getContent', 'some parameter', function (response) {
-          console.log(response);
           boxUrl.value = response.title;
           url = response.url;
-          doSomethingWith(response);
+        //  doSomethingWith(response);
       });
 
   }
@@ -77,7 +71,6 @@ if (valid)
 var close = document.getElementById("cloclo");
 if (close) {
   close.addEventListener("click", closer)
-  console.log(close);
 }
 
 
@@ -85,53 +78,45 @@ function closer(){
   sessionStorage.removeItem('infos');
   function closePlugin() {
       callEventPageMethod('closePlugin', 'some parameter', function (response) {
-          doSomethingWith(response);
+          //doSomethingWith(response);
       });
 
   }
   //generic method
   function callEventPageMethod(method, data, callback) {
-      console.log(method);
       chrome.runtime.sendMessage({ method: method, data: data }, function (response) {
           if(typeof callback === "function") callback(response);
       });
   //browser.tabs.executeScript(null, {file: "closer.js"});
   }
-  console.log("close");
   closePlugin();
 }
 
 var logut = document.getElementById("lolo");
 if (logut){
     logut.addEventListener("click", logOut);
-    console.log("MES COUILLES COUILLES COUILLES");
 }
 function logOut () {
-    console.log("CHATTE");
     sessionStorage.removeItem('infos');
     localStorage.removeItem("email");
     function outout() {
-        console.log("cul cul cul");
         callEventPageMethod('outout', 'some parameter', function (response) {
-            doSomethingWith(response);
+            //doSomethingWith(response);
         });
     }
      //generic method
   function callEventPageMethod(method, data, callback) {
-    console.log(method);
     chrome.runtime.sendMessage({ method: method, data: data }, function (response) {
         if(typeof callback === "function") callback(response);
     });
 //browser.tabs.executeScript(null, {file: "closer.js"});
     }
-console.log("close");
-outout();  
+    outout();  
 }
  /* récupération des playlists du compte */
-jQuery.get('https://localhost:8000/api/playlist/',
+jQuery.get('https://www.peersoundproject.com/api/playlist/',
 function (data){
     if (data){
-        console.log(data);
         for (var i = 0; i < data.length; i++){
             if (data[i].playlist_creator == JSON.parse(localStorage.getItem("id")))
                 {
@@ -179,11 +164,10 @@ if (addP)
 //using the function:
 removeOptions(document.getElementById("mySelectObject"));
 function createNewPlaylist(){
-    console.log("PLAYLIST :", nameP.value, kind.value, descriptionP.value, JSON.parse(localStorage.getItem("id")));
     if (nameP.value && kind.value){
         removeOptions(Playlists);
         // playlist_description: descriptionP.value
-    jQuery.post('https://localhost:8000/api/playlist/',{
+    jQuery.post('https://www.peersoundproject.com/api/playlist/',{
         playlist_creator: JSON.parse(localStorage.getItem("id")),
         playlist_name: nameP.value,
         playlist_style: kind.value,
@@ -191,13 +175,11 @@ function createNewPlaylist(){
         },
         function (data){
             if (data){
-               console.log("DATA !!! ", data);
         }
         });
-        jQuery.get('https://localhost:8000/api/playlist/',
+        jQuery.get('https://www.peersoundproject.com/api/playlist/',
 function (data){
     if (data){
-        console.log(data);
         for (var i = 0; i < data.length; i++){
             if (data[i].playlist_creator == JSON.parse(localStorage.getItem("id")))
                 {
@@ -220,10 +202,13 @@ function (data){
 function removeOptions(selectbox)
 {
     var i;
-    for(i = selectbox.options.length - 1 ; i >= 0 ; i--)
-    {
-        selectbox.remove(i);
+    if (selectbox != null) {
+        for(i = selectbox.options.length - 1 ; i >= 0 ; i--)
+        {
+            selectbox.remove(i);
+        }
     }
+
 }
 
 function sleep(miliseconds) {
@@ -233,55 +218,55 @@ function sleep(miliseconds) {
 
 function sendMusic() {
     var title = document.getElementById("boxUrl");
-    if (title.value && artist.value && date.value && description.value && Playlists.options[Playlists.selectedIndex].label != "Create Playlist") {
-      if (url.indexOf("soundcloud") != -1)
+    if (title.value && artist.value && Playlists.options[Playlists.selectedIndex].label != "Create Playlist") {
+        if (url.indexOf("soundcloud") != -1)
            var source = "soundcloud";
       else
            var source = "youtube";
+        if (!date.value)
+            date.value = "12/2999";
+        if (!description.value)
+                description.value = "nothing...";
+           
       var infs = {
           title  : title.value,
           artist : artist.value,
-          date : date.value,
+          date :  date.value,
           source : source,
           url: url,
-          description: description.value
+          description: description.value 
       }
-      //textarea1.className = '';
       textarea2.className = '';
       popError.className = '';
       sessionStorage.setItem("infos", JSON.stringify(infs));
       var musicAdded = 1;
       localStorage.setItem('musicAdded', musicAdded);
-      console.log( JSON.parse(localStorage.getItem("id")) + '-' + artist.value + '-' + boxUrl.value + '-' + description.value + '-' + url + '-' + source);
-      jQuery.post('https://localhost:8000/api/music/', {
+      jQuery.post('https://www.peersoundproject.com/api/music/', {
           usr_id: JSON.parse(localStorage.getItem("id")),
           music_source: source,
           music_group: artist.value,
           music_name: boxUrl.value,
           music_description: description.value,
           music_url: url,
-          music_date: date.value
-      },
-      function (data) {
+          music_date: date.value,
+      })
+      .done(function (data) {
          if (data) {
-           console.log(data);
             idMusic = data.Music.music_id;
-            jQuery.post('https://localhost:8000/api/musiclink/', {
+            jQuery.post('https://www.peersoundproject.com/api/musiclink/', {
                   usr_id: JSON.parse(localStorage.getItem("id")),
                   music_id: idMusic,
                   playlist_id: Playlists.options[Playlists.selectedIndex].value
                   },
                   function (data){
                       if (data){
-                         console.log(data);
                   }
                 });
                 setTimeout(function(){
                      closer();
                 }, 1000);
          }
-       }
-      );
+       });
     }
     else {
         //textarea1.className = 'blur';

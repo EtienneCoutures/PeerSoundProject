@@ -130,7 +130,12 @@ h1 {
     display: block;
     margin-bottom: 5rem;
 }
-
+#titre {
+    margin-top: 2rem;
+    font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+}
 /* input index.html */
 .small {
     font-family: arial, helvetica, sans-serif;

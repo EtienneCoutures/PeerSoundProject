@@ -29,17 +29,14 @@ browser.browserAction.onClicked.addListener(function(tab) {
 
 });
 
-console.log("ackgtrounf");
     var script = document.createElement('script');
     script.type = "text/javascript";
     script.src = "./src/js/index.js";
     document.getElementsByTagName('head')[0].appendChild(script);
     if (window.jQuery) {
      // jQuery is loaded
-     console.log("Yeah!");
  } else {
      // jQuery is not loaded
-     console.log("Doesn't Work");
     }
 
     var title = title;
@@ -47,7 +44,6 @@ console.log("ackgtrounf");
 
     function getContent(sendResponse) {
         var mydata = { title: title, url: url };
-        console.log(mydata);
         sendResponse(mydata);
     }
 
@@ -60,7 +56,6 @@ console.log("ackgtrounf");
 
     chrome.runtime.onMessage.addListener(callback);
     function callback(obj, sender, sendResponse) {
-        console.log(obj);
         if (obj) {
             if (obj.method == 'getContent') {
                 browser.windows.getLastFocused(function(fenetre) {
@@ -71,13 +66,10 @@ console.log("ackgtrounf");
                 setTimeout(function(){
                     getContent(sendResponse);
                 }, 1000);
-                console.log("?");
             } else if (obj.method == 'closePlugin') {
-                console.log("close");
                 closer();
                 closePlugin(sendResponse);
             } else if (obj.method == 'outout') {
-                console.log("outout");
                 closer();
                 outout(sendResponse);
             } else if (obj.method == 'sendMusic') {
@@ -91,7 +83,6 @@ console.log("ackgtrounf");
     //some async method
 
     function closePlugin(sendResponse) {
-      console.log("close");
       browser.tabs.executeScript(null, {file: "closer.js"});
       /*chrome.storage.local.get(["mydata"], function (obj) {
         var mydata = $.trim(obj["mydata"]);
@@ -99,7 +90,6 @@ console.log("ackgtrounf");
       });*/
     }
     function outout(sendResponse) {
-        console.log("outout");
         browser.tabs.executeScript(null, {file: "closer.js"});
         /*chrome.storage.local.get(["mydata"], function (obj) {
           var mydata = $.trim(obj["mydata"]);
