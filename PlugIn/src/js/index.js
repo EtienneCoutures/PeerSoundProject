@@ -4,10 +4,8 @@ var firstCo = document.getElementById('button1Connexion');
 
     if (firstCo)
       firstCo.addEventListener("click", function(){
-        console.log("first Connection");
-        top.location = "https://localhost:8000/signup";
+        top.location = "https://www.peersoundproject.com/signup";
       });
-
 
     main.classList.add('show');
 if (t)
@@ -25,18 +23,15 @@ function closer(){
     sessionStorage.removeItem('infos');
     function closePlugin() {
         callEventPageMethod('closePlugin', 'some parameter', function (response) {
-            console.log(response)
         });
     }
     //generic method
     function callEventPageMethod(method, data, callback) {
-        console.log(method);
         chrome.runtime.sendMessage({ method: method, data: data }, function (response) {
             if(typeof callback === "function") callback(response);
         });
     //browser.tabs.executeScript(null, {file: "closer.js"});
     }
-    console.log("close");
     closePlugin();
 }
 
@@ -53,32 +48,25 @@ function changePage() {
     if ( (email.value) && (pass.value) ) {
       email.className = '';
         pass.className = '';
-        console.log(email.value + pass.value + ']');
            var script = document.createElement('script');
            script.type = "text/javascript";
            script.src = "https://code.jquery.com/jquery-3.3.1.min.js";
            document.getElementsByTagName('head')[0].appendChild(script);
            if (window.jQuery) {
             // jQuery is loaded
-            console.log("Yeah!");
         } else {
             // jQuery is not loaded
-            console.log("Doesn't Work");
         }
       //  setTimeout(function(){
-            jQuery.post('https://localhost:8000/api/auth/login',
+            jQuery.post('https://www.peersoundproject.com/api/auth/login',
             {
               login: email.value,
               password: pass.value
             },
              function (data) {
-              console.log(email.value + pass.value + ']');
                if (data.error != - 1) {
-                  console.log(data);
                   localStorage.setItem("email", email.value);
-                  console.log(data.account.usr_id);
                   localStorage.setItem("id", data.account.usr_id);
-                  console.log(data.account.usr_firstame);
                   localStorage.setItem("name", data.account.usr_firstame);
                   main.classList.remove('show');
                   setTimeout(function(){
