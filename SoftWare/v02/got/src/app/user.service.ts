@@ -37,6 +37,7 @@ export class UserService {
                   , `{"playlist_creator":${this.loginService.account.usr_id.toString()}}`);
 
     console.log('HEADERS: ', this.headers);
+    console.log('params: ', this.params);
     return this.httpClient.get<Playlist[]>(`http://localhost:8000/api/playlist/`
                                 , {params: this.params, headers: this.headers});
   }

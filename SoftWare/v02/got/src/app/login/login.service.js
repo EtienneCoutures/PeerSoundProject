@@ -20,15 +20,16 @@ var httpOptions = {
 var LoginService = /** @class */ (function () {
     function LoginService(httpClient) {
         this.httpClient = httpClient;
+        this.baseUrl = "http://localhost:8000/"; //AppConfig.backend.baseUrl;
         this.path = 'auth/login';
     }
     LoginService.prototype.login = function (userCred) {
         return this.httpClient
-            .post('http://localhost:8000/api/auth/login', userCred, { observe: 'response' });
+            .post(this.baseUrl + 'api/auth/login', userCred, { observe: 'response' });
     };
     LoginService.prototype.signup = function (userCred) {
         return this.httpClient
-            .post('http://localhost:8000/signup', userCred, { observe: 'response' });
+            .post(this.baseUrl + 'signup', userCred, { observe: 'response' });
     };
     LoginService = __decorate([
         core_1.Injectable({

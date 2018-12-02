@@ -16,7 +16,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ElectronService } from './providers/electron.service';
 
 import { WebviewDirective } from './directives/webview.directive';
-
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -66,6 +65,7 @@ import { UserOptionsComponent } from './user-options/user-options.component';
 import { MusicListPanelComponent } from './music-list-panel/music-list-panel.component';
 import { MusicListOfflineComponent } from './music-list-offline/music-list-offline.component';
 import { OfflineFeaturesLogComponent } from './offline-features-log/offline-features-log.component';
+import { SnackBarComponent } from './snack-bar/snack-bar.component';
 
 
 // AoT requires an exported function for factories
@@ -102,7 +102,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     UserOptionsComponent,
     MusicListPanelComponent,
     MusicListOfflineComponent,
-    OfflineFeaturesLogComponent
+    OfflineFeaturesLogComponent,
+    SnackBarComponent
   ],
   imports: [
     BrowserModule,
@@ -134,7 +135,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   ],
   entryComponents: [
     DialogOverviewExampleDialog,
-    DialogInvitePeople
+    DialogInvitePeople,
+    SnackBarComponent
   ],
   providers: [ElectronService, {provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG}],

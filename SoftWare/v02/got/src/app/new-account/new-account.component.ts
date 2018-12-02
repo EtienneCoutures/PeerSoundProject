@@ -29,24 +29,37 @@ export class NewAccountComponent implements OnInit {
 
   ngOnDestroy() {}
 
+  isEmail(myVar: string) {
+  var regEmail = new RegExp('^[0-9a-z._-]+@{1}[0-9a-z.-]{2,}[.]{1}[a-z]{2,5}$'
+    , 'i');
+   return regEmail.test(myVar);
+  }
+
   createAccount() {
+    if (!this.isEmail(this.userCred.login)) {
+      this.error = "Veuillez vérifier l'adresse mail.";
+      return ;
+    }
+
 
     if (this.verifyPassword === this.userCred.password) {
       this.sub = this.loginService.signup(this.userCred)
       .subscribe(res => {
-        if (res.body.code == 0) {
+        console.log('res: ', res);
+        if (res.body.code === 0) {
           this.loginService.account = res.body.account;
           this.router.navigate(['home']);
+        } else {
+          this.error = "Cette adresse mail est déjà utilisée.";
         }
       }, error => console.log('error: ', error));
     }
     else {
-      this.error = "Passwords don't match.";
+      this.error = "Les mots de passe ne correspondent pas.";
     }
   }
 
   retour(){
-    //console.log("mamamama!!!!!!!");
     this.router.navigate(['']);
   }
 }

@@ -4,7 +4,7 @@
   </div>
   <div class="login-box animated fadeInUp">
     <div class="box-header">
-      <h2>Log In</h2>
+      <h2>Connexion</h2>
     </div>
     <div style="color:red; size-font:15px" id="error">{{error}}</div>
     <br>
@@ -12,12 +12,12 @@
     <br/>
     <input type="text" id="username" [(ngModel)]="userCred.login">
     <br/>
-    <label for="password">Password</label>
+    <label for="password">Mot de passe</label>
     <br/>
     <input type="password" id="password" [(ngModel)]="userCred.password">
     <br/>
-    <button id="submit" (click)="submit()">Sign In</button>
+    <button id="submit" (click)="submit()">Connexion</button>
     <br/>
-    <a [routerLink]="['/newAccount']"><p class="small">Create an account !</p></a>
+    <a [routerLink]="['/newAccount']"><p class="small">Créer un compte !</p></a>
   </div>
 </div>

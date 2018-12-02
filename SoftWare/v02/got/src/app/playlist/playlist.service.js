@@ -22,6 +22,7 @@ var PlaylistService = /** @class */ (function () {
     function PlaylistService(httpClient, loginService) {
         this.httpClient = httpClient;
         this.loginService = loginService;
+        this.playlists = new Array();
         this.account = this.loginService.account;
         this.headers = new http_1.HttpHeaders({
             'Content-Type': 'application/json',

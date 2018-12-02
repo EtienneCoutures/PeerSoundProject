@@ -18,10 +18,11 @@ var material_1 = require("@angular/material");
 var playlist_service_1 = require("../playlist/playlist.service");
 var event_service_1 = require("../event.service");
 var OptionsPlComponent = /** @class */ (function () {
-    function OptionsPlComponent(dialog, plService, eService) {
+    function OptionsPlComponent(dialog, plService, eService, bar) {
         this.dialog = dialog;
         this.plService = plService;
         this.eService = eService;
+        this.bar = bar;
         this.conModeSwitched = new core_1.EventEmitter();
         this.isOffline = false;
     }
@@ -39,6 +40,8 @@ var OptionsPlComponent = /** @class */ (function () {
             _this.inviteEmail = results;
             if (results) {
                 _this.eService.sendMsg({ type: 'invitSent', data: results });
+                _this.bar.open('Invitation envoyée !', 'Ok', { duration: 3000,
+                    verticalPosition: 'top' });
             }
         });
     };
@@ -62,7 +65,8 @@ var OptionsPlComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [material_1.MatDialog,
             playlist_service_1.PlaylistService,
-            event_service_1.EventService])
+            event_service_1.EventService,
+            material_1.MatSnackBar])
     ], OptionsPlComponent);
     return OptionsPlComponent;
 }());
@@ -76,32 +80,42 @@ var DialogInvitePeople = /** @class */ (function () {
     DialogInvitePeople.prototype.onNoClick = function () {
         this.dialogRef.close(null);
     };
+    DialogInvitePeople.prototype.isEmail = function (myVar) {
+        var regEmail = new RegExp('^[0-9a-z._-]+@{1}[0-9a-z.-]{2,}[.]{1}[a-z]{2,5}$', 'i');
+        return regEmail.test(myVar);
+    };
     DialogInvitePeople.prototype.invite = function () {
         var _this = this;
         console.log('invite: ', this.data);
+        if (!this.isEmail(this.inviteEmail)) {
+            this.error = "Veuillez entrer une adresse mail valide.";
+            return;
+        }
         this.invitation.inviter_usr_id = this.data.service.account.usr_id;
         this.invitation.playlist_id = this.data.pl.playlist_id;
         this.invitation.invited_role = "member";
         console.log('inviteEmail: ', this.inviteEmail);
         this.data.service.getUserIdFromMail(this.inviteEmail).subscribe(function (res) {
+            if (!res || !res[0]) {
+                _this.error = "Pas d'utilisateur trouvé.";
+                return;
+            }
             console.log('res user id from mail: ', res);
             _this.invitation.invited_usr_id = res[0].usr_id;
             //this.invitation.invited_usr_id = invited_id;
             _this.data.service.inviteUser(_this.invitation).subscribe(function (res) {
-                console.log('invite user: ', res);
-                if (res.code == 0) {
+                if (res.code === 0) {
                     _this.invitation.playlist_name = _this.data.pl.playlist_name;
                     _this.invitation.usr_login = _this.data.service.account.usr_login;
                     _this.invitation.invitation_id = res.Invitation.invitation_id;
+                    _this.error = "";
                     _this.dialogRef.close(_this.invitation);
                 }
-                else {
-                    _this.error = "Veuillez vérifier l'adresse mail.";
+                else if (res.code === 1) {
+                    _this.error = "Invitation déjà envoyée.";
                 }
             }, function (error) { return console.log('error trying invitation: ', error); });
-            console.log('res: ', res);
         }, function (error) { return console.log('error getting user id from mail: ', error); });
-        //this.dialogRef.close(this.inviteEmail);
     };
     DialogInvitePeople = __decorate([
         core_1.Component({

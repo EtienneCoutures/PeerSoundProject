@@ -26,7 +26,7 @@ export class PlaylistService {
 
   account: Account;
   selectedPl: Playlist;
-  playlists: Playlist[];
+  playlists: Playlist[] = new Array<Playlist>();
   isPlaying: boolean;
   musics: Music[];
   selectedMusic: Music;

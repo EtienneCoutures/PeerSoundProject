@@ -1,18 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var testing_1 = require("@angular/core/testing");
-var offline_features_log_component_1 = require("./offline-features-log.component");
-describe('OfflineFeaturesLogComponent', function () {
+var snack_bar_component_1 = require("./snack-bar.component");
+describe('SnackBarComponent', function () {
     var component;
     var fixture;
     beforeEach(testing_1.async(function () {
         testing_1.TestBed.configureTestingModule({
-            declarations: [offline_features_log_component_1.OfflineFeaturesLogComponent]
+            declarations: [snack_bar_component_1.SnackBarComponent]
         })
             .compileComponents();
     }));
     beforeEach(function () {
-        fixture = testing_1.TestBed.createComponent(offline_features_log_component_1.OfflineFeaturesLogComponent);
+        fixture = testing_1.TestBed.createComponent(snack_bar_component_1.SnackBarComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -20,4 +20,4 @@ describe('OfflineFeaturesLogComponent', function () {
         expect(component).toBeTruthy();
     });
 });
-//# sourceMappingURL=offline-features-log.component.spec.js.map
+//# sourceMappingURL=snack-bar.component.spec.js.map

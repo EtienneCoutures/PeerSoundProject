@@ -47,6 +47,7 @@ var user_options_component_1 = require("./user-options/user-options.component");
 var music_list_panel_component_1 = require("./music-list-panel/music-list-panel.component");
 var music_list_offline_component_1 = require("./music-list-offline/music-list-offline.component");
 var offline_features_log_component_1 = require("./offline-features-log/offline-features-log.component");
+var snack_bar_component_1 = require("./snack-bar/snack-bar.component");
 // AoT requires an exported function for factories
 function HttpLoaderFactory(http) {
     return new http_loader_1.TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -84,7 +85,8 @@ var AppModule = /** @class */ (function () {
                 user_options_component_1.UserOptionsComponent,
                 music_list_panel_component_1.MusicListPanelComponent,
                 music_list_offline_component_1.MusicListOfflineComponent,
-                offline_features_log_component_1.OfflineFeaturesLogComponent
+                offline_features_log_component_1.OfflineFeaturesLogComponent,
+                snack_bar_component_1.SnackBarComponent
             ],
             imports: [
                 platform_browser_1.BrowserModule,
@@ -116,7 +118,8 @@ var AppModule = /** @class */ (function () {
             ],
             entryComponents: [
                 create_playlist_component_2.DialogOverviewExampleDialog,
-                options_pl_component_1.DialogInvitePeople
+                options_pl_component_1.DialogInvitePeople,
+                snack_bar_component_1.SnackBarComponent
             ],
             providers: [electron_service_1.ElectronService, { provide: ngx_perfect_scrollbar_1.PERFECT_SCROLLBAR_CONFIG,
                     useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG }],

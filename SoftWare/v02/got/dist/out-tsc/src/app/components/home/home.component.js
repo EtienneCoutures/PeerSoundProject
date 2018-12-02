@@ -22,10 +22,6 @@ var offline_features_service_1 = require("../../offline-features.service");
 //declare var SC: any;
 var HomeComponent = /** @class */ (function () {
     function HomeComponent(loginService, userService, plService, rd, router, eService, offlineService) {
-        //this.account = this.loginService.account;
-        /*this.account = this.loginService.account;
-        this.playlists = this.plService.playlists;
-        this.musics = this.plService.musics;*/
         this.loginService = loginService;
         this.userService = userService;
         this.plService = plService;
@@ -35,44 +31,102 @@ var HomeComponent = /** @class */ (function () {
         this.offlineService = offlineService;
         this.users = new Array();
         this.ipcRenderer = null;
+        this.loaded = false;
+        this.init = [
+            this.getUserPlaylists,
+            this.getSubscription,
+            this.getInvitations
+        ];
         this.subs = new Array();
         console.log('this.loginService.account: ', this.loginService.account);
         if (this.loginService.account.playlist) {
-            console.log('hello bitches');
             var tmp = new Array();
             this.plService.selectedPl = this.loginService.account.playlist;
             tmp.push(this.loginService.account.playlist);
             this.plService.playlists = tmp;
         }
     }
+    HomeComponent.prototype.initialize = function (cmpt) {
+        var _this = this;
+        var i = 0;
+        return new Promise(function (resolve, reject) {
+            for (var _i = 0, _a = _this.init; _i < _a.length; _i++) {
+                var func = _a[_i];
+                func(cmpt).then(function () {
+                    ++i;
+                    if (i === cmpt.init.length) {
+                        resolve();
+                    }
+                }).catch(function (error) {
+                    reject(error);
+                });
+            }
+        });
+    };
     HomeComponent.prototype.ngOnInit = function () {
         //console.log('account bearer: ', this.account.authorization);
         var _this = this;
-        this.userService.getUserPlaylists().subscribe(function (playlists) {
-            console.log('PLAYLISTS: ', playlists);
-            _this.userService.getSubscription().subscribe(function (subscription) {
-                var tmp = new Array();
-                console.log('PLAYLISTS: ', playlists);
-                if (subscription) {
-                    for (var i = 0; i < subscription.length; ++i) {
-                        tmp.push(subscription[i].Playlist);
-                    }
+        this.handleMessages();
+        this.initialize(this).then(function (result) {
+            console.log('this.plService.playlists: ', _this.plService.playlists);
+            _this.plService.musics = _this.plService.playlists[0].MusicLink;
+            _this.plService.selectedMusic = _this.plService.playlists[0].MusicLink[0];
+            _this.plService.selectedPl = _this.plService.playlists[0];
+            _this.loaded = true;
+        }).catch(function (error) {
+            console.log('error loading home: ', error);
+        });
+    };
+    HomeComponent.prototype.getUserPlaylists = function (cmpt) {
+        return new Promise(function (resolve, reject) {
+            cmpt.userService.getUserPlaylists().subscribe(function (playlists) {
+                cmpt.plService.playlists = cmpt.plService.playlists.concat(playlists);
+                resolve();
+            }, function (error) {
+                reject(error);
+            });
+        });
+    };
+    HomeComponent.prototype.getSubscription = function (cmpt) {
+        return new Promise(function (resolve, reject) {
+            cmpt.userService.getSubscription().subscribe(function (subscriptions) {
+                var tmp = [];
+                subscriptions.map(function (item) {
+                    tmp.push(item.Playlist);
+                });
+                cmpt.plService.playlists = cmpt.plService.playlists.concat(tmp);
+                resolve();
+            }, function (error) {
+                reject(error);
+            });
+        });
+    };
+    HomeComponent.prototype.getInvitations = function (cmpt) {
+        return new Promise(function (resolve, reject) {
+            var tmp = new Array();
+            cmpt.userService.getInvitations().subscribe(function (invitations) {
+                console.log('invitation: ', invitations);
+                for (var _i = 0, invitations_1 = invitations; _i < invitations_1.length; _i++) {
+                    var invit = invitations_1[_i];
+                    var e = new events_component_1.Event();
+                    e.message = "Vous avez re\u00E7u une invitation \u00E0 rejoindre la playlist \""
+                        + (invit.Playlist.playlist_name + "\"")
+                        + (" par " + invit.Inviter.usr_login + ".");
+                    e.invitation = invit;
+                    e.type = "Invitation";
+                    tmp.push(e);
                 }
-                console.log('SUBS: ', tmp);
-                _this.plService.playlists = playlists.concat(tmp);
-                _this.plService.musics = _this.plService.playlists[0].MusicLink;
-                _this.plService.selectedMusic = _this.plService.playlists[0].MusicLink[0];
-                _this.plService.selectedPl = _this.plService.playlists[0];
-                console.log('this.plService.selectedMusic: ', _this.plService.musics);
-                //this.musics = this.playlists[0].MusicLink;
-                //this.playlists = this.plService.playlists;
-                _this.router.navigate([{ outlets: { homeOutlet: ['home/infoPlaylist'] } }]);
-                _this.getInvitations();
-            }, function (error) { return console.log('error while retrieving subs: ', error); });
-        }, function (error) { return console.log('error while retrieving playlist: ', error); });
+                cmpt.userService.events = tmp;
+                console.log('events: ', cmpt.userService.events);
+                resolve();
+            }, function (error) { return reject(error); });
+        });
+    };
+    HomeComponent.prototype.handleMessages = function () {
+        var _this = this;
         this.eService.messages.subscribe(function (m) {
             console.log('event: ', m);
-            if (m.type == "invitReceived") {
+            if (m.type === "invitReceived") {
                 var e = new events_component_1.Event();
                 e.type = "Invitation";
                 e.message = "Vous avez re\u00E7u une invitation \u00E0 rejoindre la playlist \""
@@ -86,10 +140,10 @@ var HomeComponent = /** @class */ (function () {
                 //e.invitation = {};
                 _this.userService.events.push(e);
             }
-            else if (m.type == "newMusic") {
+            else if (m.type === "newMusic") {
                 _this.plService.getMusicLinkFromMusicId(m.data.music_id).subscribe(function (link) {
                     for (var p in _this.plService.playlists) {
-                        if (_this.plService.playlists[p].playlist_id == link.playlist_id) {
+                        if (_this.plService.playlists[p].playlist_id === link.playlist_id) {
                             link.Music = m.data;
                             console.log('link: ', link);
                             _this.plService.playlists[p].MusicLink.push(link);
@@ -102,30 +156,44 @@ var HomeComponent = /** @class */ (function () {
     };
     HomeComponent.prototype.refresh = function () {
         var _this = this;
-        this.userService.getUserPlaylists().subscribe(function (playlists) {
+        //this.loaded = false;
+        this.plService.playlists = new Array();
+        this.initialize(this).then(function (result) {
+            for (var pl in _this.plService.playlists) {
+                if (_this.plService.selectedPl.playlist_id === _this.plService.playlists[pl].playlist_id)
+                    _this.plService.selectedPl = _this.plService.playlists[pl];
+                //this.plService.musics = this.plService.playlists[pl].MusicLink;
+            }
+            _this.offlineService.reset();
+        });
+        /*this.userService.getUserPlaylists().subscribe(playlists => {
+          console.log('PLAYLISTS: ', playlists);
+          this.userService.getSubscription().subscribe(subscription => {
+            let tmp = new Array();
+    
             console.log('PLAYLISTS: ', playlists);
-            _this.userService.getSubscription().subscribe(function (subscription) {
-                var tmp = new Array();
-                console.log('PLAYLISTS: ', playlists);
-                if (subscription) {
-                    for (var i = 0; i < subscription.length; ++i) {
-                        tmp.push(subscription[i].Playlist);
-                    }
-                }
-                console.log('SUBS: ', tmp);
-                _this.plService.playlists = playlists.concat(tmp);
-                for (var pl in _this.plService.playlists) {
-                    if (_this.plService.selectedPl.playlist_id = _this.plService.playlists[pl].playlist_id)
-                        _this.plService.selectedPl = _this.plService.playlists[pl];
-                    //this.plService.musics = this.plService.playlists[pl].MusicLink;
-                }
-                //this.musics = this.playlists[0].MusicLink;
-                //this.playlists = this.plService.playlists;
-                //this.router.navigate([{ outlets: { homeOutlet: ['home/infoPlaylist'] } }]);
-                _this.getInvitations();
-                _this.offlineService.reset();
-            }, function (error) { return console.log('error while retrieving subs: ', error); });
-        }, function (error) { return console.log('error while retrieving playlist: ', error); });
+            if (subscription) {
+              for (let i = 0; i < subscription.length; ++i) {
+                tmp.push(subscription[i].Playlist);
+              }
+            }
+            console.log('SUBS: ', tmp);
+    
+            this.plService.playlists = playlists.concat(tmp);
+            for (let pl in this.plService.playlists) {
+              if (this.plService.selectedPl.playlist_id = this.plService.playlists[pl].playlist_id)
+                this.plService.selectedPl = this.plService.playlists[pl];
+              //this.plService.musics = this.plService.playlists[pl].MusicLink;
+            }
+    
+            //this.musics = this.playlists[0].MusicLink;
+            //this.playlists = this.plService.playlists;
+            //this.router.navigate([{ outlets: { homeOutlet: ['home/infoPlaylist'] } }]);
+    
+            this.getInvitations();
+            this.offlineService.reset()
+          }, error => console.log('error while retrieving subs: ', error));
+        }, error => console.log('error while retrieving playlist: ', error));*/
     };
     HomeComponent.prototype.ngAfterViewInit = function () {
         this.iframeElement = this.scPlayer.nativeElement;
@@ -152,25 +220,6 @@ var HomeComponent = /** @class */ (function () {
             else
                 this.scWidget.pause();
         }
-    };
-    HomeComponent.prototype.getInvitations = function () {
-        var _this = this;
-        var tmp = new Array();
-        this.userService.getInvitations().subscribe(function (invitations) {
-            console.log('invitation: ', invitations);
-            for (var _i = 0, invitations_1 = invitations; _i < invitations_1.length; _i++) {
-                var invit = invitations_1[_i];
-                var e = new events_component_1.Event();
-                e.message = "Vous avez re\u00E7u une invitation \u00E0 rejoindre la playlist \""
-                    + (invit.Playlist.playlist_name + "\"")
-                    + (" par " + invit.Inviter.usr_login + ".");
-                e.invitation = invit;
-                e.type = "Invitation";
-                tmp.push(e);
-            }
-            _this.userService.events = tmp;
-            console.log('events: ', _this.userService.events);
-        }, function (error) { return console.log('error while retrieving invitations: ', error); });
     };
     __decorate([
         core_1.Output(),

@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private router: Router
   ) { }
 
-  private userCred: userCredentials = {login: 'gogo@gmail.com', password: '345poule'}; // !!!!!!!!!!!!!!!
+  private userCred: userCredentials = {login: 'klu@gmail.com', password: 'klu'}; // !!!!!!!!!!!!!!!
   private error: string;
   private sub: any;
   private data: loginResponse;
@@ -34,7 +34,18 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
+  isEmail(myVar: string) {
+  var regEmail = new RegExp('^[0-9a-z._-]+@{1}[0-9a-z.-]{2,}[.]{1}[a-z]{2,5}$'
+    , 'i');
+    return regEmail.test(myVar);
+  }
+
   submit() {
+    if (!this.isEmail(this.userCred.login)) {
+      this.error = "Adresse mail invalide.";
+      return ;
+    }
+
     this.sub = this.loginService.login(this.userCred).subscribe(res => {
       this.data = res.body;
       if (this.data.code != 0) {

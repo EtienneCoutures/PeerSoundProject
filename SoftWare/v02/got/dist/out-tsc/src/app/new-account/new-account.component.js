@@ -22,23 +22,34 @@ var NewAccountComponent = /** @class */ (function () {
         this.userCred = new userCredentials_1.userCredentials();
     };
     NewAccountComponent.prototype.ngOnDestroy = function () { };
+    NewAccountComponent.prototype.isEmail = function (myVar) {
+        var regEmail = new RegExp('^[0-9a-z._-]+@{1}[0-9a-z.-]{2,}[.]{1}[a-z]{2,5}$', 'i');
+        return regEmail.test(myVar);
+    };
     NewAccountComponent.prototype.createAccount = function () {
         var _this = this;
+        if (!this.isEmail(this.userCred.login)) {
+            this.error = "Veuillez vérifier l'adresse mail.";
+            return;
+        }
         if (this.verifyPassword === this.userCred.password) {
             this.sub = this.loginService.signup(this.userCred)
                 .subscribe(function (res) {
-                if (res.body.code == 0) {
+                console.log('res: ', res);
+                if (res.body.code === 0) {
                     _this.loginService.account = res.body.account;
                     _this.router.navigate(['home']);
+                }
+                else {
+                    _this.error = "Cette adresse mail est déjà utilisée.";
                 }
             }, function (error) { return console.log('error: ', error); });
         }
         else {
-            this.error = "Passwords don't match.";
+            this.error = "Les mots de passe ne correspondent pas.";
         }
     };
     NewAccountComponent.prototype.retour = function () {
-        //console.log("mamamama!!!!!!!");
         this.router.navigate(['']);
     };
     NewAccountComponent = __decorate([

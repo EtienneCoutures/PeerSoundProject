@@ -12,9 +12,7 @@
           </div>-->
 
           <div fxLayout="column" fxLayoutAlign="stretch" class="listPlaylist">
-            <ng-scrollbar>
             <app-playlist [playlist]="pl" *ngFor="let pl of playlists" (click)="selectPlaylist(pl)"></app-playlist>
-          </ng-scrollbar>
           </div>
 
 
