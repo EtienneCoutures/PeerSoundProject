@@ -64,7 +64,9 @@ function changePage() {
               password: pass.value
             },
              function (data) {
-               if (data.error != - 1) {
+              console.log(data);
+              console.log("requete KO");
+               if (data.error != - 1  && data.code != -1) {
                   localStorage.setItem("email", email.value);
                   localStorage.setItem("id", data.account.usr_id);
                   localStorage.setItem("name", data.account.usr_firstame);

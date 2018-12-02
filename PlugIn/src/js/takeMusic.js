@@ -289,6 +289,7 @@ function hidePop() {
 function hidePlaylist() {
     var opt = document.createElement('option');
     opt.label ="Create Playlist";
+    opt.text ="Create Playlist";
     Playlists.appendChild(opt);
     setTimeout(function(){
         createPlaylist.className = '';
