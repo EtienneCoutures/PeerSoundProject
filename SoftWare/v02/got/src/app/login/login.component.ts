@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private router: Router
   ) { }
 
-  private userCred: userCredentials = {login: 'klu@gmail.com', password: 'klu'}; // !!!!!!!!!!!!!!!
+  private userCred: userCredentials = new userCredentials();
   private error: string;
   private sub: any;
   private data: loginResponse;

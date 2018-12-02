@@ -7,6 +7,7 @@ import { Playlist } from './playlist/playlist';
 import { APIResponse } from './APIResponse';
 import { Event } from './events/events.component';
 import { LoginService } from './login/login.service';
+import { AppConfig } from './appConfig';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,9 @@ export class UserService {
   params: HttpParams;
   account: Account;
   events: Array<Event> = new Array<Event>();
+
+  private appConfig: AppConfig = new AppConfig;
+  private baseUrl: string = this.appConfig.urlBase;
 
   constructor(
     private httpClient: HttpClient
@@ -38,12 +42,12 @@ export class UserService {
 
     console.log('HEADERS: ', this.headers);
     console.log('params: ', this.params);
-    return this.httpClient.get<Playlist[]>(`http://localhost:8000/api/playlist/`
+    return this.httpClient.get<Playlist[]>(`${this.baseUrl}/api/playlist/`
                                 , {params: this.params, headers: this.headers});
   }
 
   getAllUserPlaylist(userId?: number) {
-    return this.httpClient.get<Playlist[]>(`http://localhost:8000/api/subscription/`
+    return this.httpClient.get<Playlist[]>(`${this.baseUrl}/api/subscription/`
                                 ,  {headers: this.headers});
   }
 
@@ -52,7 +56,7 @@ export class UserService {
     this.params = new HttpParams().set('where'
                   , `{"invited_usr_id":${this.loginService.account.usr_id.toString()}}`);
 
-    return this.httpClient.get<any>('http://localhost:8000/api/invitation', {
+    return this.httpClient.get<any>(`${this.baseUrl}/api/invitation`, {
       params: this.params,
       headers: this.headers
     });
@@ -60,12 +64,12 @@ export class UserService {
 
   deleteInvitation(invitation_id: number) {
 
-    return this.httpClient.delete<any>(`http://localhost:8000/api/invitation/${invitation_id}`
+    return this.httpClient.delete<any>(`${this.baseUrl}/api/invitation/${invitation_id}`
                                     , {headers: this.headers});
   }
 
   acceptInvitation(usr_id: number, pl_id: number): any {
-    return this.httpClient.post<any>(`http://localhost:8000/api/subscription`
+    return this.httpClient.post<any>(`${this.baseUrl}/api/subscription`
                                 , {usr_id: usr_id, playlist_id: pl_id}
                                 , {headers: this.headers});
   }
@@ -74,7 +78,7 @@ export class UserService {
     this.params = new HttpParams().set('where'
                   , `{"usr_id":${this.loginService.account.usr_id.toString()}}`);
 
-    return this.httpClient.get<any>('http://localhost:8000/api/subscription'
+    return this.httpClient.get<any>(`${this.baseUrl}/api/subscription`
     , {params: this.params, headers: this.headers});
   }
 
@@ -82,7 +86,7 @@ export class UserService {
     this.params = new HttpParams().set('where'
                   , `{"usr_email":${this.loginService.account.usr_email.toString()}}`);
 
-    return this.httpClient.get(`http://localhost:8000/api/user`, {
+    return this.httpClient.get(`${this.baseUrl}/api/user`, {
       params: this.params,
       headers: this.headers
     });

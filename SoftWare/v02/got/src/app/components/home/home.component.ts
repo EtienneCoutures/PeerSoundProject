@@ -1,4 +1,11 @@
-import { Component, ViewChild, OnInit, OnDestroy, AfterViewInit, Output } from '@angular/core';
+import {
+  Component
+  , ViewChild
+  , OnInit
+  , OnDestroy
+  , AfterViewInit
+  , Output
+} from '@angular/core';
 import { LoginService } from '../../login/login.service';
 import { Account } from '../../account';
 import { UserService } from '../../user.service';
@@ -86,6 +93,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       this.plService.musics = this.plService.playlists[0].MusicLink;
       this.plService.selectedMusic = this.plService.playlists[0].MusicLink[0];
       this.plService.selectedPl = this.plService.playlists[0];
+      //this.router.navigate([{ outlets: { homeOutlet: ['infoPlaylist'] } }
+        //, {relativeTo: this.route}]);
       this.loaded = true;
     }).catch(error => {
       console.log('error loading home: ', error);
@@ -184,44 +193,17 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   refresh() {
-    //this.loaded = false;
     this.plService.playlists = new Array();
     this.initialize(this).then((result) => {
       for (let pl in this.plService.playlists) {
-        if (this.plService.selectedPl.playlist_id === this.plService.playlists[pl].playlist_id)
+        if (this.plService.selectedPl.playlist_id
+            === this.plService.playlists[pl].playlist_id)
           this.plService.selectedPl = this.plService.playlists[pl];
+          this.router.navigate([{ outlets: { homeOutlet:['infoPlaylist'] } }]);
         //this.plService.musics = this.plService.playlists[pl].MusicLink;
       }
       this.offlineService.reset();
     })
-    /*this.userService.getUserPlaylists().subscribe(playlists => {
-      console.log('PLAYLISTS: ', playlists);
-      this.userService.getSubscription().subscribe(subscription => {
-        let tmp = new Array();
-
-        console.log('PLAYLISTS: ', playlists);
-        if (subscription) {
-          for (let i = 0; i < subscription.length; ++i) {
-            tmp.push(subscription[i].Playlist);
-          }
-        }
-        console.log('SUBS: ', tmp);
-
-        this.plService.playlists = playlists.concat(tmp);
-        for (let pl in this.plService.playlists) {
-          if (this.plService.selectedPl.playlist_id = this.plService.playlists[pl].playlist_id)
-            this.plService.selectedPl = this.plService.playlists[pl];
-          //this.plService.musics = this.plService.playlists[pl].MusicLink;
-        }
-
-        //this.musics = this.playlists[0].MusicLink;
-        //this.playlists = this.plService.playlists;
-        //this.router.navigate([{ outlets: { homeOutlet: ['home/infoPlaylist'] } }]);
-
-        this.getInvitations();
-        this.offlineService.reset()
-      }, error => console.log('error while retrieving subs: ', error));
-    }, error => console.log('error while retrieving playlist: ', error));*/
   }
 
   ngAfterViewInit() {
@@ -236,10 +218,10 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   playlistChangedHandler(pl: Playlist) {
     this.plService.selectedPl = pl;
     this.plService.musics = pl.MusicLink;
-    //this.musics = pl.MusicLink;
   }
 
   deco() {
+    this.plService.playlists = new Array();
     this.router.navigate(['']);
   }
 

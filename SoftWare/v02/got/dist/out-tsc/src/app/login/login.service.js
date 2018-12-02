@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/common/http");
 var http_2 = require("@angular/common/http");
+var appConfig_1 = require("../appConfig");
 var httpOptions = {
     headers: new http_2.HttpHeaders({
         'Content-Type': 'application/json',
@@ -20,8 +21,10 @@ var httpOptions = {
 var LoginService = /** @class */ (function () {
     function LoginService(httpClient) {
         this.httpClient = httpClient;
-        this.baseUrl = "http://localhost:8000/"; //AppConfig.backend.baseUrl;
+        this.appConfig = new appConfig_1.AppConfig;
+        this.baseUrl = ""; //this.appConfig.backend.urlBase;
         this.path = 'auth/login';
+        console.log('appConfig: ', this.appConfig);
     }
     LoginService.prototype.login = function (userCred) {
         return this.httpClient
@@ -31,12 +34,11 @@ var LoginService = /** @class */ (function () {
         return this.httpClient
             .post(this.baseUrl + 'signup', userCred, { observe: 'response' });
     };
-    var _a;
     LoginService = __decorate([
         core_1.Injectable({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof http_1.HttpClient !== "undefined" && http_1.HttpClient) === "function" ? _a : Object])
+        __metadata("design:paramtypes", [http_1.HttpClient])
     ], LoginService);
     return LoginService;
 }());

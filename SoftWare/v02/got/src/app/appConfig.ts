@@ -1,7 +1,3 @@
-class AppConfig {
-  backend: {
-    urlBase: "https:///"
-  }
+export class AppConfig {
+  urlBase: string = "https://peersoundproject.com"
 }
-
-export default new AppConfig;

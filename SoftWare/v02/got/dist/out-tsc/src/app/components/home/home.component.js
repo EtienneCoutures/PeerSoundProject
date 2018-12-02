@@ -160,40 +160,13 @@ var HomeComponent = /** @class */ (function () {
         this.plService.playlists = new Array();
         this.initialize(this).then(function (result) {
             for (var pl in _this.plService.playlists) {
-                if (_this.plService.selectedPl.playlist_id === _this.plService.playlists[pl].playlist_id)
+                if (_this.plService.selectedPl.playlist_id
+                    === _this.plService.playlists[pl].playlist_id)
                     _this.plService.selectedPl = _this.plService.playlists[pl];
                 //this.plService.musics = this.plService.playlists[pl].MusicLink;
             }
             _this.offlineService.reset();
         });
-        /*this.userService.getUserPlaylists().subscribe(playlists => {
-          console.log('PLAYLISTS: ', playlists);
-          this.userService.getSubscription().subscribe(subscription => {
-            let tmp = new Array();
-    
-            console.log('PLAYLISTS: ', playlists);
-            if (subscription) {
-              for (let i = 0; i < subscription.length; ++i) {
-                tmp.push(subscription[i].Playlist);
-              }
-            }
-            console.log('SUBS: ', tmp);
-    
-            this.plService.playlists = playlists.concat(tmp);
-            for (let pl in this.plService.playlists) {
-              if (this.plService.selectedPl.playlist_id = this.plService.playlists[pl].playlist_id)
-                this.plService.selectedPl = this.plService.playlists[pl];
-              //this.plService.musics = this.plService.playlists[pl].MusicLink;
-            }
-    
-            //this.musics = this.playlists[0].MusicLink;
-            //this.playlists = this.plService.playlists;
-            //this.router.navigate([{ outlets: { homeOutlet: ['home/infoPlaylist'] } }]);
-    
-            this.getInvitations();
-            this.offlineService.reset()
-          }, error => console.log('error while retrieving subs: ', error));
-        }, error => console.log('error while retrieving playlist: ', error));*/
     };
     HomeComponent.prototype.ngAfterViewInit = function () {
         this.iframeElement = this.scPlayer.nativeElement;
@@ -208,6 +181,7 @@ var HomeComponent = /** @class */ (function () {
         //this.musics = pl.MusicLink;
     };
     HomeComponent.prototype.deco = function () {
+        this.plService.playlists = new Array();
         this.router.navigate(['']);
     };
     HomeComponent.prototype.playMusicHandler = function (music) {
