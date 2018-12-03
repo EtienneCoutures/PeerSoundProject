@@ -1,9 +1,11 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { PlaylistService } from '../playlist/playlist.service';
+
 // require from 'reframe.js'
 
 import * as myGlobals from '../../globals'
-
 var Url = require('url-parse');
+var Url2 = require("js-video-url-parser")
 
 @Component({
   selector: 'app-yt-player',
@@ -23,8 +25,9 @@ export class YtPlayerComponent implements OnInit, OnChanges {
 
   @Input() url: string = null;
   @Input() isPlaying: boolean = false;
+  @Output() isPlayingEvent: EventEmitter<boolean> = new EventEmitter()
 
-  constructor() { }
+  constructor(private plService : PlaylistService) { }
   init() {
     var tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
@@ -49,7 +52,7 @@ export class YtPlayerComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: any) {
     if (changes.url && changes.url.firstChange === false) {
-      this.video = new Url(changes.url.currentValue).query.substr(3)
+      this.video = Url2.parse(changes.url.currentValue).id
       this.player.loadVideoById(this.video)
     }
     if (changes.isPlaying && changes.isPlaying.firstChange === false) {
@@ -86,15 +89,21 @@ export class YtPlayerComponent implements OnInit, OnChanges {
     console.log('cul', event.data)
     switch (event.data) {
       case window['YT'].PlayerState.PLAYING:
+        this.plService.isPlaying = false
+        // console.log('play')
+        // this.isPlayingEvent.emit(true)
         if (this.cleanTime() == 0) {
-          console.log('started ' + this.cleanTime());
+          // console.log('started ' + this.cleanTime());
         } else {
-          console.log('playing ' + this.cleanTime())
+          // console.log('playing ' + this.cleanTime())
         };
         break;
       case window['YT'].PlayerState.PAUSED:
+        // this.isPlayingEvent.emit(false)
+        // this.plService.isPlaying = true
+        // console.log('pause')
         if (this.player.getDuration() - this.player.getCurrentTime() != 0) {
-          console.log('paused' + ' @ ' + this.cleanTime());
+          // console.log('paused' + ' @ ' + this.cleanTime());
         };
         break;
       case window['YT'].PlayerState.ENDED:
