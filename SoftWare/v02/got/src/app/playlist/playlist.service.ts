@@ -29,7 +29,7 @@ export class PlaylistService {
   selectedPl: Playlist;
   playlists: Playlist[] = new Array<Playlist>();
   isPlaying: boolean;
-  musics: Music[];
+  musics: any[];
   selectedMusic: Music;
 
   private appConfig: AppConfig = new AppConfig;

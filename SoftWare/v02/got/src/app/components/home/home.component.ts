@@ -19,7 +19,8 @@ import { EventService } from '../../event.service';
 import { Invitation } from '../../events/events.component';
 import { OfflineFeaturesService } from '../../offline-features.service'
 import { Yts } from 'youtube-audio-stream'
-
+import { DOCUMENT } from '@angular/common';
+import { Inject }  from '@angular/core';
 //declare var SC: any;
 
 @Component({
@@ -33,10 +34,11 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   private subs: any[];
   private users: Array<any> = new Array();
   private ipcRenderer: any = null
+  private document: any;
   @Output() scWidget: any;
   @Output() iframeElement: any;
 
-  private loaded: boolean = false;
+  private loaded: boolean = true;
   private init: ((cmpt: HomeComponent) => Promise<any>)[] = [
     this.getUserPlaylists,
     this.getSubscription,
@@ -52,10 +54,13 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     private rd: Renderer2,
     private router: Router,
     private eService: EventService,
-    public offlineService: OfflineFeaturesService
+    public offlineService: OfflineFeaturesService,
+    @Inject(DOCUMENT) document
   ) {
 
     this.subs = new Array();
+    console.log('document: ', document);
+    this.document = document;
     console.log('this.loginService.account: ', this.loginService.account);
     if (this.loginService.account.playlist) {
       let tmp = new Array();
@@ -207,8 +212,37 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    //console.log('ng after view init: ', this.el.nativeElement.querySelector("[id='sc-player']"));
+
+    //this.iframeElement = this.document.getElementById('sc-player');
+    console.log('document.getElementById("sc-player"):', this.document);
     this.iframeElement = this.scPlayer.nativeElement;
-    this.scWidget = window['SC'].Widget(this.iframeElement);
+    console.log('this.scPlayer: ', this.scPlayer);
+    this.scWidget = window['SC'].Widget('sc-player');
+
+    console.log('window["SC"]: ', window['SC'].Widget.Events.FINISH);
+    let self = this;
+
+    this.scWidget.bind(window['SC'].Widget.Events.FINISH, (e) => {
+      console.log('scPlayer FINISH EVENT');
+      let found = self.plService.musics.find((item: any) => {
+        return item.Music.music_id === self.plService.selectedMusic.music_id;
+      });
+
+      if (found) {
+        let index = self.plService.musics.indexOf(found);
+        console.log('self.plService.musics: ', self.plService.musics);
+        console.log('self.plService.selectedMusic: ', self.plService.selectedMusic);
+        console.log('index: ', index);
+        if (index >= 0) {
+          if (typeof self.plService.musics[index + 1] !== 'undefined') {
+            self.playMusicHandler(self.plService.musics[index + 1].Music);
+          } else {
+            self.playMusicHandler(self.plService.musics[0].Music);
+          }
+        } else console.log('error: the selected music is not part of the current playlist');
+      } else console.log('error: the selected music is not part of the current playlist');
+    })
   }
 
   ngOnDestroy() {
@@ -227,6 +261,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   playMusicHandler(music: Music) {
     if (this.plService.selectedMusic !== music) {
+      console.log('music_url: ', music.music_url);
       this.scWidget.load(music.music_url, { auto_play: true });
     } else if (this.plService.selectedMusic === music) {
       if (this.plService.isPlaying)
