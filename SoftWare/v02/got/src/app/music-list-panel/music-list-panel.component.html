@@ -1,9 +1,11 @@
-<app-options-pl style="height: 10%; margin:0" [playlist]="plService.selectedPl" (conModeSwitched)="switchConModeEvent($event)"></app-options-pl>
+<div *ngIf="plService.selectedPl">
+  <app-options-pl style="height: 10%; margin:0" [playlist]="plService.selectedPl" (conModeSwitched)="switchConModeEvent($event)"></app-options-pl>
 
-<div *ngIf="!this.isOffline">
-<app-music-list [musics]="plService.selectedPl.MusicLink" (playMusic)="playMusicEvent($event)"></app-music-list>
-</div>
+  <div *ngIf="!this.isOffline">
+    <app-music-list [musics]="plService.selectedPl.MusicLink" (playMusic)="playMusicEvent($event)"></app-music-list>
+  </div>
 
-<div *ngIf="this.isOffline">
-  <app-music-list-offline [playlist]="playlist"></app-music-list-offline>
+  <div *ngIf="this.isOffline">
+    <app-music-list-offline [playlist]="playlist"></app-music-list-offline>
+  </div>
 </div>

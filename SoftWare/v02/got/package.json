@@ -58,6 +58,7 @@
     "plangular-3": "^3.1.2",
     "popper.js": "^1.14.4",
     "reflect-metadata": "^0.1.12",
+    "reframe": "^0.30.0",
     "reframe.js": "^2.2.4",
     "request": "^2.88.0",
     "rxjs-compat": "^6.3.2",
