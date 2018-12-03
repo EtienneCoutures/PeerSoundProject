@@ -90,12 +90,37 @@ module.exports = function(app) {
                 if (!S(Record.playlist_id).isEmpty()) record.playlist_id = Record.playlist_id;
                 if (!S(Record.invited_role).isEmpty()) record.invited_role = Record.invited_role;
 
-                record.save().then(function(record) {
-                    reply(null, record);
-                }).catch(function(err) {
-                    reply(err);
-                });
+                var query = {
+                    where: {
+                      inviter_usr_id: Record.inviter_usr_id,
+                      invited_usr_id: Record.invited_usr_id,
+                      playlist_id: Record.playlist_id
+                    }
+                };
+                app.models["Playlist"].findOne({
+                  where:{
+                    playlist_id: record.playlist_id
+                  }, include: [{
+                    model: app.models.Subscription,
+                    as: 'Subscriber',
+                    required: false,
+                    where: { usr_id: Record.invited_usr_id}
+                    }]
+                }).then(function(ret){
+                  if (ret && ret.dataValues.Subscriber[0]) { return reply(null, {code: 2, message: "user already in pl"})}
+                  app.models["Invitation"].findAll(query).then(function(result) {
+                    if (result[0]) {
+                      return reply(null, {code: 2, message: "invitation already pending"})
+                    }
+                      record.save().then(function(record) {
+                        console.log("saving")
+                          reply(null, record);
+                      }).catch(function(err) {
+                          reply(err);
+                      });
 
+                  }).catch(function(err) {console.log(err)});
+                })
             }
             function reply(err, record) {
                 if (err) {
