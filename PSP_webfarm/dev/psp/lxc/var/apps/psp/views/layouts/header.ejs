@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="apple-mobile-web-app-capable" content="true"/>
+  <title>peersoundproject</title>
+
+  <meta name="description" content="overview &amp; stats"/>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <!--basic styles-->
+  <link rel="icon" type="image/vnd.microsoft.icon" href="/img/logo.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="/img/logo.ico"/>
+
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <!--<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>-->
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- ================== BEGIN BASE CSS STYLE ================== -->
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+
+  <link href="/theme/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet">
+  <link href="/theme/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/theme/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <!--<link href="/theme/plugins/DataTables/css/data-table.css" rel="stylesheet">-->
+  <link href="/theme/plugins/ionRangeSlider/css/ion.rangeSlider.css" rel="stylesheet">
+  <link href="/theme/plugins/ionRangeSlider/css/ion.rangeSlider.skinNice.css" rel="stylesheet">
+  <link href="/theme/plugins/select2/dist/css/select2.min.css" rel="stylesheet">
+  <link href="/theme/plugins/password-indicator/css/password-indicator.css" rel="stylesheet">
+  <link href="/theme/plugins/bootstrap-wizard/css/bwizard.min.css" rel="stylesheet">
+  <link href="/theme/plugins/parsley/src/parsley.css" rel="stylesheet">
+  <link href="/theme/plugins/switchery/switchery.min.css" rel="stylesheet">
+  <link href="/theme/css/animate.min.css" rel="stylesheet">
+  <link href="/theme/css/style.min.css" rel="stylesheet">
+  <link href="/theme/css/style-responsive.min.css" rel="stylesheet">
+  <link href="/theme/css/theme/default.css" rel="stylesheet">
+  <link href="/theme/css/style.css" rel="stylesheet">
+  <link href="/theme/plugins/jquery-file-upload/blueimp-gallery/blueimp-gallery.min.css" rel="stylesheet">
+  <link href="/theme/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet">
+  <link href="/theme/plugins/jquery-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="/node_modules/angular-bootstrap-datetimepicker/src/css/datetimepicker.css"/>
+  <!-- ================== END BASE CSS STYLE ================== -->
+<!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>-->
+  <link href="/css/style.css" rel="stylesheet"/>
+  <link href="/css/header.css" rel="stylesheet"/>
+
+</head>
+<body>
+  <!-- begin #page-loader -->
+  <div id="page-loader" class="fade in"><span class="spinner"></span></div>
+  <!-- end #page-loader -->
+
+  <!-- begin #page-container -->
+  <div id="page-container"
+  ng-controller="InitController"
+  class="fade"
+  ng-class="{'page-sidebar-fixed page-header-fixed': !!myself}">
+  <!-- begin #header -->
+  <div ng-if="!!myself"
+  class="header navbar navbar-default navbar-fixed-top"
+  id="header">
+  <!-- begin container-fluid -->
+  <!-- begin navbar -->
+  <div class="container-fluid row">
+    <div class="navbar-header col-md-12">
+      <!-- begin mobile sidebar expand / collapse button -->
+      <div class="col-md-2">
+        <a href="#/" class="navbar-brand">
+          <img src="/img/logo2.png" id="logoPSP"></img>
+        </a>
+      </div>
+      <div style="float:right">
+        <!-- begin header navigation right -->
+        <div class="container">
+          <div class="col-md-6">
+            <form role="search" name="searchform" method="get">
+                <div class="input-group" style="margin-top:9px">
+                  <input id="search" type="text" style="width:100%;height:36px" placeholder="recherche" name="s" class="form-control left-rounded" required>
+                  <div class="input-group-btn">
+                    <button id="search-btn" type="submit" ng-click="userQuery()" style="border-color:white"class="btn btn-inverse"><img id="seek" src="/img/searchicon.png"></button>
+                  </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-6">
+            <div class="col-md-4 navbar-brand">
+              <img id="notif" ng-if="!(myself.messages_unread.length)" src="/img/music.png">
+              <a href="" ng-click="redirectTo('message', '')"><img id="notif" ng-if="myself.messages_unread.length > 0" src="/img/musicNotif.png"></a>
+            </div>
+            <div class="col-md-6">
+              <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown navbar-user">
+                  <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                    <span style="color:white;">{{myself.usr_email | ucfirst}}</span> <b style="color:white" class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu animated fadeInLeft" ng-init="follow()">
+                    <li class="arrow"></li>
+                    <li><a ng-href="#/myself" translate>Edit Profile</a></li>
+                    <li class="divider"></li>
+                    <li><a href="" ng-click="logout()" translate>Log Out</a></li>
+                    <li><a href="#/follower">Followers ({{nbFollowers}})</a></li>
+                    <li><a href="#/followed">Followed ({{nbFollowed}})</a></li>
+                    <li><a href="#/message">Messages ({{myself.messages_unread.length}})</a></li>
+                    <li><a href="#/playlist/list">Playlist</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#/cgu">CGU</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-2">
+              <img id="france" src="/img/france.png" style="margin-top:20%">
+            </div>
+          </div>
+
+        </div> <!-- container navbar -->
+        <!-- end header navigation right -->
+      </div>
+
+    </div>
+  </div>
+  <!-- end container-fluid -->
+</div>
+<!-- end #header -->
+
+<!-- begin #sidebar -->
+<!--<div ng-if="!!myself" id="sidebar" class="sidebar">
+  <div data-scrollbar="true" data-height="100%">
+    <ul class="nav">
+      <li class="nav-header" translate></li>
+      <li class="{{__controller == 'music' ? 'active' : ''}}">
+        <a href="#/music">
+          <i><img src="/img/logo2.png" style="width:25px;height:25px;"></img></i>
+          <span>My Fav Music</span>
+        </a>
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+        <a href="#">Link 4</a>
+        <hr>
+      </li>
+      <li class="{{__controller == 'user' ? 'active' : ''}}">
+        <a href="#/friend" class="Myfriend">
+          <i><img src="/img/logo2.png" style="width:25px;height:25px;"></img></i>
+          <span>MyFriend(s)</span>
+        </a>
+        <a href="#">MrBiscotte</a>
+        <a href="#">Bobkulte</a>
+        <a href="#">KEDIRA</a>
+        <a href="#">ITIZ</a>
+        <hr>
+      </li>
+      <li class="{{__controller == 'playlist' ? 'active' : ''}}">
+        <a href="#/playlist" class="MyPlaylist">
+          <i><img src="/img/logo2.png" style="width:25px;height:25px;"></img></i>
+          <span>MyPlaylist</span>
+        </a>
+        <a href="#" class="active">MyPlaylist</a>
+        <a href="#">Rock</a>
+        <a href="#">Regea</a>
+        <a href="#">Zoumba</a>
+        <a href="#">Hardcore</a>
+        <hr>
+      </li>
+      <li>
+        <a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify">
+          <i class="fa fa-angle-double-left"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div ng-if="!!myself"
+class="sidebar-bg">
+</div>-->
+<!-- end #sidebar -->
+
+<!-- begin #content -->
+<div id="content"
+ng-class="{
+  'login bg-black animated fadeInDown': !myself,
+  'content content-full-width': !!myself
+}"
+>

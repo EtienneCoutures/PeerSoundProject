@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<html>
+<head>
+<meta charset=utf-8 />
+
+<link href="/css/footer.css" rel="stylesheet"/>
+
+</head>
+
+<body>
+</div>
+  <div class="footer" style="border-style:none;height:55px">
+    <div class="col-md-12">
+    <div class="col-md-8">
+      <span><i>Give us Feedback :</i></span>
+      <a href="https://www.facebook.com/Peer-Sound-Project-1269297519814791/" target="_blank"><img src="/img/facebook.png" style="max-height:50px;max-width:50px;"></a>
+      <a href="https://twitter.com/PeerSound" target="_blank"><img src="/img/twitter.png" style="max-height:30px;max-width:30px;"></a>
+      <a href="https://docs.google.com/forms/d/1q9H3Mz_h3esoAV2qx6TVSGzq0I8P2dw2YW_Ab4Q-yfw/"target="_blank"><img src="/img/form.png" style="max-height:30px;max-width:30px; margin-left: 1%;"></a>
+    </div>
+    <div class="col-md-3"></div>
+    <div class="col-md-1">
+      <img src="/img/epitech.png" style="max-height:70px;max-width:70px;margin-top:5px;margin-right:45px">
+    </div>
+  </div>
+    </div>
+      </div>
+        <a href="javascript:;" style="background-color:#2d353c;"class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top">Up</a>
+    </div>
+  </body>
+  <!-- begin scroll to top btn -->
+
+  <!-- end scroll to top btn -->
+
+<!-- ================== BEGIN BASE JS ================== -->
+<script src="/node_modules/requirejs/require.js"></script>
+
+<!--inline scripts related to this page-->
+<script>
+    // obtain requirejs config
+    require(['require', './js/config-require'], function (require, config) {
+        // update global require config
+        window.require.config(config);
+        // load app
+        require(['./js/main.js']);
+    });
+</script>
+</body>
+</html>

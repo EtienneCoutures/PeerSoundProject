@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<link href="/css/user.css" rel="stylesheet"/>
+</head>
+<body>
+  <div class="container">
+    <div  data-ng-init="getMessage()">
+      <div class="">
+        <div class="row col-md-12" style="margin-top: 150px;">
+          <div class="col-md-6">
+            <div ng-if="myself.messages_unread.length">
+            <table class="notifTable col-md-6"tyle="background-color:white">
+              <thead>
+                    <tr>
+                      <th>
+                        <span>Nouveau Message</span>
+                      </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <td>
+                    <div class="col-md-5">
+                      <span>From</span>
+                    </div>
+                    <div class="col-md-5">
+                      <span>Content</span>
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                  </td>
+                </tbody>
+                <tbody ng-repeat="x in myself.messages_unread">
+                  <tr>
+                    <td>
+                      <div class="col-md-5">
+                        {{ x.Sender.usr_login }}
+                      </div>
+                      <div class="col-md-5">
+                        {{ x.content }}
+                      </div>
+                      <div class="col-md-1">
+                          <a href='' class="glyphicon glyphicon-trash" ng-click="goDeleteMessage(x.message_id)"></a>
+                      </div>
+                      <div class="col-md-1">
+                        <a href='' class="glyphicon glyphicon-ok" ng-click="readMessage(x.message_id)"></a>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+                </div>
+                <div ng-if="!(myself.messages_unread.length)">
+                  <h1>You have no new message</h1>
+                </div>
+            </div>
+          <div class="col-md-6">
+            <div ng-if="myself.messages_read.length">
+            <table class="notifTable">
+                <thead>
+                      <tr>
+                        <th>
+                          <span>Ancien Message</span>
+                        </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <td>
+                      <div class="col-md-5">
+                        <span>From</span>
+                      </div>
+                      <div class="col-md-5">
+                        <span>Content</span>
+                      </div>
+                      <div class="col-md-2">
+                      </div>
+                    </td>
+                  </tbody>
+                  <tbody ng-repeat="x in myself.messages_read">
+                    <tr>
+                      <td>
+                        <div class="col-md-5">
+                          {{ x.Sender.usr_login }}
+                        </div>
+                        <div class="col-md-5">
+                          {{ x.content }}
+                        </div>
+                        <div class="col-md-2">
+                            <a href='' class="glyphicon glyphicon-trash" ng-click="goDeleteMessage(x.message_id)"></a>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div ng-if="!(myself.messages_read.length)">
+                <h1>You have no archived message</h1>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--div  data-ng-init="getMessage()">
+    <div class="col-md-6 col-xs-12">
+      <div ng-if="myself.messages_unread.length">
+        <h4 style="float:right">You have {{ myself.messages_unread.length }} new message(s)</h4>
+        <div class="news" ng-repeat="x in myself.messages_unread" style="margin-bottom:15px">
+          <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8">
+              <h2><b>From : {{ x.Sender.usr_login  }}</b></h2>
+            </div>
+            <div class="col-md-2">
+              <a href='' class="glyphicon glyphicon-trash" ng-click="goDeleteMessage(x.message_id)"></a>
+              <a href='' class="glyphicon glyphicon-ok" ng-click="readMessage(x.message_id)"></a>
+            </div>
+          </div>
+          <div class="text">
+            {{ x.content }}
+          </div>
+        </div>
+      </div>
+      <div ng-if="!(myself.messages_unread.length)">
+        <h1>You have no new message</h1>
+      </div>
+    </div>
+    <div ng-if="myself.messages_read.length">
+      <div class="col-md-6 col-xs-12">
+        <h4 style="float:right">Your readed message(s)</h4>
+        <div class="news" ng-repeat="x in myself.messages_read" style="margin-bottom:15px">
+          <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8">
+              <h2><b>From : {{ x.Sender.usr_login  }}</b></h2>
+            </div>
+            <div class="col-md-2">
+              <a href='' class="glyphicon glyphicon-trash" ng-click="goDeleteMessage(x.message_id)"></a>
+              <a href='' class="glyphicon glyphicon-ok" ng-click="readMessage(x.message_id)"></a>
+            </div>
+          </div>
+          <div class="text">
+            {{ x.content }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div ng-if="!(myself.messages_read.length)">
+      <h1>You have no archived message</h1>
+    </div>
+  </div !-->
+</body>
+</html>
