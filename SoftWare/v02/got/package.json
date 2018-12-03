@@ -61,6 +61,7 @@
     "rxjs-compat": "^6.3.2",
     "socket.io": "^2.1.1",
     "socket.io-client": "^2.1.1",
+    "url-parse": "^1.4.4",
     "video.js": "^7.3.0",
     "videojs-youtube": "^2.6.0",
     "xml-parser": "^1.2.1",
