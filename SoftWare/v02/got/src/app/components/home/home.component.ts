@@ -100,8 +100,13 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.initialize(this).then((result) => {
       console.log('this.plService.playlists: ', this.plService.playlists);
       this.plService.musics = this.plService.playlists[0].MusicLink;
-      this.plService.selectedMusic = this.plService.playlists[0].MusicLink[0];
+      this.plService.selectedMusic = this.plService.playlists[0].MusicLink[0].Music;
+      console.log('this.plService.selectedMusic 1: ', this.plService.selectedMusic);
       this.plService.selectedPl = this.plService.playlists[0];
+      this.router.navigate(['/', 'home', { outlets: { homeOutlet: ['infoPlaylist'] }}]);
+      console.log('loaded: ', this.plService.selectedMusic.music_url);
+
+      this.scWidget.load(this.plService.selectedMusic.music_url);
       this.loaded = true;
     }).catch(error => {
       console.log('error loading home: ', error);
@@ -212,17 +217,13 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    //console.log('ng after view init: ', this.el.nativeElement.querySelector("[id='sc-player']"));
-
-    //this.iframeElement = this.document.getElementById('sc-player');
-    console.log('document.getElementById("sc-player"):', this.document);
     this.iframeElement = this.scPlayer.nativeElement;
-    console.log('this.scPlayer: ', this.scPlayer);
     this.scWidget = window['SC'].Widget('sc-player');
 
-    console.log('window["SC"]: ', window['SC'].Widget.Events.FINISH);
     let self = this;
+    console.log('this.plService.selectedMusic: ', this.plService.selectedMusic);
 
+    //this.scWidget.load(this.plService.selectedMusic.music_url,);
     this.scWidget.bind(window['SC'].Widget.Events.FINISH, (e) => {
       console.log('scPlayer FINISH EVENT');
       let found = self.plService.musics.find((item: any) => {
