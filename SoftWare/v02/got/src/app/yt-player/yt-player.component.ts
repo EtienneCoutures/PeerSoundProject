@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 // require from 'reframe.js'
+=======
+import { Component, OnInit, Input } from '@angular/core';
+>>>>>>> a69f11b8e717b4af4af0712c0bffcdfa2cc531ea
 import * as myGlobals from '../../globals'
 
 var Url = require('url-parse');
@@ -74,7 +78,6 @@ export class YtPlayerComponent implements OnInit, OnChanges {
           if (!this.reframed) {
             if (e) {
               this.reframed = true;
-              // reframe(e.target.a);
             }
           }
         }
