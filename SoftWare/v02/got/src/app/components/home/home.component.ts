@@ -90,17 +90,12 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
-
-    //console.log('account bearer: ', this.account.authorization);
-
     this.handleMessages();
     this.initialize(this).then((result) => {
       console.log('this.plService.playlists: ', this.plService.playlists);
       this.plService.musics = this.plService.playlists[0].MusicLink;
       this.plService.selectedMusic = this.plService.playlists[0].MusicLink[0];
       this.plService.selectedPl = this.plService.playlists[0];
-      //this.router.navigate([{ outlets: { homeOutlet: ['infoPlaylist'] } }
-        //, {relativeTo: this.route}]);
       this.loaded = true;
     }).catch(error => {
       console.log('error loading home: ', error);
