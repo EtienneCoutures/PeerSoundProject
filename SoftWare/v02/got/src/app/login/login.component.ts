@@ -19,7 +19,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private router: Router
   ) { }
 
-  private userCred: userCredentials = new userCredentials();
+  // private userCred: userCredentials = new userCredentials();
+  private userCred: userCredentials = {login: 'test@test.com', password: 'test'};
   private error: string;
   private sub: any;
   private data: loginResponse;

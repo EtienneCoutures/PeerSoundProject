@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import reframe from 'reframe.js'
+// require from 'reframe.js'
 import * as myGlobals from '../../globals'
 
 var Url = require('url-parse');
@@ -60,7 +60,7 @@ export class YtPlayerComponent implements OnInit {
           if (!this.reframed) {
             if (e) {
               this.reframed = true;
-              reframe(e.target.a);
+              // reframe(e.target.a);
             }
           }
         }
