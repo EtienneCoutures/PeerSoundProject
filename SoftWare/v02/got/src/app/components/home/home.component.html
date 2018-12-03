@@ -51,7 +51,7 @@
             </div>
             <!-- youtube player -->
             <div *ngIf='musicSrcPlat === "yt"' style="background-color:#2c2f33;">
-              <app-yt-player [url]="ytsrc"></app-yt-player>
+              <app-yt-player [isPlaying]="this.plService.isPlaying" [url]="ytsrc"></app-yt-player>
             </div>
           </div>
 

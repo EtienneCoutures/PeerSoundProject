@@ -208,9 +208,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit() {
     this.iframeElement = this.scPlayer.nativeElement;
     this.scWidget = window['SC'].Widget(this.iframeElement);
-    // console.log('cul', new Url('https://github.com/foo/bar'));
-    // console.log('zizi')
-    // var url = new UrlParser('https://github.com/foo/bar');
   }
 
   ngOnDestroy() {
@@ -228,19 +225,19 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   playMusicHandler(music: Music) {
-    // console.log('cul', music)
+    console.log('cul', music)
     if (music.music_source == 'soundcloud')
       this.musicSrcPlat = 'sc'
     if (music.music_source == 'youtube')
       this.musicSrcPlat = 'yt'
 
     if (this.plService.selectedMusic !== music) {
+      console.log('cul ici')
       if (music.music_source == 'soundcloud') {
         this.scWidget.load(music.music_url, { auto_play: true });
       }
       else if (music.music_source == 'youtube') {
         this.ytsrc = music.music_url;
-        // console.log('cul yt')
       }
     } else if (this.plService.selectedMusic === music) {
       if (music.music_source == 'soundcloud') {
