@@ -217,9 +217,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     //this.iframeElement = this.document.getElementById('sc-player');
     console.log('document.getElementById("sc-player"):', this.document);
     this.iframeElement = this.scPlayer.nativeElement;
-<<<<<<< HEAD
-    this.scWidget = window['SC'].Widget(this.iframeElement);
-=======
+
     console.log('this.scPlayer: ', this.scPlayer);
     this.scWidget = window['SC'].Widget('sc-player');
 
@@ -246,7 +244,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         } else console.log('error: the selected music is not part of the current playlist');
       } else console.log('error: the selected music is not part of the current playlist');
     })
->>>>>>> a69f11b8e717b4af4af0712c0bffcdfa2cc531ea
   }
 
   ngOnDestroy() {
@@ -264,11 +261,9 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   playMusicHandler(music: Music) {
-<<<<<<< HEAD
-    console.log('cul', music)
-=======
+
     console.log('music:', music)
->>>>>>> a69f11b8e717b4af4af0712c0bffcdfa2cc531ea
+
     if (music.music_source == 'soundcloud')
       this.musicSrcPlat = 'sc'
     if (music.music_source == 'youtube')
