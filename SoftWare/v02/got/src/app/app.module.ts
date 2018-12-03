@@ -66,6 +66,7 @@ import { MusicListPanelComponent } from './music-list-panel/music-list-panel.com
 import { MusicListOfflineComponent } from './music-list-offline/music-list-offline.component';
 import { OfflineFeaturesLogComponent } from './offline-features-log/offline-features-log.component';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
+import { YtPlayerComponent } from './yt-player/yt-player.component';
 
 
 // AoT requires an exported function for factories
@@ -103,7 +104,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MusicListPanelComponent,
     MusicListOfflineComponent,
     OfflineFeaturesLogComponent,
-    SnackBarComponent
+    SnackBarComponent,
+    YtPlayerComponent
   ],
   imports: [
     BrowserModule,
