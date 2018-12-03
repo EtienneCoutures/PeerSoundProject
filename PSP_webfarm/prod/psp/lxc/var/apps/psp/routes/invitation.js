@@ -107,10 +107,10 @@ module.exports = function(app) {
                     where: { usr_id: Record.invited_usr_id}
                     }]
                 }).then(function(ret){
-                  if (ret && ret.dataValues.Subscriber[0]) { return reply(null, {code: 2, message: "user already in pl"})}
+                  if (ret && ret.dataValues.Subscriber[0]) { return reply(true, "L'utilisateur est deja dans la playlist")}
                   app.models["Invitation"].findAll(query).then(function(result) {
                     if (result[0]) {
-                      return reply(null, {code: 2, message: "invitation already pending"})
+                      return reply(true, "L'invitation est deja en attente")
                     }
                       record.save().then(function(record) {
                         console.log("saving")
@@ -118,15 +118,14 @@ module.exports = function(app) {
                       }).catch(function(err) {
                           reply(err);
                       });
-
                   }).catch(function(err) {console.log(err)});
                 })
             }
             function reply(err, record) {
                 if (err) {
                     res.json({
-                        code: -1,
-                        errors: (err.errors && err.errors.length > 0) ? err.errors : [{message: err.message || err}]
+                        code: 2,
+                        errors: record
                     })
                 } else {
                     res.json({
