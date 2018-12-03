@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
+// require from 'reframe.js'
+
 import * as myGlobals from '../../globals'
 
 var Url = require('url-parse');
@@ -12,7 +14,7 @@ var Url = require('url-parse');
   // styles: [`.max-width-1024 { max-width: 1024px; margin: 0 auto; }`],
 })
 
-export class YtPlayerComponent implements OnInit {
+export class YtPlayerComponent implements OnInit, OnChanges {
 
   public YT: any;
   public video: any;
@@ -20,21 +22,19 @@ export class YtPlayerComponent implements OnInit {
   public reframed: Boolean = false;
 
   @Input() url: string = null;
+  @Input() isPlaying: boolean = false;
 
   constructor() { }
   init() {
     var tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
-    // tag.src = this.url;
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   }
 
   ngOnInit() {
     this.init();
-    console.log('cul', new Url(this.url).query.substr(3))
 
-    // this.video = '1cH2cerUpMQ' //video id
     this.video = new Url(this.url).query.substr(3)
     if (myGlobals.ytApiLoadedOnce) {
       this.onYouTubeIframeAPIReady(undefined)
@@ -44,11 +44,26 @@ export class YtPlayerComponent implements OnInit {
       myGlobals.setYtApiLoadedOnce(true)
       this.onYouTubeIframeAPIReady(e)
     };
+
+  }
+
+  ngOnChanges(changes: any) {
+    if (changes.url && changes.url.firstChange === false) {
+      this.video = new Url(changes.url.currentValue).query.substr(3)
+      this.player.loadVideoById(this.video)
+    }
+    if (changes.isPlaying && changes.isPlaying.firstChange === false) {
+        if (changes.isPlaying.currentValue)
+          this.player.playVideo()
+        else
+          this.player.pauseVideo()
+    }
   }
 
   onYouTubeIframeAPIReady(e) {
     this.YT = window['YT'];
     this.reframed = false;
+    console.log('cul on yt api ready')
 
     this.player = new window['YT'].Player('player', {
       videoId: this.video,
@@ -56,6 +71,7 @@ export class YtPlayerComponent implements OnInit {
         'onStateChange': this.onPlayerStateChange.bind(this),
         'onError': this.onPlayerError.bind(this),
         'onReady': (e) => {
+          e.target.playVideo()
           if (!this.reframed) {
             if (e) {
               this.reframed = true;
@@ -67,7 +83,7 @@ export class YtPlayerComponent implements OnInit {
   }
 
   onPlayerStateChange(event) {
-    // console.log('cul', event.data)
+    console.log('cul', event.data)
     switch (event.data) {
       case window['YT'].PlayerState.PLAYING:
         if (this.cleanTime() == 0) {

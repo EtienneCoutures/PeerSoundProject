@@ -261,19 +261,21 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   playMusicHandler(music: Music) {
+
     console.log('music:', music)
+
     if (music.music_source == 'soundcloud')
       this.musicSrcPlat = 'sc'
     if (music.music_source == 'youtube')
       this.musicSrcPlat = 'yt'
 
     if (this.plService.selectedMusic !== music) {
+      console.log('cul ici')
       if (music.music_source == 'soundcloud') {
         this.scWidget.load(music.music_url, { auto_play: true });
       }
       else if (music.music_source == 'youtube') {
         this.ytsrc = music.music_url;
-        // console.log('cul yt')
       }
     } else if (this.plService.selectedMusic === music) {
       if (music.music_source === 'soundcloud') {
@@ -281,10 +283,10 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
           this.scWidget.play();
         else
           this.scWidget.pause();
-      } else if (music.music_source === 'youtube') {
+      } /*else if (music.music_source === 'youtube') {
         console.log('youteub');
         this.ytsrc = music.music_url;
-      }
+      }*/
     }
   }
 }
