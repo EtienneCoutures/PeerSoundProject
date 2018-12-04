@@ -87,39 +87,26 @@ export class YtPlayerComponent implements OnInit, OnChanges {
   }
 
   onPlayerStateChange(event) {
-    // console.log('cul', event.data)
     switch (event.data) {
       case window['YT'].PlayerState.PLAYING:
-<<<<<<< HEAD
-        // this.plService.isPlaying = false
-=======
       console.log('playiing');
         this.plService.isPlaying = true;
->>>>>>> 185146ed93ab68644a0700c93ccc90a474dc3e3e
-        // console.log('play')
-        // this.isPlayingEvent.emit(true)
         if (this.cleanTime() == 0) {
           // console.log('started ' + this.cleanTime());
         } else {
-          // console.log('playing ' + this.cleanTime())
+          // console.log('playing ' + this.cleanTime()) putain tu casse les couilles clean ton code wesh
         };
         break;
       case window['YT'].PlayerState.PAUSED:
         this.plService.isPlaying = false;
         // this.isPlayingEvent.emit(false)
         // this.plService.isPlaying = true
-        console.log('pause')
         if (this.player.getDuration() - this.player.getCurrentTime() != 0) {
           // console.log('paused' + ' @ ' + this.cleanTime());
         };
         break;
       case window['YT'].PlayerState.ENDED:
-<<<<<<< HEAD
-        // console.log('ended ');
-=======
-        console.log('ended ');
         this.onMusicEnd.emit();
->>>>>>> 185146ed93ab68644a0700c93ccc90a474dc3e3e
         break;
     };
   };

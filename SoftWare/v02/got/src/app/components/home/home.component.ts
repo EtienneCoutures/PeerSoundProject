@@ -65,13 +65,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   ) {
 
     this.subs = new Array();
-<<<<<<< HEAD
-    // console.log('document: ', document);
     this.document = document;
-    // console.log('this.loginService.account: ', this.loginService.account);
-=======
-    console.log('this.loginService.account: ', this.loginService.account);
->>>>>>> 185146ed93ab68644a0700c93ccc90a474dc3e3e
     if (this.loginService.account.playlist) {
       let tmp = new Array();
 
@@ -101,13 +95,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     this.handleMessages();
     this.initialize(this).then((result) => {
-<<<<<<< HEAD
-      // console.log('this.plService.playlists: ', this.plService.playlists);
-      this.plService.musics = this.plService.playlists[0].MusicLink;
       this.plService.selectedMusic = this.plService.playlists[0].MusicLink[0];
-=======
-
->>>>>>> 185146ed93ab68644a0700c93ccc90a474dc3e3e
       this.plService.selectedPl = this.plService.playlists[0];
       this.plService.musics = this.plService.playlists[0].MusicLink;
       this.router.navigate(['/', 'home', { outlets: { homeOutlet: ['infoPlaylist'] } }]);
@@ -235,48 +223,11 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-<<<<<<< HEAD
-    //console.log('ng after view init: ', this.el.nativeElement.querySelector("[id='sc-player']"));
-
-    //this.iframeElement = this.document.getElementById('sc-player');
-    // console.log('document.getElementById("sc-player"):', this.document);
-    this.iframeElement = this.scPlayer.nativeElement;
-
-    // console.log('this.scPlayer: ', this.scPlayer);
-    this.scWidget = window['SC'].Widget('sc-player');
-
-    // console.log('window["SC"]: ', window['SC'].Widget.Events.FINISH);
-=======
     this.iframeElement = this.scPlayer.nativeElement;
     this.scWidget = window['SC'].Widget('sc-player');
-
->>>>>>> 185146ed93ab68644a0700c93ccc90a474dc3e3e
     let self = this;
-    console.log('this.plService.selectedMusic: ', this.plService.selectedMusic);
-
     this.scWidget.bind(window['SC'].Widget.Events.FINISH, (e) => {
-<<<<<<< HEAD
-      // console.log('scPlayer FINISH EVENT');
-      let found = self.plService.musics.find((item: any) => {
-        return item.Music.music_id === self.plService.selectedMusic.music_id;
-      });
-
-      if (found) {
-        let index = self.plService.musics.indexOf(found);
-        // console.log('self.plService.musics: ', self.plService.musics);
-        // console.log('self.plService.selectedMusic: ', self.plService.selectedMusic);
-        // console.log('index: ', index);
-        if (index >= 0) {
-          if (typeof self.plService.musics[index + 1] !== 'undefined') {
-            self.playMusicHandler(self.plService.musics[index + 1].Music);
-          } else {
-            self.playMusicHandler(self.plService.musics[0].Music);
-          }
-        } else console.log('error: the selected music is not part of the current playlist');
-      } else console.log('error: the selected music is not part of the current playlist');
-=======
       self.playNextMusic();
->>>>>>> 185146ed93ab68644a0700c93ccc90a474dc3e3e
     })
   }
 
@@ -339,12 +290,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
           this.scWidget.play();
         else
           this.scWidget.pause();
-<<<<<<< HEAD
-      } else if (music.music_source === 'youtube') {
-        // console.log('youteub');
-        this.ytsrc = music.music_url;
-=======
->>>>>>> 185146ed93ab68644a0700c93ccc90a474dc3e3e
       }
     }
   }
