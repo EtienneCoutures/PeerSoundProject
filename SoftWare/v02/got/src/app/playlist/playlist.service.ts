@@ -30,7 +30,8 @@ export class PlaylistService {
   playlists: Playlist[] = new Array<Playlist>();
   isPlaying: boolean;
   musics: any[];
-  selectedMusic: Music;
+  selectedMusic: any;
+  plInPlay: Playlist;
 
   private appConfig: AppConfig = new AppConfig;
   private baseUrl: string = this.appConfig.urlBase;

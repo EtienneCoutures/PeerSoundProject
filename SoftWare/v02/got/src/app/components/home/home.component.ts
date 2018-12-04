@@ -20,7 +20,7 @@ import { Invitation } from '../../events/events.component';
 import { OfflineFeaturesService } from '../../offline-features.service'
 import { Yts } from 'youtube-audio-stream'
 import { DOCUMENT } from '@angular/common';
-import { Inject }  from '@angular/core';
+import { Inject } from '@angular/core';
 // import { UrlParser } from 'url-parse';
 // import "js-video-url-parser/lib/provider/youtube";
 // import "js-video-url-parser/lib/provider/soundcloud";
@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   private ipcRenderer: any = null
   private document: any;
   public musicSrcPlat: string = 'sc';
-  public platforms = Object.freeze({"YT":1, "SC":2})
+  public platforms = Object.freeze({ "YT": 1, "SC": 2 })
   public ytsrc: string = '';
 
   @Output() scWidget: any;
@@ -103,7 +103,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       this.plService.selectedMusic = this.plService.playlists[0].MusicLink[0].Music;
       console.log('this.plService.selectedMusic 1: ', this.plService.selectedMusic);
       this.plService.selectedPl = this.plService.playlists[0];
-      this.router.navigate(['/', 'home', { outlets: { homeOutlet: ['infoPlaylist'] }}]);
+      this.router.navigate(['/', 'home', { outlets: { homeOutlet: ['infoPlaylist'] } }]);
       console.log('loaded: ', this.plService.selectedMusic.music_url);
 
       this.scWidget.load(this.plService.selectedMusic.music_url);
@@ -207,9 +207,9 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.initialize(this).then((result) => {
       for (let pl in this.plService.playlists) {
         if (this.plService.selectedPl.playlist_id
-            === this.plService.playlists[pl].playlist_id)
+          === this.plService.playlists[pl].playlist_id)
           this.plService.selectedPl = this.plService.playlists[pl];
-          this.router.navigate([{ outlets: { homeOutlet:['infoPlaylist'] } }]);
+        this.router.navigate([{ outlets: { homeOutlet: ['infoPlaylist'] } }]);
         //this.plService.musics = this.plService.playlists[pl].MusicLink;
       }
       this.offlineService.reset();
@@ -223,23 +223,18 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     let self = this;
     console.log('this.plService.selectedMusic: ', this.plService.selectedMusic);
 
-    //this.scWidget.load(this.plService.selectedMusic.music_url,);
     this.scWidget.bind(window['SC'].Widget.Events.FINISH, (e) => {
-      console.log('scPlayer FINISH EVENT');
-      let found = self.plService.musics.find((item: any) => {
+      let found = self.plService.plInPlay.MusicLink.find((item: any) => {
         return item.Music.music_id === self.plService.selectedMusic.music_id;
       });
 
       if (found) {
-        let index = self.plService.musics.indexOf(found);
-        console.log('self.plService.musics: ', self.plService.musics);
-        console.log('self.plService.selectedMusic: ', self.plService.selectedMusic);
-        console.log('index: ', index);
+        let index = self.plService.plInPlay.MusicLink.indexOf(found);
         if (index >= 0) {
           if (typeof self.plService.musics[index + 1] !== 'undefined') {
-            self.playMusicHandler(self.plService.musics[index + 1].Music);
+            self.playMusicHandler(self.plService.plInPlay.MusicLink[index + 1].Music);
           } else {
-            self.playMusicHandler(self.plService.musics[0].Music);
+            self.playMusicHandler(self.plService.plInPlay.MusicLink.Music);
           }
         } else console.log('error: the selected music is not part of the current playlist');
       } else console.log('error: the selected music is not part of the current playlist');
@@ -271,22 +266,22 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
     if (this.plService.selectedMusic !== music) {
       console.log('cul ici')
-      if (music.music_source == 'soundcloud') {
+      if (music.music_source === 'soundcloud') {
+        console.log('music.music_url: ', music.music_url);
         this.scWidget.load(music.music_url, { auto_play: true });
       }
-      else if (music.music_source == 'youtube') {
+      else if (music.music_source === 'youtube') {
         this.ytsrc = music.music_url;
       }
+      this.plService.plInPlay = this.plService.selectedPl;
+      this.plService.selectedMusic = music;
     } else if (this.plService.selectedMusic === music) {
       if (music.music_source === 'soundcloud') {
         if (this.plService.isPlaying)
           this.scWidget.play();
         else
           this.scWidget.pause();
-      } /*else if (music.music_source === 'youtube') {
-        console.log('youteub');
-        this.ytsrc = music.music_url;
-      }*/
+      }
     }
   }
 }
