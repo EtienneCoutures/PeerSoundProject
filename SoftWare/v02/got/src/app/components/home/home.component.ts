@@ -262,7 +262,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   playMusicHandler(music: Music) {
 
-    console.log('music:', music)
+    // console.log('music url :', music.music_url)
 
     if (music.music_source == 'soundcloud')
       this.musicSrcPlat = 'sc'
