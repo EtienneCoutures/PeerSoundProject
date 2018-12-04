@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) { }
 
   // private userCred: userCredentials = new userCredentials();
-  private userCred: userCredentials = {login: 'test@test.com', password: 'test'};
+  private userCred: userCredentials = new userCredentials();
   private error: string;
   private sub: any;
   private data: loginResponse;
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       } else {
         this.loginService.account = this.data.account;
         this.loginService.account.authorization = res.headers.get('authorization');
-        console.log('account: ', this.loginService.account);
+        // console.log('account: ', this.loginService.account);
         this.router.navigate(['home']);
       }
     }, error => console.log('Login request error: ', error));

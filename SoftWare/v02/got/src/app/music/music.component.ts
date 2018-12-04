@@ -27,12 +27,12 @@ export class MusicComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('i construct a music:', this.music);
+    // console.log('i construct a music:', this.music);
 
   }
 
   clickMusic() {
-    console.log('click music');
+    // console.log('click music');
 //    this.selectedMusic = this.music;
     //this.isPlaying = !this.isPlaying;
   }

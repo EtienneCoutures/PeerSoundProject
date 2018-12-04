@@ -28,7 +28,7 @@ export class LoginService {
 
   constructor(private httpClient: HttpClient) {
     this.path = 'auth/login';
-    console.log('appConfig: ', this.appConfig);
+    // console.log('appConfig: ', this.appConfig);
   }
 
   login(userCred: userCredentials): Observable<HttpResponse<loginResponse>> {

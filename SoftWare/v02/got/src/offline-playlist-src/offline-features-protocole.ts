@@ -5,7 +5,7 @@ import { OfflineFeaturesHandler } from './offline-features-handler'
 let offlineFeaturesHandler = null
 
 app.on('browser-window-created', (event, window) => {
-  offlineFeaturesHandler = new OfflineFeaturesHandler(window)
+  // offlineFeaturesHandler = new OfflineFeaturesHandler(window)
 })
 
 ipcMain.on('offline-load-playlist', (event, data) => { // data = la playlist

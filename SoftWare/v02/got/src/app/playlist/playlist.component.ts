@@ -15,7 +15,7 @@ export class PlaylistComponent {
 
   @Input()
   playlist: Playlist;
-  
+
   navigationExtras: NavigationExtras;
 
   isSelected: boolean;
@@ -30,10 +30,10 @@ export class PlaylistComponent {
   ngOnInit() {
     this.navigationExtras = { queryParams: this.playlist };
 
-    console.log('im creating a playlist: ', this.playlist);
+    // console.log('im creating a playlist: ', this.playlist);
     this.playlistService.getPlaylistMusics(this.playlist.playlist_id)
       .subscribe(musics => {
-        console.log('musics: ', musics);
+        // console.log('musics: ', musics);
       }, error => console.log('error while retrieving musics: ', error));
   }
 

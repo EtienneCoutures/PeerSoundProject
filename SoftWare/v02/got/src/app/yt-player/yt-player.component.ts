@@ -66,7 +66,7 @@ export class YtPlayerComponent implements OnInit, OnChanges {
   onYouTubeIframeAPIReady(e) {
     this.YT = window['YT'];
     this.reframed = false;
-    console.log('cul on yt api ready')
+    // console.log('cul on yt api ready')
 
     this.player = new window['YT'].Player('player', {
       videoId: this.video,
@@ -74,7 +74,7 @@ export class YtPlayerComponent implements OnInit, OnChanges {
         'onStateChange': this.onPlayerStateChange.bind(this),
         'onError': this.onPlayerError.bind(this),
         'onReady': (e) => {
-          e.target.playVideo()
+          // e.target.playVideo()
           if (!this.reframed) {
             if (e) {
               this.reframed = true;
@@ -86,10 +86,10 @@ export class YtPlayerComponent implements OnInit, OnChanges {
   }
 
   onPlayerStateChange(event) {
-    console.log('cul', event.data)
+    // console.log('cul', event.data)
     switch (event.data) {
       case window['YT'].PlayerState.PLAYING:
-        this.plService.isPlaying = false
+        // this.plService.isPlaying = false
         // console.log('play')
         // this.isPlayingEvent.emit(true)
         if (this.cleanTime() == 0) {
@@ -107,7 +107,7 @@ export class YtPlayerComponent implements OnInit, OnChanges {
         };
         break;
       case window['YT'].PlayerState.ENDED:
-        console.log('ended ');
+        // console.log('ended ');
         break;
     };
   };
@@ -118,10 +118,10 @@ export class YtPlayerComponent implements OnInit, OnChanges {
   };
 
   onPlayerError(event) {
-    console.log('cul error', event.data)
+    // console.log('cul error', event.data)
     switch (event.data) {
       case 2:
-        console.log('' + this.video)
+        // console.log('' + this.video)
         break;
       case 100:
         break;

@@ -35,7 +35,7 @@ export class OptionsPlComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('opt pl : ', this.playlist);
+    // console.log('opt pl : ', this.playlist);
   }
 
   invitePeople() {

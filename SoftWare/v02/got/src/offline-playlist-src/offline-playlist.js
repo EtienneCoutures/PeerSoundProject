@@ -156,21 +156,12 @@ var OfflinePlaylist = /** @class */ (function (_super) {
                 fs.readFile(filepath, function (err, data) {
                     if (err)
                         reject(err);
-                    console.log('insert', insert);
                     if (self._header.addMusic(filename, pos, name, insert, true) == false) {
-                        // console.log('1 ->', (self._header.getMusicByPos(pos)._isInFile == false))
-                        // console.log('2 ->', (self._header.getMusicByPos(pos)._isInFile === false))
-                        // console.log('3 ->', (self._header.getMusicByPos(pos)._isInFile == true))
-                        // console.log('4 ->', (self._header.getMusicByPos(pos)._isInFile === true))
-                        // console.log('4 ->', (self._header.getMusicByPos(pos)._isInFile == 'false'))
-                        // console.log('4 ->', (self._header.getMusicByPos(pos)._isInFile === 'false'))
-                        // console.log(' 5 ->', self._header.getMusicByPos(pos)._isInFile)
                         if (self._header.getMusicByPos(pos)._isInFile == 'false') {
-                            console.log('ici c\'est cool');
                             self._header.getMusicByPos(pos).isInFile = true;
+                            self._header.getMusicByPos(pos).filename = filename;
                         }
                         else {
-                            console.log('6->', self._header.getMusicByPos(pos));
                             reject('Can\'t add music "' + name + '" : Already in the playlist !');
                         }
                     }

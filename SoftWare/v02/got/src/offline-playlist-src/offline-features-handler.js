@@ -30,7 +30,8 @@ var OfflineFeaturesHandler = /** @class */ (function (_super) {
         _this._downloader = new music_downloader_1.MusicDownloader();
         _this._pspFilesOpened = {};
         _this._downloader.on('dl-status-update', function (data) {
-            _this._win.webContents.send('dl-status-update', data);
+            // console.log('->', data)
+            // this._win.webContents.send('dl-status-update', data)
         });
         return _this;
     }
@@ -38,25 +39,16 @@ var OfflineFeaturesHandler = /** @class */ (function (_super) {
         var _this = this;
         var saveDirPath = './';
         var pspFile = this.getPspFile(plName);
-        console.log('go dl mus');
+        console.log('cul', music);
         pspFile.open(saveDirPath, plName, false).then(function () {
             // this.win.webContents.send('set-dl-status', 'dl-init...');
-            var filepath = saveDirPath + music.music_name + '.mp3';
+            var filepath = saveDirPath + 'tmp.mp3';
             var isMusInFile = pspFile.getMusicMetadataByName(music.music_name).isInFile;
-            console.log('1from dl : ', isMusInFile);
-            console.log('2from dl : ', (isMusInFile === false));
-            console.log('3from dl : ', (isMusInFile == false));
-            console.log('4from dl : ', (isMusInFile == true));
-            console.log('5from dl : ', (isMusInFile === true));
-            console.log('6from dl : ', (isMusInFile == 'false'));
-            console.log('7from dl : ', (isMusInFile === 'false'));
-            console.log('8from dl : ', (isMusInFile == 'true'));
-            console.log('9from dl : ', (isMusInFile === 'true'));
             if (isMusInFile == 'false' || isMusInFile == false) {
-                _this._win.webContents.send('dl-status-update', { update: 'connecting to source provider...' });
+                // this._win.webContents.send('dl-status-update', {update: 'connecting to source provider...'})
                 console.log('download');
-                _this._downloader.dlFromSoundCloud2Mp3(saveDirPath, music.music_name, music.music_url).then(function () {
-                    _this._win.webContents.send('dl-status-update', { update: 'packing' });
+                _this._downloader.dlFromSoundCloud2Mp3(saveDirPath, 'tmp', music.music_url).then(function () {
+                    // this._win.webContents.send('dl-status-update', {update:'packing'});
                     pspFile.addMusicFile(filepath, music.music_id, music.music_name, false).then(function () {
                         pspFile.save().then(function () {
                             fs.unlink(filepath, function (err) {
@@ -64,7 +56,14 @@ var OfflineFeaturesHandler = /** @class */ (function (_super) {
                                     throw new Error(err);
                                 // this.win.webContents.send('set-dl-status', 'offline-available');
                             });
+                        }, function (err) {
+                            console.log(err);
+                            throw new Error(err);
                         });
+                    }, function (err) {
+                        // this.win.webContents.send('set-dl-status', 'dl failed')
+                        console.log(err);
+                        throw new Error(err);
                     });
                 }, function (err) {
                     // this.win.webContents.send('set-dl-status', 'dl failed')
@@ -73,9 +72,11 @@ var OfflineFeaturesHandler = /** @class */ (function (_super) {
                 });
             }
             else {
-                fs.unlink(filepath, function () { }); // del mp3 file
+                console.log('???');
+                // fs.unlink(filepath, () => {}) // del mp3 file
             }
         }, function (err) {
+            console.log('??? ->', err);
             // this.win.webContents.send('set-dl-status', 'dl failed ')
             throw new Error(err);
         });
@@ -107,25 +108,18 @@ var OfflineFeaturesHandler = /** @class */ (function (_super) {
     };
     OfflineFeaturesHandler.prototype.loadPspFile = function (pl) {
         var _this = this;
-        var pspFile = this.getPspFile(pl.playlist_name);
-        // self.changeCurPspFile(pl.playlist_name)
-        if (pspFile.isOpened) {
-            this._win.webContents.send('offline-load-playlist-ok');
-            return;
-        }
-        pspFile.open('./', pl.playlist_name, true).then(function (da) {
-            pl.MusicLink.forEach(function (m, i) {
-                pspFile.header.addMusic('', m.music_id - 1, m.Music.music_name, false);
-            });
-            pspFile.save().then(function () {
-                _this._win.webContents.send('offline-load-playlist-ok');
-            }, function (err) {
-                console.log(err);
-                _this._win.webContents.send('offline-load-playlist-ko', err);
-            });
-        }, function (err) {
-            console.log(err);
-            _this._win.webContents.send('offline-load-playlist-ko', err);
+        return new Promise(function (resolve, reject) {
+            var pspFile = _this.getPspFile(pl.playlist_name);
+            if (pspFile.isOpened) // file already loaded
+                resolve(pspFile.getMusicsMetadata());
+            pspFile.open('./', pl.playlist_name, true).then(function () {
+                pl.MusicLink.forEach(function (m, i) {
+                    pspFile.header.addMusic('', i, m.Music.music_name, false);
+                });
+                pspFile.save().then(function () {
+                    resolve(pspFile.getMusicsMetadata());
+                }, function (err) { reject(err); });
+            }, function (err) { reject(err); });
         });
     };
     OfflineFeaturesHandler.prototype.sendMusics = function (plName) {
@@ -149,7 +143,7 @@ var OfflineFeaturesHandler = /** @class */ (function (_super) {
                 timeElapsed += 50;
                 // console.log(timeElapsed, pspFile.isOpening, pspFile.name, name, musics.length, pspFile.getMusicsMetadata.length)
                 if (pspFile.isOpened) {
-                    self._win.webContents.send('offline-get-musics-request-ok', { musics: musics, plName: name });
+                    // self._win.webContents.send('offline-get-musics-request-ok', {musics: musics, plName: name})
                     clearInterval(interval);
                     // console.log('wtf')
                 }
@@ -157,7 +151,7 @@ var OfflineFeaturesHandler = /** @class */ (function (_super) {
         }
         else {
             // console.log('echec critique', plName)
-            self._win.webContents.send('offline-get-musics-request-ko');
+            // self._win.webContents.send('offline-get-musics-request-ko')
             // reject()
         }
         // }).then(() => {

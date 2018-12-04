@@ -19,6 +19,7 @@ var fs = require("fs");
 var ID3 = require("node-id3");
 var request = require("request");
 var EventEmitter = require("events");
+var ytdl = require('ytdl-core');
 var MusicDownloader = /** @class */ (function (_super) {
     __extends(MusicDownloader, _super);
     function MusicDownloader() {
@@ -35,13 +36,35 @@ var MusicDownloader = /** @class */ (function (_super) {
             defaultPath: name
         });
     };
+    MusicDownloader.prototype.dlLink2Mp3 = function (dest, filename, url) {
+        return new Promise(function (resolve, reject) {
+        });
+    };
+    MusicDownloader.prototype.dlFromYoutube2Mp3 = function (dest, filename, url) {
+        return new Promise(function (resolve, reject) {
+            var rstream = ytdl('http://www.youtube.com/watch?v=A02s8omM_hI', { filter: 'audioonly', quality: 'highestaudio' });
+            rstream.on('readable', function () {
+                var data;
+                while (data = this.read()) {
+                    console.log('cul', data);
+                }
+            });
+            rstream.on('error', function () {
+                reject();
+            });
+            rstream.on('end', function () {
+                var wstream = fs.createWriteStream('');
+                rstream.pipe(wstream);
+            });
+        });
+    };
     MusicDownloader.prototype.dlFromSoundCloud2Mp3 = function (dest, filename, url) {
         var self = this;
-        console.log('from downloader: ', dest, filename, url);
+        // console.log('from downloader: ', dest + filename + '.mp3', url)
+        // console.log('url', url)
         return new Promise(function (resolve, reject) {
             https.get('https://api.soundcloud.com/resolve?url=' + url + '&client_id=' + self._scKey, function (res) {
                 res.on('data', function (data) {
-                    console.log('from dowloader: http.get passed');
                     data = JSON.parse(data);
                     if (data.errors)
                         reject(data.errors[0].error_message);
@@ -52,9 +75,18 @@ var MusicDownloader = /** @class */ (function (_super) {
                             // console.log('data', data)
                             if (data.errors)
                                 reject(data.errors[0].error_message);
+                            // console.log("cul", data)
                             var item = { id: data.id, stream_url: data.stream_url, artwork_url: data.artwork_url,
-                                title: data.title, artist: data.user.username };
+                                title: data.title, artist: (data.user ? data.user.username : 'unknown') };
+                            // console.log('->', item)
+                            if (item.stream_url == undefined) {
+                                reject('url pointing to redirecting to artist instead of a specific music');
+                                // item.stream_url = 'https://api.soundcloud.com/tracks/' + item.id + '/stream'
+                                // console.log('->', item.stream_url)
+                            }
                             https.get(item.stream_url + '?client_id=' + self._scKey, function (res) {
+                                console.log(res);
+                                console.log(res.headers);
                                 var output_filename = dest + filename + '.mp3', redirect = res.headers.location, received_bytes = 0, total_bytes = 0;
                                 request.head(redirect, function (err, res, body) {
                                     total_bytes = parseInt(res.headers['content-length']);
@@ -86,6 +118,9 @@ var MusicDownloader = /** @class */ (function (_super) {
                                         reject(err);
                                     });
                                 });
+                            }).on('error', function (e) {
+                                console.error(e);
+                                reject(e);
                             });
                         });
                     }).on('error', function (error) {

@@ -1,120 +1,43 @@
 import { Injectable } from '@angular/core';
-import { ElectronService } from './providers/electron.service';
 import { PlaylistService } from './playlist/playlist.service';
-import { Observable, of } from 'rxjs';
 import { Music } from './music/music';
 import { Playlist } from './playlist/playlist';
+import { OfflineFeaturesHandler } from '../offline-playlist-src/offline-features-handler'
+import { MusicEntry } from '../offline-playlist-src/music-entry'
 
 @Injectable({
   providedIn: 'root'
 })
 export class OfflineFeaturesService {
 
-  ipcRenderer: any
+  offline: any = new OfflineFeaturesHandler(undefined)
   isOfflineModeOn: boolean = false
-  // isPlaylistOpened: boolean = false
-  // isPlaylistOpening: boolean = false
-  // isPlaylistLoaded: boolean = false
-  // isPlaylistLoading: boolean = false
   musics: Music[] = []
 
+  constructor(public plService: PlaylistService) {
 
-  constructor(public electronService: ElectronService, public plService: PlaylistService) {
-    this.ipcRenderer = electronService.ipcRenderer
+  }
 
-    this.ipcRenderer.on('offline-load-playlist-ok', (event, data) => {
-      // console.log('cul offline-load-playlist-ok')
-    })
-
-    this.ipcRenderer.on('offline-get-musics-request-ok', (event, data: any) => {
-      this.musics.length = 0
-      if (data.plName != plService.selectedPl.playlist_name) {
-        // this.cancelMusicsLoading(data.plName)
-        // console.log('cul c\'est quoi ce bordel', data.plName)
-      }
-      else {
-        // if (plService.musics) {
-        //   plService.musics.forEach((mus) => {
-        //
-        //   })
-      }
-      // console.log('cul offline-get-musics-request-ok', data.plName)
-      // console.log('cul ', data.musics)
-      // var res = plService.musics.find((elem): boolean => {
-        // console.log(plService.selectedPl.MusicLink[0].Music.music_url)
-      //   return (true)
-      // })
-      console.log('cul data', data.musics)
-      data.musics.forEach((music) => {
-        // if (plService.selectedPl) {
-        var url = plService.selectedPl.MusicLink.find((elem) => {
+  loadPlaylistMetadata(pl: Playlist) {
+    this.musics.length = 0 // empty music list array
+    this.offline.loadPspFile(pl).then((inputs: MusicEntry[]) => { // get psp file metadata
+      inputs.forEach((music) => {
+        var url = this.plService.selectedPl.MusicLink.find((elem) => { // try to get music url from online music array
           return elem.Music.music_name === music._name
         }).Music.music_url
-
-        if (url) {
-          this.musics.push(new Music(music, url))
-        }
+        this.musics.push(new Music(music, url)) // convert MusicEntry type to Music type and add it to list
       })
+    }, (err) => {
+      console.error('error while loading playlist "' + pl.playlist_name + '" in offline mode : ' + err)
     })
-
-    this.ipcRenderer.on('dl-status-update', (event, data) => {
-      console.log('cul dl-status-update', data)
-
-      if (data.update == 'dl-start') {
-        var mus = this.musics.find((elem) => {
-          return elem.music_url == data.url
-        })
-        if (mus)
-          mus.isDownloading = true
-      }
-
-      if (data.update == 'dl-progress') {
-        var mus = this.musics.find((elem) => {
-          return elem.music_url == data.url
-        })
-        if (mus && Math.round(data.progress) != mus.dlProgress)
-          mus.dlProgress = Math.round(data.progress)
-      }
-
-      if (data.update == 'dl-end') {
-        var mus = this.musics.find((elem) => {
-          return elem.music_url == data.url
-        })
-        if (mus) {
-          mus.isOfflineAvailable = true
-          mus.isDownloading = false
-        }
-      }
-    })
-
-    this.ipcRenderer.on('offline-get-musics-request-ko', (event, data) => {
-      // console.log('cul offline-get-musics-request-ko')
-      this.musics.length = 0
-    })
-  }
-
-  loadPspFile(pl: Playlist): void {
-    // console.log('cul load new playlist')
-    this.musics.length = 0
-    this.ipcRenderer.send('offline-load-playlist', {pl: pl})
-  }
-
-  getMusicsRequest(plName: string): void {
-    this.ipcRenderer.send('offline-get-musics-request', {plName: plName})
-
-  }
-
-  cancelMusicsLoading(plName: string): void {
-    this.ipcRenderer.send('offline-cancel-musics-loading', {plName: plName})
   }
 
   dlMusic(music: Music) {
-    console.log('cul dl music', music)
-    this.ipcRenderer.send('offline-dl-music', {plName: this.plService.selectedPl.playlist_name, music: music })
+    console.log('dl music')
+    this.offline.dlMusicToPspFile(this.plService.selectedPl.playlist_name, music)
   }
 
-  reset(): void {
-    this.ipcRenderer.send('offline-reset')
-    this.musics.length = 0
+  reset() {
+
   }
 }

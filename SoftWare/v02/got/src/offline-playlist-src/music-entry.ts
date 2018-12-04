@@ -13,7 +13,8 @@ export class MusicEntry {
     this._name = name
     this._filename = filename
     this._isInFile = isInFile
-    console.log('new music', pos, name, filename, isInFile)
+    // console.log('filename:')
+    // console.log('new music', pos, name, filename, isInFile)
   }
 
   get pos(): number { // !!! ne pas faire confience si musique déplacée ou nouvelle musique ajoutée

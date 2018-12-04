@@ -41,10 +41,10 @@ export class OfflinePlaylistHeader {
 
   addMusic(filename: string, pos: number, name: string, insert: boolean = true, isInFile: boolean = false): boolean {
     if (this.getMusicByName(name) && !insert) {
-      console.log('from addmus : ret err')
+      // console.log('from addmus : ret err')
       return false
     }
-    console.log('????')
+    // console.log('????')
     var music = new MusicEntry(pos, name, filename, isInFile)
     if (insert)
       this._musics.splice(pos, 0, music)

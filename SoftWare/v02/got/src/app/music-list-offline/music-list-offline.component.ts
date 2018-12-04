@@ -23,12 +23,13 @@ export class MusicListOfflineComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    console.log('cul', 'offline component OnChanges')
-    this.loadMusicsFromPspFile()
+    // this.offlineService.
+    // console.log('cul', 'offline component OnChanges')
+    // this.loadMusicsFromPspFile()
   }
 
   loadMusicsFromPspFile() {
-    this.offlineService.getMusicsRequest(this.playlist.playlist_name)
+    // this.offlineService.getMusicsRequest(this.playlist.playlist_name)
   }
 
   dlMusic(music: Music) {

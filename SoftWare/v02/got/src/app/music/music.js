@@ -6,6 +6,7 @@ var Music = /** @class */ (function () {
         this.music_id = mus._pos;
         this.music_name = mus._name;
         this.isOfflineAvailable = mus._isInFile;
+        console.log('cul', mus._isInFile);
         this.music_url = url;
         this.isDownloading = false;
         this.dlProgress = 0;

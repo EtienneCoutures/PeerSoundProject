@@ -7,7 +7,8 @@ var MusicEntry = /** @class */ (function () {
         this._name = name;
         this._filename = filename;
         this._isInFile = isInFile;
-        console.log('new music', pos, name, filename, isInFile);
+        // console.log('filename:')
+        // console.log('new music', pos, name, filename, isInFile)
     }
     Object.defineProperty(MusicEntry.prototype, "pos", {
         get: function () {

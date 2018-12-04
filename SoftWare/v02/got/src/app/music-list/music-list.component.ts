@@ -22,9 +22,9 @@ export class MusicListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    console.log("musics music list: ", this.musics);
+    // console.log("musics music list: ", this.musics);
 
-    console.log("musics music list: ", this.plService.selectedPl);
+    // console.log("musics music list: ", this.plService.selectedPl);
   }
 
   trackElement(index: number, element: any) {
@@ -40,7 +40,7 @@ export class MusicListComponent implements OnInit, OnChanges {
       this.plService.isPlaying = !this.plService.isPlaying;
       this.playMusic.emit(music);
     }
-     console.log('play music: ', music);
+     // console.log('play music: ', music);
   }
 
 }

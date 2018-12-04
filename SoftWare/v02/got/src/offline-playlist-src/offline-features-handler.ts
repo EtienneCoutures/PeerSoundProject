@@ -21,34 +21,26 @@ export class OfflineFeaturesHandler extends EventEmitter {
   constructor(private _win: any) {
     super()
     this._downloader.on('dl-status-update', (data) => {
-      this._win.webContents.send('dl-status-update', data)
+      // console.log('->', data)
+      // this._win.webContents.send('dl-status-update', data)
     })
   }
 
   dlMusicToPspFile(plName, music: Music): void {
     let saveDirPath: string = './'
     var pspFile: OfflinePlaylist = this.getPspFile(plName)
-    console.log('go dl mus')
+    console.log('cul', music)
     pspFile.open(saveDirPath, plName, false).then(() => {
       // this.win.webContents.send('set-dl-status', 'dl-init...');
-      let filepath: string = saveDirPath + music.music_name + '.mp3'
+      let filepath: string = saveDirPath + 'tmp.mp3'
       var isMusInFile: any = pspFile.getMusicMetadataByName(music.music_name).isInFile
-      console.log('1from dl : ', isMusInFile)
-      console.log('2from dl : ', (isMusInFile === false))
-      console.log('3from dl : ', (isMusInFile == false))
-      console.log('4from dl : ', (isMusInFile == true))
-      console.log('5from dl : ', (isMusInFile === true))
-      console.log('6from dl : ', (isMusInFile == 'false'))
-      console.log('7from dl : ', (isMusInFile === 'false'))
-      console.log('8from dl : ', (isMusInFile == 'true'))
-      console.log('9from dl : ', (isMusInFile === 'true'))
 
       if (isMusInFile == 'false' || isMusInFile == false) {
-        this._win.webContents.send('dl-status-update', {update: 'connecting to source provider...'})
+        // this._win.webContents.send('dl-status-update', {update: 'connecting to source provider...'})
 
         console.log('download')
-        this._downloader.dlFromSoundCloud2Mp3(saveDirPath, music.music_name, music.music_url).then(() => { // start dl
-          this._win.webContents.send('dl-status-update', {update:'packing'});
+        this._downloader.dlFromSoundCloud2Mp3(saveDirPath, 'tmp', music.music_url).then(() => { // start dl
+          // this._win.webContents.send('dl-status-update', {update:'packing'});
           pspFile.addMusicFile(filepath, music.music_id, music.music_name, false).then(() => { // add music to header
             pspFile.save().then(() => { // pack mp3 to zip file
               fs.unlink(filepath, (err: any) => { // del mp3 file
@@ -56,7 +48,15 @@ export class OfflineFeaturesHandler extends EventEmitter {
                   throw new Error(err);
                 // this.win.webContents.send('set-dl-status', 'offline-available');
               })
+            }, (err) => {
+              console.log(err)
+
+              throw new Error(err)
             })
+          }, (err) => {
+            // this.win.webContents.send('set-dl-status', 'dl failed')
+            console.log(err)
+            throw new Error(err);
           })
         }, (err) => {
           // this.win.webContents.send('set-dl-status', 'dl failed')
@@ -64,9 +64,11 @@ export class OfflineFeaturesHandler extends EventEmitter {
           throw new Error(err);
         })
       } else {
-        fs.unlink(filepath, () => {}) // del mp3 file
+        console.log('???')
+        // fs.unlink(filepath, () => {}) // del mp3 file
       }
     }, (err) => {
+      console.log('??? ->', err)
       // this.win.webContents.send('set-dl-status', 'dl failed ')
       throw new Error(err);
     });
@@ -103,29 +105,22 @@ export class OfflineFeaturesHandler extends EventEmitter {
   }
 
 
-  loadPspFile(pl: any): void {
-    let pspFile = this.getPspFile(pl.playlist_name)
-    // self.changeCurPspFile(pl.playlist_name)
+  loadPspFile(pl: any): Promise<any> {
+    return new Promise((resolve, reject) => {
 
-    if (pspFile.isOpened) {
-      this._win.webContents.send('offline-load-playlist-ok')
-      return ;
-    }
+      let pspFile = this.getPspFile(pl.playlist_name)
+      if (pspFile.isOpened) // file already loaded
+        resolve(pspFile.getMusicsMetadata())
 
-    pspFile.open('./', pl.playlist_name, true).then((da) => {
-      pl.MusicLink.forEach((m, i) => {
-        pspFile.header.addMusic('', m.music_id - 1, m.Music.music_name, false)
-      })
-      pspFile.save().then(() => {
-        this._win.webContents.send('offline-load-playlist-ok')
-      }, (err) => {
-        console.log(err)
-        this._win.webContents.send('offline-load-playlist-ko', err)
-      })
-    }, (err) => {
-      console.log(err)
-      this._win.webContents.send('offline-load-playlist-ko', err)
-    })
+      pspFile.open('./', pl.playlist_name, true).then(() => { // create file if doesn't exist
+        pl.MusicLink.forEach((m, i) => { // fill header width musics metadata
+          pspFile.header.addMusic('', i, m.Music.music_name, false)
+        })
+        pspFile.save().then(() => { // save file as archive
+          resolve(pspFile.getMusicsMetadata())
+        }, (err) => { reject(err) })
+      }, (err) => { reject(err) })
+    });
   }
 
   sendMusics(plName: string): void {
@@ -153,7 +148,7 @@ export class OfflineFeaturesHandler extends EventEmitter {
           timeElapsed += 50
           // console.log(timeElapsed, pspFile.isOpening, pspFile.name, name, musics.length, pspFile.getMusicsMetadata.length)
           if (pspFile.isOpened) {
-            self._win.webContents.send('offline-get-musics-request-ok', {musics: musics, plName: name})
+            // self._win.webContents.send('offline-get-musics-request-ok', {musics: musics, plName: name})
             clearInterval(interval)
             // console.log('wtf')
           }
@@ -161,7 +156,7 @@ export class OfflineFeaturesHandler extends EventEmitter {
       }
       else {
         // console.log('echec critique', plName)
-        self._win.webContents.send('offline-get-musics-request-ko')
+        // self._win.webContents.send('offline-get-musics-request-ko')
         // reject()
       }
     // }).then(() => {

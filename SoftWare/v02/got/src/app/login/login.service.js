@@ -24,7 +24,7 @@ var LoginService = /** @class */ (function () {
         this.appConfig = new appConfig_1.AppConfig;
         this.baseUrl = this.appConfig.urlBase;
         this.path = 'auth/login';
-        console.log('appConfig: ', this.appConfig);
+        // console.log('appConfig: ', this.appConfig);
     }
     LoginService.prototype.login = function (userCred) {
         return this.httpClient

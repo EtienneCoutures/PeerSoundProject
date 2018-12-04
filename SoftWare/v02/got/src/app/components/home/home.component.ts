@@ -66,9 +66,9 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   ) {
 
     this.subs = new Array();
-    console.log('document: ', document);
+    // console.log('document: ', document);
     this.document = document;
-    console.log('this.loginService.account: ', this.loginService.account);
+    // console.log('this.loginService.account: ', this.loginService.account);
     if (this.loginService.account.playlist) {
       let tmp = new Array();
 
@@ -98,7 +98,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     this.handleMessages();
     this.initialize(this).then((result) => {
-      console.log('this.plService.playlists: ', this.plService.playlists);
+      // console.log('this.plService.playlists: ', this.plService.playlists);
       this.plService.musics = this.plService.playlists[0].MusicLink;
       this.plService.selectedMusic = this.plService.playlists[0].MusicLink[0];
       this.plService.selectedPl = this.plService.playlists[0];
@@ -138,7 +138,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     return new Promise<any>((resolve, reject) => {
       let tmp: Array<Event> = new Array<Event>();
       cmpt.userService.getInvitations().subscribe(invitations => {
-        console.log('invitation: ', invitations);
+        // console.log('invitation: ', invitations);
 
         for (let invit of invitations) {
           let e = new Event();
@@ -153,7 +153,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         }
         cmpt.userService.events = tmp;
 
-        console.log('events: ', cmpt.userService.events);
+        // console.log('events: ', cmpt.userService.events);
         resolve()
       }, error => reject(error));
     })
@@ -162,7 +162,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   handleMessages() {
     this.eService.messages.subscribe(m => {
-      console.log('event: ', m);
+      // console.log('event: ', m);
 
       if (m.type === "invitReceived") {
 
@@ -173,7 +173,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
           + `${m.data.playlist_name}"`
           + ` par ${m.data.usr_login}.`;
 
-        console.log('n event pushed: ', e);
+        // console.log('n event pushed: ', e);
         e.invitation = new Invitation();
         e.invitation.invitation_id = m.data.invitation_id;
         e.invitation.invited_usr_id = m.data.invited_usr_id;
@@ -215,26 +215,26 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     //console.log('ng after view init: ', this.el.nativeElement.querySelector("[id='sc-player']"));
 
     //this.iframeElement = this.document.getElementById('sc-player');
-    console.log('document.getElementById("sc-player"):', this.document);
+    // console.log('document.getElementById("sc-player"):', this.document);
     this.iframeElement = this.scPlayer.nativeElement;
 
-    console.log('this.scPlayer: ', this.scPlayer);
+    // console.log('this.scPlayer: ', this.scPlayer);
     this.scWidget = window['SC'].Widget('sc-player');
 
-    console.log('window["SC"]: ', window['SC'].Widget.Events.FINISH);
+    // console.log('window["SC"]: ', window['SC'].Widget.Events.FINISH);
     let self = this;
 
     this.scWidget.bind(window['SC'].Widget.Events.FINISH, (e) => {
-      console.log('scPlayer FINISH EVENT');
+      // console.log('scPlayer FINISH EVENT');
       let found = self.plService.musics.find((item: any) => {
         return item.Music.music_id === self.plService.selectedMusic.music_id;
       });
 
       if (found) {
         let index = self.plService.musics.indexOf(found);
-        console.log('self.plService.musics: ', self.plService.musics);
-        console.log('self.plService.selectedMusic: ', self.plService.selectedMusic);
-        console.log('index: ', index);
+        // console.log('self.plService.musics: ', self.plService.musics);
+        // console.log('self.plService.selectedMusic: ', self.plService.selectedMusic);
+        // console.log('index: ', index);
         if (index >= 0) {
           if (typeof self.plService.musics[index + 1] !== 'undefined') {
             self.playMusicHandler(self.plService.musics[index + 1].Music);
@@ -284,7 +284,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         else
           this.scWidget.pause();
       } else if (music.music_source === 'youtube') {
-        console.log('youteub');
+        // console.log('youteub');
         this.ytsrc = music.music_url;
       }
     }

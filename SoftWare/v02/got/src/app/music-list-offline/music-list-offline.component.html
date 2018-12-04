@@ -7,13 +7,13 @@
           <!-- <mat-icon mat-list-icon> {{ plService.isPlaying && isSelected() ? 'pause' : 'play_arrow'}}</mat-icon> -->
           <!-- {{music.music_name}} -->
           <!-- <p mat-line> {{music.music_group}} </p> -->
-          <a class="dl-icon" *ngIf="music.isOfflineAvailable===false || music.isOfflineAvailable==='false'" (click)="dlMusic(music)"><i class="material-icons">cloud_download</i></a>
+          <a class="dl-icon" *ngIf="(music.isOfflineAvailable===false || music.isOfflineAvailable==='false') && music.music_url != undefined" (click)="dlMusic(music)"><i class="material-icons">cloud_download</i></a>
           <!-- <span *ngIf="music.offline=='true'"><i class="material-icons">cloud_done</i></span> -->
 
           <h5 mat-line [class.offline-unavailable]="music.isOfflineAvailable===false || music.isOfflineAvailable==='false'">{{music.music_name}}</h5>
-          <h5 *ngIf="music.isDownloading" mat-line [class.offline-unavailable]="music.isOfflineAvailable===false || music.isOfflineAvailable==='false'">dl-{{music.dlProgress}}%</h5>
-          <h5 *ngIf="!music.isDownloading && music.isOfflineAvailable" mat-line [class.offline-unavailable]="music.isOfflineAvailable===false || music.isOfflineAvailable==='false'">offline-available</h5>
-          <h5 *ngIf="!music.isDownloading && !music.isOfflineAvailable" mat-line [class.offline-unavailable]="music.isOfflineAvailable===false || music.isOfflineAvailable==='false'">offline-unavailable</h5>
+          <h5 *ngIf="music.isDownloading === true" mat-line [class.offline-unavailable]="music.isOfflineAvailable===false || music.isOfflineAvailable==='false'">dl-{{music.dlProgress}}%</h5>
+          <h5 *ngIf="(music.isDownloading == false || music.isDownloading == 'false') && (music.isOfflineAvailable == true || music.isOfflineAvailable == 'true')" mat-line [class.offline-unavailable]="music.isOfflineAvailable===false || music.isOfflineAvailable==='false'">offline-available</h5>
+          <h5 *ngIf="(music.isDownloading == false || music.isDownloading == 'false') && (music.isOfflineAvailable == false || music.isOfflineAvailable == 'false')" mat-line [class.offline-unavailable]="music.isOfflineAvailable===false || music.isOfflineAvailable==='false'">offline-unavailable</h5>
           <!-- <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div> -->
           <mat-divider></mat-divider>
         </mat-list-item>

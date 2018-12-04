@@ -36,10 +36,10 @@ var OfflinePlaylistHeader = /** @class */ (function () {
         if (insert === void 0) { insert = true; }
         if (isInFile === void 0) { isInFile = false; }
         if (this.getMusicByName(name) && !insert) {
-            console.log('from addmus : ret err');
+            // console.log('from addmus : ret err')
             return false;
         }
-        console.log('????');
+        // console.log('????')
         var music = new music_entry_1.MusicEntry(pos, name, filename, isInFile);
         if (insert)
             this._musics.splice(pos, 0, music);

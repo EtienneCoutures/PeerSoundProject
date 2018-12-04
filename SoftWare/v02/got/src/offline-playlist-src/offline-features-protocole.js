@@ -1,10 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var electron_1 = require("electron");
-var offline_features_handler_1 = require("./offline-features-handler");
 var offlineFeaturesHandler = null;
 electron_1.app.on('browser-window-created', function (event, window) {
-    offlineFeaturesHandler = new offline_features_handler_1.OfflineFeaturesHandler(window);
+    // offlineFeaturesHandler = new OfflineFeaturesHandler(window)
 });
 electron_1.ipcMain.on('offline-load-playlist', function (event, data) {
     var pl = data.pl;

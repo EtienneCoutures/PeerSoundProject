@@ -30,7 +30,7 @@ export class MusicListPanelComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: any) {
-    // console.log('cul changes', changes)
+    // console.log('cul music list panel changes', changes)
 
     // if new playlist opened -> load & update its associated psp file
 
@@ -43,8 +43,8 @@ export class MusicListPanelComponent implements OnInit, OnChanges {
     }
 
     if (currPlaylist && (prevPlaylist == null || prevPlaylist.playlist_name !== currPlaylist.playlist_name)) {
-      this.offlineService.loadPspFile(currPlaylist)
-
+      // this.offlineService.loadPspFile(currPlaylist)
+      this.offlineService.loadPlaylistMetadata(currPlaylist)
 
       // if offline mode activated on playlist change, load its offline musics
       // if (this.isOffline) {

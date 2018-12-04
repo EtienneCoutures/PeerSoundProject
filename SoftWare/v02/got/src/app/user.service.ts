@@ -40,8 +40,8 @@ export class UserService {
     this.params = new HttpParams().set('where'
                   , `{"playlist_creator":${this.loginService.account.usr_id.toString()}}`);
 
-    console.log('HEADERS: ', this.headers);
-    console.log('params: ', this.params);
+    // console.log('HEADERS: ', this.headers);
+    // console.log('params: ', this.params);
     return this.httpClient.get<Playlist[]>(`${this.baseUrl}/api/playlist/`
                                 , {params: this.params, headers: this.headers});
   }
@@ -52,7 +52,7 @@ export class UserService {
   }
 
   getInvitations(userId?: number) {
-    console.log('this.loginService.account: ', this.loginService.account.usr_id);
+    // console.log('this.loginService.account: ', this.loginService.account.usr_id);
     this.params = new HttpParams().set('where'
                   , `{"invited_usr_id":${this.loginService.account.usr_id.toString()}}`);
 
