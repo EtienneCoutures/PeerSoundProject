@@ -62,12 +62,9 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     private router: Router,
     private eService: EventService,
     public offlineService: OfflineFeaturesService,
-    @Inject(DOCUMENT) document
   ) {
 
     this.subs = new Array();
-    console.log('document: ', document);
-    this.document = document;
     console.log('this.loginService.account: ', this.loginService.account);
     if (this.loginService.account.playlist) {
       let tmp = new Array();
@@ -98,15 +95,24 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     this.handleMessages();
     this.initialize(this).then((result) => {
-      console.log('this.plService.playlists: ', this.plService.playlists);
-      this.plService.musics = this.plService.playlists[0].MusicLink;
-      this.plService.selectedMusic = this.plService.playlists[0].MusicLink[0].Music;
-      console.log('this.plService.selectedMusic 1: ', this.plService.selectedMusic);
-      this.plService.selectedPl = this.plService.playlists[0];
-      this.router.navigate(['/', 'home', { outlets: { homeOutlet: ['infoPlaylist'] } }]);
-      console.log('loaded: ', this.plService.selectedMusic.music_url);
 
-      this.scWidget.load(this.plService.selectedMusic.music_url);
+      this.plService.selectedPl = this.plService.playlists[0];
+      this.plService.musics = this.plService.playlists[0].MusicLink;
+      this.router.navigate(['/', 'home', { outlets: { homeOutlet: ['infoPlaylist'] } }]);
+
+      if (this.plService.playlists[0].MusicLink[0]) {
+        this.plService.selectedMusic = this.plService.playlists[0].MusicLink[0].Music;
+        console.log('music_source: ', this.plService.selectedMusic.music_source);
+        if (this.plService.selectedMusic.music_source === 'soundcloud') {
+          this.scWidget.load(this.plService.selectedMusic.music_url);
+          this.musicSrcPlat = 'sc';
+        }
+        else if (this.plService.selectedMusic.music_source === 'youtube')
+        {
+          this.ytsrc = this.plService.selectedMusic.music_url;
+          this.musicSrcPlat = "yt";
+        }
+      }
       this.loaded = true;
     }).catch(error => {
       console.log('error loading home: ', error);
@@ -273,9 +279,11 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       if (music.music_source === 'soundcloud') {
         console.log('music.music_url: ', music.music_url);
         this.scWidget.load(music.music_url, { auto_play: true });
+        // pause youtube
       }
       else if (music.music_source === 'youtube') {
         this.ytsrc = music.music_url;
+        this.scWidget.pause();
       }
       this.plService.plInPlay = this.plService.selectedPl;
       this.plService.selectedMusic = music;

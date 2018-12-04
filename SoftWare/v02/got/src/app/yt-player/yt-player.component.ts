@@ -90,7 +90,8 @@ export class YtPlayerComponent implements OnInit, OnChanges {
     console.log('cul', event.data)
     switch (event.data) {
       case window['YT'].PlayerState.PLAYING:
-        this.plService.isPlaying = false
+      console.log('playiing');
+        this.plService.isPlaying = true;
         // console.log('play')
         // this.isPlayingEvent.emit(true)
         if (this.cleanTime() == 0) {
@@ -100,9 +101,10 @@ export class YtPlayerComponent implements OnInit, OnChanges {
         };
         break;
       case window['YT'].PlayerState.PAUSED:
+        this.plService.isPlaying = false;
         // this.isPlayingEvent.emit(false)
         // this.plService.isPlaying = true
-        // console.log('pause')
+        console.log('pause')
         if (this.player.getDuration() - this.player.getCurrentTime() != 0) {
           // console.log('paused' + ' @ ' + this.cleanTime());
         };
