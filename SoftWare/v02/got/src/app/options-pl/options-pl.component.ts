@@ -116,8 +116,8 @@ export class DialogInvitePeople {
             this.invitation.invitation_id = res.Invitation.invitation_id;
             this.error = "";
             this.dialogRef.close(this.invitation);
-          } else if (res.code === 1){
-            this.error = "Invitation déjà envoyée."
+          } else if (res.code === 2){
+            this.error = "Invitation déjà envoyée.";
           }
         }, error => console.log('error trying invitation: ', error));
 
