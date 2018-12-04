@@ -420,6 +420,23 @@ h1 {
     transition: transform .1s cubic-bezier(.31,.8,.18,1.01);
 }
 
+#okPop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 2.5rem 2rem;
+    height: 505px;
+    width: 330px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: left;
+    background: rgba(23, 139, 58, 0.9);
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+    transition: transform .5s cubic-bezier(.31,.8,.18,1.01);
+}
+
 #errorPop {
     position: absolute;
     top: 0;
@@ -437,7 +454,7 @@ h1 {
     transition: transform .5s cubic-bezier(.31,.8,.18,1.01);
 }
 
-.sendMusic #errorPop {
+.sendMusic #errorPop, .sendMusic #okPop{
     position: absolute;
     top: 0;
     left: 0;
@@ -453,23 +470,23 @@ h1 {
     transition: transform .5s cubic-bezier(.31,.8,.18,1.01);
 }
 
-.sendMusic #errorPop p {
+.sendMusic #errorPop p, .sendMusic #okPop p{
     width: 100%;
 }
 
-#errorPop.show, #errorPop.show.hide {
+#errorPop.show, #errorPop.show.hide, #okPop.show, #okPop.show.hide{
     -webkit-transform: translateY(0);
     transform: translateY(0);
     transition: transform .1s cubic-bezier(.31,.8,.18,1.01);
 }
 
-#errorPop.hide, #errorPop.hide.show {
+#errorPop.hide, #errorPop.hide.show, #okPop.hide, #okPop.show.hide{
     -webkit-transform: translateY(100%);
     transform: translateY(100%);
     transition: transform .1s cubic-bezier(.31,.8,.18,1.01);
 }
 
-#errorPop h2 {
+#errorPop h2,  #okPop h2 {
     color: #fff;
     font-family: arial, helvetica, sans-serif;
     font-size: 2rem;
@@ -480,12 +497,12 @@ h1 {
     line-height: 1.5;
     margin-bottom: 1rem;
 }
-#errorPop h2 span {
+#errorPop h2 span, #okPop h2 span{
     font-family: arial, helvetica, sans-serif;
     font-size: 1.6rem;
 }
 
-#errorPop p {
+#errorPop p, #okPop p{
     font-family: arial, helvetica, sans-serif;
     font-size: 1.5rem;
     font-weight: 400;
@@ -493,13 +510,13 @@ h1 {
     color: rgba(255,255,255,.8);
     text-align: center;
 }
-#errorPop .close {
+#errorPop .close, #okPop .close{
     position: absolute;
     top: 2.5rem;
     right: 2rem;
 }
 
-#errorPop .close a {
+#errorPop .close a, #okPop .close a{
     text-decoration: none;
     display: block;
     opacity: 1;
@@ -510,15 +527,24 @@ h1 {
     outline: none;
     opacity: .7;
 }
-#errorPop .logo {
+#errorPop .logo{
     text-align: center;
     display: block;
     padding-left: 37%;
     margin-bottom: 3rem;
     margin-top: 6rem;
+    
 }
 
-#errorPop .btnClose {
+#okPop .logo{
+    text-align: center;
+    display: block;
+    margin-bottom: 3rem;
+    margin-top: 6rem;
+}
+
+
+#errorPop .btnClose #okPop{
     padding-top: 30%;
 }
 

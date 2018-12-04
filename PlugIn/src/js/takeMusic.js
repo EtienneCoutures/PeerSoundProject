@@ -8,6 +8,7 @@ var artist = document.getElementById("boxArtist"),
     kind = document.getElementById("boxKind"),
     create = document.getElementById("create"),
     popError = document.getElementById("errorPop"),
+    popOk = document.getElementById("okPop"),
     createPlaylist = document.getElementById("createPlaylist"),
     closeError = document.getElementById('close_a'),
     closeErrorP = document.getElementById('close_p'),
@@ -260,8 +261,10 @@ function sendMusic() {
                   },
                   function (data){
                       if (data){
+
                   }
                 });
+                popOk.className = 'show';
                 setTimeout(function(){
                      closer();
                 }, 1000);
@@ -304,3 +307,4 @@ function focusInput() {
     textarea2.className = 'onfocus';
     textarea3.className = 'onfocus';
 }
+

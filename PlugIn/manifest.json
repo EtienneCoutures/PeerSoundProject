@@ -1,6 +1,6 @@
 {
-    "name": "PeerSoundProject",
-    "version": "0.1.5",
+    "name": "Peer Sound Project",
+    "version": "0.1.6",
     "description": "réseau de partage et de streaming de musique",
     "manifest_version": 2,
     "icons": {
