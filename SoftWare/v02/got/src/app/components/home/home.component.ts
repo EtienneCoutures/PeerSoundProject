@@ -224,21 +224,25 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log('this.plService.selectedMusic: ', this.plService.selectedMusic);
 
     this.scWidget.bind(window['SC'].Widget.Events.FINISH, (e) => {
-      let found = self.plService.plInPlay.MusicLink.find((item: any) => {
-        return item.Music.music_id === self.plService.selectedMusic.music_id;
-      });
-
-      if (found) {
-        let index = self.plService.plInPlay.MusicLink.indexOf(found);
-        if (index >= 0) {
-          if (typeof self.plService.musics[index + 1] !== 'undefined') {
-            self.playMusicHandler(self.plService.plInPlay.MusicLink[index + 1].Music);
-          } else {
-            self.playMusicHandler(self.plService.plInPlay.MusicLink.Music);
-          }
-        } else console.log('error: the selected music is not part of the current playlist');
-      } else console.log('error: the selected music is not part of the current playlist');
+      self.playNextMusic();
     })
+  }
+
+  playNextMusic() {
+    let found = this.plService.plInPlay.MusicLink.find((item: any) => {
+      return item.Music.music_id === this.plService.selectedMusic.music_id;
+    });
+
+    if (found) {
+      let index = this.plService.plInPlay.MusicLink.indexOf(found);
+      if (index >= 0) {
+        if (typeof this.plService.musics[index + 1] !== 'undefined') {
+          this.playMusicHandler(this.plService.plInPlay.MusicLink[index + 1].Music);
+        } else {
+          this.playMusicHandler(this.plService.plInPlay.MusicLink[0].Music);
+        }
+      } else console.log('error: the selected music is not part of the current playlist');
+    } else console.log('error: the selected music is not part of the current playlist');
   }
 
   ngOnDestroy() {
@@ -259,13 +263,13 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
     // console.log('music url :', music.music_url)
 
-    if (music.music_source == 'soundcloud')
+    if (music.music_source === 'soundcloud')
       this.musicSrcPlat = 'sc'
-    if (music.music_source == 'youtube')
+    if (music.music_source === 'youtube')
       this.musicSrcPlat = 'yt'
 
     if (this.plService.selectedMusic !== music) {
-      console.log('cul ici')
+      console.log('cul ici: ')
       if (music.music_source === 'soundcloud') {
         console.log('music.music_url: ', music.music_url);
         this.scWidget.load(music.music_url, { auto_play: true });

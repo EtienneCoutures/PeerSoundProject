@@ -25,7 +25,8 @@ export class YtPlayerComponent implements OnInit, OnChanges {
 
   @Input() url: string = null;
   @Input() isPlaying: boolean = false;
-  @Output() isPlayingEvent: EventEmitter<boolean> = new EventEmitter()
+  @Output() isPlayingEvent: EventEmitter<boolean> = new EventEmitter();
+  @Output() onMusicEnd: EventEmitter<void> = new EventEmitter();
 
   constructor(private plService : PlaylistService) { }
   init() {
@@ -108,6 +109,7 @@ export class YtPlayerComponent implements OnInit, OnChanges {
         break;
       case window['YT'].PlayerState.ENDED:
         console.log('ended ');
+        this.onMusicEnd.emit();
         break;
     };
   };
