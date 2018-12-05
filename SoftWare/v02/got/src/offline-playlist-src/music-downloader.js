@@ -37,52 +37,44 @@ var MusicDownloader = /** @class */ (function (_super) {
             defaultPath: name
         });
     };
-    MusicDownloader.prototype.dlLink2Mp3 = function (dest, filename, url, platform) {
+    MusicDownloader.prototype.dlLink2Mp3 = function (dest, filename, url, platform, music) {
         if (platform == 'youtube')
-            return this.dlFromYoutube2Mp3(dest, filename, url);
+            return this.dlFromYoutube2Mp3(dest, filename, url, music);
         else if (platform == 'soundcloud')
-            return this.dlFromSoundCloud2Mp3(dest, filename, url);
+            return this.dlFromSoundCloud2Mp3(dest, filename, url, music);
         else {
-            return this.dlFromYoutube2Mp3(dest, filename, url);
-            // return new Promise((resolve, reject) => {
-            //   reject('t\'a cru ct noel')
-            // })
+            // return this.dlFromYoutube2Mp3(dest, filename, url)
+            return new Promise(function (resolve, reject) {
+                reject('t\'a cru ct noel');
+            });
         }
     };
-    MusicDownloader.prototype.dlFromYoutube2Mp3 = function (dest, filename, url) {
+    MusicDownloader.prototype.dlFromYoutube2Mp3 = function (dest, filename, url, music) {
         var self = this;
+        var url = 'http://www.youtube.com/watch?v=' + yturl.parse(url).id;
         return new Promise(function (resolve, reject) {
-            var r = ytdl('http://www.youtube.com/watch?v=' + yturl.parse(url).id, { filter: 'audioonly', quality: 'highestaudio' });
+            var r = ytdl(url, { filter: 'audioonly', quality: 'highestaudio' });
             var w = fs.createWriteStream(dest + filename + '.mp3');
             r.on('readable', function () {
-                var data;
-                self.emit('dl-status-update', { update: 'dl-start', url: url });
-                // while (data = this.read()) {
-                //   // console.log('data')
-                //   var progress = 0
-                //   this.emit('dl-status-update', {update: 'dl-progress', progress: progress, url:url})
-                // }
+                self.emit('dl-status-update', { update: 'dl-start', url: url, music: music });
             });
             r.on('progress', function (chunck, received_bytes, total_bytes) {
                 var progress = received_bytes * 100 / total_bytes;
-                console.log('ici', progress);
-                self.emit('dl-status-update', { update: 'dl-progress', progress: progress, url: url, src: 'yt' });
+                self.emit('dl-status-update', { update: 'dl-progress', progress: progress, url: url, music: music });
             });
             r.on('end', function () {
-                console.log('read end');
+                // console.log('read end')
             });
             w.on('finish', function () {
-                console.log('write end');
-                self.emit('dl-status-update', { update: 'dl-end', url: url });
+                // console.log('write end')
+                self.emit('dl-status-update', { update: 'dl-end', url: url, music: music });
                 resolve();
             });
             r.pipe(w);
         });
     };
-    MusicDownloader.prototype.dlFromSoundCloud2Mp3 = function (dest, filename, url) {
+    MusicDownloader.prototype.dlFromSoundCloud2Mp3 = function (dest, filename, url, music) {
         var self = this;
-        // console.log('from downloader: ', dest + filename + '.mp3', url)
-        // console.log('url', url)
         return new Promise(function (resolve, reject) {
             https.get('https://api.soundcloud.com/resolve?url=' + url + '&client_id=' + self._scKey, function (res) {
                 res.on('data', function (data) {
@@ -93,17 +85,12 @@ var MusicDownloader = /** @class */ (function (_super) {
                     https.get(redirect, function (res) {
                         res.on('data', function (data) {
                             data = JSON.parse(data);
-                            // console.log('data', data)
                             if (data.errors)
                                 reject(data.errors[0].error_message);
-                            // console.log("cul", data)
                             var item = { id: data.id, stream_url: data.stream_url, artwork_url: data.artwork_url,
                                 title: data.title, artist: (data.user ? data.user.username : 'unknown') };
-                            // console.log('->', item)
                             if (item.stream_url == undefined) {
                                 reject('url pointing to redirecting to artist instead of a specific music');
-                                // item.stream_url = 'https://api.soundcloud.com/tracks/' + item.id + '/stream'
-                                // console.log('->', item.stream_url)
                             }
                             https.get(item.stream_url + '?client_id=' + self._scKey, function (res) {
                                 console.log(res);
@@ -114,19 +101,19 @@ var MusicDownloader = /** @class */ (function (_super) {
                                     // err -> del file ?
                                     https.get(redirect, function (res) {
                                         var output = fs.createWriteStream(output_filename);
-                                        self.emit('dl-status-update', { update: 'dl-start', url: url });
+                                        self.emit('dl-status-update', { update: 'dl-start', url: url, music: music });
                                         res.on('data', function (chunk) {
                                             received_bytes += chunk.length;
                                             output.write(chunk);
                                             var progress = received_bytes * 100 / total_bytes;
-                                            self.emit('dl-status-update', { update: 'dl-progress', progress: progress, url: url, src: 'sc' });
+                                            self.emit('dl-status-update', { update: 'dl-progress', progress: progress, url: url, music: music });
                                         });
                                         res.on('end', function () {
                                             output.end();
                                             ID3.removeTags(output_filename);
                                             var meta_written = ID3.write({ artist: item.artist, title: item.title, album: '' });
                                             if (meta_written) {
-                                                self.emit('dl-status-update', { update: 'dl-end', url: url });
+                                                self.emit('dl-status-update', { update: 'dl-end', url: url, music: music });
                                                 resolve();
                                             }
                                         });

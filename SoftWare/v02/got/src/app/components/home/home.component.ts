@@ -266,12 +266,12 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
     // console.log('music url :', music.music_url)
 
-    if (music.music_source === 'soundcloud')
-      this.musicSrcPlat = 'sc'
-    if (music.music_source === 'youtube')
-      this.musicSrcPlat = 'yt'
+    if (music.music_source === 'soundcloud' && !music.isLocalFile)
+      this.musicSrcPlat = 'soundcloud'
+    else if (music.music_source === 'youtube' && !music.isLocalFile)
+      this.musicSrcPlat = 'youtube'
 
-    if (this.plService.selectedMusic !== music) {
+    if (this.plService.selectedMusic !== music && !music.isLocalFile) {
       console.log('cul ici: ')
       if (music.music_source === 'soundcloud') {
         console.log('music.music_url: ', music.music_url);
@@ -284,7 +284,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       }
       this.plService.plInPlay = this.plService.selectedPl;
       this.plService.selectedMusic = music;
-    } else if (this.plService.selectedMusic === music) {
+    } else if (this.plService.selectedMusic === music && !music.isLocalFile) {
       if (music.music_source === 'soundcloud') {
         if (this.plService.isPlaying)
           this.scWidget.play();

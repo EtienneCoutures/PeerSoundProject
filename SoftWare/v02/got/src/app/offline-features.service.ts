@@ -33,10 +33,10 @@ export class OfflineFeaturesService {
             // console.log(elem.music_url, data.url)
             return elem.music_name == data.music.music_name
         })
-        console.log('mus found', mus, data.url)
+        // console.log('mus found', mus, data.url)
         if (mus && Math.round(data.progress) != mus.dlProgress) {
           mus.dlProgress = Math.round(data.progress)
-          console.log('update dl progress')
+          // console.log('update dl progress')
         }
       }
 

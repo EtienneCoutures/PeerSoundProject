@@ -31,13 +31,15 @@ export class OfflineFeaturesHandler extends EventEmitter {
 
     pspFile.open(saveDirPath, plName, false).then(() => {
       // this.win.webContents.send('set-dl-status', 'dl-init...');
-      let filepath: string = saveDirPath + 'tmp.mp3'
+      var filename: string = music.music_name.replace(/ */g, '_')
       var isMusInFile: any = pspFile.getMusicMetadataByName(music.music_name).isInFile
+      let filepath: string = saveDirPath + music.music_name.replace(/ */g, '_') + '.mp3'
+      // console.log('ici', )
 
       if (isMusInFile == 'false' || isMusInFile == false) {
         // this._win.webContents.send('dl-status-update', {update: 'connecting to source provider...'})
 
-        this._downloader.dlLink2Mp3(saveDirPath, 'tmp', music.music_url, music.music_source, music).then(() => { // start dl
+        this._downloader.dlLink2Mp3(saveDirPath, filename, music.music_url, music.music_source, music).then(() => { // start dl
           // this._win.webContents.send('dl-status-update', {update:'packing'});
 
           pspFile.addMusicFile(filepath, music.music_id, music.music_name, false).then(() => { // add music to header
