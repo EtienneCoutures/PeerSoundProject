@@ -20,6 +20,7 @@ var ID3 = require("node-id3");
 var request = require("request");
 var EventEmitter = require("events");
 var ytdl = require('ytdl-core');
+var yturl = require("js-video-url-parser");
 var MusicDownloader = /** @class */ (function (_super) {
     __extends(MusicDownloader, _super);
     function MusicDownloader() {
@@ -36,26 +37,46 @@ var MusicDownloader = /** @class */ (function (_super) {
             defaultPath: name
         });
     };
-    MusicDownloader.prototype.dlLink2Mp3 = function (dest, filename, url) {
-        return new Promise(function (resolve, reject) {
-        });
+    MusicDownloader.prototype.dlLink2Mp3 = function (dest, filename, url, platform) {
+        if (platform == 'youtube')
+            return this.dlFromYoutube2Mp3(dest, filename, url);
+        else if (platform == 'soundcloud')
+            return this.dlFromSoundCloud2Mp3(dest, filename, url);
+        else {
+            return this.dlFromYoutube2Mp3(dest, filename, url);
+            // return new Promise((resolve, reject) => {
+            //   reject('t\'a cru ct noel')
+            // })
+        }
     };
     MusicDownloader.prototype.dlFromYoutube2Mp3 = function (dest, filename, url) {
+        var self = this;
         return new Promise(function (resolve, reject) {
-            var rstream = ytdl('http://www.youtube.com/watch?v=A02s8omM_hI', { filter: 'audioonly', quality: 'highestaudio' });
-            rstream.on('readable', function () {
+            var r = ytdl('http://www.youtube.com/watch?v=' + yturl.parse(url).id, { filter: 'audioonly', quality: 'highestaudio' });
+            var w = fs.createWriteStream(dest + filename + '.mp3');
+            r.on('readable', function () {
                 var data;
-                while (data = this.read()) {
-                    console.log('cul', data);
-                }
+                self.emit('dl-status-update', { update: 'dl-start', url: url });
+                // while (data = this.read()) {
+                //   // console.log('data')
+                //   var progress = 0
+                //   this.emit('dl-status-update', {update: 'dl-progress', progress: progress, url:url})
+                // }
             });
-            rstream.on('error', function () {
-                reject();
+            r.on('progress', function (chunck, received_bytes, total_bytes) {
+                var progress = received_bytes * 100 / total_bytes;
+                console.log('ici', progress);
+                self.emit('dl-status-update', { update: 'dl-progress', progress: progress, url: url, src: 'yt' });
             });
-            rstream.on('end', function () {
-                var wstream = fs.createWriteStream('');
-                rstream.pipe(wstream);
+            r.on('end', function () {
+                console.log('read end');
             });
+            w.on('finish', function () {
+                console.log('write end');
+                self.emit('dl-status-update', { update: 'dl-end', url: url });
+                resolve();
+            });
+            r.pipe(w);
         });
     };
     MusicDownloader.prototype.dlFromSoundCloud2Mp3 = function (dest, filename, url) {
@@ -98,11 +119,7 @@ var MusicDownloader = /** @class */ (function (_super) {
                                             received_bytes += chunk.length;
                                             output.write(chunk);
                                             var progress = received_bytes * 100 / total_bytes;
-                                            // if (progress > 5 && !this.bool) {
-                                            //   this.bool = true
-                                            //   reject('blabla')
-                                            // }
-                                            self.emit('dl-status-update', { update: 'dl-progress', progress: progress, url: url });
+                                            self.emit('dl-status-update', { update: 'dl-progress', progress: progress, url: url, src: 'sc' });
                                         });
                                         res.on('end', function () {
                                             output.end();

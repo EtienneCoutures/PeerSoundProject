@@ -21,7 +21,7 @@ var OfflinePlaylistHeader = /** @class */ (function () {
                 if (res.root.musics[0]) {
                     res.root.musics[0].music.forEach(function (music, index, array) {
                         music = music.$;
-                        self.addMusic(music.filename, music.pos, music.name, false, music.isInFile);
+                        self.addMusic(music.filename, music.pos, music.name, false, music.isInFile, music._source);
                     });
                 }
                 resolve();
@@ -32,9 +32,10 @@ var OfflinePlaylistHeader = /** @class */ (function () {
         this._musics.length = 0;
         this._playlistName = '';
     };
-    OfflinePlaylistHeader.prototype.addMusic = function (filename, pos, name, insert, isInFile) {
+    OfflinePlaylistHeader.prototype.addMusic = function (filename, pos, name, insert, isInFile, source) {
         if (insert === void 0) { insert = true; }
         if (isInFile === void 0) { isInFile = false; }
+        if (source === void 0) { source = 'local'; }
         if (this.getMusicByName(name) && !insert) {
             // console.log('from addmus : ret err')
             return false;

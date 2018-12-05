@@ -30,8 +30,7 @@ var OfflineFeaturesHandler = /** @class */ (function (_super) {
         _this._downloader = new music_downloader_1.MusicDownloader();
         _this._pspFilesOpened = {};
         _this._downloader.on('dl-status-update', function (data) {
-            // console.log('->', data)
-            // this._win.webContents.send('dl-status-update', data)
+            _this.emit('dl-status-update', data);
         });
         return _this;
     }
@@ -39,15 +38,13 @@ var OfflineFeaturesHandler = /** @class */ (function (_super) {
         var _this = this;
         var saveDirPath = './';
         var pspFile = this.getPspFile(plName);
-        console.log('cul', music);
         pspFile.open(saveDirPath, plName, false).then(function () {
             // this.win.webContents.send('set-dl-status', 'dl-init...');
             var filepath = saveDirPath + 'tmp.mp3';
             var isMusInFile = pspFile.getMusicMetadataByName(music.music_name).isInFile;
             if (isMusInFile == 'false' || isMusInFile == false) {
                 // this._win.webContents.send('dl-status-update', {update: 'connecting to source provider...'})
-                console.log('download');
-                _this._downloader.dlFromSoundCloud2Mp3(saveDirPath, 'tmp', music.music_url).then(function () {
+                _this._downloader.dlLink2Mp3(saveDirPath, 'tmp', music.music_url, music.music_source).then(function () {
                     // this._win.webContents.send('dl-status-update', {update:'packing'});
                     pspFile.addMusicFile(filepath, music.music_id, music.music_name, false).then(function () {
                         pspFile.save().then(function () {
@@ -122,44 +119,61 @@ var OfflineFeaturesHandler = /** @class */ (function (_super) {
             }, function (err) { reject(err); });
         });
     };
-    OfflineFeaturesHandler.prototype.sendMusics = function (plName) {
-        // new Promise((resolve, reject) => {
-        var pspFile = this.getPspFile(plName);
-        // console.log(pspFile.name)
-        var timeElapsed = 0;
-        var interval;
-        var name = plName;
-        var self = this;
-        // console.log('isOpened | isOpening ', pspFile.isOpened, pspFile.isOpening)
-        if (pspFile.isOpening || pspFile.isOpened) {
-            // if (pspFile.isOpening)
-            // console.log('waiting file to be opened')
-            interval = setInterval(function () {
-                var musics = pspFile.getMusicsMetadata();
-                // self.once('stop', (data) => {
-                //   if (data.plName == name)
-                //     clearInterval(interval)
-                // })
-                timeElapsed += 50;
-                // console.log(timeElapsed, pspFile.isOpening, pspFile.name, name, musics.length, pspFile.getMusicsMetadata.length)
-                if (pspFile.isOpened) {
-                    // self._win.webContents.send('offline-get-musics-request-ok', {musics: musics, plName: name})
-                    clearInterval(interval);
-                    // console.log('wtf')
-                }
-            }, 50);
-        }
-        else {
-            // console.log('echec critique', plName)
-            // self._win.webContents.send('offline-get-musics-request-ko')
-            // reject()
-        }
-        // }).then(() => {
-        // })
+    OfflineFeaturesHandler.prototype.extractMusicFile = function (plName, music) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var pspFile = _this.getPspFile(plName);
+            pspFile.extractMusicFile('./', music.music_id, 'tmp').then(function () {
+                resolve();
+            }, function (e) {
+                reject(e);
+            });
+        });
     };
-    OfflineFeaturesHandler.prototype.cancelSendMusicsRequest = function (plName) {
-        // this.emit('stop', {plName: plName})
-    };
+    // sendMusics(plName: string): void {
+    //
+    //   // new Promise((resolve, reject) => {
+    //     let pspFile = this.getPspFile(plName)
+    //     // console.log(pspFile.name)
+    //     let timeElapsed = 0
+    //     let interval: any
+    //     let name = plName
+    //     var self = this
+    //
+    //     // console.log('isOpened | isOpening ', pspFile.isOpened, pspFile.isOpening)
+    //
+    //     if (pspFile.isOpening || pspFile.isOpened) {
+    //       // if (pspFile.isOpening)
+    //       // console.log('waiting file to be opened')
+    //       interval = setInterval(() => {
+    //
+    //         let musics = pspFile.getMusicsMetadata()
+    //         // self.once('stop', (data) => {
+    //         //   if (data.plName == name)
+    //         //     clearInterval(interval)
+    //         // })
+    //         timeElapsed += 50
+    //         // console.log(timeElapsed, pspFile.isOpening, pspFile.name, name, musics.length, pspFile.getMusicsMetadata.length)
+    //         if (pspFile.isOpened) {
+    //           // self._win.webContents.send('offline-get-musics-request-ok', {musics: musics, plName: name})
+    //           clearInterval(interval)
+    //           // console.log('wtf')
+    //         }
+    //       }, 50)
+    //     }
+    //     else {
+    //       // console.log('echec critique', plName)
+    //       // self._win.webContents.send('offline-get-musics-request-ko')
+    //       // reject()
+    //     }
+    //   // }).then(() => {
+    //
+    //   // })
+    // }
+    //
+    // cancelSendMusicsRequest(plName: string): void {
+    //   // this.emit('stop', {plName: plName})
+    // }
     OfflineFeaturesHandler.prototype.reset = function () {
         for (var plName in this._pspFilesOpened) {
             if (this._pspFilesOpened[plName]._interval)

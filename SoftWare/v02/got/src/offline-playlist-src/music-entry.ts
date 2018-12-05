@@ -7,12 +7,14 @@ export class MusicEntry {
   _filename: string
   _isInFile: any
   _isDeleted: boolean
+  _source: string
 
   constructor(pos: number, name: string, filename: string, isInFile: boolean) {
     this._pos = pos
     this._name = name
     this._filename = filename
     this._isInFile = isInFile
+    this._source = 'local'
     // console.log('filename:')
     // console.log('new music', pos, name, filename, isInFile)
   }
@@ -60,7 +62,7 @@ export class MusicEntry {
   toXml(pos: number = undefined): any {
     pos = pos || this._pos
     return XmlBuilder.create('music').att('name', this._name).att('pos', pos).att('filename', this._filename).
-      att('isInFile', this._isInFile)
+      att('isInFile', this._isInFile).att('source', this._source)
   }
 
   toString(pos: number): string {

@@ -11,9 +11,6 @@ var Url2 = require("js-video-url-parser")
   selector: 'app-yt-player',
   templateUrl: './yt-player.component.html',
   styleUrls: ['./yt-player.component.scss'],
-  // template:
-  //   ``,
-  // styles: [`.max-width-1024 { max-width: 1024px; margin: 0 auto; }`],
 })
 
 export class YtPlayerComponent implements OnInit, OnChanges {
@@ -67,7 +64,6 @@ export class YtPlayerComponent implements OnInit, OnChanges {
   onYouTubeIframeAPIReady(e) {
     this.YT = window['YT'];
     this.reframed = false;
-    // console.log('cul on yt api ready')
 
     this.player = new window['YT'].Player('player', {
       videoId: this.video,
@@ -89,21 +85,12 @@ export class YtPlayerComponent implements OnInit, OnChanges {
   onPlayerStateChange(event) {
     switch (event.data) {
       case window['YT'].PlayerState.PLAYING:
-      console.log('playiing');
         this.plService.isPlaying = true;
-        if (this.cleanTime() == 0) {
-          // console.log('started ' + this.cleanTime());
-        } else {
-          // console.log('playing ' + this.cleanTime()) putain tu casse les couilles clean ton code wesh
-        };
         break;
       case window['YT'].PlayerState.PAUSED:
         this.plService.isPlaying = false;
         // this.isPlayingEvent.emit(false)
         // this.plService.isPlaying = true
-        if (this.player.getDuration() - this.player.getCurrentTime() != 0) {
-          // console.log('paused' + ' @ ' + this.cleanTime());
-        };
         break;
       case window['YT'].PlayerState.ENDED:
         this.onMusicEnd.emit();
@@ -117,10 +104,8 @@ export class YtPlayerComponent implements OnInit, OnChanges {
   };
 
   onPlayerError(event) {
-    // console.log('cul error', event.data)
     switch (event.data) {
       case 2:
-        // console.log('' + this.video)
         break;
       case 100:
         break;

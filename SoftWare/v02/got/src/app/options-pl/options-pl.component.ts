@@ -10,6 +10,8 @@ import {
 import { PlaylistService, Invitation } from '../playlist/playlist.service';
 import { EventService } from '../event.service';
 import { SnackBarComponent } from '../snack-bar/snack-bar.component';
+import { OfflineFeaturesService } from '../offline-features.service'
+
 
 @Component({
   selector: 'app-options-pl',
@@ -22,13 +24,13 @@ export class OptionsPlComponent implements OnInit {
   @Output() conModeSwitched: EventEmitter<boolean> = new EventEmitter();
 
   inviteEmail: string;
-  isOffline: boolean = false;
 
   constructor(
     public dialog: MatDialog,
     public plService: PlaylistService,
     private eService: EventService,
-    public bar: MatSnackBar
+    public bar: MatSnackBar,
+    public offlineService: OfflineFeaturesService
   ) { }
 
   openInviteDialog(): void {
@@ -54,8 +56,7 @@ export class OptionsPlComponent implements OnInit {
   }
 
   switchConnectivityMode(): void {
-    this.isOffline = !this.isOffline;
-    this.conModeSwitched.emit(this.isOffline);
+    this.offlineService.switchOfflineMode()
   }
 }
 

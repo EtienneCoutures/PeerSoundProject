@@ -7,6 +7,7 @@ var MusicEntry = /** @class */ (function () {
         this._name = name;
         this._filename = filename;
         this._isInFile = isInFile;
+        this._source = 'local';
         // console.log('filename:')
         // console.log('new music', pos, name, filename, isInFile)
     }
@@ -64,7 +65,7 @@ var MusicEntry = /** @class */ (function () {
         if (pos === void 0) { pos = undefined; }
         pos = pos || this._pos;
         return XmlBuilder.create('music').att('name', this._name).att('pos', pos).att('filename', this._filename).
-            att('isInFile', this._isInFile);
+            att('isInFile', this._isInFile).att('source', this._source);
     };
     MusicEntry.prototype.toString = function (pos) {
         return this.toXml().toString({ pretty: true });

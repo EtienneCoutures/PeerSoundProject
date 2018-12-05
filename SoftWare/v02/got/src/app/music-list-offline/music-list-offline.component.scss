@@ -7,6 +7,18 @@
   color: grey;
 }
 
+.offline-available {
+  cursor: pointer;
+}
+
+.offline-available :hover {
+    background-color: rgba(100,100,100,30);
+}
+
+.selected {
+    background-color: rgba(100,100,100,50);
+}
+
 .dl-icon {
   margin-left: 3%;
   margin-right: -3%;

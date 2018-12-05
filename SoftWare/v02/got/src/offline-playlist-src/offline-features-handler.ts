@@ -21,15 +21,14 @@ export class OfflineFeaturesHandler extends EventEmitter {
   constructor(private _win: any) {
     super()
     this._downloader.on('dl-status-update', (data) => {
-      // console.log('->', data)
-      // this._win.webContents.send('dl-status-update', data)
+      this.emit('dl-status-update', data)
     })
   }
 
-  dlMusicToPspFile(plName, music: Music): void {
+  dlMusicToPspFile(plName: string, music: Music): void {
     let saveDirPath: string = './'
     var pspFile: OfflinePlaylist = this.getPspFile(plName)
-    console.log('cul', music)
+
     pspFile.open(saveDirPath, plName, false).then(() => {
       // this.win.webContents.send('set-dl-status', 'dl-init...');
       let filepath: string = saveDirPath + 'tmp.mp3'
@@ -38,12 +37,13 @@ export class OfflineFeaturesHandler extends EventEmitter {
       if (isMusInFile == 'false' || isMusInFile == false) {
         // this._win.webContents.send('dl-status-update', {update: 'connecting to source provider...'})
 
-        console.log('download')
-        this._downloader.dlFromSoundCloud2Mp3(saveDirPath, 'tmp', music.music_url).then(() => { // start dl
+        this._downloader.dlLink2Mp3(saveDirPath, 'tmp', music.music_url, music.music_source, music).then(() => { // start dl
           // this._win.webContents.send('dl-status-update', {update:'packing'});
+
           pspFile.addMusicFile(filepath, music.music_id, music.music_name, false).then(() => { // add music to header
             pspFile.save().then(() => { // pack mp3 to zip file
               fs.unlink(filepath, (err: any) => { // del mp3 file
+
                 if (err)
                   throw new Error(err);
                 // this.win.webContents.send('set-dl-status', 'offline-available');
@@ -123,50 +123,62 @@ export class OfflineFeaturesHandler extends EventEmitter {
     });
   }
 
-  sendMusics(plName: string): void {
+  extractMusicFile(plName: string, music: Music): Promise<any> {
 
-    // new Promise((resolve, reject) => {
-      let pspFile = this.getPspFile(plName)
-      // console.log(pspFile.name)
-      let timeElapsed = 0
-      let interval: any
-      let name = plName
-      var self = this
-
-      // console.log('isOpened | isOpening ', pspFile.isOpened, pspFile.isOpening)
-
-      if (pspFile.isOpening || pspFile.isOpened) {
-        // if (pspFile.isOpening)
-        // console.log('waiting file to be opened')
-        interval = setInterval(() => {
-
-          let musics = pspFile.getMusicsMetadata()
-          // self.once('stop', (data) => {
-          //   if (data.plName == name)
-          //     clearInterval(interval)
-          // })
-          timeElapsed += 50
-          // console.log(timeElapsed, pspFile.isOpening, pspFile.name, name, musics.length, pspFile.getMusicsMetadata.length)
-          if (pspFile.isOpened) {
-            // self._win.webContents.send('offline-get-musics-request-ok', {musics: musics, plName: name})
-            clearInterval(interval)
-            // console.log('wtf')
-          }
-        }, 50)
-      }
-      else {
-        // console.log('echec critique', plName)
-        // self._win.webContents.send('offline-get-musics-request-ko')
-        // reject()
-      }
-    // }).then(() => {
-
-    // })
+    return new Promise((resolve, reject) => {
+      var pspFile: OfflinePlaylist = this.getPspFile(plName)
+      pspFile.extractMusicFile('./', music.music_id, 'tmp').then(() => {
+        resolve()
+      }, (e) => {
+        reject(e)
+      })
+    })
   }
 
-  cancelSendMusicsRequest(plName: string): void {
-    // this.emit('stop', {plName: plName})
-  }
+  // sendMusics(plName: string): void {
+  //
+  //   // new Promise((resolve, reject) => {
+  //     let pspFile = this.getPspFile(plName)
+  //     // console.log(pspFile.name)
+  //     let timeElapsed = 0
+  //     let interval: any
+  //     let name = plName
+  //     var self = this
+  //
+  //     // console.log('isOpened | isOpening ', pspFile.isOpened, pspFile.isOpening)
+  //
+  //     if (pspFile.isOpening || pspFile.isOpened) {
+  //       // if (pspFile.isOpening)
+  //       // console.log('waiting file to be opened')
+  //       interval = setInterval(() => {
+  //
+  //         let musics = pspFile.getMusicsMetadata()
+  //         // self.once('stop', (data) => {
+  //         //   if (data.plName == name)
+  //         //     clearInterval(interval)
+  //         // })
+  //         timeElapsed += 50
+  //         // console.log(timeElapsed, pspFile.isOpening, pspFile.name, name, musics.length, pspFile.getMusicsMetadata.length)
+  //         if (pspFile.isOpened) {
+  //           // self._win.webContents.send('offline-get-musics-request-ok', {musics: musics, plName: name})
+  //           clearInterval(interval)
+  //           // console.log('wtf')
+  //         }
+  //       }, 50)
+  //     }
+  //     else {
+  //       // console.log('echec critique', plName)
+  //       // self._win.webContents.send('offline-get-musics-request-ko')
+  //       // reject()
+  //     }
+  //   // }).then(() => {
+  //
+  //   // })
+  // }
+  //
+  // cancelSendMusicsRequest(plName: string): void {
+  //   // this.emit('stop', {plName: plName})
+  // }
 
   reset(): void {
     for (let plName in this._pspFilesOpened) {

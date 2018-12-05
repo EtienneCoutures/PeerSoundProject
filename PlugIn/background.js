@@ -96,7 +96,7 @@ browser.browserAction.onClicked.addListener(function(tab) {
           sendResponse(mydata);
         });*/
       }
-    //some async method 
+    //some async method
     function sendMusic(sendResponse) {
       chrome.storage.local.get(["mydata"], function (obj) {
         var mydata = $.trim(obj["mydata"]);
@@ -118,3 +118,14 @@ browser.browserAction.onClicked.addListener(function(tab) {
         localStorage.setItem('musicAdded', musicAdded);
         browser.tabs.executeScript(null, {file: "closer.js"});
     }
+
+    var reg=new RegExp("[/]", "g");
+
+    browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+         if (changeInfo.title){
+             var tabNom = tab.url.split(reg);
+             if (tab.url.indexOf("soundcloud.com") == -1 || (tabNom.length > 4 && tab.url.indexOf("soundcloud.com") > 0 )){
+                getMusic();
+             }
+         }
+     });
