@@ -4,7 +4,7 @@ import { Music } from './music/music';
 import { Playlist } from './playlist/playlist';
 import { OfflineFeaturesHandler } from '../offline-playlist-src/offline-features-handler'
 import { MusicEntry } from '../offline-playlist-src/music-entry'
-const yturl = require("js-video-url-parser")
+// const yturl = require("js-video-url-parser")
 
 @Injectable({
   providedIn: 'root'

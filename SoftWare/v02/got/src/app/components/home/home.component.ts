@@ -18,9 +18,9 @@ import { Router } from '@angular/router';
 import { EventService } from '../../event.service';
 import { Invitation } from '../../events/events.component';
 import { OfflineFeaturesService } from '../../offline-features.service'
-import { Yts } from 'youtube-audio-stream'
-import { DOCUMENT } from '@angular/common';
-import { Inject } from '@angular/core';
+// import { Yts } from 'youtube-audio-stream'
+// import { DOCUMENT } from '@angular/common';
+// import { Inject } from '@angular/core';
 // import { UrlParser } from 'url-parse';
 // import "js-video-url-parser/lib/provider/youtube";
 // import "js-video-url-parser/lib/provider/soundcloud";
