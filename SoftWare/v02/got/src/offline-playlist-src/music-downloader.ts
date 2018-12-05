@@ -51,27 +51,20 @@ export class MusicDownloader extends EventEmitter {
       const w = fs.createWriteStream(dest + filename + '.mp3');
 
       r.on('readable', function() {
-        let data;
         self.emit('dl-status-update', {update: 'dl-start', url:url, music:music})
-        // while (data = this.read()) {
-        //   // console.log('data')
-        //   var progress = 0
-        //   this.emit('dl-status-update', {update: 'dl-progress', progress: progress, url:url})
-        // }
       })
 
       r.on('progress', function(chunck, received_bytes, total_bytes) {
         var progress = received_bytes * 100 / total_bytes
-        // console.log('ici', progress)
         self.emit('dl-status-update', {update: 'dl-progress', progress: progress, url:url, music:music})
       })
 
       r.on('end', () => {
-        console.log('read end')
+        // console.log('read end')
       })
 
       w.on('finish', () => {
-        console.log('write end')
+        // console.log('write end')
         self.emit('dl-status-update', {update: 'dl-end', url:url, music:music})
         resolve()
       })
@@ -82,8 +75,7 @@ export class MusicDownloader extends EventEmitter {
 
   dlFromSoundCloud2Mp3(dest: string, filename: string, url: string, music: Music): Promise<any> {
     var self = this
-    // console.log('from downloader: ', dest + filename + '.mp3', url)
-    // console.log('url', url)
+
     return new Promise((resolve, reject) => {
       https.get('https://api.soundcloud.com/resolve?url=' + url + '&client_id=' + self._scKey, (res: any) => {
           res.on('data', (data: any) => {
@@ -96,17 +88,12 @@ export class MusicDownloader extends EventEmitter {
                   res.on('data', (data: any) => {
 
                       data = JSON.parse(data);
-                      // console.log('data', data)
                       if (data.errors)
                         reject(data.errors[0].error_message);
-                      // console.log("cul", data)
                       var item = {id:data.id, stream_url:data.stream_url, artwork_url:data.artwork_url,
                           title:data.title, artist:(data.user ? data.user.username : 'unknown')};
-                      // console.log('->', item)
                       if (item.stream_url == undefined) {
                         reject('url pointing to redirecting to artist instead of a specific music')
-                        // item.stream_url = 'https://api.soundcloud.com/tracks/' + item.id + '/stream'
-                        // console.log('->', item.stream_url)
                       }
 
                           https.get(item.stream_url + '?client_id=' + self._scKey, function(res) {

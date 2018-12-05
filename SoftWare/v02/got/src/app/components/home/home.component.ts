@@ -39,16 +39,13 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   private users: Array<any> = new Array();
   private ipcRenderer: any = null
   private document: any;
-  public musicSrcPlat: string = 'lc';
+  public musicSrcPlat: string = 'sc';
   public platforms = Object.freeze({ "YT": 1, "SC": 2 })
   public ytsrc: string = '';
-  public file: any;
 
   @Output() scWidget: any;
   @Output() iframeElement: any;
   @ViewChild('scPlayer') scPlayer: ElementRef;
-  @ViewChild('lcPlayer') lcPlayer: ElementRef;
-  @ViewChild('audioSource') source: ElementRef;
 
   private loaded: boolean = true;
   private init: ((cmpt: HomeComponent) => Promise<any>)[] = [
@@ -68,7 +65,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   ) {
 
     this.subs = new Array();
-    console.log('this.loginService.account: ', this.loginService.account);
+    this.document = document;
     if (this.loginService.account.playlist) {
       let tmp = new Array();
 
@@ -98,7 +95,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     this.handleMessages();
     this.initialize(this).then((result) => {
-
+      this.plService.selectedMusic = this.plService.playlists[0].MusicLink[0];
       this.plService.selectedPl = this.plService.playlists[0];
       this.plService.musics = this.plService.playlists[0].MusicLink;
       this.router.navigate(['/', 'home', { outlets: { homeOutlet: ['infoPlaylist'] } }]);
@@ -115,8 +112,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
           this.ytsrc = this.plService.selectedMusic.music_url;
           this.musicSrcPlat = "yt";
         }
-        // else if (this.plService.selectedMusic.music_source === 'youtube')
-
       }
       this.loaded = true;
     }).catch(error => {
@@ -149,7 +144,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       })
     });
   }
-
 
   getInvitations(cmpt: HomeComponent): Promise<any> {
     return new Promise<any>((resolve, reject) => {
@@ -231,10 +225,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit() {
     this.iframeElement = this.scPlayer.nativeElement;
     this.scWidget = window['SC'].Widget('sc-player');
-
     let self = this;
-    console.log('this.plService.selectedMusic: ', this.plService.selectedMusic);
-
     this.scWidget.bind(window['SC'].Widget.Events.FINISH, (e) => {
       self.playNextMusic();
     })
@@ -272,24 +263,18 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   playMusicHandler(music: Music) {
-    // console.log('cul src', music.music_source)
+
     // console.log('music url :', music.music_url)
 
-    if (music.music_source === 'local') {
-      this.scWidget.pause();
-      // console.log('cul source', )
-      // this.source.nativeElement.src
-      // this.lcPlayer.nativeElement.load()
-      // this.lcPlayer.nativeElement.play()
-      // var t = new FileReader()
-    }
+    if (music.music_source === 'soundcloud')
+      this.musicSrcPlat = 'sc'
+    if (music.music_source === 'youtube')
+      this.musicSrcPlat = 'yt'
 
-    if (!music.isLocalFile)
-      this.musicSrcPlat = music.music_source
-
-    if (this.plService.selectedMusic !== music && !music.isLocalFile) {
+    if (this.plService.selectedMusic !== music) {
+      console.log('cul ici: ')
       if (music.music_source === 'soundcloud') {
-        // console.log('music.music_url: ', music.music_url);
+        console.log('music.music_url: ', music.music_url);
         this.scWidget.load(music.music_url, { auto_play: true });
         // pause youtube
       }
@@ -297,11 +282,9 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         this.ytsrc = music.music_url;
         this.scWidget.pause();
       }
-
       this.plService.plInPlay = this.plService.selectedPl;
       this.plService.selectedMusic = music;
-
-    } else if (this.plService.selectedMusic === music  && !music.isLocalFile) {
+    } else if (this.plService.selectedMusic === music) {
       if (music.music_source === 'soundcloud') {
         if (this.plService.isPlaying)
           this.scWidget.play();
