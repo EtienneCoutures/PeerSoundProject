@@ -58,19 +58,16 @@
     "plangular-3": "^3.1.2",
     "popper.js": "^1.14.4",
     "reflect-metadata": "^0.1.12",
-    "reframe": "^0.30.0",
-    "reframe.js": "^2.2.4",
     "request": "^2.88.0",
     "rxjs-compat": "^6.3.2",
     "socket.io": "^2.1.1",
     "socket.io-client": "^2.1.1",
     "url-parse": "^1.4.4",
     "video.js": "^7.3.0",
-    "videojs-youtube": "^2.6.0",
     "xml-parser": "^1.2.1",
     "xml2js": "^0.4.19",
     "xmlbuilder": "^10.1.1",
-    "youtube-audio-stream": "^0.2.0"
+    "ytdl-core": "^0.28.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.6.3",
