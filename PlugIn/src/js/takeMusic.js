@@ -60,28 +60,17 @@ function getMusic() {
   //getLink();
 }
 getMusic();
-
- chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+/*
+var reg=new RegExp("[/]", "g");
+browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
      if (changeInfo.title){
-         console.log(tab.url);
-         if (tab.url.indexOf("soundcloud.com") == -1){
+         var tabNom = tab.url.split(reg);
+         if (tab.url.indexOf("soundcloud.com") == -1 || (tabNom.length > 4 && tab.url.indexOf("soundcloud.com") > 0 )){
             getMusic();
-            console.log("oouhuuouuoo!!!");
          }
-   //      console.log(changeInfo);
-     //    console.log(tab);
-         var chaine ="https://soundcloud.com/majorlazer/major";
-         "[a-zA-Z0-9\-_]+[a-zA-Z0-9\.\-_]*@[a-zA-Z0-9\-_]+\.[a-zA-Z\.\-_]{1,}[a-zA-Z\-_]+"
- var reg=new RegExp("((ht|f)tps?:\/\/\S*)", "i");
- var tabNom=chaine.split(exp);
-  if (tabNom==null) {
-    console.log("Problème dans l'expression !");
-  } else {
-    console.table(tabNom);
-  }
-     }
-        
- });
+     }    
+ });*/
+ 
 setTimeout(function(){
     main.classList.add('show');
 }, 500);
@@ -240,6 +229,7 @@ function sleep(miliseconds) {
 
 function sendMusic() {
     var title = document.getElementById("boxUrl");
+    console.log(url);
     if (title.value && artist.value && Playlists.options[Playlists.selectedIndex].label != "Create Playlist" && url != undefined) {
         console.log(url);
         if (url.indexOf("soundcloud") != -1)
