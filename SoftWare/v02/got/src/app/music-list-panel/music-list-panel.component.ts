@@ -58,13 +58,7 @@ export class MusicListPanelComponent implements OnInit, OnChanges {
   }
 
   playMusicEvent(music: Music): void {
+    console.log('playMusicEvent')
     this.playMusic.emit(music)
-  }
-
-  switchConModeEvent(isOffline: boolean): void {
-    this.isOffline = isOffline
-    // if (this.isOffline) {
-    //   this.offlineService.loadMusics(this.playlist.playlist_name)
-    // }
   }
 }

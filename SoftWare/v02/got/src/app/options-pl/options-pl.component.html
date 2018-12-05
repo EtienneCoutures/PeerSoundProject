@@ -20,7 +20,7 @@
     <mat-divider></mat-divider>
 
     <button mat-button (click)="switchConnectivityMode()">
-      <i class="material-icons">cloud_off</i>
-      Mode hors-ligne
+      <i class="material-icons">{{ (offlineService.isOfflineModeOn ? "cloud" : "cloud_off") }}</i>
+      {{ (offlineService.isOfflineModeOn ? "Mode en-ligne" : "Mode hors-ligne") }}
     </button>
   </mat-expansion-panel>

@@ -26,7 +26,7 @@ export class OfflinePlaylistHeader {
         if (res.root.musics[0]) {
           res.root.musics[0].music.forEach(function(music, index, array) {
             music = music.$
-            self.addMusic(music.filename, music.pos, music.name, false, music.isInFile)
+            self.addMusic(music.filename, music.pos, music.name, false, music.isInFile, music._source)
           });
         }
         resolve()
@@ -39,7 +39,7 @@ export class OfflinePlaylistHeader {
     this._playlistName = ''
   }
 
-  addMusic(filename: string, pos: number, name: string, insert: boolean = true, isInFile: boolean = false): boolean {
+  addMusic(filename: string, pos: number, name: string, insert: boolean = true, isInFile: boolean = false, source: string = 'local'): boolean {
     if (this.getMusicByName(name) && !insert) {
       // console.log('from addmus : ret err')
       return false

@@ -52,7 +52,9 @@ export class YtPlayerComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: any) {
+    // console.log('cul changes', changes)
     if (changes.url && changes.url.firstChange === false) {
+      // console.log(this.player)
       this.video = Url2.parse(changes.url.currentValue).id
       this.player.loadVideoById(this.video)
     }
@@ -90,12 +92,8 @@ export class YtPlayerComponent implements OnInit, OnChanges {
     // console.log('cul', event.data)
     switch (event.data) {
       case window['YT'].PlayerState.PLAYING:
-<<<<<<< HEAD
-        // this.plService.isPlaying = false
-=======
       console.log('playiing');
         this.plService.isPlaying = true;
->>>>>>> 185146ed93ab68644a0700c93ccc90a474dc3e3e
         // console.log('play')
         // this.isPlayingEvent.emit(true)
         if (this.cleanTime() == 0) {
@@ -114,12 +112,8 @@ export class YtPlayerComponent implements OnInit, OnChanges {
         };
         break;
       case window['YT'].PlayerState.ENDED:
-<<<<<<< HEAD
-        // console.log('ended ');
-=======
         console.log('ended ');
         this.onMusicEnd.emit();
->>>>>>> 185146ed93ab68644a0700c93ccc90a474dc3e3e
         break;
     };
   };
