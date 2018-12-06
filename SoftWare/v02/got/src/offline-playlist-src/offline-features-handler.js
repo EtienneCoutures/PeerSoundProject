@@ -40,9 +40,10 @@ var OfflineFeaturesHandler = /** @class */ (function (_super) {
         var pspFile = this.getPspFile(plName);
         pspFile.open(saveDirPath, plName, false).then(function () {
             // this.win.webContents.send('set-dl-status', 'dl-init...');
-            var filename = music.music_name.replace(/ */g, '_');
+            var filename = 'tmp' + music.music_id;
+            // filename = filename.replace(/- */g, '_')
             var isMusInFile = pspFile.getMusicMetadataByName(music.music_name).isInFile;
-            var filepath = saveDirPath + music.music_name.replace(/ */g, '_') + '.mp3';
+            var filepath = saveDirPath + filename + '.mp3';
             // console.log('ici', )
             if (isMusInFile == 'false' || isMusInFile == false) {
                 // this._win.webContents.send('dl-status-update', {update: 'connecting to source provider...'})

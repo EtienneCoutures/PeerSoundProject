@@ -18,14 +18,6 @@ import { Router } from '@angular/router';
 import { EventService } from '../../event.service';
 import { Invitation } from '../../events/events.component';
 import { OfflineFeaturesService } from '../../offline-features.service'
-// import { Yts } from 'youtube-audio-stream'
-// import { DOCUMENT } from '@angular/common';
-// import { Inject } from '@angular/core';
-// import { UrlParser } from 'url-parse';
-// import "js-video-url-parser/lib/provider/youtube";
-// import "js-video-url-parser/lib/provider/soundcloud";
-
-//declare var SC: any;
 
 @Component({
   selector: 'app-home',
@@ -114,6 +106,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       }
       this.loaded = true;
+      console.log('this.plService.selectedMusic: ', this.plService.selectedPl);
     }).catch(error => {
       console.log('error loading home: ', error);
     });
@@ -277,6 +270,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         console.log('music.music_url: ', music.music_url);
         this.scWidget.load(music.music_url, { auto_play: true });
         // pause youtube
+        this.plService.ytPlayer.pauseVideo();
       }
       else if (music.music_source === 'youtube') {
         this.ytsrc = music.music_url;

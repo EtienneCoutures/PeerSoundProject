@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { PlaylistService } from '../playlist/playlist.service';
 
-// require from 'reframe.js'
-
 import * as myGlobals from '../../globals'
 var Url = require('url-parse');
 var Url2 = require("js-video-url-parser")
@@ -58,7 +56,8 @@ export class YtPlayerComponent implements OnInit, OnChanges {
       this.video = Url2.parse(changes.url.currentValue).id
       this.player.loadVideoById(this.video)
     }
-    if (changes.isPlaying && changes.isPlaying.firstChange === false) {
+    if (changes.isPlaying && changes.isPlaying.firstChange === false
+        && this.plService.selectedMusic.music_source === 'youtube') {
         if (changes.isPlaying.currentValue)
           this.player.playVideo()
         else
@@ -86,6 +85,7 @@ export class YtPlayerComponent implements OnInit, OnChanges {
         }
       }
     });
+    this.plService.ytPlayer = this.player;
   }
 
   onPlayerStateChange(event) {

@@ -109,6 +109,11 @@ export class DialogInvitePeople {
         }
         console.log('res user id from mail: ', res);
         this.invitation.invited_usr_id = res[0].usr_id;
+        console.log('this.data.service.selectedPl.creator_id: ', this.data.service.selectedPl);
+        if  (this.invitation.invited_usr_id === this.data.service.selectedPl.playlist_creator) {
+          this.error = "Utilisateur déjà dans la playlist.";
+          return ;
+        }
         //this.invitation.invited_usr_id = invited_id;
         this.data.service.inviteUser(this.invitation).subscribe(res => {
           if (res.code === 0) {

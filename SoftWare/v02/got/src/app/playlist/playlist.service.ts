@@ -32,6 +32,7 @@ export class PlaylistService {
   musics: any[];
   selectedMusic: any;
   plInPlay: Playlist;
+  ytPlayer: any;
 
   private appConfig: AppConfig = new AppConfig;
   private baseUrl: string = this.appConfig.urlBase;
