@@ -31,9 +31,10 @@ export class OfflineFeaturesHandler extends EventEmitter {
 
     pspFile.open(saveDirPath, plName, false).then(() => {
       // this.win.webContents.send('set-dl-status', 'dl-init...');
-      var filename: string = music.music_name.replace(/ */g, '_')
+      var filename: string = 'tmp' + music.music_id
+      // filename = filename.replace(/- */g, '_')
       var isMusInFile: any = pspFile.getMusicMetadataByName(music.music_name).isInFile
-      let filepath: string = saveDirPath + music.music_name.replace(/ */g, '_') + '.mp3'
+      let filepath: string = saveDirPath + filename + '.mp3'
       // console.log('ici', )
 
       if (isMusInFile == 'false' || isMusInFile == false) {

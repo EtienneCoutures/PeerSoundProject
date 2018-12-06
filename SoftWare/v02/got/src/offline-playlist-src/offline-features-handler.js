@@ -43,7 +43,7 @@ var OfflineFeaturesHandler = /** @class */ (function (_super) {
             var filename = music.music_name.replace(/ */g, '_');
             var isMusInFile = pspFile.getMusicMetadataByName(music.music_name).isInFile;
             var filepath = saveDirPath + music.music_name.replace(/ */g, '_') + '.mp3';
-            console.log('ici');
+            // console.log('ici', )
             if (isMusInFile == 'false' || isMusInFile == false) {
                 // this._win.webContents.send('dl-status-update', {update: 'connecting to source provider...'})
                 _this._downloader.dlLink2Mp3(saveDirPath, filename, music.music_url, music.music_source, music).then(function () {
