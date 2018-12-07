@@ -1,6 +1,6 @@
 {
     "name": "PeerSoundProject",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "description": "réseau de partage et de streaming de musique",
     "manifest_version": 2,
     "icons": {
@@ -9,14 +9,14 @@
         "128": "images/128.png"
     },
 
-    "permissions": ["unlimitedStorage", "tabs", "<all_urls>", "activeTab", "cookies", "webRequest", "webNavigation", "*://developer.mozilla.org/*", "browsingData", "privacy"],
+    "permissions": ["unlimitedStorage", "tabs", "<all_urls>", "activeTab", "cookies", "webRequest", "webNavigation", "https://www.youtube.com/*", "https://soundcloud.com/*", "browsingData", "privacy"],
     "content_scripts": [{
         "matches": ["http://*/*", "https://*/*", "*://*/*", "*://*.mozilla.org/*"],
         "css": ["src/css/show_PSP.css"],
         "all_frames": true,
         "js" : ["index.html", "src/js/vendor/jquery.min.js"]
     }],
-    "content_security_policy" : "script-src 'self' https://code.jquery.com/ ; object-src 'self'",
+    "content_security_policy" : "script-src 'self' https://code.jquery.com  ; object-src 'self'",
 
     "web_accessible_resources": [
         "background.html", "background.js", "index.html", "src/js/index.js", "takeMusic.html", "SendMusic.html", "content.js"

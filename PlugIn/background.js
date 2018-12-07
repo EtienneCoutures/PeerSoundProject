@@ -24,9 +24,8 @@ var artist = document.getElementById("boxArtist"),
     close = document.getElementById('cloclo'),
     closeP = document.getElementById('clocloP');
 browser.browserAction.onClicked.addListener(function(tab) {
-
+   
     browser.tabs.executeScript(null, {file: "content.js"});
-
 });
 
     var script = document.createElement('script');
@@ -119,13 +118,35 @@ browser.browserAction.onClicked.addListener(function(tab) {
         browser.tabs.executeScript(null, {file: "closer.js"});
     }
 
-    var reg=new RegExp("[/]", "g");
-
-    browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-         if (changeInfo.title){
-             var tabNom = tab.url.split(reg);
-             if (tab.url.indexOf("soundcloud.com") == -1 || (tabNom.length > 4 && tab.url.indexOf("soundcloud.com") > 0 )){
-                getMusic();
+/*
+    function getMusic() {
+        function getContent() {
+            callEventPageMethod('getContent', 'some parameter', function (response) {
+                //alert(response);
+                boxUrl.value = response.title;
+                url = response.url;
+              //  doSomethingWith(response);
+            });
+      
+        }
+        //generic method
+        function callEventPageMethod(method, data, callback) {
+            chrome.runtime.sendMessage({ method: method, data: data }, function (response) {
+                if(typeof callback === "function") callback(response);
+            });
+        }
+        getContent();
+        //getLink();
+      }
+        var reg=new RegExp("[/]", "g");
+        chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+           // alert(tab);
+             if (changeInfo.title){
+                 var tabNom = tab.url.split(reg);
+                 console.log(changeInfo.title);
+                 if (tab.url.indexOf("soundcloud.com") == -1 || (tabNom.length > 4 && tab.url.indexOf("soundcloud.com") > 0 )){
+                    getMusic();
+                 }
              }
-         }
-     });
+         });
+*/   

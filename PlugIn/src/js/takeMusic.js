@@ -60,17 +60,21 @@ function getMusic() {
   //getLink();
 }
 getMusic();
+
+//var browser = browser || chrome;
+//console.log(browser);
 /*
 var reg=new RegExp("[/]", "g");
+//var gettingCurrent = browser.tabs.getCurrent();
 browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
      if (changeInfo.title){
-         var tabNom = tab.url.split(reg);
+        var tabNom = tab.url.split(reg);
          if (tab.url.indexOf("soundcloud.com") == -1 || (tabNom.length > 4 && tab.url.indexOf("soundcloud.com") > 0 )){
             getMusic();
          }
      }    
- });*/
- 
+ });
+*/
 setTimeout(function(){
     main.classList.add('show');
 }, 500);
