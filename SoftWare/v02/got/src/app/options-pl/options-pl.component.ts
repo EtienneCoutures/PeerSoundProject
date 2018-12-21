@@ -59,7 +59,7 @@ export class OptionsPlComponent implements OnInit {
 
   switchConnectivityMode(): void {
     this.offlineService.switchOfflineMode()
-    this.panel.expanded = false // close panel -> this is not really an error
+    // this.panel.nativeElement.expanded = false // close panel -> this is not really an error
   }
 }
 
