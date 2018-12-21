@@ -111,6 +111,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       }
       this.loaded = true;
+      console.log('this.plService.selectedMusic: ', this.plService.selectedPl);
     }).catch(error => {
       console.log('error loading home: ', error);
     });

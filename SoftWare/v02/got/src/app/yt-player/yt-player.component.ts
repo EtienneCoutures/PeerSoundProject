@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { PlaylistService } from '../playlist/playlist.service';
 
-// require from 'reframe.js'
-
 import * as myGlobals from '../../globals'
 var Url = require('url-parse');
 var Url2 = require("js-video-url-parser")
