@@ -1,0 +1,39 @@
+<div>
+  <div style="width:100%">
+    <mat-slider
+      class="lc-player-progress-slider"
+      min="0"
+      max="{{audio.duration}}"
+      thumbLabel
+      [displayWith]="secondsToMinutesAsString"
+      step="1"
+      value="{{audio.currentTime}}"
+      (change)="setProgress($event.value)"
+      (input)="setProgress($event.value)"
+      style="width:100%">
+    </mat-slider>
+  </div>
+
+  <div id="controls">
+    <button mat-button (click)="onPlayClicked()"><mat-icon mat-list-icon>{{playing ? 'pause' : 'play_arrow'}}</mat-icon></button>
+
+    <button mat-button id="volume" (click)="mute()"><mat-icon mat-list-icon>{{getVolumeIcon()}}</mat-icon></button>
+    <mat-slider
+      class="lc-player-volume-slider"
+      min="0"
+      max="1"
+      step="0.001"
+      value="{{audio.volume}}"
+      (change)="setVolume($event.value)"
+      (input)="setVolume($event.value)">
+    </mat-slider>
+
+    <span class="info" id="info-time">{{audio.duration ? getProgressString(audio.currentTime) : 'loading' }}</span>
+    <span class="info" id="info-name" *ngIf="plService.selectedMusic">{{plService.selectedMusic.music_name}}</span>
+
+    <span id="prev-next-controls">
+      <button mat-button (click)="prevMusicClicked()"><mat-icon mat-list-icon>skip_previous</mat-icon></button>
+      <button mat-button (click)="nextMusicClicked()"><mat-icon mat-list-icon>skip_next</mat-icon></button>
+    </span>
+  </div>
+</div>

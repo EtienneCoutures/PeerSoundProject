@@ -2,22 +2,20 @@
     <perfect-scrollbar style="max-width: 600px; max-height: 1000px;" [config]="config">
       <!-- <app-music [music]="music.Music"  *ngFor="let music of musics; let i = index; trackBy: trackElement">
       </app-music> -->
-      <div *ngFor="let music of offlineService.musics">
-        <div
-          [class.selected]="music.music_name == plService.selectedMusic.music_name"
-          [class.offline-available]="music.isOfflineAvailable == true" (click)="playMusicEvent(music)">
-        <mat-list-item>
-          <mat-icon *ngIf="music.isOfflineAvailable" mat-list-icon> {{ plService.isPlaying && music.music_name == plService.selectedMusic.music_name ? 'pause' : 'play_arrow'}}</mat-icon>
-          <!-- {{music.music_name}} -->
-          <!-- <p mat-line> {{music.music_group}} </p> -->
-          <a class="dl-icon" *ngIf="(music.isOfflineAvailable===false) && music.music_url != undefined && !offlineService.isDownloading" (click)="dlMusic(music)"><i class="material-icons">cloud_download</i></a>
-          <!-- <span *ngIf="music.offline=='true'"><i class="material-icons">cloud_done</i></span> -->
 
-          <h5 mat-line style="font-size:15px" [class.offline-unavailable]="music.isOfflineAvailable===false">{{music.music_name}}</h5>
-          <h5 style="font-size:12px" *ngIf="music.isDownloading === true" mat-line [class.offline-unavailable]="music.isOfflineAvailable===false">dl-{{music.dlProgress}}%</h5>
-          <h5 style="font-size:12px" *ngIf="(music.isDownloading == false || music.isDownloading == 'false') && (music.isOfflineAvailable == true)" mat-line [class.offline-unavailable]="music.isOfflineAvailable===false">offline-available</h5>
-          <h5 style="font-size:12px" *ngIf="(music.isDownloading == false || music.isDownloading == 'false') && (music.isOfflineAvailable == false)" mat-line [class.offline-unavailable]="music.isOfflineAvailable===false">offline-unavailable</h5>
-          <!-- <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div> -->
+      <div *ngFor="let music of offlineService.musics">
+
+        <div
+          [class.offline-available]="music.isOfflineAvailable" (click)="playMusicEvent(music)"
+          [class.selected]="isSelected(music)">
+        <mat-list-item>
+          <mat-icon *ngIf="music.isOfflineAvailable" mat-list-icon> {{ plService.lcPlayer.playing && isSelected(music) ? 'pause' : 'play_arrow'}}</mat-icon>
+          <a class="dl-icon" *ngIf="(music.isOfflineAvailable===false) && music.music_url != undefined && !offlineService.isDownloading" (click)="dlMusic(music)"><i class="material-icons">cloud_download</i></a>
+
+          <h5 mat-line style="font-size:15px" [class.offline-unavailable]="!music.isOfflineAvailable">{{music.music_name}}</h5>
+          <h5 style="font-size:12px" *ngIf="music.isDownloading" mat-line [class.offline-unavailable]="!music.isOfflineAvailable">dl-{{music.dlProgress}}%</h5>
+          <h5 style="font-size:12px" *ngIf="!music.isDownloading && music.isOfflineAvailable" mat-line [class.offline-unavailable]="!music.isOfflineAvailable">offline-available</h5>
+          <h5 style="font-size:12px" *ngIf="!music.isDownloading && !music.isOfflineAvailable" mat-line [class.offline-unavailable]="!music.isOfflineAvailable">offline-unavailable</h5>
           <mat-divider></mat-divider>
         </mat-list-item>
         </div>

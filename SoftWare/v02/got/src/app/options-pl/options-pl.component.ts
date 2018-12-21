@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, Inject, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 import { Playlist } from '../playlist/playlist';
 import {
   MatDialog
@@ -22,7 +22,9 @@ export class OptionsPlComponent implements OnInit {
 
   @Input() playlist: Playlist;
   @Output() conModeSwitched: EventEmitter<boolean> = new EventEmitter();
+  @ViewChild('optionPanel') panel: ElementRef
 
+  isOfflineModeOn: boolean = undefined
   inviteEmail: string;
 
   constructor(
@@ -37,7 +39,7 @@ export class OptionsPlComponent implements OnInit {
   }
 
   ngOnInit() {
-    // console.log('opt pl : ', this.playlist);
+    this.isOfflineModeOn = this.offlineService.isOfflineModeOn
   }
 
   invitePeople() {
@@ -57,6 +59,7 @@ export class OptionsPlComponent implements OnInit {
 
   switchConnectivityMode(): void {
     this.offlineService.switchOfflineMode()
+    this.panel.expanded = false // close panel -> this is not really an error
   }
 }
 
@@ -124,5 +127,4 @@ export class DialogInvitePeople {
 
       }, error => console.log('error getting user id from mail: ', error));
   }
-
 }

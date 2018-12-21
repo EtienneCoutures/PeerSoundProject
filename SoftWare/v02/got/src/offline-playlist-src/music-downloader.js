@@ -21,6 +21,8 @@ var request = require("request");
 var EventEmitter = require("events");
 var ytdl = require('ytdl-core');
 var yturl = require("js-video-url-parser");
+var dataurl = require('dataurl');
+var YoutubeMp3Downloader = require("youtube-mp3-downloader");
 var MusicDownloader = /** @class */ (function (_super) {
     __extends(MusicDownloader, _super);
     function MusicDownloader() {
@@ -53,24 +55,25 @@ var MusicDownloader = /** @class */ (function (_super) {
         var self = this;
         var url = 'http://www.youtube.com/watch?v=' + yturl.parse(url).id;
         return new Promise(function (resolve, reject) {
-            var r = ytdl(url, { filter: 'audioonly', quality: 'highestaudio' });
-            var w = fs.createWriteStream(dest + filename + '.mp3');
-            r.on('readable', function () {
-                self.emit('dl-status-update', { update: 'dl-start', url: url, music: music });
+            var YD = new YoutubeMp3Downloader({
+                "ffmpegPath": "./ffmpeg/bin/ffmpeg.exe",
+                "outputPath": "./",
+                "youtubeVideoQuality": "highest",
+                "queueParallelism": 2,
+                "progressTimeout": 200 // How long should be the interval of the progress reports
             });
-            r.on('progress', function (chunck, received_bytes, total_bytes) {
-                var progress = received_bytes * 100 / total_bytes;
-                self.emit('dl-status-update', { update: 'dl-progress', progress: progress, url: url, music: music });
-            });
-            r.on('end', function () {
-                // console.log('read end')
-            });
-            w.on('finish', function () {
-                // console.log('write end')
+            YD.download(yturl.parse(url).id, filename + '.mp3');
+            self.emit('dl-status-update', { update: 'dl-start', url: url, music: music });
+            YD.on("finished", function (err, data) {
                 self.emit('dl-status-update', { update: 'dl-end', url: url, music: music });
                 resolve();
             });
-            r.pipe(w);
+            YD.on("error", function (error) {
+                reject(error);
+            });
+            YD.on("progress", function (data) {
+                self.emit('dl-status-update', { update: 'dl-progress', progress: data.progress.percentage, url: url, music: music });
+            });
         });
     };
     MusicDownloader.prototype.dlFromSoundCloud2Mp3 = function (dest, filename, url, music) {
@@ -135,6 +138,30 @@ var MusicDownloader = /** @class */ (function (_super) {
             }).on('error', function (error) {
                 reject(error);
             });
+        });
+    };
+    MusicDownloader.prototype.dlFromYoutube2Mp3Ytdl = function (dest, filename, url, music) {
+        var self = this;
+        var url = 'http://www.youtube.com/watch?v=' + yturl.parse(url).id;
+        return new Promise(function (resolve, reject) {
+            var r = ytdl(url, { filter: 'audioonly', quality: 'highestaudio' });
+            var w = fs.createWriteStream(dest + filename + '.mp3');
+            r.on('readable', function () {
+                self.emit('dl-status-update', { update: 'dl-start', url: url, music: music });
+            });
+            r.on('progress', function (chunck, received_bytes, total_bytes) {
+                var progress = received_bytes * 100 / total_bytes;
+                self.emit('dl-status-update', { update: 'dl-progress', progress: progress, url: url, music: music });
+            });
+            r.on('end', function () {
+                // console.log('read end')
+            });
+            w.on('finish', function () {
+                // console.log('write end')
+                self.emit('dl-status-update', { update: 'dl-end', url: url, music: music });
+                resolve();
+            });
+            r.pipe(w);
         });
     };
     return MusicDownloader;

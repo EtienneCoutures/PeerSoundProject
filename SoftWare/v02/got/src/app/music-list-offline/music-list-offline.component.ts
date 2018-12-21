@@ -33,24 +33,31 @@ export class MusicListOfflineComponent implements OnInit, OnChanges {
 
   playMusicEvent(music: Music) {
     if (music.isOfflineAvailable) {
-      if (this.plService.selectedMusic !== music) {
-        this.offlineService.extractMusicFile(music)
-        this.plService.isPlaying = true;
-        this.plService.selectedMusic = music;
+      if ((this.plService.selectedMusic && this.plService.selectedMusic != music) ||
+          !this.plService.selectedMusic) {
+
+        music.isExtractedPromise = new Promise((res, rej) => {
+          this.offlineService.extractMusicFile(music).then(() => { // extract file
+            res()
+          }, (err) => {
+            rej(err)
+          })
+        })
         this.playOfflineMusic.emit(music);
       } else {
-        this.plService.isPlaying = !this.plService.isPlaying;
         this.playOfflineMusic.emit(music);
       }
     }
   }
 
-  loadMusicsFromPspFile() {
-    // this.offlineService.getMusicsRequest(this.playlist.playlist_name)
+  isSelected(music: Music) {
+    return this.plService.selectedMusic == music
+    // if (!this.plService.selectedMusic)
+    //   return false
+    // return music.music_name == this.plService.selectedMusic.music_name && this.plService.selectedMusic.isLocalFile
   }
 
   dlMusic(music: Music) {
-    console.log('from dlMusic', music)
     this.offlineService.dlMusic(music)
   }
 }

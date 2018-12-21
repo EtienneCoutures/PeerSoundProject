@@ -57,19 +57,28 @@ export class OfflineFeaturesService {
   loadPlaylistMetadata(pl: Playlist) {
     this.musics.length = 0 // empty music list array
     this.offline.loadPspFile(pl).then((inputs: MusicEntry[]) => { // get psp file metadata
+
+      // console.log('music entry', inputs)
+      // console.log('music', this.plService.selectedPl.MusicLink)
       inputs.forEach((music) => {
+        // console.log('ici', i)
         var elem = this.plService.selectedPl.MusicLink.find((elem) => { // try to get music url from online music array
-          return elem.Music.music_name === music._name
+          // console.log('la', elem)
+          return elem.music_name === music._name
         })
-        this.musics.push(new Music(music, elem.Music.music_url, elem.Music.music_source)) // convert MusicEntry type to Music type and add it to list
+        // console.log('elem found', elem)
+        // console.log('elem found', music)
+        if (elem != undefined)
+          this.musics.push(Music.getMusFromMusicEntry(music, elem.music_url, elem.music_source)) // convert MusicEntry type to Music type and add it to list
       })
+      // console.log('off musics', this.musics)
     }, (err) => {
       console.error('error while loading playlist "' + pl.playlist_name + '" in offline mode : ' + err)
     })
   }
 
   dlMusic(music: Music) {
-    console.log('dl music')
+    // console.log('dl music')
     this.offline.dlMusicToPspFile(this.plService.selectedPl.playlist_name, music)
   }
 
@@ -81,8 +90,8 @@ export class OfflineFeaturesService {
     this.isOfflineModeOn = !this.isOfflineModeOn
   }
 
-  extractMusicFile(music: Music) {
-    this.offline.extractMusicFile(this.plService.selectedPl.playlist_name, music)
+  extractMusicFile(music: Music): Promise<any> {
+    return this.offline.extractMusicFile(this.plService.selectedPl.playlist_name, music)
   }
 
   reset() {

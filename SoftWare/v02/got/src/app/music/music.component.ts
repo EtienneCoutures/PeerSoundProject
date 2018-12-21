@@ -23,7 +23,8 @@ export class MusicComponent implements OnInit {
   }
 
   isSelected() {
-    return this.music === this.plService.selectedMusic;
+    return  this.plService.selectedMusic &&
+            this.music === this.plService.selectedMusic;
   }
 
   ngOnInit() {

@@ -51,12 +51,12 @@
             </div>
             <!-- youtube player -->
             <div [hidden]='musicSrcPlat !== "youtube"' style="background-color:#2c2f33;">
-              <app-yt-player (onMusicEnd)="playNextMusic()" [isPlaying]="this.plService.isPlaying" [url]="ytsrc"></app-yt-player>
+              <app-yt-player (onMusicEnd)="playNextMusic()"  [isPlaying]="this.plService.isPlaying" [url]="ytsrc"></app-yt-player>
             </div>
 
             <div [hidden]='musicSrcPlat !== "local"' style="background-color:#2c2f33;">
-              <!-- <audio controls #lcPlayer id="lc-player" autoplay>
-                <source #audioSource src="./tmp.mp3">
+              <app-local-player></app-local-player>
+              <!-- <audio controls #lcPlayer autoplay>
               </audio> -->
             </div>
           </div>

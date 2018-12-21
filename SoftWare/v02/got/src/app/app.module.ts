@@ -1,7 +1,8 @@
 import 'zone.js/dist/zone-mix';
 import 'reflect-metadata';
 import '../polyfills';
-import { BrowserModule } from '@angular/platform-browser';
+
+
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -14,7 +15,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { ElectronService } from './providers/electron.service';
-
+import { GestureConfig } from '@angular/material';
 import { WebviewDirective } from './directives/webview.directive';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -42,9 +43,11 @@ import { MatDialogModule,
          MatListModule,
          MatExpansionModule,
          MatToolbarModule,
-         MatSnackBarModule
+         MatSnackBarModule,
+         MatSliderModule,
        } from '@angular/material';
 
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { PerfectScrollbarModule
         , PERFECT_SCROLLBAR_CONFIG
         , PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -67,7 +70,9 @@ import { MusicListOfflineComponent } from './music-list-offline/music-list-offli
 import { OfflineFeaturesLogComponent } from './offline-features-log/offline-features-log.component';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
 import { YtPlayerComponent } from './yt-player/yt-player.component';
+import { LocalPlayerComponent } from './local-player/local-player.component';
 
+import 'hammerjs';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -77,6 +82,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
+
 
 @NgModule({
   declarations: [
@@ -105,14 +111,16 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MusicListOfflineComponent,
     OfflineFeaturesLogComponent,
     SnackBarComponent,
-    YtPlayerComponent
+    YtPlayerComponent,
+    LocalPlayerComponent
   ],
   imports: [
-    BrowserModule,
     FormsModule,
+    BrowserAnimationsModule,
+    MatSliderModule,
+    BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
     MatDialogModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -135,13 +143,20 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       }
     }),
   ],
+  exports: [
+    // MatSlider
+  ],
   entryComponents: [
     DialogOverviewExampleDialog,
     DialogInvitePeople,
     SnackBarComponent
   ],
-  providers: [ElectronService, {provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG}],
+  providers: [
+    ElectronService,
+    {provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG},
+    {provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

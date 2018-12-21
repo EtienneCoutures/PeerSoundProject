@@ -30,8 +30,10 @@ export class PlaylistService {
   playlists: Playlist[] = new Array<Playlist>();
   isPlaying: boolean;
   musics: any[];
-  selectedMusic: any;
+  selectedMusic: any = undefined;
   plInPlay: Playlist;
+  ytPlayer: any;
+  lcPlayer: any;
 
   private appConfig: AppConfig = new AppConfig;
   private baseUrl: string = this.appConfig.urlBase;
@@ -83,6 +85,16 @@ export class PlaylistService {
   getMusicLinkFromMusicId(id:number) {
     return this.httpClient.get<any>(`${this.baseUrl}/api/musiclink`
       + `?where=%7B%22music_id%22:%22${id.toString()}%22%7D`)
+  }
+
+  isNewMusicSelected(music: Music) {
+    console.log('from is new music', this.selectedMusic, music, this.selectedMusic != music)
+    // if (!this.selectedMusic && music)
+    //   return true
+    return this.selectedMusic !== music
+    // if ((this.selectedMusic.isLocalFile == undefined || !this.selectedMusic.isLocalFile) && music.isLocalFile)
+    //   return true
+    // return (this.selectedMusic.music_name == music.music_name)
   }
 
 }

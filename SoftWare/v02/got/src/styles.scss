@@ -21,6 +21,36 @@ html, body {
 .header {
   margin: 0px !important;
 }
+
+.lc-player-progress-slider {
+  .mat-slider-thumb {
+    background-color: red !important;
+  }
+
+  .mat-slider-thumb-label {
+    background-color: rgba(100,100,100,50) !important;
+    color: white !important;
+  }
+
+  .mat-slider-track-fill {
+    background-color: red !important;
+  }
+}
+
+.lc-player-volume-slider {
+  .mat-slider-thumb {
+    background-color: white !important;
+  }
+
+  .mat-slider-thumb-label {
+    background-color: white !important;
+  }
+
+  .mat-slider-track-fill {
+    background-color: white !important;
+  }
+}
+
 md-icon{
   font-family: 'Material Icons' !important;
 }

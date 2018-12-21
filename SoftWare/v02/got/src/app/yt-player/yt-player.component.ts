@@ -27,6 +27,7 @@ export class YtPlayerComponent implements OnInit, OnChanges {
   @Input() isPlaying: boolean = false;
   @Output() isPlayingEvent: EventEmitter<boolean> = new EventEmitter();
   @Output() onMusicEnd: EventEmitter<void> = new EventEmitter();
+  // @Input() pause: boolean = false
 
   constructor(private plService : PlaylistService) { }
   init() {
@@ -52,18 +53,26 @@ export class YtPlayerComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: any) {
-    console.log('cul changes', changes)
+    // console.log('cul changes', changes)
     if (changes.url && changes.url.firstChange === false) {
-      console.log(this.player)
       this.video = Url2.parse(changes.url.currentValue).id
       this.player.loadVideoById(this.video)
     }
-    if (changes.isPlaying && changes.isPlaying.firstChange === false) {
-        if (changes.isPlaying.currentValue)
-          this.player.playVideo()
-        else
-          this.player.pauseVideo()
-    }
+    // if (changes.isPlaying && changes.isPlaying.firstChange === false && this.plService.selectedMusic.music_source === 'youtube') {
+    //     if (changes.isPlaying.currentValue)
+    //       this.player.playVideo()
+    //     else
+    //       this.player.pauseVideo()
+    // }
+    // if (changes.pause && changes.pause.previousValue == false && changes.pause.currentValue == true) {
+      // this.player.pauseVideo()
+      // this.player.seekTo(0)
+    // }
+
+    // if (changes.pause && changes.pause.previousValue == true && changes.pause.currentValue == false) {
+    //   this.player.seekTo(0)
+    //   this.player.playVideo()
+    // }
   }
 
   onYouTubeIframeAPIReady(e) {
@@ -86,6 +95,7 @@ export class YtPlayerComponent implements OnInit, OnChanges {
         }
       }
     });
+    this.plService.ytPlayer = this.player
   }
 
   onPlayerStateChange(event) {

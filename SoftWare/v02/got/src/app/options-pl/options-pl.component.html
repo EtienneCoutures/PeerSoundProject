@@ -1,4 +1,4 @@
-<mat-expansion-panel color="primary" style="margin:0">
+<mat-expansion-panel #optionPanel (afterCollapse)="isOfflineModeOn=offlineService.isOfflineModeOn"  style="margin:0">
     <mat-expansion-panel-header>
       <mat-panel-title>
         {{plService.selectedPl.playlist_name}}
@@ -20,7 +20,8 @@
     <mat-divider></mat-divider>
 
     <button mat-button (click)="switchConnectivityMode()">
-      <i class="material-icons">{{ (offlineService.isOfflineModeOn ? "cloud" : "cloud_off") }}</i>
-      {{ (offlineService.isOfflineModeOn ? "Mode en-ligne" : "Mode hors-ligne") }}
+      <i class="material-icons">{{ (isOfflineModeOn ? "cloud" : "cloud_off") }}</i>
+      {{ (isOfflineModeOn ? "Mode en-ligne" : "Mode hors-ligne") }}
     </button>
+
   </mat-expansion-panel>

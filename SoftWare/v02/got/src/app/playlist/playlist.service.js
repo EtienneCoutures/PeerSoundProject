@@ -24,6 +24,7 @@ var PlaylistService = /** @class */ (function () {
         this.httpClient = httpClient;
         this.loginService = loginService;
         this.playlists = new Array();
+        this.selectedMusic = undefined;
         this.appConfig = new appConfig_1.AppConfig;
         this.baseUrl = this.appConfig.urlBase;
         this.account = this.loginService.account;
@@ -57,6 +58,13 @@ var PlaylistService = /** @class */ (function () {
     PlaylistService.prototype.getMusicLinkFromMusicId = function (id) {
         return this.httpClient.get(this.baseUrl + "/api/musiclink"
             + ("?where=%7B%22music_id%22:%22" + id.toString() + "%22%7D"));
+    };
+    PlaylistService.prototype.isNewMusicSelected = function (music) {
+        if (!this.selectedMusic && music)
+            return false;
+        if ((this.selectedMusic.isLocalFile == undefined || !this.selectedMusic.isLocalFile) && music.isLocalFile)
+            return false;
+        return (this.selectedMusic.music_name == music.music_name);
     };
     PlaylistService = __decorate([
         core_1.Injectable({

@@ -9,7 +9,8 @@ import * as EventEmitter from 'events'
 const ytdl = require('ytdl-core')
 const yturl = require("js-video-url-parser")
 import { Music } from '../app/music/music'
-
+const dataurl = require('dataurl')
+var YoutubeMp3Downloader = require("youtube-mp3-downloader")
 
 
 export class MusicDownloader extends EventEmitter {
@@ -36,40 +37,41 @@ export class MusicDownloader extends EventEmitter {
       return this.dlFromSoundCloud2Mp3(dest, filename, url, music)
     else {
       // return this.dlFromYoutube2Mp3(dest, filename, url)
-
       return new Promise((resolve, reject) => {
         reject('t\'a cru ct noel')
       })
     }
   }
 
-  dlFromYoutube2Mp3(dest: string, filename: string, url: string, music: Music): Promise<any> {
+
+  dlFromYoutube2Mp3(dest: string, filename: string, url: string, music: Music): Promise<any> { // ffmpeg dependent
     var self = this
     var url = 'http://www.youtube.com/watch?v=' + yturl.parse(url).id
+
     return new Promise((resolve, reject) => {
-      const r = ytdl(url, { filter : 'audioonly', quality : 'highestaudio'})
-      const w = fs.createWriteStream(dest + filename + '.mp3');
+      var YD = new YoutubeMp3Downloader({
+        "ffmpegPath": "./ffmpeg/bin/ffmpeg.exe", // Where is the FFmpeg binary located?
+        "outputPath": "./", // Where should the downloaded and encoded files be stored?
+        "youtubeVideoQuality": "highest",
+        "queueParallelism": 2, // How many parallel downloads/encodes should be started?
+        "progressTimeout": 200 // How long should be the interval of the progress reports
+      });
 
-      r.on('readable', function() {
-        self.emit('dl-status-update', {update: 'dl-start', url:url, music:music})
-      })
+      YD.download(yturl.parse(url).id, filename + '.mp3');
+      self.emit('dl-status-update', {update: 'dl-start', url:url, music:music})
 
-      r.on('progress', function(chunck, received_bytes, total_bytes) {
-        var progress = received_bytes * 100 / total_bytes
-        self.emit('dl-status-update', {update: 'dl-progress', progress: progress, url:url, music:music})
-      })
-
-      r.on('end', () => {
-        // console.log('read end')
-      })
-
-      w.on('finish', () => {
-        // console.log('write end')
+      YD.on("finished", function(err, data) {
         self.emit('dl-status-update', {update: 'dl-end', url:url, music:music})
         resolve()
-      })
+      });
 
-      r.pipe(w)
+      YD.on("error", function(error) {
+        reject(error)
+      });
+
+      YD.on("progress", function(data) {
+        self.emit('dl-status-update', {update: 'dl-progress', progress: data.progress.percentage, url:url, music:music})
+      });
     })
   }
 
@@ -149,4 +151,37 @@ export class MusicDownloader extends EventEmitter {
           });
     })
   }
+
+  dlFromYoutube2Mp3Ytdl(dest: string, filename: string, url: string, music: Music): Promise<any> { // slow
+    var self = this
+    var url = 'http://www.youtube.com/watch?v=' + yturl.parse(url).id
+
+    return new Promise((resolve, reject) => {
+
+      const r = ytdl(url, { filter : 'audioonly', quality : 'highestaudio'})
+      const w = fs.createWriteStream(dest + filename + '.mp3');
+
+      r.on('readable', function() {
+        self.emit('dl-status-update', {update: 'dl-start', url:url, music:music})
+      })
+
+      r.on('progress', function(chunck, received_bytes, total_bytes) {
+        var progress = received_bytes * 100 / total_bytes
+        self.emit('dl-status-update', {update: 'dl-progress', progress: progress, url:url, music:music})
+      })
+
+      r.on('end', () => {
+        // console.log('read end')
+      })
+
+      w.on('finish', () => {
+        // console.log('write end')
+        self.emit('dl-status-update', {update: 'dl-end', url:url, music:music})
+        resolve()
+      })
+
+      r.pipe(w)
+    })
+  }
+
 }

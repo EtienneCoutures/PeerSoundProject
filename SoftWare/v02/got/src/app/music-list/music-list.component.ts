@@ -33,11 +33,11 @@ export class MusicListComponent implements OnInit, OnChanges {
 
   playMusicEvent(music, idx) {
     if (this.plService.selectedMusic !== music) {
-      this.plService.isPlaying = true;
+      // this.plService.isPlaying = true;
       this.playMusic.emit(music);
       this.plService.selectedMusic = music;
     } else {
-      this.plService.isPlaying = !this.plService.isPlaying;
+      // this.plService.isPlaying = !this.plService.isPlaying;
       this.playMusic.emit(music);
     }
      // console.log('play music: ', music);
