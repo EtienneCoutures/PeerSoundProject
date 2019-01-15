@@ -39,10 +39,9 @@ export class OfflinePlaylistHeader {
     this._playlistName = ''
   }
 
-  addMusic(filename: string, pos: number, name: string, insert: boolean = true, isInFile: boolean = false, source: string = 'local'): boolean {
+  addMusic(filename: string, pos: number, name: string, insert: boolean = true, isInFile: boolean = false, source: string = 'local'): MusicEntry {
     if (this.getMusicByName(name) && !insert) {
-      // console.log('from addmus : ret err')
-      return false
+      return undefined
     }
     // console.log('????')
     var music = new MusicEntry(pos, name, filename, isInFile)
@@ -51,7 +50,7 @@ export class OfflinePlaylistHeader {
     else
       this._musics[pos] = music
     this._changes = true
-    return true
+    return music
   }
 
   delMusicByPos(pos: number): boolean {
@@ -129,6 +128,10 @@ export class OfflinePlaylistHeader {
 
   get changes(): boolean {
     return this._changes
+  }
+
+  set changes(val: boolean) {
+    this._changes = val
   }
 
   toXml(): any {

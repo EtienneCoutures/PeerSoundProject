@@ -7,9 +7,9 @@
 
   </mat-list>-->
 
-  <mat-list style="margin: 0">
+  <mat-list  style="margin: 0">
       <perfect-scrollbar style="max-width: 600px; height:94vh;" [config]="config">
-          <app-music [music]="music" (click)="playMusicEvent(music, i)" *ngFor="let music of musics; let i = index; trackBy: trackElement">
+          <app-music  [music]="music" (click)="playMusicEvent(music, i)" *ngFor="let music of musics; let i = index; trackBy: trackElement">
           </app-music>
       </perfect-scrollbar>
 </mat-list>

@@ -88,13 +88,7 @@ export class PlaylistService {
   }
 
   isNewMusicSelected(music: Music) {
-    console.log('from is new music', this.selectedMusic, music, this.selectedMusic != music)
-    // if (!this.selectedMusic && music)
-    //   return true
     return this.selectedMusic !== music
-    // if ((this.selectedMusic.isLocalFile == undefined || !this.selectedMusic.isLocalFile) && music.isLocalFile)
-    //   return true
-    // return (this.selectedMusic.music_name == music.music_name)
   }
 
 }

@@ -94,6 +94,57 @@ export class OfflineFeaturesService {
     return this.offline.extractMusicFile(this.plService.selectedPl.playlist_name, music)
   }
 
+  getNextMusic(curMusic): Music {
+    let i: number = 0
+
+    if (!curMusic)
+      return undefined
+
+    i = parseInt(curMusic.music_id) + 1
+
+    var res = undefined
+    while (res == undefined) {
+      if (i == this.musics.length)
+        i = 0
+      // console.log('cul k', i, this.musics[0])
+      if (this.musics[i].isOfflineAvailable == true) {
+        res = this.musics[i]
+        break
+      }
+      i = i + 1
+    }
+    return res
+  }
+
+  getPrevMusic(curMusic): Music {
+    let i: number = 0
+
+    if (!curMusic)
+      return undefined
+
+    i = parseInt(curMusic.music_id) - 1
+
+    var res = undefined
+    while (res == undefined) {
+      if (i < 0)
+        i = this.musics.length - 1
+      // console.log('cul k', i, this.musics[0])
+      if (this.musics[i].isOfflineAvailable == true) {
+        res = this.musics[i]
+        break
+      }
+      i = i - 1
+    }
+    return res
+  }
+
+  reloadPlaylist(pl) {
+    var musAdded = this.offline.reloadPlaylist(pl)
+    musAdded.forEach((m, i) => {
+      this.musics.push(Music.getMusFromMusicEntry(m[0], m[1].music_url, m[1].music_source)) // convert MusicEntry type to Music type and add it to list
+    })
+  }
+
   reset() {
 
   }

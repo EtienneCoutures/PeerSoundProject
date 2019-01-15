@@ -9,3 +9,16 @@
   padding-left: 10%;
   padding-right: 30px;
 }
+
+.fadein  {
+    animation: fadein 1s;
+}
+
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}

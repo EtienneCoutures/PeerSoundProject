@@ -112,6 +112,18 @@ export class OfflineFeaturesHandler extends EventEmitter {
     })
   }
 
+  reloadPlaylist(pl): any[] {
+    let pspFile = this.getPspFile(pl.playlist_name)
+    let musAdded: any[] = []
+    pl.MusicLink.forEach((m, i) => { // fill header width musics metadata
+      var added = pspFile.header.addMusic('', i, m.music_name, false)
+      if (added) {
+        musAdded.push([added, m])
+      }
+    })
+    return (musAdded)
+  }
+
   reset(): void {
     this._pspFilesOpened.length = 0
     this._downloader = new MusicDownloader()

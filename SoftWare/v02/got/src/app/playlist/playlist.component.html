@@ -1,6 +1,6 @@
 
-<mat-list-item>
-<button class="playlist_avatar" [routerLink]="[{ outlets: { homeOutlet: ['infoPlaylist'] } }]" mat-fab color="primary" (click)="selectPlaylist()">
+<mat-list-item class="fadein">
+<button [matTooltip]="playlist.playlist_name"  matTooltipPosition="right" class="playlist_avatar"  [class.selected]="isSelectedFunc()" [routerLink]="[{ outlets: { homeOutlet: ['infoPlaylist'] } }]" mat-fab [style.background-color]="color" (click)="selectPlaylist()">
     <img ng-src="../../assets/psp.png"/>
 </button>
 </mat-list-item>

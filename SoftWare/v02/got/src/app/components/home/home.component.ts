@@ -92,26 +92,26 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.handleMessages();
     this.initialize(this).then((result) => {
       // console.log('from init', this.plService.playlists)
-      this.plService.selectedMusic = this.plService.playlists[0].MusicLink[0];
+      // this.plService.selectedMusic = this.plService.playlists[0].MusicLink[0];
       this.plService.selectedPl = this.plService.playlists[0];
       this.plService.musics = this.plService.playlists[0].MusicLink;
       this.router.navigate(['/', 'home', { outlets: { homeOutlet: ['infoPlaylist'] } }]);
 
       if (this.plService.playlists[0].MusicLink[0]) {
-        this.plService.selectedMusic = this.plService.playlists[0].MusicLink[0];
+        // this.plService.selectedMusic = this.plService.playlists[0].MusicLink[0];
         // console.log('music_source: ', this.plService.selectedMusic.music_source);
         if (this.plService.selectedMusic.music_source === 'soundcloud') {
-          this.scWidget.load(this.plService.selectedMusic.music_url);
-          this.musicSrcPlat = 'soundcloud';
+          // this.scWidget.load(this.plService.selectedMusic.music_url);
+          // this.musicSrcPlat = 'soundcloud';
         }
         else if (this.plService.selectedMusic.music_source === 'youtube')
         {
-          this.ytsrc = this.plService.selectedMusic.music_url;
-          this.musicSrcPlat = "youtube";
+          // this.ytsrc = this.plService.selectedMusic.music_url;
+          // this.musicSrcPlat = "youtube";
         }
       }
       this.loaded = true;
-      console.log('this.plService.selectedMusic: ', this.plService.selectedPl);
+      // console.log('this.plService.selectedMusic: ', this.plService.selectedPl);
     }).catch(error => {
       console.log('error loading home: ', error);
     });
@@ -211,25 +211,27 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.eService.sendMsg({ type: "connection", data: this.plService.account });
   }
 
+  shortcuts(event) {
+    switch (event.code) {
+      case 'KeyR':
+        this.refresh()
+    }
+  }
+
   refresh() {
     this.plService.playlists = new Array();
     this.initialize(this).then((result) => {
       for (let pl in this.plService.playlists) {
-        if (this.plService.selectedPl.playlist_id
-          === this.plService.playlists[pl].playlist_id)
+        if (this.plService.selectedPl.playlist_id === this.plService.playlists[pl].playlist_id)
           this.plService.selectedPl = this.plService.playlists[pl];
-        this.router.navigate([{ outlets: { homeOutlet: ['infoPlaylist'] } }]);
+        // this.router.navigate([{ outlets: { homeOutlet: ['infoPlaylist'] } }]); // error
         //this.plService.musics = this.plService.playlists[pl].MusicLink;
+        this.offlineService.reloadPlaylist(this.plService.playlists[pl]);
       }
-      this.offlineService.reset();
     })
   }
 
-  public soundFile: any
-
   ngAfterViewInit() {
-    console.log('after view init')
-    // new Audio('C:/Users/moi/Desktop/psp2/PeerSoundProject/SoftWare/v02/got/tmp.mp3').play()
     this.iframeElement = this.scPlayer.nativeElement;
     this.scWidget = window['SC'].Widget('sc-player');
     let self = this;
@@ -249,20 +251,46 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   };
 
   playNextMusic() {
-    let found = this.plService.plInPlay.MusicLink.find((item: any) => {
-      return item.Music.music_id === this.plService.selectedMusic.music_id;
-    });
 
-    if (found) {
-      let index = this.plService.plInPlay.MusicLink.indexOf(found);
-      if (index >= 0) {
-        if (typeof this.plService.musics[index + 1] !== 'undefined') {
-          this.playMusicHandler(this.plService.plInPlay.MusicLink[index + 1]);
-        } else {
-          this.playMusicHandler(this.plService.plInPlay.MusicLink[0]);
-        }
+    if (this.musicSrcPlat == 'local') {
+      var nextMusic = this.offlineService.getNextMusic(this.plService.selectedMusic)
+      if (nextMusic) {
+        // if (nextMusic == this.plService.selectedMusic)
+        this.plService.selectedMusic = undefined
+        nextMusic.isExtractedPromise = this.offlineService.extractMusicFile(nextMusic)
+        this.playMusicHandler(nextMusic)
+      }
+    }
+    else {
+      let found = this.plService.plInPlay.MusicLink.find((item: any) => {
+        return item.music_id === this.plService.selectedMusic.music_id;
+      });
+
+      // console.log('cul found', )
+      if (found) {
+        let index = this.plService.plInPlay.MusicLink.indexOf(found);
+        // console.log('cul', found, index)
+        if (index >= 0) {
+          if (typeof this.plService.musics[index + 1] !== 'undefined') {
+            this.playMusicHandler(this.plService.plInPlay.MusicLink[index + 1]);
+          } else {
+            this.playMusicHandler(this.plService.plInPlay.MusicLink[0]);
+          }
+        } else console.log('error: the selected music is not part of the current playlist');
       } else console.log('error: the selected music is not part of the current playlist');
-    } else console.log('error: the selected music is not part of the current playlist');
+    }
+  }
+
+  playPrevMusic() {
+    if (this.musicSrcPlat == 'local') {
+      var prevMusic = this.offlineService.getPrevMusic(this.plService.selectedMusic)
+      if (prevMusic) {
+        // if (nextMusic == this.plService.selectedMusic)
+        this.plService.selectedMusic = undefined
+        prevMusic.isExtractedPromise = this.offlineService.extractMusicFile(prevMusic)
+        this.playMusicHandler(prevMusic)
+      }
+    }
   }
 
   ngOnDestroy() {
@@ -282,7 +310,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   playMusicHandler(music: Music) {
 
     // console.log('ici', this.musicSrcPlat, music.music_source, this.plService.isSelectedMusic(music))
-    console.log(music)
+    // console.log('cul', music)
 
     if (this.plService.isNewMusicSelected(music)) {
       console.log('ici dif')
@@ -330,6 +358,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         case 'local':
           music.isExtractedPromise.then(() => { // wait until file extraction from psp archive completed
             this.plService.lcPlayer.setMusic('./tmp.mp3', true)
+            music.isExtractedPromise = undefined
           })
           break
       }

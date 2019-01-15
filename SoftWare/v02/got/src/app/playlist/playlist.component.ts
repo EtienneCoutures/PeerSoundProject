@@ -13,8 +13,8 @@ export class PlaylistComponent {
 
   subs?: any[];
 
-  @Input()
-  playlist: Playlist;
+  @Input() playlist: Playlist;
+  @Input() color: string;
 
   navigationExtras: NavigationExtras;
 
@@ -43,5 +43,9 @@ export class PlaylistComponent {
     //this.router.navigate([{ outlets: { homeOutlet: ['infoPlaylist'] } }]);
   }
 
+
+  isSelectedFunc(): boolean {
+    return this.playlistService.selectedPl == this.playlist
+  }
 
 }

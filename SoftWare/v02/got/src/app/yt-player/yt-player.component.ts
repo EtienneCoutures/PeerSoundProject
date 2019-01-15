@@ -51,6 +51,7 @@ export class YtPlayerComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: any) {
+
     // console.log('cul changes', changes)
     if (changes.url && changes.url.firstChange === false) {
       this.video = Url2.parse(changes.url.currentValue).id

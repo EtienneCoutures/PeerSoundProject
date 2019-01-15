@@ -11,6 +11,7 @@ export class UserComponent implements OnInit {
 
   private show: boolean = false;
   @Input() user: Account;
+  @Input() color: string;
 
   constructor(
     private plService: PlaylistService

@@ -14,6 +14,9 @@ export class MusicComponent implements OnInit {
   isPlaying: boolean = false;
   //isSelected: boolean = false;
   selectedMusic: Music;
+  contextMenu: boolean = false;
+  contextMenuX: number = 0
+  contextMenuY: number = 0
 
   constructor(
     private plService: PlaylistService
@@ -36,6 +39,12 @@ export class MusicComponent implements OnInit {
     // console.log('click music');
 //    this.selectedMusic = this.music;
     //this.isPlaying = !this.isPlaying;
+  }
+
+  onRightClick(e: any) {
+    this.contextMenu = true
+    this.contextMenuX = e.clientX
+    this.contextMenuY = e.clientY
   }
 
 }

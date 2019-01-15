@@ -16,6 +16,7 @@ export class LocalPlayerComponent implements OnInit, OnDestroy {
 
   @Output() nextMusic: EventEmitter<any> = new EventEmitter();
   @Output() prevMusic: EventEmitter<any> = new EventEmitter();
+  @Output() onMusicEnd: EventEmitter<any> = new EventEmitter();
 
   private audio: any = null
   private playing: boolean = false
@@ -30,6 +31,11 @@ export class LocalPlayerComponent implements OnInit, OnDestroy {
     });
     this.setVolume(this.volume)
     this.plService.lcPlayer = this
+
+    var self = this
+    this.audio.onended = function() {
+      self.onMusicEnd.emit()
+    }
   }
 
   ngOnDestroy() {
@@ -72,6 +78,8 @@ export class LocalPlayerComponent implements OnInit, OnDestroy {
   }
 
   setMusic(filepath: string, autoplay: boolean = true) {
+    if (this.audio.src)
+      delete this.audio.src
     this.loadLocalFile(filepath).then((res) => {
       this.stop()
       this.audio.src = res
@@ -120,6 +128,12 @@ export class LocalPlayerComponent implements OnInit, OnDestroy {
   private getProgressString() {
     return this.secondsToMinutesAsString(this.audio.currentTime) + ' / ' +
            this.secondsToMinutesAsString(this.audio.duration)
+  }
+
+  private getName() {
+    if (this.plService.selectedMusic.music_name.length >= 100)
+      return this.plService.selectedMusic.music_name.splice(0, 100) + '...'
+    return this.plService.selectedMusic.music_name
   }
 
   private prevMusicClicked() {

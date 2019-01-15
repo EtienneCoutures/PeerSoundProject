@@ -18,9 +18,39 @@
   background-size: cover;
   overflow: hidden;
   background-image: url('../../assets/psp.png');
+  opacity: 0.4;
+  transition: 0.6s;
 }
 
 .myapp-mat-list-item .mat-list-item {
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+// .button {
+//   // transition-duration: 0.4s;
+//   opacity: 0.6;
+// }
+
+.playlist_avatar:hover {
+  // color: white;
+  opacity: 1;
+  background-color: #4CAF50; /* Green */
+}
+
+.selected {
+  opacity: 1;
+}
+
+.fadein  {
+    animation: fadein 1s;
+}
+
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
 }

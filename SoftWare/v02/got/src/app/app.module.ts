@@ -31,7 +31,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { DialogInvitePeople } from './options-pl/options-pl.component';
 import { WebSocketService } from './web-socket.service';
 import { EventService } from './event.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
+import {MatMenuModule} from '@angular/material/menu';
 import { MatDialogModule,
          MatDialogRef,
          MatButtonModule,
@@ -73,6 +75,7 @@ import { YtPlayerComponent } from './yt-player/yt-player.component';
 import { LocalPlayerComponent } from './local-player/local-player.component';
 
 import 'hammerjs';
+import { MusicOptionsMenuComponent } from './music-options-menu/music-options-menu.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -112,7 +115,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     OfflineFeaturesLogComponent,
     SnackBarComponent,
     YtPlayerComponent,
-    LocalPlayerComponent
+    LocalPlayerComponent,
+    MusicOptionsMenuComponent
   ],
   imports: [
     FormsModule,
@@ -129,12 +133,14 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatDividerModule,
     MatIconModule,
     MatBadgeModule,
+    MatMenuModule,
     MatListModule,
     MatExpansionModule,
     MatToolbarModule,
     PerfectScrollbarModule,
     ScrollbarModule,
     MatSnackBarModule,
+    MatTooltipModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

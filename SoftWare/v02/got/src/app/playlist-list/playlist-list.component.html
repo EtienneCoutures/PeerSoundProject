@@ -12,7 +12,7 @@
           </div>-->
 
           <div fxLayout="column" fxLayoutAlign="stretch" class="listPlaylist">
-            <app-playlist [playlist]="pl" *ngFor="let pl of playlists" (click)="selectPlaylist(pl)"></app-playlist>
+            <app-playlist [playlist]="pl" *ngFor="let pl of playlists;  let i = index;" (click)="selectPlaylist(pl)" [color]='playlistIconColors[i % playlistIconColors.length]'></app-playlist>
           </div>
 
 

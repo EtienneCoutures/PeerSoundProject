@@ -40,7 +40,7 @@ export class Music {
   }
 
   static getMusFromMusicEntry(mus: any, url: string = null, src: string) {
-    var res: Music = new Music()
+    var res: Music = new Music(mus.pos)
 
     res.music_name = mus._name
     res.music_url = url

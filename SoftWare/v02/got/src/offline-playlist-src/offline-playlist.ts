@@ -121,12 +121,13 @@ export class OfflinePlaylist extends EventEmitter {
       // if (!self._header.changes) // rien a été modifié
       //   resolve()
 
-      if (self._filepath) {
+      if (self._filepath && self._header.changes) {
         self._zip.file('header.xml', self._header.toString()); // add header
 
         self._zip.generateNodeStream({streamFiles : true}, function progress(metadata) {
           self.emit('psp-packing', metadata.percent)
         }).pipe(fs.createWriteStream(self._filepath)).on('finish', () => {
+          self._header.changes = false
           resolve()
         }).on('error', (err) => {
           // ici backup de la file en cas d'echec
@@ -161,7 +162,7 @@ export class OfflinePlaylist extends EventEmitter {
         fs.readFile(filepath, function(err, data) {
           if (err)
             reject(err)
-          if (self._header.addMusic(filename, pos, name, insert, true) == false) {
+          if (self._header.addMusic(filename, pos, name, insert, true) == undefined) {
             if (self._header.getMusicByPos(pos)._isInFile == 'false') {
               self._header.getMusicByPos(pos).isInFile = true
               self._header.getMusicByPos(pos).filename = filename
