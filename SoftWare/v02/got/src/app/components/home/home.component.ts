@@ -90,11 +90,12 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     this.handleMessages();
+    this.plService.playlists = [];
     this.initialize(this).then((result) => {
       // console.log('from init', this.plService.playlists)
       // this.plService.selectedMusic = this.plService.playlists[0].MusicLink[0];
-      this.plService.selectedPl = this.plService.playlists[0];
-      this.plService.musics = this.plService.playlists[0].MusicLink;
+      // this.plService.selectedPl = this.plService.playlists[0];
+      // this.plService.musics = this.plService.playlists[0].MusicLink;
       this.router.navigate(['/', 'home', { outlets: { homeOutlet: ['infoPlaylist'] } }]);
 
       if (this.plService.playlists[0].MusicLink[0]) {
@@ -102,12 +103,12 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         // console.log('music_source: ', this.plService.selectedMusic.music_source);
         if (this.plService.selectedMusic.music_source === 'soundcloud') {
           // this.scWidget.load(this.plService.selectedMusic.music_url);
-          // this.musicSrcPlat = 'soundcloud';
+          this.musicSrcPlat = 'soundcloud';
         }
         else if (this.plService.selectedMusic.music_source === 'youtube')
         {
           // this.ytsrc = this.plService.selectedMusic.music_url;
-          // this.musicSrcPlat = "youtube";
+          this.musicSrcPlat = "youtube";
         }
       }
       this.loaded = true;
@@ -118,6 +119,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getUserPlaylists(cmpt: HomeComponent): Promise<any> {
+
     return new Promise((resolve, reject) => {
       cmpt.userService.getUserPlaylists().subscribe(playlists => {
         playlists.forEach((pl) => { // convert bdd music link obj to standard Music obj
@@ -307,10 +309,11 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.router.navigate(['']);
   }
 
-  playMusicHandler(music: Music) {
+  playMusicHandler(music: any) {
 
     // console.log('ici', this.musicSrcPlat, music.music_source, this.plService.isSelectedMusic(music))
-    // console.log('cul', music)
+    if (!music.music_name)
+      music = music.Music
 
     if (this.plService.isNewMusicSelected(music)) {
       console.log('ici dif')

@@ -91,6 +91,9 @@ export class OfflineFeaturesHandler extends EventEmitter {
 
       pspFile.open('./', pl.playlist_name, true).then(() => { // create file if doesn't exist
         pl.MusicLink.forEach((m, i) => { // fill header width musics metadata
+          // console.log('lala', m)
+          if (m.Music)
+            m = m.Music
           pspFile.header.addMusic('', i, m.music_name, false)
         })
         pspFile.save().then(() => { // save file as archive

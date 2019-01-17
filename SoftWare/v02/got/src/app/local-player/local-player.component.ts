@@ -131,8 +131,10 @@ export class LocalPlayerComponent implements OnInit, OnDestroy {
   }
 
   private getName() {
-    if (this.plService.selectedMusic.music_name.length >= 100)
-      return this.plService.selectedMusic.music_name.splice(0, 100) + '...'
+    if (!this.plService.selectedMusic.music_name)
+      this.plService.selectedMusic = this.plService.selectedMusic.Music
+    if (this.plService.selectedMusic.music_name.length >= 80)
+      return this.plService.selectedMusic.music_name.splice(0, 80) + '...'
     return this.plService.selectedMusic.music_name
   }
 

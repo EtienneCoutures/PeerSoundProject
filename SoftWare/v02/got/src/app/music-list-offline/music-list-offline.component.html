@@ -10,7 +10,7 @@
           [class.selected]="isSelected(music)">
         <mat-list-item>
           <mat-icon *ngIf="music.isOfflineAvailable" mat-list-icon> {{ plService.lcPlayer.playing && isSelected(music) ? 'pause' : 'play_arrow'}}</mat-icon>
-          <a class="dl-icon" *ngIf="(music.isOfflineAvailable===false) && music.music_url != undefined && !offlineService.isDownloading" (click)="dlMusic(music)"><i class="material-icons">cloud_download</i></a>
+          <a class="dl-icon" *ngIf="test(music)" (click)="dlMusic(music)"><i class="material-icons">cloud_download</i></a>
 
           <h5 mat-line style="font-size:15px" [class.offline-unavailable]="!music.isOfflineAvailable">{{music.music_name}}</h5>
           <h5 style="font-size:12px" *ngIf="music.isDownloading" mat-line [class.offline-unavailable]="!music.isOfflineAvailable">dl-{{music.dlProgress}}%</h5>

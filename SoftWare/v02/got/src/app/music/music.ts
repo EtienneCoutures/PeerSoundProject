@@ -42,10 +42,13 @@ export class Music {
   static getMusFromMusicEntry(mus: any, url: string = null, src: string) {
     var res: Music = new Music(mus.pos)
 
+    // if (mus.Music)
+    //   mus = mus.Music
     res.music_name = mus._name
     res.music_url = url
     res.music_source = src
-    res.isOfflineAvailable = (mus._isInFile == 'true' ? true : false)
+    console.log('from getmusFromEntry', mus._isInFile == 'true')
+    res.isOfflineAvailable = ((mus._isInFile === 'true' || mus._isInFile === true) ? true : false)
     res.isLocalFile = true
     return (res)
   }

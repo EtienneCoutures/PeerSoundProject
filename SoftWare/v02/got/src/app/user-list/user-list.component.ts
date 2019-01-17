@@ -38,9 +38,9 @@ export class UserListComponent implements OnChanges, OnInit {
   ngOnChanges() {
     // console.log('users have changed!');
     if (this.playlist) {
-      this.users = [];
       this.plService.getUserFromPlaylist(this.playlist.playlist_id).subscribe(
         res => {
+          this.users = [];
           this.users.push(res.Playlist.rows[0].Creator);
           this.users = this.users.concat(res.Playlist.rows[0].Subscriber);
           // console.log('users: ', this.users);

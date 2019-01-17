@@ -55,23 +55,34 @@ export class OfflineFeaturesService {
   }
 
   loadPlaylistMetadata(pl: Playlist) {
-    this.musics.length = 0 // empty music list array
+    this.musics = null // empty music list array
+    this.musics = []
+    // console.log('-----------')
+    // console.log(this.musics)
     this.offline.loadPspFile(pl).then((inputs: MusicEntry[]) => { // get psp file metadata
-
       // console.log('music entry', inputs)
       // console.log('music', this.plService.selectedPl.MusicLink)
       inputs.forEach((music) => {
+        // console.log('music', music)
+
         // console.log('ici', i)
         var elem = this.plService.selectedPl.MusicLink.find((elem) => { // try to get music url from online music array
-          // console.log('la', elem)
+          // console.log('cul', elem)
+          if (elem.Music)
+            elem = elem.Music
           return elem.music_name === music._name
         })
+
         // console.log('elem found', elem)
         // console.log('elem found', music)
-        if (elem != undefined)
+        if (elem != undefined) {
+          if (elem.Music)
+            elem = elem.Music
           this.musics.push(Music.getMusFromMusicEntry(music, elem.music_url, elem.music_source)) // convert MusicEntry type to Music type and add it to list
+        }
       })
-      // console.log('off musics', this.musics)
+      // this.musics
+      // console.log('musics', this.musics)
     }, (err) => {
       console.error('error while loading playlist "' + pl.playlist_name + '" in offline mode : ' + err)
     })
@@ -139,10 +150,14 @@ export class OfflineFeaturesService {
   }
 
   reloadPlaylist(pl) {
-    var musAdded = this.offline.reloadPlaylist(pl)
-    musAdded.forEach((m, i) => {
-      this.musics.push(Music.getMusFromMusicEntry(m[0], m[1].music_url, m[1].music_source)) // convert MusicEntry type to Music type and add it to list
-    })
+    this.loadPlaylistMetadata(pl)
+    // var musAdded = this.offline.reloadPlaylist(pl)
+    // musAdded.forEach((m, i) => {
+    //   console.log(m)
+    //   if (m[1].Music)
+    //     m[1] = m[1].Music
+    //   this.musics.push(Music.getMusFromMusicEntry(m[0], m[1].music_url, m[1].music_source)) // convert MusicEntry type to Music type and add it to list
+    // })
   }
 
   reset() {

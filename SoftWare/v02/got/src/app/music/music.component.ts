@@ -47,4 +47,9 @@ export class MusicComponent implements OnInit {
     this.contextMenuY = e.clientY
   }
 
+  test() {
+    // console.log('cul', this.music)
+    
+  }
+
 }

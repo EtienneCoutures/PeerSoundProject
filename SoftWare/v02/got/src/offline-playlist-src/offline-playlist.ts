@@ -121,7 +121,7 @@ export class OfflinePlaylist extends EventEmitter {
       // if (!self._header.changes) // rien a été modifié
       //   resolve()
 
-      if (self._filepath && self._header.changes) {
+      if (self._filepath) {
         self._zip.file('header.xml', self._header.toString()); // add header
 
         self._zip.generateNodeStream({streamFiles : true}, function progress(metadata) {

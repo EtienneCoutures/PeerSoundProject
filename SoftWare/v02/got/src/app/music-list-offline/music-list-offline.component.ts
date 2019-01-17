@@ -60,4 +60,11 @@ export class MusicListOfflineComponent implements OnInit, OnChanges {
   dlMusic(music: Music) {
     this.offlineService.dlMusic(music)
   }
+
+  test(m) {
+    // console.log('cul ici', m, m.music_url, m.isOfflineAvailable, !this.offlineService.isDownloading)
+    if (m.Music != undefined)
+      m = m.Music
+    return (m.isOfflineAvailable===false) && m.music_url != undefined && !this.offlineService.isDownloading
+  }
 }
