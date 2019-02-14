@@ -93,9 +93,11 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     this.plService.playlists = [];
     this.initialize(this).then((result) => {
       // console.log('from init', this.plService.playlists)
-      // this.plService.selectedMusic = this.plService.playlists[0].MusicLink[0];
-      // this.plService.selectedPl = this.plService.playlists[0];
-      // this.plService.musics = this.plService.playlists[0].MusicLink;
+      if (this.plService.playlists[0] && this.plService.playlists[0].MusicLink[0]) {
+          this.plService.selectedMusic = this.plService.playlists[0].MusicLink[0];
+          this.plService.selectedPl = this.plService.playlists[0];
+          this.plService.musics = this.plService.playlists[0].MusicLink;
+      }
       this.router.navigate(['/', 'home', { outlets: { homeOutlet: ['infoPlaylist'] } }]);
 
       if (this.plService.playlists[0].MusicLink[0]) {

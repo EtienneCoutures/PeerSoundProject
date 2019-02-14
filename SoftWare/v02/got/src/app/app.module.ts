@@ -75,7 +75,6 @@ import { YtPlayerComponent } from './yt-player/yt-player.component';
 import { LocalPlayerComponent } from './local-player/local-player.component';
 
 import 'hammerjs';
-import { MusicOptionsMenuComponent } from './music-options-menu/music-options-menu.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -116,7 +115,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SnackBarComponent,
     YtPlayerComponent,
     LocalPlayerComponent,
-    MusicOptionsMenuComponent
   ],
   imports: [
     FormsModule,

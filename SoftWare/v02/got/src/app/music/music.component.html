@@ -6,8 +6,4 @@
     <img src="/assets/{{music.music_source || music.Music.music_source}}.png" style="max-height:50px;max-width:50px">
     <mat-divider></mat-divider>
   </mat-list-item>
-
-    <div *ngIf="contextMenu == true">
-      <app-music-options-menu [x]='contextMenuX' [y]='contextMenuY'></app-music-options-menu>
-    </div>
 </div>

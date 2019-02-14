@@ -41,15 +41,10 @@ export class MusicComponent implements OnInit {
     //this.isPlaying = !this.isPlaying;
   }
 
-  onRightClick(e: any) {
-    this.contextMenu = true
-    this.contextMenuX = e.clientX
-    this.contextMenuY = e.clientY
-  }
 
   test() {
     // console.log('cul', this.music)
-    
+
   }
 
 }
